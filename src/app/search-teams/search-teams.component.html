@@ -1,0 +1,107 @@
+<div class="card" style="padding: 25px; background-color: transparent; color: white;">
+    <div style="text-align: center;">
+        <h3>Select Home and Away Teams <button *ngIf="(GameSetup.HomeTeamSelection && GameSetup.AwayTeamSelection)"
+                class="btn btn-success" (click)="SetLineups()" style="padding:20px; float: right; width: 40%">Set
+                Lineups <i class="fa fa-arrow-right"></i></button></h3>
+    </div>
+
+    <hr />
+    <div *ngIf="( GameSetup.HomeTeamSelection || GameSetup.AwayTeamSelection)" class="row">
+        <div class="col-md-6">
+            <div *ngIf="GameSetup.HomeTeamSelection" class="alert alert-danger" style="padding: 17px;">
+                <strong>Home Team Selected!</strong> {{GameSetup.HomeTeamSelection.season}} -
+                {{GameSetup.HomeTeamSelection.teamName}}
+                <button class="btn btn-danger" style="float: right;" (click)="GameSetup.HomeTeamSelection = null;"><i
+                        class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div *ngIf="GameSetup.AwayTeamSelection" class="alert alert-primary" style="padding: 17px;">
+                <strong>Away Team Selected!</strong> {{GameSetup.AwayTeamSelection.season}} -
+                {{GameSetup.AwayTeamSelection.teamName}}
+                <button class="btn btn-primary" style="float: right;" (click)="GameSetup.AwayTeamSelection = null;"><i
+                        class="fa fa-times" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Home Team</h3>
+        </div>
+        <div class="col-md-6">
+            <h3>Away Team</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <select class="form-control" (change)="SearchTeams(true, $event.target.value)">
+                <option *ngFor="let year of SearchableSeasons" value={{year}}>{{year}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-danger"><i class="fa fa-search"></i> Season</button>
+        </div>
+        <div class="col-md-3">
+            <select class="form-control" (change)="SearchTeams(false, $event.target.value)">
+                <option *ngFor="let year of SearchableSeasons" value={{year}}>{{year}}</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary"><i class="fa fa-search"></i> Season</button>
+        </div>
+    </div>
+
+    <div *ngIf="HomeSearchResults || AwaySearchResults" class="row">
+        <div class="col-md-6">
+            <div *ngIf="SearchingHomeTeams" class="loader"></div>
+
+            <table
+                *ngIf="!SearchingHomeTeams && !GameSetup.HomeTeamSelection && HomeSearchResults && HomeSearchResults.length > 0"
+                class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.7;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Ballpark</th>
+                        <th>League</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let homeTeamSearchResult of HomeSearchResults">
+                        <td>{{homeTeamSearchResult.teamName}}</td>
+                        <td>{{homeTeamSearchResult.ballpark}}</td>
+                        <td class="text-center">{{homeTeamSearchResult.league}}</td>
+                        <td class="text-center"><button class="btn btn-danger"
+                                (click)="SetHomeTeamSelection(homeTeamSearchResult)">Select</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-6">
+            <div *ngIf="SearchingAwayTeams" class="loader"></div>
+            <table
+                *ngIf="!SearchingAwayTeams && !GameSetup.AwayTeamSelection && AwaySearchResults && AwaySearchResults.length > 0"
+                class="table table-bordered table-dark table-hover" style="margin-top: 20px; opacity: 0.7;">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Ballpark</th>
+                        <th>League</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let awayTeamSearchResult of AwaySearchResults">
+                        <td>{{awayTeamSearchResult.teamName}}</td>
+                        <td>{{awayTeamSearchResult.ballpark}}</td>
+                        <td class="text-center">{{awayTeamSearchResult.league}}</td>
+                        <td class="text-center"><button class="btn btn-primary"
+                                (click)="SetAwayTeamSelection(awayTeamSearchResult)">Select</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

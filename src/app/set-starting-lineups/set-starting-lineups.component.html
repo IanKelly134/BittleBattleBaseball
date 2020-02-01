@@ -1,0 +1,392 @@
+<div class="card" style="padding: 25px; background-color: transparent; color: white;">
+    <div style="text-align: center;">
+        <h3>{{NewGameSetup.HomeTeamSelection.ballpark}} - Set Starting Lineups <button
+                *ngIf="(Game.HomeTeam.IsRosterSet && Game.AwayTeam.IsRosterSet)" class="btn btn-success"
+                (click)="StartGame()" style="padding:20px; float: right; width: 40%">Play Ball!!! <i
+                    class="fa fa-arrow-right"></i></button></h3>
+    </div>
+    <hr />
+    <ng-container *ngIf="HomeTeamDataLoading || AwayTeamDataLoading">
+        <h5 style="text-align: center;">Loading Team Player Roster Information. Please Wait...</h5>
+        <div class="loader"></div>
+    </ng-container>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <ng-container *ngIf="!HomeTeamDataLoading">
+                <h3>Home Lineup - {{NewGameSetup.HomeTeamSelection.season}} {{NewGameSetup.HomeTeamSelection.name}}</h3>
+                <div class="row">
+                    <div class="col-sm-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedLineup" class="alert-danger"
+                        style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px;">
+                        <h5>Suggested Batting Order <button (click)="UseSuggestedHomeLineup()" class="btn btn-success"
+                                style="float:right; font-size: small;">Use This Lineup</button></h5>
+                        <hr />
+                        <ng-container *ngFor="let suggestedPlayer of HomeTeamRoster.suggestedLineup; let i = index">
+                            <span> {{i + 1}}) {{suggestedPlayer.player.position}} {{suggestedPlayer.player.playerName}}
+                                {{suggestedPlayer.avg | battingAvgPipe }}
+                                {{suggestedPlayer.hr}}HR {{suggestedPlayer.rbi}}RBI</span>
+                            <br />
+                        </ng-container>
+                    </div>
+                    <div class="col-sm-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedRotation"
+                        class="alert-danger"
+                        style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px; float: right;">
+                        <h5>Suggested Rotation</h5>
+                        <hr />
+                        <ng-container *ngFor="let suggestedPlayer of HomeTeamRoster.suggestedRotation; let i = index">
+                            <span> {{i + 1}}) {{suggestedPlayer.player.playerName}}
+                                {{suggestedPlayer.wins}}-{{suggestedPlayer.losses}}
+                                {{suggestedPlayer.era }}ERA
+                                {{suggestedPlayer.whip }}WHIP</span>
+                            <br />
+                        </ng-container>
+                    </div>
+                </div>
+                <table class="table table-bordered table-dark table-hover table-condensed"
+                    style="margin-top: 20px; opacity: 0.9;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Pos</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                            <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)">
+                                <td class="text-center">{{lineUpNumber}}</td>
+                                <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                        alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="70px">
+                                </td>
+                                <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
+                                <td class="text-center">
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger"
+                                        (click)="Game.HomeTeam.MovePlayerUpInOrder(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
+                                            class="fa fa-arrow-up"></i></button>
+                                    <button class="btn btn-danger"
+                                        (click)="Game.HomeTeam.MovePlayerDownInOrder(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
+                                            class="fa fa-arrow-down"></i></button>
+                                    <button class="btn btn-danger"
+                                        (click)="RemoveHomePlayerAtLineupNumber(lineUpNumber)"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </ng-container>
+        </div>
+        <div class="col-lg-6">
+
+            <ng-container *ngIf="!AwayTeamDataLoading">
+                <h3>Away Lineup - {{NewGameSetup.AwayTeamSelection.season}} {{NewGameSetup.AwayTeamSelection.name}}</h3>
+                <div class="row">
+                    <div class="col-sm-6" *ngIf="AwayTeamRoster && AwayTeamRoster.suggestedLineup" class="alert-primary"
+                        style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px;">
+                        <h5>Suggested Batting Order <button (click)="UseSuggestedAwayLineup()" class="btn btn-success"
+                                style="float:right; font-size: small;">Use This Lineup</button></h5>
+                        <hr />
+                        <ng-container *ngFor="let suggestedPlayer of AwayTeamRoster.suggestedLineup; let i = index">
+                            <span> {{i + 1}}) {{suggestedPlayer.player.position}} {{suggestedPlayer.player.playerName}}
+                                {{suggestedPlayer.avg | battingAvgPipe }}
+                                {{suggestedPlayer.hr}}HR {{suggestedPlayer.rbi}}RBI</span>
+                            <br />
+                        </ng-container>
+                    </div>
+                    <div class="col-sm-6" *ngIf="AwayTeamRoster && AwayTeamRoster.suggestedRotation"
+                        class="alert-primary"
+                        style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px; float: right;">
+                        <h5>Suggested Rotation</h5>
+                        <hr />
+                        <ng-container *ngFor="let suggestedPlayer of AwayTeamRoster.suggestedRotation; let i = index">
+                            <span> {{i + 1}}) {{suggestedPlayer.player.playerName}}
+                                {{suggestedPlayer.wins}}-{{suggestedPlayer.losses}}
+                                {{suggestedPlayer.era }}ERA
+                                {{suggestedPlayer.whip }}WHIP</span>
+                            <br />
+                        </ng-container>
+                    </div>
+                </div>
+                <table class="table table-bordered table-dark table-hover table-condensed"
+                    style="margin-top: 20px; opacity: 0.9;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Pos</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                            <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)">
+                                <td class="text-center">{{lineUpNumber}}</td>
+                                <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                        alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="70px">
+                                </td>
+                                <td>{{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
+                                <td class="text-center">
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-primary"
+                                        (click)="Game.AwayTeam.MovePlayerUpInOrder(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
+                                            class="fa fa-arrow-up"></i></button>
+                                    <button class="btn btn-primary"
+                                        (click)="Game.AwayTeam.MovePlayerDownInOrder(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
+                                            class="fa fa-arrow-down"></i></button>
+                                    <button class="btn btn-primary"
+                                        (click)="RemoveAwayPlayerAtLineupNumber(lineUpNumber)"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </ng-container>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h5>Home Roster</h5>
+            <table *ngIf="HomeTeamRoster" class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9; font-size: small;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Pos</th>
+                        <th>Stats</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let hitter of HomeTeamRoster.hitters">
+                        <tr *ngIf="hitter.player && playerIsInStartingLineup(true, hitter.player.id) == false">
+                            <td><img [src]="hitter.player.playerImageURL" [title]="hitter.player.playerImageURL" alt="!"
+                                    onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="90px"></td>
+                            <td>{{hitter.player.playerName}}</td>
+                            <td>{{hitter.player.position}}</td>
+                            <td>
+                                <table class="table table-condensed" style="font-size: small; color: white;">
+                                    <thead>
+                                        <tr>
+                                            <th>AVG</th>
+                                            <th>HR</th>
+                                            <th>RBI</th>
+                                            <th>OBP</th>
+                                            <th>SLG</th>
+                                            <th>BBREF</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> {{hitter.avg | battingAvgPipe}} </td>
+                                            <td> {{hitter.hr}} </td>
+                                            <td> {{hitter.rbi}} </td>
+                                            <td> {{hitter.obp | obpPipe}} </td>
+                                            <td> {{hitter.slg}} </td>
+                                            <td><a [href]="hitter.player.bbRefHref" target="_blank"><img
+                                                        src="../../assets/images/bbrefLogo.jpg"></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </td>
+                            <td class="text-center">
+                                <button *ngIf="!Game.HomeTeam.Catcher && hitter.player.position == 'C'"
+                                    class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('C', true, hitter, null)">C</button>
+                                <button *ngIf="!Game.HomeTeam.FirstBaseman" class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('1B', true, hitter, null)">1B</button>
+                                <button
+                                    *ngIf="!Game.HomeTeam.SecondBaseman && (hitter.player.position == '2B' || hitter.player.position == 'SS' || hitter.player.position == '3B')"
+                                    class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('2B', true, hitter, null)">2B</button>
+                                <button
+                                    *ngIf="!Game.HomeTeam.Shortstop && (hitter.player.position == '2B' || hitter.player.position == 'SS' || hitter.player.position == '3B')"
+                                    class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('SS', true, hitter, null)">SS</button>
+                                <button
+                                    *ngIf="!Game.HomeTeam.ThirdBaseman && (hitter.player.position == '2B' || hitter.player.position == 'SS' || hitter.player.position == '3B' || hitter.player.position == '1B')"
+                                    class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('3B', true, hitter, null)">3B</button>
+                                <button
+                                    *ngIf="!Game.HomeTeam.LeftFielder && (hitter.player.position == 'LF' || hitter.player.position == 'CF' || hitter.player.position == 'RF' || hitter.player.position == 'OF' )"
+                                    class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('LF', true, hitter, null)">LF</button>
+                                <button
+                                    *ngIf="!Game.HomeTeam.CenterFielder && (hitter.player.position == 'LF' || hitter.player.position == 'CF' || hitter.player.position == 'RF' || hitter.player.position == 'OF' )"
+                                    class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('CF', true, hitter, null)">CF</button>
+                                <button
+                                    *ngIf="!Game.HomeTeam.RightFielder && (hitter.player.position == 'LF' || hitter.player.position == 'CF' || hitter.player.position == 'RF' || hitter.player.position == 'OF' )"
+                                    class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('RF', true, hitter, null)">RF</button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngFor="let pitcher of HomeTeamRoster.pitchers">
+                        <tr *ngIf="pitcher.player && playerIsInStartingLineup(true, pitcher.player.id) == false">
+                            <td><img [src]="pitcher.player.playerImageURL" alt="!"
+                                    onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="90px"></td>
+                            <td>{{pitcher.player.playerName}}</td>
+                            <td>{{pitcher.player.position}}</td>
+                            <td>
+                                <table class="table table-condensed" style="font-size: small; color: white;">
+                                    <thead>
+                                        <tr>
+                                            <th>W</th>
+                                            <th>L</th>
+                                            <th>ERA</th>
+                                            <th>WHIP</th>
+                                            <th>BBREF</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> {{pitcher.wins}} </td>
+                                            <td> {{pitcher.losses}} </td>
+                                            <td> {{pitcher.era}} </td>
+                                            <td> {{pitcher.whip}} </td>
+                                            <td><a [href]="pitcher.player.bbRefHref" target="_blank"><img
+                                                        src="../../assets/images/bbrefLogo.jpg"></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="text-center">
+                                <button *ngIf="!Game.HomeTeam.Pitcher" class="btn btn-danger btn-pos"
+                                    (click)="setLineupPosition('SP', true, null, pitcher)">SP</button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-6">
+            <h5>Away Roster</h5>
+            <table *ngIf="AwayTeamRoster" class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9; font-size: small;">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Pos</th>
+                        <th>Stats</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let hitter of AwayTeamRoster.hitters">
+                        <tr *ngIf="hitter.player && playerIsInStartingLineup(false, hitter.player.id) == false">
+                            <td><img [src]="hitter.player.playerImageURL" [title]="hitter.player.playerImageURL" alt="!"
+                                    onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="90px"></td>
+                            <td>{{hitter.player.playerName}}</td>
+                            <td>{{hitter.player.position}}</td>
+                            <td>
+                                <table class="table table-condensed" style="font-size: small; color: white;">
+                                    <thead>
+                                        <tr>
+                                            <th>AVG</th>
+                                            <th>HR</th>
+                                            <th>RBI</th>
+                                            <th>OBP</th>
+                                            <th>SLG</th>
+                                            <th>BBREF</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> {{hitter.avg | battingAvgPipe}} </td>
+                                            <td> {{hitter.hr}} </td>
+                                            <td> {{hitter.rbi}} </td>
+                                            <td> {{hitter.obp | obpPipe}} </td>
+                                            <td> {{hitter.slg}} </td>
+                                            <td><a [href]="hitter.player.bbRefHref" target="_blank"><img
+                                                        src="../../assets/images/bbrefLogo.jpg"></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </td>
+                            <td class="text-center">
+                                <button *ngIf="!Game.AwayTeam.Catcher && hitter.player.position == 'C'"
+                                    class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('C', false, hitter, null)">C</button>
+                                <button *ngIf="!Game.AwayTeam.FirstBaseman" class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('1B', false, hitter, null)">1B</button>
+                                <button
+                                    *ngIf="!Game.AwayTeam.SecondBaseman && (hitter.player.position == '2B' || hitter.player.position == 'SS' || hitter.player.position == '3B')"
+                                    class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('2B', false, hitter, null)">2B</button>
+                                <button
+                                    *ngIf="!Game.AwayTeam.Shortstop && (hitter.player.position == '2B' || hitter.player.position == 'SS' || hitter.player.position == '3B')"
+                                    class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('SS', false, hitter, null)">SS</button>
+                                <button
+                                    *ngIf="!Game.AwayTeam.ThirdBaseman && (hitter.player.position == '2B' || hitter.player.position == 'SS' || hitter.player.position == '3B' || hitter.player.position == '1B')"
+                                    class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('3B', false, hitter, null)">3B</button>
+                                <button
+                                    *ngIf="!Game.AwayTeam.LeftFielder && (hitter.player.position == 'LF' || hitter.player.position == 'CF' || hitter.player.position == 'RF' || hitter.player.position == 'OF' )"
+                                    class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('LF', false, hitter, null)">LF</button>
+                                <button
+                                    *ngIf="!Game.AwayTeam.CenterFielder && (hitter.player.position == 'LF' || hitter.player.position == 'CF' || hitter.player.position == 'RF' || hitter.player.position == 'OF' )"
+                                    class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('CF', false, hitter, null)">CF</button>
+                                <button
+                                    *ngIf="!Game.AwayTeam.RightFielder && (hitter.player.position == 'LF' || hitter.player.position == 'CF' || hitter.player.position == 'RF' || hitter.player.position == 'OF' )"
+                                    class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('RF', false, hitter, null)">RF</button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <ng-container *ngFor="let pitcher of AwayTeamRoster.pitchers">
+                        <tr *ngIf="pitcher.player && playerIsInStartingLineup(false, pitcher.player.id) == false">
+                            <td><img [src]="pitcher.player.playerImageURL" alt="!"
+                                    onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="90px"></td>
+                            <td>{{pitcher.player.playerName}}</td>
+                            <td>{{pitcher.player.position}}</td>
+                            <td>
+                                <table class="table table-condensed" style="font-size: small; color: white;">
+                                    <thead>
+                                        <tr>
+                                            <th>W</th>
+                                            <th>L</th>
+                                            <th>ERA</th>
+                                            <th>WHIP</th>
+                                            <th>BBREF</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td> {{pitcher.wins}} </td>
+                                            <td> {{pitcher.losses}} </td>
+                                            <td> {{pitcher.era}} </td>
+                                            <td> {{pitcher.whip}} </td>
+                                            <td><a [href]="pitcher.player.bbRefHref" target="_blank"><img
+                                                        src="../../assets/images/bbrefLogo.jpg"></a></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="text-center">
+                                <button *ngIf="!Game.AwayTeam.Pitcher" class="btn btn-primary btn-pos"
+                                    (click)="setLineupPosition('SP', false, null, pitcher)">SP</button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>

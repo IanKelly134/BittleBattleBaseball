@@ -1,0 +1,37 @@
+<div class="container-fluid" style="text-align: center;">
+    <div class="row">
+        <div class="col-sm-1">
+            <button class="btn btn-danger" style="width: 100%;" (click)="ClearCanvas()">Next Play</button>
+            <button class="btn btn-success" (click)="GroundBallSingleLeft1()">Ground-ball Left 1</button>
+            <button class="btn btn-success" (click)="GroundBallSingleLeft2()">Ground-ball Left 2</button>
+            <button class="btn btn-primary" (click)="GroundBallCenter1()">Ground-ball Center 1</button>
+            <button class="btn btn-primary" (click)="GroundBallCenter2()">Ground-ball Center 2</button>
+            <button class="btn btn-primary" (click)="GroundBallRight1()">Ground-ball Right 1</button>
+            <button class="btn btn-primary" (click)="GroundBallRight2()">Ground-ball Right 2</button>
+            <button class="btn btn-primary" (click)="FlyBallLeft1()">Fly-ball Left 1</button>
+            <button class="btn btn-primary" (click)="FlyBallLeft2()">Fly-ball Left 2</button>
+            <button class="btn btn-primary" (click)="FlyBallLeftCenter()">Fly-ball Left-Center 1</button>
+            <button class="btn btn-primary" (click)="FlyBallCenter()">Fly-ball Center 1</button>
+            <button class="btn btn-primary" (click)="FlyBallRightCenter()">Fly-ball Right-Center 1</button>
+            <button class="btn btn-primary" (click)="FlyBallRight1()">Fly-ball Right 1</button>
+            <button class="btn btn-primary" (click)="FlyBallInfield1()">Fly-ball Infield 1</button>
+            <button class="btn btn-primary" (click)="FlyBallInfield2()">Fly-ball Infield 2</button>
+        </div>
+        <div class="col-sm-10"> <canvas id="ballparkCanvas" [width]="canvasWidth" [height]="canvasHeight"> </canvas>
+        </div>
+        <div class="col-sm-1"></div>
+
+        <button class="btn btn-primary" (click)="HomerLeftFieldLine()">Homer Left Field Line</button>
+        <button class="btn btn-primary" (click)="LongHomerLeftFieldLine()">Long Homer Left Field
+            Line</button>
+        <button class="btn btn-primary">Homer Left Field</button>
+        <button class="btn btn-primary">Homer Left-Center Field</button>
+        <button class="btn btn-primary">Homer Center</button>
+        <button class="btn btn-primary">Homer Right Field Line</button>
+        <button class="btn btn-primary">Homer Right-Center Field</button>
+        <button class="btn btn-primary">Homer Right Field</button>
+        <button class="btn btn-primary" (click)="Fastball()">Fastball</button>
+        <button class="btn btn-primary" (click)="BreakingBallRH()">BreakingBallRH</button>
+        <button class="btn btn-primary" (click)="BreakingBallLH()">BreakingBallLH</button>
+    </div>
+</div>
