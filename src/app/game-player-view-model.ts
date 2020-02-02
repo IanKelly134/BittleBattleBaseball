@@ -1,7 +1,6 @@
 import { GameAtBatViewModel } from './game-at-bat-view-model';
 import { HitterPlayerSeasonViewModel } from './hitter-player-season-view-model';
 import { PitcherPlayerSeasonViewModel } from './pitcher-player-season-view-model';
-import { TeamSearchResultViewModel } from './team-search-result-view-model';
 
 export class GamePlayerViewModel {
     AtBats: GameAtBatViewModel[];

@@ -17,6 +17,10 @@ export class GameTeamViewModel {
     RightFielder: GamePlayerViewModel;
     Pitcher: GamePlayerViewModel;
 
+    CurrentBatter: GamePlayerViewModel;
+    LastBatter: GamePlayerViewModel;
+    NextBatter: GamePlayerViewModel;
+
     private numberOfBatters(): number {
         let returnVal = 0;
 

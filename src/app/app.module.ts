@@ -14,6 +14,7 @@ import { OnBasePctPipePipe } from './on-base-pct-pipe.pipe';
 import { DataLoadingComponent } from './data-loading/data-loading.component';
 import { BallParkCoordinatesConfiguratorComponent } from './ball-park-coordinates-configurator/ball-park-coordinates-configurator.component';
 import { ToastrModule } from 'ngx-toastr';
+import { GameViewModel } from './game-view-model';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ToastrModule } from 'ngx-toastr';
     HttpClientModule,
     ToastrModule.forRoot() // ToastrModule added
   ],
-  providers: [],
+  providers: [GameViewModel],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

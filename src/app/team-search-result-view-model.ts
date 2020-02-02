@@ -7,4 +7,5 @@ export class TeamSearchResultViewModel {
     city: string;
     nameAbbrev: string;
     name: string;
+    logoUrl: string;
 }

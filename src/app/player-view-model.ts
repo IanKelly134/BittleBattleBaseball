@@ -4,4 +4,5 @@ export class PlayerViewModel {
     position: string;
     bbRefHref: string;
     playerImageURL: string;
+    bats: string;
 }

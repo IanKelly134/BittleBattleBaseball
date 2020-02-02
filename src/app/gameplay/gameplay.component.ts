@@ -1,7 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GameViewModel } from '../game-view-model';
-import { ToastrService } from 'ngx-toastr';
+//import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-gameplay',
@@ -17,7 +17,7 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   pitchSound = new Audio("http://localhost:4200/assets/audio/caughtball.mp3");
   IsSoundMuted: boolean = false;
 
-  screenPctAdj: number = 0.60;
+  screenPctAdj: number = 0.62;
 
   leftFieldCornerX: number;
   leftFieldCornerY: number;
@@ -71,7 +71,7 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   canvasWidth: number = 1920 * this.screenPctAdj;
   canvasHeight: number = 1080 * this.screenPctAdj;
 
-  Game: GameViewModel;
+  Game: GameViewModel;//= new GameViewModel();
   lineupNumbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   GameId: number;
 
@@ -83,15 +83,20 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-
+    // this.Game = history.state;
+    // this.Game.StartGame();
   }
 
-  constructor(private router: Router, activatedRoute: ActivatedRoute, private toastr: ToastrService) {
-
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, game: GameViewModel) //, private toastr: ToastrService
+  {
+    //console.log(this.router.getCurrentNavigation().extras.state);
     document.body.style.backgroundImage = "url('../assets/images/baseball-background1.jpg')";
 
     this.GameId = activatedRoute.snapshot.params["gameId"];
-    this.Game = JSON.parse(localStorage.getItem('bittlebattlebaseball_game_instance' + this.GameId)) as GameViewModel;
+    //var parsedGame = ) as GameViewModel;
+    //Object.assign(this.Game, JSON.parse(localStorage.getItem('bittlebattlebaseball_game_instance' + this.GameId)));
+    this.Game = game;
+    this.Game.StartGame();
   }
 
   SetPlayingField() {
@@ -121,46 +126,78 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   DrawOffensivePlayers() {
     this.DrawHitterOnHomeDeck();
     this.DrawHitterOnAwayDeck();
-    this.DrawLeftHandedBatter();
-    this.DrawRightHandedBatter();
+    this.DrawBatter();
     this.DrawRunnerOnFirst();
     this.DrawRunnerOnSecond();
     this.DrawRunnerOnThird();
   }
 
-  DrawLeftHandedBatter() {
+  DrawBatter() {
     let img = new Image();
-    if (this.Game.CurrentInning.IsBottomOfInning) {
-      img.src = this.Game.HomeTeam.RightFielder.PlayerImageURL;
-      img.title = this.Game.HomeTeam.RightFielder.Name;
-    }
-    else {
-      img.src = this.Game.AwayTeam.RightFielder.PlayerImageURL;
-      img.title = "TEST TEST";// this.Game.AwayTeam.RightFielder.Name;
+    img.src = this.Game.CurrentAtBat.Batter.PlayerImageURL;
+    img.title = this.Game.CurrentAtBat.Batter.Name;
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
     }
 
-    img.onload = () => {
-      this.ctx.drawImage(img,
-        this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+    if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "r") {
+      img.onload = () => {
+        this.ctx.drawImage(img,
+          this.rightHandedBatterX, this.rightHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      }
+    } else if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "l") {
+      img.onload = () => {
+        this.ctx.drawImage(img,
+          this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      }
+    } else {
+      img.onload = () => {
+        this.ctx.drawImage(img,
+          this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      }
     }
+
   }
 
-  DrawRightHandedBatter() {
-    let img = new Image();
-    if (this.Game.CurrentInning.IsBottomOfInning) {
-      img.src = this.Game.HomeTeam.FirstBaseman.PlayerImageURL;
-      img.title = this.Game.HomeTeam.FirstBaseman.Name;
-    }
-    else {
-      img.src = this.Game.AwayTeam.FirstBaseman.PlayerImageURL;
-      img.title = this.Game.AwayTeam.FirstBaseman.Name;
-    }
+  // DrawLeftHandedBatter() {
+  //   let img = new Image();
+  //   if (this.Game.CurrentInning.IsBottomOfInning) {
+  //     img.src = this.Game.HomeTeam.RightFielder.PlayerImageURL;
+  //     img.title = this.Game.HomeTeam.RightFielder.Name;
+  //   }
+  //   else {
+  //     img.src = this.Game.AwayTeam.RightFielder.PlayerImageURL;
+  //     img.title = "TEST TEST";// this.Game.AwayTeam.RightFielder.Name;
+  //   }
 
-    img.onload = () => {
-      this.ctx.drawImage(img,
-        this.rightHandedBatterX, this.rightHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
-    }
-  }
+  //   img.onerror = function () {
+  //     img.src = '../assets/images/emptyHeadshot.jpeg';
+  //   }
+
+
+  // }
+
+  // DrawRightHandedBatter() {
+  //   let img = new Image();
+  //   if (this.Game.CurrentInning.IsBottomOfInning) {
+  //     img.src = this.Game.HomeTeam.FirstBaseman.PlayerImageURL;
+  //     img.title = this.Game.HomeTeam.FirstBaseman.Name;
+  //   }
+  //   else {
+  //     img.src = this.Game.AwayTeam.FirstBaseman.PlayerImageURL;
+  //     img.title = this.Game.AwayTeam.FirstBaseman.Name;
+  //   }
+
+  //   img.onerror = function () {
+  //     img.src = '../assets/images/emptyHeadshot.jpeg';
+  //   }
+
+  //   img.onload = () => {
+  //     this.ctx.drawImage(img,
+  //       this.rightHandedBatterX, this.rightHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+  //   }
+  // }
 
   DrawRunnerOnFirst() {
     let img = new Image();
@@ -171,6 +208,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.AwayTeam.SecondBaseman.PlayerImageURL;
       img.title = this.Game.AwayTeam.SecondBaseman.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.firstBaseX, this.firstBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -187,6 +229,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.AwayTeam.Shortstop.PlayerImageURL;
       img.title = this.Game.AwayTeam.Shortstop.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.secondBaseX, this.secondBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -202,6 +249,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.AwayTeam.ThirdBaseman.PlayerImageURL;
       img.title = this.Game.AwayTeam.ThirdBaseman.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.thirdBaseX, this.thirdBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -216,6 +268,10 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     } else {
       img.src = this.Game.AwayTeam.LeftFielder.PlayerImageURL;
       img.title = this.Game.AwayTeam.LeftFielder.Name;
+    }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
     }
 
     img.onload = () => {
@@ -235,6 +291,10 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.title = this.Game.AwayTeam.CenterFielder.Name;
     }
 
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.awayOnDeckBatterX, this.awayOnDeckBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -250,6 +310,10 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     else {
       img.src = this.Game.HomeTeam.Pitcher.PlayerImageURL;
       img.title = this.Game.HomeTeam.Pitcher.Name;
+    }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
     }
 
     img.onload = () => {
@@ -268,6 +332,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.HomeTeam.Catcher.PlayerImageURL;
       img.title = this.Game.HomeTeam.Catcher.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.catcherX, this.catcherY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -282,8 +351,13 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
     else {
       img.src = this.Game.HomeTeam.FirstBaseman.PlayerImageURL;
-      img.title = this.Game.HomeTeam.FirstBaseman.Name;
+      img.title = "\"" + this.Game.HomeTeam.FirstBaseman.Name + "\"";
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.firstBasemanX, this.firstBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -299,6 +373,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.HomeTeam.SecondBaseman.PlayerImageURL;
       img.title = this.Game.HomeTeam.SecondBaseman.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.secondBasemanX, this.secondBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -314,6 +393,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.HomeTeam.ThirdBaseman.PlayerImageURL;
       img.title = this.Game.HomeTeam.ThirdBaseman.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.thirdBasemanX, this.thirdBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -329,6 +413,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.HomeTeam.Shortstop.PlayerImageURL;
       img.title = this.Game.HomeTeam.Shortstop.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.shortstopX, this.shortstopY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -344,6 +433,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.HomeTeam.LeftFielder.PlayerImageURL;
       img.title = this.Game.HomeTeam.LeftFielder.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.leftFielderX, this.leftFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -360,6 +454,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
       img.src = this.Game.HomeTeam.RightFielder.PlayerImageURL;
       img.title = this.Game.HomeTeam.RightFielder.Name;
     }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
     img.onload = () => {
       this.ctx.drawImage(img,
         this.rightFielderX, this.rightFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -384,11 +483,7 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     img.onload = () => {
       this.ctx.drawImage(img,
         this.centerFielderX, this.centerFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
-      img.title = this.Game.AwayTeam.CenterFielder.Name;
-      // this.ctx.strokeText("<h5>" + this.Game.AwayTeam.CenterFielder.Name + "</h5>", this.centerFielderX, this.centerFielderY + 10);
     }
-
-
   }
 
   groundBallSingleLeft1X: number = 415 * this.screenPctAdj;
@@ -588,11 +683,13 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   }
 
   showSuccess(msg: string) {
-    this.toastr.success("", msg, {
-      timeOut: 3000,
-      positionClass: "toast-top-center",
-      messageClass: "toast-message"
-    });
+    // this.toastr.success("", msg, {
+    //   timeOut: 3000,
+    //   positionClass: "toast-top-center",
+    //   messageClass: "toast-message"
+    // });
+
+    this.Game.PlayByPlay += "\n" + " " + msg;
   }
 
   FlipHomeAway() {

@@ -14,7 +14,9 @@
     <div class="row">
         <div class="col-lg-6">
             <ng-container *ngIf="!HomeTeamDataLoading">
-                <h3>Home Lineup - {{NewGameSetup.HomeTeamSelection.season}} {{NewGameSetup.HomeTeamSelection.name}}</h3>
+                <h3><img [src]="NewGameSetup.HomeTeamSelection.logoUrl" style="height: 75px;" /> Home Lineup -
+                    {{NewGameSetup.HomeTeamSelection.season}} {{NewGameSetup.HomeTeamSelection.name}}
+                </h3>
                 <div class="row">
                     <div class="col-sm-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedLineup" class="alert-danger"
                         style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px;">
@@ -84,7 +86,8 @@
         <div class="col-lg-6">
 
             <ng-container *ngIf="!AwayTeamDataLoading">
-                <h3>Away Lineup - {{NewGameSetup.AwayTeamSelection.season}} {{NewGameSetup.AwayTeamSelection.name}}</h3>
+                <h3><img [src]="NewGameSetup.AwayTeamSelection.logoUrl" style="height: 75px;" /> Away Lineup -
+                    {{NewGameSetup.AwayTeamSelection.season}} {{NewGameSetup.AwayTeamSelection.name}}</h3>
                 <div class="row">
                     <div class="col-sm-6" *ngIf="AwayTeamRoster && AwayTeamRoster.suggestedLineup" class="alert-primary"
                         style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px;">

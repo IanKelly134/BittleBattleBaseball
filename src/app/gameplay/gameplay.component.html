@@ -13,8 +13,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td></td>
-                        <td></td>
+                        <td *ngIf="Game && Game.CurrentAtBat && Game.CurrentAtBat.Pitcher"><img
+                                [src]="Game.CurrentAtBat.Pitcher.PlayerImageURL" alt="!"
+                                onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
+                            {{Game.CurrentAtBat.Pitcher.Name}}</td>
+                        <td *ngIf="Game && Game.CurrentAtBat && Game.CurrentAtBat.Batter"><img
+                                [src]="Game.CurrentAtBat.Batter.PlayerImageURL" alt="!"
+                                onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
+                            {{Game.CurrentAtBat.Batter.Name}}</td>
                         <td></td>
                     </tr>
                 </tbody>
@@ -29,7 +35,6 @@
                         <ng-container *ngFor="let inning of Game.Innings">
                             <th>{{inning.InningNumber}}</th>
                         </ng-container>
-
                         <th>R</th>
                         <th>H</th>
                         <th>E</th>
@@ -68,7 +73,14 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>{{ Game.PlayByPlay }}</td>
+                        <td>
+                            <div>
+                                <span>
+                                    {{ Game.PlayByPlay }}
+                                </span>
+                            </div>
+
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -77,7 +89,7 @@
 
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-sm-2">
-            <!-- <table *ngIf="Game && Game.AwayTeam" class="table table-bordered table-dark table-hover table-condensed"
+            <table *ngIf="Game && Game.AwayTeam" class="table table-bordered table-dark table-hover table-condensed"
                 style="margin-top: 20px; opacity: 0.9;">
                 <thead>
                     <tr>
@@ -92,7 +104,7 @@
                         <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)">
                             <td class="text-center">{{lineUpNumber}}</td>
                             <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
-                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="70px">
+                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
                             </td>
                             <td>{{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
                             <td class="text-center">
@@ -101,11 +113,37 @@
                         </tr>
                     </ng-container>
                 </tbody>
-            </table> -->
+            </table>
         </div>
         <div class="col-sm-8"> <canvas id="ballparkCanvas" [width]="canvasWidth" [height]="canvasHeight"> </canvas>
         </div>
-        <div class="col-sm-2"> </div>
+        <div class="col-sm-2">
+            <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Pos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                        <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)">
+                            <td class="text-center">{{lineUpNumber}}</td>
+                            <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
+                            </td>
+                            <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
+                            <td class="text-center">
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 

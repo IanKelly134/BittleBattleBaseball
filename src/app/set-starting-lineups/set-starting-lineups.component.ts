@@ -23,14 +23,15 @@ export class SetStartingLineupsComponent implements OnInit {
   Game: GameViewModel;
   lineupNumbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   GameId: number;
-  constructor(private router: Router, private searchTeamsService: SearchTeamsServiceService, activatedRoute: ActivatedRoute) {
+  constructor(private router: Router, private searchTeamsService: SearchTeamsServiceService, activatedRoute: ActivatedRoute, game: GameViewModel) {
 
     this.HomeTeamRoster = null;
 
     this.GameId = activatedRoute.snapshot.params["newGameId"];
     this.NewGameSetup = JSON.parse(localStorage.getItem('game_setup_' + this.GameId)) as NewGameSetupViewModel;
 
-    this.Game = new GameViewModel(this.GameId, this.NewGameSetup.HomeTeamSelection, this.NewGameSetup.AwayTeamSelection);
+    this.Game = game;
+    this.Game.SetValues(this.GameId, this.NewGameSetup.HomeTeamSelection, this.NewGameSetup.AwayTeamSelection);
 
     if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("fenway", 0) > -1) {
       document.body.style.backgroundImage = "url('../assets/images/fenway1.jpg')";
@@ -288,6 +289,7 @@ export class SetStartingLineupsComponent implements OnInit {
   StartGame() {
     localStorage.setItem('bittlebattlebaseball_game_instance' + this.GameId, JSON.stringify(this.Game));
     this.router.navigateByUrl("/game/" + this.GameId);
+    //   this.router.navigateByUrl("/game/" + this.GameId, { state: this.Game });
   }
 
   ngOnInit() {
