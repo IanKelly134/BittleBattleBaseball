@@ -1,6 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GameViewModel } from '../game-view-model';
+import { MLBYearByYearLeagueStatsServiceService } from '../mlbyear-by-year-league-stats-service.service';
+import { MLBYearByYearBattingStatsViewModel } from '../mlbyear-by-year-batting-stats-view-model';
+import { MLBYearByYearPitchingStatsViewModel } from '../mlbyear-by-year-pitching-stats-view-model';
 //import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -78,6 +81,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   playerFieldImgAvatarHeight: number = 45;
   playerFieldImgAvatarWidth: number = 30;
 
+  _leagueHomeBattingStats: MLBYearByYearBattingStatsViewModel;
+  _leagueAwayBattingStats: MLBYearByYearBattingStatsViewModel;
+  _leagueHomePitchingStats: MLBYearByYearPitchingStatsViewModel;
+  _leagueAwayPitchingStats: MLBYearByYearPitchingStatsViewModel;
+
   ngAfterViewInit(): void {
     this.SetPlayingField();
   }
@@ -87,7 +95,8 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     // this.Game.StartGame();
   }
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, game: GameViewModel) //, private toastr: ToastrService
+  constructor(private router: Router, private activatedRoute: ActivatedRoute,
+    game: GameViewModel, mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService) //, private toastr: ToastrService
   {
     //console.log(this.router.getCurrentNavigation().extras.state);
     document.body.style.backgroundImage = "url('../assets/images/baseball-background1.jpg')";
@@ -95,7 +104,24 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     this.GameId = activatedRoute.snapshot.params["gameId"];
     //var parsedGame = ) as GameViewModel;
     //Object.assign(this.Game, JSON.parse(localStorage.getItem('bittlebattlebaseball_game_instance' + this.GameId)));
+
+
     this.Game = game;
+
+    mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
+      this._leagueHomeBattingStats = data;
+    });
+    mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
+      this._leagueAwayBattingStats = data;
+    });
+    mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
+      this._leagueHomePitchingStats = data;
+    });
+    mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
+      this._leagueAwayPitchingStats = data;
+    });
+
+
     this.Game.StartGame();
   }
 

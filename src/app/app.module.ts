@@ -15,6 +15,7 @@ import { DataLoadingComponent } from './data-loading/data-loading.component';
 import { BallParkCoordinatesConfiguratorComponent } from './ball-park-coordinates-configurator/ball-park-coordinates-configurator.component';
 import { ToastrModule } from 'ngx-toastr';
 import { GameViewModel } from './game-view-model';
+import { MLBYearByYearLeagueStatsServiceService } from './mlbyear-by-year-league-stats-service.service';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,7 @@ import { GameViewModel } from './game-view-model';
     HttpClientModule,
     ToastrModule.forRoot() // ToastrModule added
   ],
-  providers: [GameViewModel],
+  providers: [GameViewModel, MLBYearByYearLeagueStatsServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
