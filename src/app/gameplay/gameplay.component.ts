@@ -129,7 +129,7 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     this.canvas = <HTMLCanvasElement>document.getElementById("ballparkCanvas");
     this.ctx = this.canvas.getContext("2d");
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/busch1.jpg';
+    img.src = 'http://localhost:4200/assets/images/GenericField.png';
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0, this.canvasWidth, this.canvasHeight);
       this.SetDefensivePlayers();
