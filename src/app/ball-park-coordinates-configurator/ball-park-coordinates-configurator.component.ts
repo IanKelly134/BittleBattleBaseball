@@ -9,8 +9,8 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
-  batHittingBallSound = new Audio("http://localhost:4200/assets/audio/batHittingBall.mp3");
-  pitchSound = new Audio("http://localhost:4200/assets/audio/caughtball.mp3");
+  batHittingBallSound = new Audio("../assets/audio/batHittingBall.mp3");
+  pitchSound = new Audio("../assets/audio/caughtball.mp3");
   IsSoundMuted: boolean = false;
 
   leftFieldCornerX: number;
@@ -64,7 +64,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
     this.canvas = <HTMLCanvasElement>document.getElementById("ballparkCanvas");
     this.ctx = this.canvas.getContext("2d");
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/camden1.jpg';
+    img.src = '../assets/images/camden1.jpg';
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0, this.canvasWidth, this.canvasHeight);
       this.SetDefensivePlayers();
@@ -88,7 +88,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawPitcher() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyPitcherIcon.png';
+    img.src = '../assets/images/emptyPitcherIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.pitcherX, this.pitcherY, 60, 60);
@@ -97,7 +97,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawCatcher() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyCatcherIcon.png';
+    img.src = '../assets/images/emptyCatcherIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.catcherX, this.catcherY, 40, 40);
@@ -106,7 +106,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawFirstBasemen() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyRightSideInfielderIcon.png';
+    img.src = '../assets/images/emptyRightSideInfielderIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.firstBasemanX, this.firstBasemanY, 35, 35);
@@ -115,7 +115,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawSecondBasemen() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyRightSideInfielderIcon.png';
+    img.src = '../assets/images/emptyRightSideInfielderIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.secondBasemanX, this.secondBasemanY, 35, 35);
@@ -124,7 +124,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawThirdBasemen() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyLeftSideInfielderIcon.png';
+    img.src = '../assets/images/emptyLeftSideInfielderIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.thirdBasemanX, this.thirdBasemanY, 35, 35);
@@ -133,7 +133,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawShortstop() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyLeftSideInfielderIcon.png';
+    img.src = '../assets/images/emptyLeftSideInfielderIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.shortstopX, this.shortstopY, 35, 35);
@@ -142,7 +142,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawLeftfielder() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyLeftSideOutfielderIcon.png';
+    img.src = '../assets/images/emptyLeftSideOutfielderIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.leftFielderX, this.leftFielderY, 35, 35);
@@ -151,7 +151,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawRightfielder() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyRightSideOutfielderIcon.png';
+    img.src = '../assets/images/emptyRightSideOutfielderIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.rightFielderX, this.rightFielderY, 35, 35);
@@ -160,7 +160,7 @@ export class BallParkCoordinatesConfiguratorComponent implements OnInit, AfterVi
 
   DrawCenterfielder() {
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/emptyCenterFielderIcon.png';
+    img.src = '../assets/images/emptyCenterFielderIcon.png';
     img.onload = () => {
       this.ctx.drawImage(img,
         this.centerFielderX, this.centerFielderY, 35, 35);

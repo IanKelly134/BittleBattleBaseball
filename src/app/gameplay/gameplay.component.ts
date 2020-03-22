@@ -16,8 +16,8 @@ export class GameplayComponent implements OnInit, AfterViewInit {
 
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
-  batHittingBallSound = new Audio("http://localhost:4200/assets/audio/batHittingBall.mp3");
-  pitchSound = new Audio("http://localhost:4200/assets/audio/caughtball.mp3");
+  batHittingBallSound = new Audio("../assets/audio/batHittingBall.mp3");
+  pitchSound = new Audio("../assets/assets/audio/caughtball.mp3");
   IsSoundMuted: boolean = false;
 
   screenPctAdj: number = 0.62;
@@ -53,23 +53,23 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   awayOnDeckBatterY: number = 950 * this.screenPctAdj;
 
   catcherX: number = 875 * this.screenPctAdj;
-  catcherY: number = 1005 * this.screenPctAdj;
+  catcherY: number = 900 * this.screenPctAdj;
   pitcherX: number = 895 * this.screenPctAdj;
-  pitcherY: number = 800 * this.screenPctAdj;
+  pitcherY: number = 700 * this.screenPctAdj;
   firstBasemanX: number = 1210 * this.screenPctAdj;
-  firstBasemanY: number = 710 * this.screenPctAdj;
+  firstBasemanY: number = 610 * this.screenPctAdj;
   secondBasemanX: number = 1045 * this.screenPctAdj;
-  secondBasemanY: number = 700 * this.screenPctAdj;
+  secondBasemanY: number = 600 * this.screenPctAdj;
   thirdBasemanX: number = 584 * this.screenPctAdj;
-  thirdBasemanY: number = 720 * this.screenPctAdj;
+  thirdBasemanY: number = 620 * this.screenPctAdj;
   shortstopX: number = 740 * this.screenPctAdj;
-  shortstopY: number = 700 * this.screenPctAdj;
+  shortstopY: number = 600 * this.screenPctAdj;
   leftFielderX: number = 565 * this.screenPctAdj;
-  leftFielderY: number = 620 * this.screenPctAdj;
+  leftFielderY: number = 370 * this.screenPctAdj;
   centerFielderX: number = 935 * this.screenPctAdj;
-  centerFielderY: number = 605 * this.screenPctAdj;
-  rightFielderX: number = 1330 * this.screenPctAdj;
-  rightFielderY: number = 625 * this.screenPctAdj;
+  centerFielderY: number = 320 * this.screenPctAdj;
+  rightFielderX: number = 1360 * this.screenPctAdj;
+  rightFielderY: number = 355 * this.screenPctAdj;
 
   canvasWidth: number = 1920 * this.screenPctAdj;
   canvasHeight: number = 1080 * this.screenPctAdj;
@@ -78,8 +78,8 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   lineupNumbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   GameId: number;
 
-  playerFieldImgAvatarHeight: number = 45;
-  playerFieldImgAvatarWidth: number = 30;
+  playerFieldImgAvatarHeight: number = 60;
+  playerFieldImgAvatarWidth: number = 40;
 
   _leagueHomeBattingStats: MLBYearByYearBattingStatsViewModel;
   _leagueAwayBattingStats: MLBYearByYearBattingStatsViewModel;
@@ -129,7 +129,7 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     this.canvas = <HTMLCanvasElement>document.getElementById("ballparkCanvas");
     this.ctx = this.canvas.getContext("2d");
     let img = new Image();
-    img.src = 'http://localhost:4200/assets/images/GenericField.png';
+    img.src = '../assets/images/GenericField.png';
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0, this.canvasWidth, this.canvasHeight);
       this.SetDefensivePlayers();
