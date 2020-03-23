@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL: "http://bittlebattlebaseballwebapi.azurewebsites.net/api/"
-  // API_URL: "http://localhost:50438/api/"
+  API_URL: "http://localhost:50438/api/"
 };
 
 /*
