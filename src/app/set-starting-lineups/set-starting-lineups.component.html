@@ -5,8 +5,9 @@
     <hr />
     <div class="row" *ngIf="(Game.HomeTeam.IsRosterSet && Game.AwayTeam.IsRosterSet)">
         <div class="col-sm-12" style="text-align: center;">
-            <button class="btn btn-success" (click)="StartGame()" style="padding:20px; float: right; width: 40%">Play
-                Ball!!! <i class="fa fa-arrow-right"></i></button>
+            <button class="btn btn-success" (click)="StartGame()"
+                style="padding:20px; margin-left:50%; margin-right:50%; margin-bottom: 20px; width: 85%">Play Ball!!! <i
+                    class="fa fa-arrow-right"></i></button>
         </div>
     </div>
     <ng-container *ngIf="HomeTeamDataLoading || AwayTeamDataLoading">
