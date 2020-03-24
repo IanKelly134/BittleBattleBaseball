@@ -1,11 +1,17 @@
-<div class="card" style="padding: 25px; background-color: transparent; color: white;">
+<div class="card" style="padding: 10px; background-color: transparent; color: white;">
     <div style="text-align: center;">
-        <h3>Select Home and Away Teams <button *ngIf="(GameSetup.HomeTeamSelection && GameSetup.AwayTeamSelection)"
-                class="btn btn-success" (click)="SetLineups()" style="padding:20px; float: right; width: 40%">Set
-                Lineups <i class="fa fa-arrow-right"></i></button></h3>
+        <h3>Select Home and Away Teams</h3>
     </div>
 
     <hr />
+    <div class="row" *ngIf="(GameSetup.HomeTeamSelection && GameSetup.AwayTeamSelection)">
+        <div class="col-sm-12" style="text-align: center;">
+            <button class="btn btn-success" (click)="SetLineups()"
+                style="padding:20px; margin-left:50%; margin-right:50%; margin-bottom: 20px; width: 70%">Set
+                Lineups <i class="fa fa-arrow-right"></i></button>
+
+        </div>
+    </div>
     <div *ngIf="( GameSetup.HomeTeamSelection || GameSetup.AwayTeamSelection)" class="row">
         <div class="col-md-6">
             <div *ngIf="GameSetup.HomeTeamSelection" class="alert alert-danger" style="padding: 17px;">
@@ -37,6 +43,7 @@
             <select class="form-control" (change)="SearchTeams(true, $event.target.value)">
                 <option *ngFor="let year of SearchableSeasons" value={{year}}>{{year}}</option>
             </select>
+            <br />
         </div>
         <div class="col-md-3">
             <button class="btn btn-danger"><i class="fa fa-search"></i> Season</button>
@@ -45,6 +52,7 @@
             <select class="form-control" (change)="SearchTeams(false, $event.target.value)">
                 <option *ngFor="let year of SearchableSeasons" value={{year}}>{{year}}</option>
             </select>
+            <br />
         </div>
         <div class="col-md-3">
             <button class="btn btn-primary"><i class="fa fa-search"></i> Season</button>

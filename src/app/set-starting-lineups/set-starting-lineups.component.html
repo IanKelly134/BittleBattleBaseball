@@ -1,11 +1,14 @@
-<div class="card" style="padding: 25px; background-color: transparent; color: white;">
+<div class="card" style="padding: 10px; background-color: transparent; color: white;">
     <div style="text-align: center;">
-        <h3>{{NewGameSetup.HomeTeamSelection.ballpark}} - Set Starting Lineups <button
-                *ngIf="(Game.HomeTeam.IsRosterSet && Game.AwayTeam.IsRosterSet)" class="btn btn-success"
-                (click)="StartGame()" style="padding:20px; float: right; width: 40%">Play Ball!!! <i
-                    class="fa fa-arrow-right"></i></button></h3>
+        <h3>{{NewGameSetup.HomeTeamSelection.ballpark}} - Set Starting Lineups </h3>
     </div>
     <hr />
+    <div class="row" *ngIf="(Game.HomeTeam.IsRosterSet && Game.AwayTeam.IsRosterSet)">
+        <div class="col-sm-12" style="text-align: center;">
+            <button class="btn btn-success" (click)="StartGame()" style="padding:20px; float: right; width: 40%">Play
+                Ball!!! <i class="fa fa-arrow-right"></i></button>
+        </div>
+    </div>
     <ng-container *ngIf="HomeTeamDataLoading || AwayTeamDataLoading">
         <h5 style="text-align: center;">Loading Team Player Roster Information. Please Wait...</h5>
         <div class="loader"></div>
@@ -18,7 +21,7 @@
                     {{NewGameSetup.HomeTeamSelection.season}} {{NewGameSetup.HomeTeamSelection.name}}
                 </h3>
                 <div class="row">
-                    <div class="col-sm-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedLineup" class="alert-danger"
+                    <div class="col-lg-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedLineup" class="alert-danger"
                         style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px;">
                         <h5>Suggested Batting Order <button (click)="UseSuggestedHomeLineup()" class="btn btn-success"
                                 style="float:right; font-size: small;">Use This Lineup</button></h5>
@@ -30,7 +33,7 @@
                             <br />
                         </ng-container>
                     </div>
-                    <div class="col-sm-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedRotation"
+                    <div class="col-lg-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedRotation"
                         class="alert-danger"
                         style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px; float: right;">
                         <h5>Suggested Rotation</h5>
