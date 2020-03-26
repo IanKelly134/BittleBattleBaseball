@@ -16,6 +16,7 @@ import { BallParkCoordinatesConfiguratorComponent } from './ball-park-coordinate
 import { ToastrModule } from 'ngx-toastr';
 import { GameViewModel } from './game-view-model';
 import { MLBYearByYearLeagueStatsServiceService } from './mlbyear-by-year-league-stats-service.service';
+import { GameConfigureComponent } from './game-configure/game-configure.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { MLBYearByYearLeagueStatsServiceService } from './mlbyear-by-year-league
     BattingAvgPipePipe,
     OnBasePctPipePipe,
     DataLoadingComponent,
-    BallParkCoordinatesConfiguratorComponent
+    BallParkCoordinatesConfiguratorComponent,
+    GameConfigureComponent
   ],
   imports: [
     BrowserModule,

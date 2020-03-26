@@ -1,4 +1,4 @@
-<div class="card" style="padding: 10px; background-color: transparent; color: white;">
+<div class="container-fluid" style="padding: 5px; margin: 5px; background-color: transparent; color: white;">
     <div style="text-align: center;">
         <h3>{{NewGameSetup.HomeTeamSelection.ballpark}} - Set Starting Lineups </h3>
     </div>
@@ -6,9 +6,12 @@
     <div class="row" *ngIf="(Game.HomeTeam.IsRosterSet && Game.AwayTeam.IsRosterSet)">
         <div class="col-sm-12" style="text-align: center;">
             <button class="btn btn-success" (click)="StartGame()"
-                style="padding:20px; margin-left:50%; margin-right:50%; margin-bottom: 20px; width: 85%">Play Ball!!! <i
-                    class="fa fa-arrow-right"></i></button>
+                style="padding:20px; margin-left:50%; margin-right:50%; margin-bottom: 20px !important; width: 100%">Play
+                Ball!!!
+                <i class="fa fa-arrow-right"></i></button>
         </div>
+        <br />
+        <br />
     </div>
     <ng-container *ngIf="HomeTeamDataLoading || AwayTeamDataLoading">
         <h5 style="text-align: center;">Loading Team Player Roster Information. Please Wait...</h5>
@@ -23,7 +26,7 @@
                 </h3>
                 <div class="row">
                     <div class="col-lg-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedLineup" class="alert-danger"
-                        style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px;">
+                        style="padding: 10px; font-size: small; opacity: .9; width: 100%; margin: 3px;">
                         <h5>Suggested Batting Order <button (click)="UseSuggestedHomeLineup()" class="btn btn-success"
                                 style="float:right; font-size: small;">Use This Lineup</button></h5>
                         <hr />
@@ -36,7 +39,7 @@
                     </div>
                     <div class="col-lg-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedRotation"
                         class="alert-danger"
-                        style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px; float: right;">
+                        style="padding: 10px; font-size: small; opacity: .9; width: 100%; margin: 3px; float: right;">
                         <h5>Suggested Rotation</h5>
                         <hr />
                         <ng-container *ngFor="let suggestedPlayer of HomeTeamRoster.suggestedRotation; let i = index">
@@ -94,7 +97,7 @@
                     {{NewGameSetup.AwayTeamSelection.season}} {{NewGameSetup.AwayTeamSelection.name}}</h3>
                 <div class="row">
                     <div class="col-sm-6" *ngIf="AwayTeamRoster && AwayTeamRoster.suggestedLineup" class="alert-primary"
-                        style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px;">
+                        style="padding: 10px; font-size: small; opacity: .9; width: 100%; margin: 3px;">
                         <h5>Suggested Batting Order <button (click)="UseSuggestedAwayLineup()" class="btn btn-success"
                                 style="float:right; font-size: small;">Use This Lineup</button></h5>
                         <hr />
@@ -107,7 +110,7 @@
                     </div>
                     <div class="col-sm-6" *ngIf="AwayTeamRoster && AwayTeamRoster.suggestedRotation"
                         class="alert-primary"
-                        style="padding: 10px; font-size: small; opacity: .9; width: 48%; margin: 5px; float: right;">
+                        style="padding: 10px; font-size: small; opacity: .9; width: 100%; margin: 3px; float: right;">
                         <h5>Suggested Rotation</h5>
                         <hr />
                         <ng-container *ngFor="let suggestedPlayer of AwayTeamRoster.suggestedRotation; let i = index">
@@ -161,7 +164,7 @@
     </div>
     <div class="row">
         <div class="col-lg-6">
-            <h5>Home Roster</h5>
+            <h5 *ngIf="!HomeTeamDataLoading">Home Roster</h5>
             <table *ngIf="HomeTeamRoster" class="table table-bordered table-dark table-hover table-condensed"
                 style="margin-top: 20px; opacity: 0.9; font-size: small;">
                 <thead>
@@ -176,12 +179,14 @@
                 <tbody>
                     <ng-container *ngFor="let hitter of HomeTeamRoster.hitters">
                         <tr *ngIf="hitter.player && playerIsInStartingLineup(true, hitter.player.id) == false">
-                            <td><img [src]="hitter.player.playerImageURL" [title]="hitter.player.playerImageURL" alt="!"
+                            <td style="padding-left: 0px; padding-right: 0px;"><img [src]="hitter.player.playerImageURL"
+                                    [title]="hitter.player.playerImageURL" alt="!"
                                     onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="90px"></td>
                             <td>{{hitter.player.playerName}}</td>
                             <td>{{hitter.player.position}}</td>
-                            <td>
-                                <table class="table table-condensed" style="font-size: small; color: white;">
+                            <td style="padding: 0px">
+                                <table class="table table-condensed"
+                                    style="font-size: small; color: white; margin: 0px;">
                                     <thead>
                                         <tr>
                                             <th>AVG</th>
@@ -278,7 +283,7 @@
             </table>
         </div>
         <div class="col-lg-6">
-            <h5>Away Roster</h5>
+            <h5 *ngIf="!AwayTeamDataLoading">Away Roster</h5>
             <table *ngIf="AwayTeamRoster" class="table table-bordered table-dark table-hover table-condensed"
                 style="margin-top: 20px; opacity: 0.9; font-size: small;">
                 <thead>
@@ -293,12 +298,14 @@
                 <tbody>
                     <ng-container *ngFor="let hitter of AwayTeamRoster.hitters">
                         <tr *ngIf="hitter.player && playerIsInStartingLineup(false, hitter.player.id) == false">
-                            <td><img [src]="hitter.player.playerImageURL" [title]="hitter.player.playerImageURL" alt="!"
+                            <td style="padding-left: 0px; padding-right: 0px;"><img [src]="hitter.player.playerImageURL"
+                                    [title]="hitter.player.playerImageURL" alt="!"
                                     onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="90px"></td>
                             <td>{{hitter.player.playerName}}</td>
                             <td>{{hitter.player.position}}</td>
-                            <td>
-                                <table class="table table-condensed" style="font-size: small; color: white;">
+                            <td style="padding: 0px">
+                                <table class="table table-condensed"
+                                    style="font-size: small; color: white; margin: 0px;">
                                     <thead>
                                         <tr>
                                             <th>AVG</th>
