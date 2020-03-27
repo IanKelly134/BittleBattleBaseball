@@ -140,3 +140,8 @@ td {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
   }
+
+  .row {
+    padding: 2px !important;
+    margin: 2px !important;
+ }
