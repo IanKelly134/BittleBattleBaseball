@@ -1094,16 +1094,20 @@ export class GameConfigureComponent implements OnInit {
 
   //Outs
   flyBallInfieldOut1cp1X: number = 1000 * this.screenPctAdj;
-  flyBallInfieldOut1cp1Y: number = 10 * this.screenPctAdj;
-  flyBallInfieldOut1cp2X: number = 1050 * this.screenPctAdj;
+  flyBallInfieldOut1cp1Y: number = 1 * this.screenPctAdj;
+  flyBallInfieldOut1cp2X: number = 1120 * this.screenPctAdj;
   flyBallInfieldOut1cp2Y: number = 150 * this.screenPctAdj;
-  FlyBallInfieldOut1() {
+  FlyBallOutToFirst() {
     this.FlyBallHit(this.flyBallInfieldOut1cp1X, this.flyBallInfieldOut1cp1Y, this.flyBallInfieldOut1cp2X, this.flyBallInfieldOut1cp2Y,
       (this.rightFielderX + this.centerFielderX + 50) / 2, this.shortstopY + 30);
   }
 
-  FlyBallInfieldOut2() {
-    this.FlyBallHit(850, 10, 850, 150, (this.leftFielderX + this.centerFielderX) / 2, this.secondBasemanY + 30);
+  flyBallInfieldOut2cp1X: number = 750 * this.screenPctAdj;
+  flyBallInfieldOut2cp1Y: number = 10 * this.screenPctAdj;
+  flyBallInfieldOut2cp2X: number = 710 * this.screenPctAdj;
+  flyBallInfieldOut2cp2Y: number = 150 * this.screenPctAdj;
+  FlyBallOutToThird() {
+    this.FlyBallHit(this.flyBallInfieldOut2cp1X, this.flyBallInfieldOut2cp1Y, this.flyBallInfieldOut2cp2X, this.flyBallInfieldOut2cp2Y, (this.leftFielderX + this.centerFielderX) / 2, this.secondBasemanY + 30);
   }
 
   BreakingBallRH() {
@@ -1178,12 +1182,22 @@ export class GameConfigureComponent implements OnInit {
     }
   }
 
+  homerLeftFieldLinecp1X: number = 400 * this.screenPctAdj;
+  homerLeftFieldLinecp1Y: number = 10 * this.screenPctAdj;
+  homerLeftFieldLinecp2X: number = 250 * this.screenPctAdj;
+  homerLeftFieldLinecp2Y: number = 1 * this.screenPctAdj;
   HomerLeftFieldLine() {
-    this.FlyBallHit(550, 10, 475, 250, 400, this.leftFielderY);
+    this.FlyBallHit(this.homerLeftFieldLinecp1X, this.homerLeftFieldLinecp1Y, this.homerLeftFieldLinecp2X,
+      this.homerLeftFieldLinecp2Y, 70, this.leftFielderY - 30);
   }
 
+  longHomerLeftFieldLinecp1X: number = 325 * this.screenPctAdj;
+  longHomerLeftFieldLinecp1Y: number = 10 * this.screenPctAdj;
+  longHomerLeftFieldLinecp2X: number = 250 * this.screenPctAdj;
+  longHomerLeftFieldLinecp2Y: number = (this.leftFielderY - 300) * this.screenPctAdj;
   LongHomerLeftFieldLine() {
-    this.FlyBallHit(550, 10, 475, 200, 400, this.leftFielderY - 78);
+    this.FlyBallHit(this.longHomerLeftFieldLinecp1X, this.longHomerLeftFieldLinecp1Y, this.longHomerLeftFieldLinecp2X,
+      this.longHomerLeftFieldLinecp2Y, 70, this.leftFielderY - 100);
   }
 
   showSuccess(msg: string) {

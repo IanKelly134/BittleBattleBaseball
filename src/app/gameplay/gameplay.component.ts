@@ -133,7 +133,7 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0, this.canvasWidth, this.canvasHeight);
       this.SetDefensivePlayers();
-      this.DrawOffensivePlayers();
+      // this.DrawOffensivePlayers();
     }
   }
 
