@@ -53,11 +53,43 @@ export class GameViewModel {
     }
 
     StartGame() {
+        this.SetBattersOBRPAccordingToNewPitcherWHIP();
+
         this.HomeTeam.NextBatter = this.HomeTeam.GetBatterAtLineupPosition(1);
         this.AwayTeam.NextBatter = this.AwayTeam.GetBatterAtLineupPosition(1);
+
         this.NewAtBat();
 
         this.PlayByPlay = "Top of the 1st inning.... Play Ball!";
+    }
+
+    SetBattersOBRPAccordingToNewPitcherWHIP() {
+        this.SetAWAYTEAMBattersOBRPAccordingToNewPitcherWHIP();
+        this.SetHOMETEAMBattersOBRPAccordingToNewPitcherWHIP();
+    }
+
+    SetAWAYTEAMBattersOBRPAccordingToNewPitcherWHIP() {
+        this.AwayTeam.Pitcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Pitcher.HittingSeasonStats.obp;
+        this.AwayTeam.Catcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Catcher.HittingSeasonStats.obp;
+        this.AwayTeam.FirstBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
+        this.AwayTeam.SecondBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.SecondBaseman.HittingSeasonStats.obp;
+        this.AwayTeam.Shortstop.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Shortstop.HittingSeasonStats.obp;
+        this.AwayTeam.ThirdBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.ThirdBaseman.HittingSeasonStats.obp;
+        this.AwayTeam.LeftFielder.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.LeftFielder.HittingSeasonStats.obp;
+        this.AwayTeam.CenterFielder.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.CenterFielder.HittingSeasonStats.obp;
+        this.AwayTeam.RightFielder.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.RightFielder.HittingSeasonStats.obp;
+    }
+
+    SetHOMETEAMBattersOBRPAccordingToNewPitcherWHIP() {
+        this.HomeTeam.Pitcher.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.Pitcher.HittingSeasonStats.obp;
+        this.HomeTeam.Catcher.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.Catcher.HittingSeasonStats.obp;
+        this.HomeTeam.FirstBaseman.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.FirstBaseman.HittingSeasonStats.obp;
+        this.HomeTeam.SecondBaseman.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.SecondBaseman.HittingSeasonStats.obp;
+        this.HomeTeam.Shortstop.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.Shortstop.HittingSeasonStats.obp;
+        this.HomeTeam.ThirdBaseman.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.ThirdBaseman.HittingSeasonStats.obp;
+        this.HomeTeam.LeftFielder.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.LeftFielder.HittingSeasonStats.obp;
+        this.HomeTeam.CenterFielder.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.CenterFielder.HittingSeasonStats.obp;
+        this.HomeTeam.RightFielder.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.RightFielder.HittingSeasonStats.obp;
     }
 
     NextInning() {

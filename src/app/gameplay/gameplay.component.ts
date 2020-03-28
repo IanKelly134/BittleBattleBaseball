@@ -34,7 +34,7 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   rightCenterWallY: number;
 
   homePlateX: number = 947 * this.screenPctAdj;
-  homePlateY: number = 967 * this.screenPctAdj;
+  homePlateY: number = 947 * this.screenPctAdj;
   firstBaseX: number = 1220 * this.screenPctAdj;
   firstBaseY: number = 800 * this.screenPctAdj;
   secondBaseX: number = 905 * this.screenPctAdj;

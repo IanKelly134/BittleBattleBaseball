@@ -5,4 +5,5 @@ export class PitcherPlayerSeasonViewModel extends PlayerSeasonViewModel {
     whip: number;
     wins: number;
     losses: number;
+    PX: number = 1;
 }

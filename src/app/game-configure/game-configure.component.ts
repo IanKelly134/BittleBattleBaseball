@@ -39,7 +39,7 @@ export class GameConfigureComponent implements OnInit {
   rightCenterWallY: number;
 
   homePlateX: number = 947 * this.screenPctAdj;
-  homePlateY: number = 967 * this.screenPctAdj;
+  homePlateY: number = 947 * this.screenPctAdj;
   firstBaseX: number = 1220 * this.screenPctAdj;
   firstBaseY: number = 800 * this.screenPctAdj;
   secondBaseX: number = 905 * this.screenPctAdj;
@@ -101,7 +101,7 @@ export class GameConfigureComponent implements OnInit {
   constructor(private router: Router, mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService) //, private toastr: ToastrService
   {
     //console.log(this.router.getCurrentNavigation().extras.state);
-    document.body.style.backgroundImage = "url('../assets/images/baseball-background1.jpg')";
+    document.body.style.backgroundImage = "url('../assets/images/baseball-background6.jpg')";
 
     //this.GameId = activatedRoute.snapshot.params["gameId"];
     //var parsedGame = ) as GameViewModel;
@@ -468,7 +468,54 @@ export class GameConfigureComponent implements OnInit {
   }
   //***
 
+  ExecuteNextPlay() {
+    this.ClearCanvas();
+
+    setTimeout(() => {
+      let diceRoll = this.GenerateRandomNumber(0, 1000);
+
+      if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP <= (diceRoll * .001)) {
+        this.ExecuteCurrentBatterReachedBase();
+      }
+      else {
+        this.ExecuteCurrentBatterIsOut();
+      }
+    }, 300);
+  }
+
+  GenerateRandomNumber(from: number, to: number): number {
+    return Math.floor((Math.random() * to));
+
+  }
+
+  ExecuteCurrentBatterReachedBase() {
+    let diceRoll = this.GenerateRandomNumber(1, 4);
+    if (diceRoll == 1) {
+      this.GroundBallSingleLeft1();
+    }
+    else if (diceRoll == 2) {
+      this.HomerLeftFieldLine();
+    }
+    else if (diceRoll == 3) {
+      this.LongHomerLeftFieldLine();
+    } else {
+      this.GroundBallSingleLeft2();
+    }
+  }
+
+  ExecuteCurrentBatterIsOut() {
+    let diceRoll = this.GenerateRandomNumber(1, 3);
+    if (diceRoll == 1) {
+      this.FlyBallOutToFirst();
+    } else {
+      this.FlyBallOutToThird();
+    }
+
+  }
+
+
   SetPlayingField() {
+
     this.canvas = <HTMLCanvasElement>document.getElementById("ballparkCanvas");
     this.ctx = this.canvas.getContext("2d");
     let img = new Image();
@@ -990,8 +1037,8 @@ export class GameConfigureComponent implements OnInit {
     }
   }
 
-  groundBallSingleLeft1X: number = 415 * this.screenPctAdj;
-  groundBallSingleLeft1Y: number = 720 * this.screenPctAdj;
+  groundBallSingleLeft1X: number = 370 * this.screenPctAdj;
+  groundBallSingleLeft1Y: number = 500 * this.screenPctAdj;
 
   GroundBallSingleLeft1() {
     this.GroundBallHit(this.groundBallSingleLeft1X, this.groundBallSingleLeft1Y, "Single down the left field line!");
