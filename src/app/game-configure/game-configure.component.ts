@@ -8,6 +8,9 @@ import { TeamViewModel } from '../team-view-model';
 import { GameTeamViewModel } from '../game-team-view-model';
 import { TeamSearchResultViewModel } from '../team-search-result-view-model';
 import { GamePlayerViewModel } from '../game-player-view-model';
+import { HitterPlayerSeasonViewModel } from '../hitter-player-season-view-model';
+import { PitcherPlayerSeasonViewModel } from '../pitcher-player-season-view-model';
+import { PlayerViewModel } from '../player-view-model';
 
 @Component({
   selector: 'app-game-configure',
@@ -130,13 +133,6 @@ export class GameConfigureComponent implements OnInit {
   private BuildMockGame(): GameViewModel {
     let gameVM = new GameViewModel();
 
-    let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III");
-    //homeTeam.SetPitcher(new GamePlayerViewModel("SP", ""));
-    gameVM.HomeTeam = homeTeam;
-
-    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field");
-    gameVM.AwayTeam = awayTeam;
-
     let homeTeamSearchResult = new TeamSearchResultViewModel();
     homeTeamSearchResult.id = 1234;
     homeTeamSearchResult.city = "St. Louis";
@@ -150,6 +146,327 @@ export class GameConfigureComponent implements OnInit {
     awayTeamSearchResult.teamName = "Rockies";
 
     gameVM.SetValues(1010101, homeTeamSearchResult, awayTeamSearchResult);
+
+
+    //---------------
+
+    let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III");
+
+    var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    pitcherHitterPlayerSeasonViewModel.obp = 0.400;
+    pitcherHitterPlayerSeasonViewModel.slg = 0.650;
+    pitcherHitterPlayerSeasonViewModel.avg = 0.300;
+    pitcherHitterPlayerSeasonViewModel.pa = 600;
+    pitcherHitterPlayerSeasonViewModel.ab = 500;
+    pitcherHitterPlayerSeasonViewModel.hr = 30;
+    pitcherHitterPlayerSeasonViewModel.rbi = 100;
+    pitcherHitterPlayerSeasonViewModel.sb = 20;
+    pitcherHitterPlayerSeasonViewModel.bb = 100;
+    pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    pitcherHitterPlayerSeasonViewModel.player.playerName = "Adam Wainwright";
+
+    var pitherPitcherPlayerSeasonViewModel = new PitcherPlayerSeasonViewModel();
+    pitherPitcherPlayerSeasonViewModel.era = 3.26;
+    pitherPitcherPlayerSeasonViewModel.fldPct = .989;
+    pitherPitcherPlayerSeasonViewModel.whip = 1.46;
+    pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
+    pitherPitcherPlayerSeasonViewModel.player.playerName = "Adam Wainwright";
+    var p = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
+    p.BattingOrderNumber = 9;
+    homeTeam.SetPitcher(p);
+
+    var catcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    catcherHitterPlayerSeasonViewModel.obp = 0.400;
+    catcherHitterPlayerSeasonViewModel.slg = 0.650;
+    catcherHitterPlayerSeasonViewModel.avg = 0.300;
+    catcherHitterPlayerSeasonViewModel.pa = 600;
+    catcherHitterPlayerSeasonViewModel.ab = 500;
+    catcherHitterPlayerSeasonViewModel.hr = 30;
+    catcherHitterPlayerSeasonViewModel.rbi = 100;
+    catcherHitterPlayerSeasonViewModel.sb = 20;
+    catcherHitterPlayerSeasonViewModel.bb = 100;
+    catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    catcherHitterPlayerSeasonViewModel.player.playerName = "Yadi Molina";
+    var c = new GamePlayerViewModel("C", catcherHitterPlayerSeasonViewModel, null);
+    c.BattingOrderNumber = 8;
+    homeTeam.SetCatcher(c);
+
+    var firstBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    firstBaseHitterPlayerSeasonViewModel.obp = 0.400;
+    firstBaseHitterPlayerSeasonViewModel.slg = 0.650;
+    firstBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    firstBaseHitterPlayerSeasonViewModel.pa = 600;
+    firstBaseHitterPlayerSeasonViewModel.ab = 500;
+    firstBaseHitterPlayerSeasonViewModel.hr = 30;
+    firstBaseHitterPlayerSeasonViewModel.rbi = 100;
+    firstBaseHitterPlayerSeasonViewModel.sb = 20;
+    firstBaseHitterPlayerSeasonViewModel.bb = 100;
+    firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    firstBaseHitterPlayerSeasonViewModel.player.playerName = "Albert Pujols";
+
+    var fb = new GamePlayerViewModel("1B", firstBaseHitterPlayerSeasonViewModel, null);
+    fb.BattingOrderNumber = 3;
+    homeTeam.SetFirstBase(fb);
+
+    var secondBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    secondBaseHitterPlayerSeasonViewModel.obp = 0.400;
+    secondBaseHitterPlayerSeasonViewModel.slg = 0.650;
+    secondBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    secondBaseHitterPlayerSeasonViewModel.pa = 600;
+    secondBaseHitterPlayerSeasonViewModel.ab = 500;
+    secondBaseHitterPlayerSeasonViewModel.hr = 30;
+    secondBaseHitterPlayerSeasonViewModel.rbi = 100;
+    secondBaseHitterPlayerSeasonViewModel.sb = 20;
+    secondBaseHitterPlayerSeasonViewModel.bb = 100;
+    secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    secondBaseHitterPlayerSeasonViewModel.player.playerName = "Rogers Hornsby";
+    var sb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
+    sb.BattingOrderNumber = 1;
+    homeTeam.SetSecondBase(sb);
+
+    var thirdBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    thirdBaseHitterPlayerSeasonViewModel.obp = 0.400;
+    thirdBaseHitterPlayerSeasonViewModel.slg = 0.650;
+    thirdBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    thirdBaseHitterPlayerSeasonViewModel.pa = 600;
+    thirdBaseHitterPlayerSeasonViewModel.ab = 500;
+    thirdBaseHitterPlayerSeasonViewModel.hr = 30;
+    thirdBaseHitterPlayerSeasonViewModel.rbi = 100;
+    thirdBaseHitterPlayerSeasonViewModel.sb = 20;
+    thirdBaseHitterPlayerSeasonViewModel.bb = 100;
+    thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Scott Rolen";
+    var tb = new GamePlayerViewModel("3B", thirdBaseHitterPlayerSeasonViewModel, null);
+    tb.BattingOrderNumber = 4;
+    homeTeam.SetThirdBase(tb);
+
+    var shortstopHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    shortstopHitterPlayerSeasonViewModel.obp = 0.400;
+    shortstopHitterPlayerSeasonViewModel.slg = 0.650;
+    shortstopHitterPlayerSeasonViewModel.avg = 0.300;
+    shortstopHitterPlayerSeasonViewModel.pa = 600;
+    shortstopHitterPlayerSeasonViewModel.ab = 500;
+    shortstopHitterPlayerSeasonViewModel.hr = 30;
+    shortstopHitterPlayerSeasonViewModel.rbi = 100;
+    shortstopHitterPlayerSeasonViewModel.sb = 20;
+    shortstopHitterPlayerSeasonViewModel.bb = 100;
+    shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    shortstopHitterPlayerSeasonViewModel.player.playerName = "Ozzie Smith";
+    var ss = new GamePlayerViewModel("SS", shortstopHitterPlayerSeasonViewModel, null);
+    ss.BattingOrderNumber = 7;
+    homeTeam.SetShortstop(ss);
+
+    var leftfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    leftfielderHitterPlayerSeasonViewModel.obp = 0.400;
+    leftfielderHitterPlayerSeasonViewModel.slg = 0.650;
+    leftfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    leftfielderHitterPlayerSeasonViewModel.pa = 600;
+    leftfielderHitterPlayerSeasonViewModel.ab = 500;
+    leftfielderHitterPlayerSeasonViewModel.hr = 30;
+    leftfielderHitterPlayerSeasonViewModel.rbi = 100;
+    leftfielderHitterPlayerSeasonViewModel.sb = 20;
+    leftfielderHitterPlayerSeasonViewModel.bb = 100;
+    leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    leftfielderHitterPlayerSeasonViewModel.player.playerName = "Matt Holliday";
+    var lf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
+    lf.BattingOrderNumber = 5;
+    homeTeam.SetLeftField(lf);
+
+    var centerfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    centerfielderHitterPlayerSeasonViewModel.obp = 0.400;
+    centerfielderHitterPlayerSeasonViewModel.slg = 0.650;
+    centerfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    centerfielderHitterPlayerSeasonViewModel.pa = 600;
+    centerfielderHitterPlayerSeasonViewModel.ab = 500;
+    centerfielderHitterPlayerSeasonViewModel.hr = 30;
+    centerfielderHitterPlayerSeasonViewModel.rbi = 100;
+    centerfielderHitterPlayerSeasonViewModel.sb = 20;
+    centerfielderHitterPlayerSeasonViewModel.bb = 100;
+    centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    centerfielderHitterPlayerSeasonViewModel.player.playerName = "Lou Brock";
+    var cf = new GamePlayerViewModel("CF", centerfielderHitterPlayerSeasonViewModel, null);
+    cf.BattingOrderNumber = 2;
+    homeTeam.SetCenterField(cf);
+
+    var rightfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    rightfielderHitterPlayerSeasonViewModel.obp = 0.400;
+    rightfielderHitterPlayerSeasonViewModel.slg = 0.650;
+    rightfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    rightfielderHitterPlayerSeasonViewModel.pa = 600;
+    rightfielderHitterPlayerSeasonViewModel.ab = 500;
+    rightfielderHitterPlayerSeasonViewModel.hr = 30;
+    rightfielderHitterPlayerSeasonViewModel.rbi = 100;
+    rightfielderHitterPlayerSeasonViewModel.sb = 20;
+    rightfielderHitterPlayerSeasonViewModel.bb = 100;
+    rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    rightfielderHitterPlayerSeasonViewModel.player.playerName = "Stan Musial";
+    let rf = new GamePlayerViewModel("RF", rightfielderHitterPlayerSeasonViewModel, null);
+    rf.BattingOrderNumber = 6;
+    homeTeam.SetRightField(rf);
+
+    gameVM.HomeTeam = homeTeam;
+
+    //---------------
+
+    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field");
+
+    var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    pitcherHitterPlayerSeasonViewModel.obp = 0.400;
+    pitcherHitterPlayerSeasonViewModel.slg = 0.650;
+    pitcherHitterPlayerSeasonViewModel.avg = 0.300;
+    pitcherHitterPlayerSeasonViewModel.pa = 600;
+    pitcherHitterPlayerSeasonViewModel.ab = 500;
+    pitcherHitterPlayerSeasonViewModel.hr = 30;
+    pitcherHitterPlayerSeasonViewModel.rbi = 100;
+    pitcherHitterPlayerSeasonViewModel.sb = 20;
+    pitcherHitterPlayerSeasonViewModel.bb = 100;
+    pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    pitcherHitterPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
+
+    var pitherPitcherPlayerSeasonViewModel = new PitcherPlayerSeasonViewModel();
+    pitherPitcherPlayerSeasonViewModel.era = 3.26;
+    pitherPitcherPlayerSeasonViewModel.fldPct = .989;
+    pitherPitcherPlayerSeasonViewModel.whip = 1.46;
+    pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
+    pitherPitcherPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
+    var ap = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
+    ap.BattingOrderNumber = 9;
+    awayTeam.SetPitcher(ap);
+
+    var catcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    catcherHitterPlayerSeasonViewModel.obp = 0.400;
+    catcherHitterPlayerSeasonViewModel.slg = 0.650;
+    catcherHitterPlayerSeasonViewModel.avg = 0.300;
+    catcherHitterPlayerSeasonViewModel.pa = 600;
+    catcherHitterPlayerSeasonViewModel.ab = 500;
+    catcherHitterPlayerSeasonViewModel.hr = 30;
+    catcherHitterPlayerSeasonViewModel.rbi = 100;
+    catcherHitterPlayerSeasonViewModel.sb = 20;
+    catcherHitterPlayerSeasonViewModel.bb = 100;
+    catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    catcherHitterPlayerSeasonViewModel.player.playerName = "Yorvit Torrealba";
+    var ac = new GamePlayerViewModel("C", catcherHitterPlayerSeasonViewModel, null);
+    ac.BattingOrderNumber = 8;
+    awayTeam.SetCatcher(ac);
+
+    var firstBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    firstBaseHitterPlayerSeasonViewModel.obp = 0.400;
+    firstBaseHitterPlayerSeasonViewModel.slg = 0.650;
+    firstBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    firstBaseHitterPlayerSeasonViewModel.pa = 600;
+    firstBaseHitterPlayerSeasonViewModel.ab = 500;
+    firstBaseHitterPlayerSeasonViewModel.hr = 30;
+    firstBaseHitterPlayerSeasonViewModel.rbi = 100;
+    firstBaseHitterPlayerSeasonViewModel.sb = 20;
+    firstBaseHitterPlayerSeasonViewModel.bb = 100;
+    firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    firstBaseHitterPlayerSeasonViewModel.player.playerName = "Todd Helton";
+
+    var afb = new GamePlayerViewModel("1B", firstBaseHitterPlayerSeasonViewModel, null);
+    afb.BattingOrderNumber = 3;
+    awayTeam.SetFirstBase(afb);
+
+    var secondBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    secondBaseHitterPlayerSeasonViewModel.obp = 0.400;
+    secondBaseHitterPlayerSeasonViewModel.slg = 0.650;
+    secondBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    secondBaseHitterPlayerSeasonViewModel.pa = 600;
+    secondBaseHitterPlayerSeasonViewModel.ab = 500;
+    secondBaseHitterPlayerSeasonViewModel.hr = 30;
+    secondBaseHitterPlayerSeasonViewModel.rbi = 100;
+    secondBaseHitterPlayerSeasonViewModel.sb = 20;
+    secondBaseHitterPlayerSeasonViewModel.bb = 100;
+    secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    secondBaseHitterPlayerSeasonViewModel.player.playerName = "Mike Lansing";
+    var asb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
+    asb.BattingOrderNumber = 1;
+    awayTeam.SetSecondBase(asb);
+
+    var thirdBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    thirdBaseHitterPlayerSeasonViewModel.obp = 0.400;
+    thirdBaseHitterPlayerSeasonViewModel.slg = 0.650;
+    thirdBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    thirdBaseHitterPlayerSeasonViewModel.pa = 600;
+    thirdBaseHitterPlayerSeasonViewModel.ab = 500;
+    thirdBaseHitterPlayerSeasonViewModel.hr = 30;
+    thirdBaseHitterPlayerSeasonViewModel.rbi = 100;
+    thirdBaseHitterPlayerSeasonViewModel.sb = 20;
+    thirdBaseHitterPlayerSeasonViewModel.bb = 100;
+    thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Nolan Arenado";
+    var atb = new GamePlayerViewModel("3B", thirdBaseHitterPlayerSeasonViewModel, null);
+    atb.BattingOrderNumber = 4;
+    awayTeam.SetThirdBase(atb);
+
+    var shortstopHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    shortstopHitterPlayerSeasonViewModel.obp = 0.400;
+    shortstopHitterPlayerSeasonViewModel.slg = 0.650;
+    shortstopHitterPlayerSeasonViewModel.avg = 0.300;
+    shortstopHitterPlayerSeasonViewModel.pa = 600;
+    shortstopHitterPlayerSeasonViewModel.ab = 500;
+    shortstopHitterPlayerSeasonViewModel.hr = 30;
+    shortstopHitterPlayerSeasonViewModel.rbi = 100;
+    shortstopHitterPlayerSeasonViewModel.sb = 20;
+    shortstopHitterPlayerSeasonViewModel.bb = 100;
+    shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    shortstopHitterPlayerSeasonViewModel.player.playerName = "Troy Tulowitzki";
+    var ass = new GamePlayerViewModel("SS", shortstopHitterPlayerSeasonViewModel, null);
+    ass.BattingOrderNumber = 7;
+    awayTeam.SetShortstop(ass);
+
+    var leftfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    leftfielderHitterPlayerSeasonViewModel.obp = 0.400;
+    leftfielderHitterPlayerSeasonViewModel.slg = 0.650;
+    leftfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    leftfielderHitterPlayerSeasonViewModel.pa = 600;
+    leftfielderHitterPlayerSeasonViewModel.ab = 500;
+    leftfielderHitterPlayerSeasonViewModel.hr = 30;
+    leftfielderHitterPlayerSeasonViewModel.rbi = 100;
+    leftfielderHitterPlayerSeasonViewModel.sb = 20;
+    leftfielderHitterPlayerSeasonViewModel.bb = 100;
+    leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    leftfielderHitterPlayerSeasonViewModel.player.playerName = "Carlos Gonzalez";
+    var alf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
+    alf.BattingOrderNumber = 5;
+    awayTeam.SetLeftField(alf);
+
+    var centerfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    centerfielderHitterPlayerSeasonViewModel.obp = 0.400;
+    centerfielderHitterPlayerSeasonViewModel.slg = 0.650;
+    centerfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    centerfielderHitterPlayerSeasonViewModel.pa = 600;
+    centerfielderHitterPlayerSeasonViewModel.ab = 500;
+    centerfielderHitterPlayerSeasonViewModel.hr = 30;
+    centerfielderHitterPlayerSeasonViewModel.rbi = 100;
+    centerfielderHitterPlayerSeasonViewModel.sb = 20;
+    centerfielderHitterPlayerSeasonViewModel.bb = 100;
+    centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    centerfielderHitterPlayerSeasonViewModel.player.playerName = "Charlie Blackmon";
+    var acf = new GamePlayerViewModel("CF", centerfielderHitterPlayerSeasonViewModel, null);
+    acf.BattingOrderNumber = 2;
+    awayTeam.SetCenterField(acf);
+
+    var rightfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    rightfielderHitterPlayerSeasonViewModel.obp = 0.400;
+    rightfielderHitterPlayerSeasonViewModel.slg = 0.650;
+    rightfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    rightfielderHitterPlayerSeasonViewModel.pa = 600;
+    rightfielderHitterPlayerSeasonViewModel.ab = 500;
+    rightfielderHitterPlayerSeasonViewModel.hr = 30;
+    rightfielderHitterPlayerSeasonViewModel.rbi = 100;
+    rightfielderHitterPlayerSeasonViewModel.sb = 20;
+    rightfielderHitterPlayerSeasonViewModel.bb = 100;
+    rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    rightfielderHitterPlayerSeasonViewModel.player.playerName = "Larry Walker";
+    let arf = new GamePlayerViewModel("RF", rightfielderHitterPlayerSeasonViewModel, null);
+    arf.BattingOrderNumber = 6;
+    awayTeam.SetRightField(arf);
+
+
+    gameVM.AwayTeam = awayTeam;
+
+
+    gameVM.StartGame();
 
     return gameVM;
   }

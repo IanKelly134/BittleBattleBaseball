@@ -86,7 +86,7 @@ export class HomeComponent implements OnInit {
     this.ImageURLs.push("../assets/images/valenzuela1.jpg");
     this.ImageURLs.push("../assets/images/rizzo1.jpg");
     this.ImageURLs.push("../assets/images/story1.JPEG");
-    this.ImageURLs.push("../assets/images/santo1.jpg");
+    this.ImageURLs.push("../assets/images/santo1.jpeg");
     this.ImageURLs.push("../assets/images/sandberg1.jpg");
     this.ImageURLs.push("../assets/images/dean1.jpg");
     this.ImageURLs.push("../assets/images/yaz1.jpg");
@@ -94,7 +94,7 @@ export class HomeComponent implements OnInit {
     this.ImageURLs.push("../assets/images/pudge1.jpg");
     this.ImageURLs.push("../assets/images/votto1.jpg");
     this.ImageURLs.push("../assets/images/maysCatch1.jpg");
-    this.ImageURLs.push("../assets/images/ruth2.jpg");
+    this.ImageURLs.push("../assets/images/ruth2.jpeg");
     this.ImageURLs.push("../assets/images/ruth60th.jpg");
     this.ImageURLs.push("../assets/images/shotHeardRoundTheWorld.jpg");
     this.ImageURLs.push("../assets/images/rivera1.jpg");
@@ -102,6 +102,11 @@ export class HomeComponent implements OnInit {
     this.ImageURLs.push("../assets/images/aaron715.jpg");
     this.ImageURLs.push("../assets/images/maris61.jpg");
     this.ImageURLs.push("../assets/images/ryan2.jpg");
+    this.ImageURLs.push("../assets/images/gehrig2.jpg");
+    this.ImageURLs.push("../assets/images/williams2.jpg");
+    this.ImageURLs.push("../assets/images/musial2.jpg");
+    this.ImageURLs.push("../assets/images/musial3.jpg");
+    this.ImageURLs.push("../assets/images/thomas1.jpg");
 
     document.body.style.backgroundImage = "url('../assets/images/BaseballFieldBackground.jpg')";
 
