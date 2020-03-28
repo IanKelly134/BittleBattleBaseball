@@ -26,6 +26,8 @@ export class HomeComponent implements OnInit {
     this.ImageURLs.push("../assets/images/arenado1.jpg");
     this.ImageURLs.push("../assets/images/mays1.jpg");
     this.ImageURLs.push("../assets/images/mantle1.jpg");
+    this.ImageURLs.push("../assets/images/ichiro1.jpg");
+    this.ImageURLs.push("../assets/images/mattingly1.jpg");
     this.ImageURLs.push("../assets/images/cobb1.jpg");
     this.ImageURLs.push("../assets/images/nolanryan1.jpg");
     this.ImageURLs.push("../assets/images/vladSr.jpeg");
@@ -73,6 +75,33 @@ export class HomeComponent implements OnInit {
     this.ImageURLs.push("../assets/images/shoelessjoe1.jpg");
     this.ImageURLs.push("../assets/images/killebrew1.jpg");
     this.ImageURLs.push("../assets/images/carew1.jpg");
+    this.ImageURLs.push("../assets/images/griffey1.jpg");
+    this.ImageURLs.push("../assets/images/brobinson1.jpg");
+    this.ImageURLs.push("../assets/images/ohtani1.jpg");
+    this.ImageURLs.push("../assets/images/betts1.jpg");
+    this.ImageURLs.push("../assets/images/bellinger1.jpg");
+    this.ImageURLs.push("../assets/images/verlander1.jpg");
+    this.ImageURLs.push("../assets/images/beltre1.jpg");
+    this.ImageURLs.push("../assets/images/cabrera1.jpg");
+    this.ImageURLs.push("../assets/images/valenzuela1.jpg");
+    this.ImageURLs.push("../assets/images/rizzo1.jpg");
+    this.ImageURLs.push("../assets/images/story1.JPEG");
+    this.ImageURLs.push("../assets/images/santo1.jpg");
+    this.ImageURLs.push("../assets/images/sandberg1.jpg");
+    this.ImageURLs.push("../assets/images/dean1.jpg");
+    this.ImageURLs.push("../assets/images/yaz1.jpg");
+    this.ImageURLs.push("../assets/images/posey1.jpg");
+    this.ImageURLs.push("../assets/images/pudge1.jpg");
+    this.ImageURLs.push("../assets/images/votto1.jpg");
+    this.ImageURLs.push("../assets/images/maysCatch1.jpg");
+    this.ImageURLs.push("../assets/images/ruth2.jpg");
+    this.ImageURLs.push("../assets/images/ruth60th.jpg");
+    this.ImageURLs.push("../assets/images/shotHeardRoundTheWorld.jpg");
+    this.ImageURLs.push("../assets/images/rivera1.jpg");
+    this.ImageURLs.push("../assets/images/aaron2.jpg");
+    this.ImageURLs.push("../assets/images/aaron715.jpg");
+    this.ImageURLs.push("../assets/images/maris61.jpg");
+    this.ImageURLs.push("../assets/images/ryan2.jpg");
 
     document.body.style.backgroundImage = "url('../assets/images/BaseballFieldBackground.jpg')";
 
