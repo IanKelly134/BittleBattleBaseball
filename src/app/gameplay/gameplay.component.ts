@@ -33,8 +33,8 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   rightCenterWallX: number;
   rightCenterWallY: number;
 
-  homePlateX: number = 895 * this.screenPctAdj;
-  homePlateY: number = 990 * this.screenPctAdj;
+  homePlateX: number = 947 * this.screenPctAdj;
+  homePlateY: number = 967 * this.screenPctAdj;
   firstBaseX: number = 1220 * this.screenPctAdj;
   firstBaseY: number = 800 * this.screenPctAdj;
   secondBaseX: number = 905 * this.screenPctAdj;
@@ -52,24 +52,24 @@ export class GameplayComponent implements OnInit, AfterViewInit {
   awayOnDeckBatterX: number = 480 * this.screenPctAdj;
   awayOnDeckBatterY: number = 950 * this.screenPctAdj;
 
-  catcherX: number = 875 * this.screenPctAdj;
-  catcherY: number = 900 * this.screenPctAdj;
-  pitcherX: number = 895 * this.screenPctAdj;
-  pitcherY: number = 700 * this.screenPctAdj;
+  catcherX: number = 915 * this.screenPctAdj;
+  catcherY: number = 995 * this.screenPctAdj;
+  pitcherX: number = 915 * this.screenPctAdj;
+  pitcherY: number = 660 * this.screenPctAdj;
   firstBasemanX: number = 1210 * this.screenPctAdj;
   firstBasemanY: number = 610 * this.screenPctAdj;
   secondBasemanX: number = 1045 * this.screenPctAdj;
-  secondBasemanY: number = 600 * this.screenPctAdj;
-  thirdBasemanX: number = 584 * this.screenPctAdj;
+  secondBasemanY: number = 560 * this.screenPctAdj;
+  thirdBasemanX: number = 625 * this.screenPctAdj;
   thirdBasemanY: number = 620 * this.screenPctAdj;
-  shortstopX: number = 740 * this.screenPctAdj;
-  shortstopY: number = 600 * this.screenPctAdj;
-  leftFielderX: number = 565 * this.screenPctAdj;
-  leftFielderY: number = 370 * this.screenPctAdj;
+  shortstopX: number = 775 * this.screenPctAdj;
+  shortstopY: number = 560 * this.screenPctAdj;
+  leftFielderX: number = 430 * this.screenPctAdj;
+  leftFielderY: number = 320 * this.screenPctAdj;
   centerFielderX: number = 935 * this.screenPctAdj;
-  centerFielderY: number = 320 * this.screenPctAdj;
-  rightFielderX: number = 1360 * this.screenPctAdj;
-  rightFielderY: number = 355 * this.screenPctAdj;
+  centerFielderY: number = 260 * this.screenPctAdj;
+  rightFielderX: number = 1430 * this.screenPctAdj;
+  rightFielderY: number = 320 * this.screenPctAdj;
 
   canvasWidth: number = 1920 * this.screenPctAdj;
   canvasHeight: number = 1080 * this.screenPctAdj;
@@ -329,9 +329,11 @@ export class GameplayComponent implements OnInit, AfterViewInit {
 
   DrawPitcher() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.Pitcher.PlayerImageURL;
       img.title = this.Game.AwayTeam.Pitcher.Name;
+      color = 'blue';
     }
     else {
       img.src = this.Game.HomeTeam.Pitcher.PlayerImageURL;
@@ -343,16 +345,31 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.pitcherX, this.pitcherY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
       this.ctx.drawImage(img,
         this.pitcherX, this.pitcherY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText(img.title, this.pitcherX + (this.playerFieldImgAvatarWidth / 2), (this.pitcherY - 5));
     }
   }
 
   DrawCatcher() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.Catcher.PlayerImageURL;
       img.title = this.Game.AwayTeam.Catcher.Name;
+      color = 'blue';
     }
     else {
       img.src = this.Game.HomeTeam.Catcher.PlayerImageURL;
@@ -364,20 +381,35 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.catcherX, this.catcherY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
       this.ctx.drawImage(img,
         this.catcherX, this.catcherY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'gray';
+      this.ctx.fillText(img.title, this.catcherX + (this.playerFieldImgAvatarWidth / 2), (this.catcherY - 5));
     }
   }
 
   DrawFirstBasemen() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.FirstBaseman.PlayerImageURL;
       img.title = this.Game.AwayTeam.FirstBaseman.Name;
+      color = 'blue';
     }
     else {
       img.src = this.Game.HomeTeam.FirstBaseman.PlayerImageURL;
-      img.title = "\"" + this.Game.HomeTeam.FirstBaseman.Name + "\"";
+      img.title = this.Game.HomeTeam.FirstBaseman.Name;
     }
 
     img.onerror = function () {
@@ -385,16 +417,31 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.firstBasemanX, this.firstBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
       this.ctx.drawImage(img,
         this.firstBasemanX, this.firstBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText(img.title, this.firstBasemanX + (this.playerFieldImgAvatarWidth / 2), (this.firstBasemanY - 5));
     }
   }
 
   DrawSecondBasemen() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.SecondBaseman.PlayerImageURL;
       img.title = this.Game.AwayTeam.SecondBaseman.Name;
+      color = 'blue';
     } else {
       img.src = this.Game.HomeTeam.SecondBaseman.PlayerImageURL;
       img.title = this.Game.HomeTeam.SecondBaseman.Name;
@@ -405,16 +452,31 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.secondBasemanX, this.secondBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
       this.ctx.drawImage(img,
         this.secondBasemanX, this.secondBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText(img.title, this.secondBasemanX + (this.playerFieldImgAvatarWidth / 2), (this.secondBasemanY - 5));
     }
   }
 
   DrawThirdBasemen() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.ThirdBaseman.PlayerImageURL;
       img.title = this.Game.AwayTeam.ThirdBaseman.Name;
+      color = 'blue';
     } else {
       img.src = this.Game.HomeTeam.ThirdBaseman.PlayerImageURL;
       img.title = this.Game.HomeTeam.ThirdBaseman.Name;
@@ -425,16 +487,31 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.thirdBasemanX, this.thirdBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
       this.ctx.drawImage(img,
         this.thirdBasemanX, this.thirdBasemanY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText(img.title, this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2), (this.thirdBasemanY - 5));
     }
   }
 
   DrawShortstop() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.Shortstop.PlayerImageURL;
       img.title = this.Game.AwayTeam.Shortstop.Name;
+      color = 'blue';
     } else {
       img.src = this.Game.HomeTeam.Shortstop.PlayerImageURL;
       img.title = this.Game.HomeTeam.Shortstop.Name;
@@ -445,16 +522,31 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.shortstopX, this.shortstopY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
       this.ctx.drawImage(img,
         this.shortstopX, this.shortstopY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText(img.title, this.shortstopX + (this.playerFieldImgAvatarWidth / 2), (this.shortstopY - 5));
     }
   }
 
   DrawLeftfielder() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.LeftFielder.PlayerImageURL;
       img.title = this.Game.AwayTeam.LeftFielder.Name;
+      color = 'blue';
     } else {
       img.src = this.Game.HomeTeam.LeftFielder.PlayerImageURL;
       img.title = this.Game.HomeTeam.LeftFielder.Name;
@@ -465,16 +557,32 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.leftFielderX, this.leftFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
+
       this.ctx.drawImage(img,
         this.leftFielderX, this.leftFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText(img.title, this.leftFielderX + (this.playerFieldImgAvatarWidth / 2), (this.leftFielderY - 5));
     }
   }
 
   DrawRightfielder() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.RightFielder.PlayerImageURL;
       img.title = this.Game.AwayTeam.RightFielder.Name;
+      color = 'blue';
     }
     else {
       img.src = this.Game.HomeTeam.RightFielder.PlayerImageURL;
@@ -486,17 +594,31 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.rightFielderX, this.rightFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
       this.ctx.drawImage(img,
         this.rightFielderX, this.rightFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText(img.title, this.rightFielderX + (this.playerFieldImgAvatarWidth / 2), (this.rightFielderY - 5));
     }
   }
 
   DrawCenterfielder() {
     let img = new Image();
-
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.CenterFielder.PlayerImageURL;
       img.title = this.Game.AwayTeam.CenterFielder.Name;
+      color = 'blue';
     } else {
       img.src = this.Game.HomeTeam.CenterFielder.PlayerImageURL;
       img.title = this.Game.HomeTeam.CenterFielder.Name;
@@ -507,8 +629,21 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     }
 
     img.onload = () => {
+      this.ctx.beginPath();
+      this.ctx.rect(this.centerFielderX, this.centerFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      this.ctx.fillStyle = color;
+      this.ctx.fill();
+      this.ctx.lineWidth = 4;
+      this.ctx.strokeStyle = color;
+      this.ctx.stroke();
+
       this.ctx.drawImage(img,
         this.centerFielderX, this.centerFielderY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+      this.ctx.font = '8pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText(img.title, this.centerFielderX + (this.playerFieldImgAvatarWidth / 2), (this.centerFielderY - 5));
     }
   }
 
