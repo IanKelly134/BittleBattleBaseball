@@ -25,7 +25,7 @@ export class GameConfigureComponent implements OnInit {
   pitchSound = new Audio("../assets/assets/audio/caughtball.mp3");
   IsSoundMuted: boolean = false;
 
-  screenPctAdj: number = 0.62;
+  screenPctAdj: number = 0.66;
 
   leftFieldCornerX: number;
   leftFieldCornerY: number;
@@ -38,14 +38,14 @@ export class GameConfigureComponent implements OnInit {
   rightCenterWallX: number;
   rightCenterWallY: number;
 
-  homePlateX: number = 947 * this.screenPctAdj;
-  homePlateY: number = 947 * this.screenPctAdj;
+  homePlateX: number = 950 * this.screenPctAdj;
+  homePlateY: number = 1170 * this.screenPctAdj;
   firstBaseX: number = 1220 * this.screenPctAdj;
-  firstBaseY: number = 800 * this.screenPctAdj;
+  firstBaseY: number = 1023 * this.screenPctAdj;
   secondBaseX: number = 905 * this.screenPctAdj;
-  secondBaseY: number = 690 * this.screenPctAdj;
+  secondBaseY: number = 913 * this.screenPctAdj;
   thirdBaseX: number = 555 * this.screenPctAdj;
-  thirdBaseY: number = 790 * this.screenPctAdj;
+  thirdBaseY: number = 1013 * this.screenPctAdj;
 
   rightHandedBatterX: number = 830 * this.screenPctAdj;
   rightHandedBatterY: number = 940 * this.screenPctAdj;
@@ -53,31 +53,31 @@ export class GameConfigureComponent implements OnInit {
   leftHandedBatterY: number = 940 * this.screenPctAdj;
 
   homeOnDeckBatterX: number = 1300 * this.screenPctAdj;
-  homeOnDeckBatterY: number = 950 * this.screenPctAdj;
+  homeOnDeckBatterY: number = 1173 * this.screenPctAdj;
   awayOnDeckBatterX: number = 480 * this.screenPctAdj;
-  awayOnDeckBatterY: number = 950 * this.screenPctAdj;
+  awayOnDeckBatterY: number = 1173 * this.screenPctAdj;
 
   catcherX: number = 915 * this.screenPctAdj;
-  catcherY: number = 995 * this.screenPctAdj;
+  catcherY: number = 1217 * this.screenPctAdj;
   pitcherX: number = 915 * this.screenPctAdj;
-  pitcherY: number = 660 * this.screenPctAdj;
+  pitcherY: number = 883 * this.screenPctAdj;
   firstBasemanX: number = 1210 * this.screenPctAdj;
-  firstBasemanY: number = 610 * this.screenPctAdj;
+  firstBasemanY: number = 833 * this.screenPctAdj;
   secondBasemanX: number = 1045 * this.screenPctAdj;
-  secondBasemanY: number = 560 * this.screenPctAdj;
+  secondBasemanY: number = 783 * this.screenPctAdj;
   thirdBasemanX: number = 625 * this.screenPctAdj;
-  thirdBasemanY: number = 620 * this.screenPctAdj;
+  thirdBasemanY: number = 843 * this.screenPctAdj;
   shortstopX: number = 775 * this.screenPctAdj;
-  shortstopY: number = 560 * this.screenPctAdj;
+  shortstopY: number = 783 * this.screenPctAdj;
   leftFielderX: number = 430 * this.screenPctAdj;
-  leftFielderY: number = 320 * this.screenPctAdj;
+  leftFielderY: number = 543 * this.screenPctAdj;
   centerFielderX: number = 935 * this.screenPctAdj;
-  centerFielderY: number = 260 * this.screenPctAdj;
+  centerFielderY: number = 483 * this.screenPctAdj;
   rightFielderX: number = 1430 * this.screenPctAdj;
-  rightFielderY: number = 320 * this.screenPctAdj;
+  rightFielderY: number = 543 * this.screenPctAdj;
 
   canvasWidth: number = 1920 * this.screenPctAdj;
-  canvasHeight: number = 1080 * this.screenPctAdj;
+  canvasHeight: number = 1371 * this.screenPctAdj;
 
   Game: GameViewModel;//= new GameViewModel();
   lineupNumbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
@@ -525,8 +525,9 @@ export class GameConfigureComponent implements OnInit {
 
     this.canvas = <HTMLCanvasElement>document.getElementById("ballparkCanvas");
     this.ctx = this.canvas.getContext("2d");
+
     let img = new Image();
-    img.src = '../assets/images/GenericField.png';
+    img.src = '../assets/images/GenericField2.png';
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0, this.canvasWidth, this.canvasHeight);
       this.SetDefensivePlayers();
@@ -1266,10 +1267,10 @@ export class GameConfigureComponent implements OnInit {
   homerLeftCenterFieldcp1X: number = 650 * this.screenPctAdj;
   homerLeftCenterFieldcp1Y: number = 0;
   homerLeftCenterFieldcp2X: number = 550 * this.screenPctAdj;
-  homerLeftCenterFieldcp2Y: number = 0;
+  homerLeftCenterFieldcp2Y: number = -150;
   HomerLeftCenterField() {
     this.FlyBallHit(this.homerLeftCenterFieldcp1X, this.homerLeftCenterFieldcp1Y, this.homerLeftCenterFieldcp2X,
-      this.homerLeftCenterFieldcp2Y, 350, this.leftFielderY - 100);
+      this.homerLeftCenterFieldcp2Y, 350, this.leftFielderY - 90);
   }
 
   showSuccess(msg: string) {
