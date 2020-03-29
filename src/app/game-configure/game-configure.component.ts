@@ -489,7 +489,7 @@ export class GameConfigureComponent implements OnInit {
   }
 
   ExecuteCurrentBatterReachedBase() {
-    let diceRoll = this.GenerateRandomNumber(1, 4);
+    let diceRoll = this.GenerateRandomNumber(1, 6);
     if (diceRoll == 1) {
       this.GroundBallSingleLeft1();
     }
@@ -498,7 +498,14 @@ export class GameConfigureComponent implements OnInit {
     }
     else if (diceRoll == 3) {
       this.LongHomerLeftFieldLine();
-    } else {
+    }
+    else if (diceRoll == 4) {
+      this.HomerLeftField();
+    }
+    else if (diceRoll == 5) {
+      this.HomerLeftCenterField();
+    }
+    else {
       this.GroundBallSingleLeft2();
     }
   }
@@ -1245,6 +1252,24 @@ export class GameConfigureComponent implements OnInit {
   LongHomerLeftFieldLine() {
     this.FlyBallHit(this.longHomerLeftFieldLinecp1X, this.longHomerLeftFieldLinecp1Y, this.longHomerLeftFieldLinecp2X,
       this.longHomerLeftFieldLinecp2Y, 70, this.leftFielderY - 100);
+  }
+
+  homerLeftFieldcp1X: number = 650 * this.screenPctAdj;
+  homerLeftFieldcp1Y: number = 0;
+  homerLeftFieldcp2X: number = 550 * this.screenPctAdj;
+  homerLeftFieldcp2Y: number = 0;
+  HomerLeftField() {
+    this.FlyBallHit(this.homerLeftFieldcp1X, this.homerLeftFieldcp1Y, this.homerLeftFieldcp2X,
+      this.homerLeftFieldcp2Y, 225, this.leftFielderY - 80);
+  }
+
+  homerLeftCenterFieldcp1X: number = 650 * this.screenPctAdj;
+  homerLeftCenterFieldcp1Y: number = 0;
+  homerLeftCenterFieldcp2X: number = 550 * this.screenPctAdj;
+  homerLeftCenterFieldcp2Y: number = 0;
+  HomerLeftCenterField() {
+    this.FlyBallHit(this.homerLeftCenterFieldcp1X, this.homerLeftCenterFieldcp1Y, this.homerLeftCenterFieldcp2X,
+      this.homerLeftCenterFieldcp2Y, 350, this.leftFielderY - 100);
   }
 
   showSuccess(msg: string) {
