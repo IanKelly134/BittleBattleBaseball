@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
     this.ImageURLs.push("../assets/images/waino1.jpg");
     this.ImageURLs.push("../assets/images/carp1.jpg");
     this.ImageURLs.push("../assets/images/degrom1.jpg");
-    this.ImageURLs.push("../assets/images/strawberry1.jpg");
+    this.ImageURLs.push("../assets/images/strawberry1.jpeg");
     this.ImageURLs.push("../assets/images/gooden1.jpg");
 
     document.body.style.backgroundImage = "url('../assets/images/BaseballFieldBackground.jpg')";
