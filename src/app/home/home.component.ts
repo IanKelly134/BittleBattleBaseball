@@ -112,6 +112,31 @@ export class HomeComponent implements OnInit {
     this.ImageURLs.push("../assets/images/degrom1.jpg");
     this.ImageURLs.push("../assets/images/strawberry1.jpeg");
     this.ImageURLs.push("../assets/images/gooden1.jpg");
+    this.ImageURLs.push("../assets/images/ripken1.jpg");
+    this.ImageURLs.push("../assets/images/piazza1.jpg");
+    this.ImageURLs.push("../assets/images/greenberg1.jpg");
+    this.ImageURLs.push("../assets/images/schmidt1.jpg");
+    this.ImageURLs.push("../assets/images/mauer1.jpg");
+    this.ImageURLs.push("../assets/images/raines1.jpg");
+    this.ImageURLs.push("../assets/images/dawson1.jpg");
+    this.ImageURLs.push("../assets/images/cjones1.jpg");
+    this.ImageURLs.push("../assets/images/glavine1.jpg");
+    this.ImageURLs.push("../assets/images/murphy1.jpg");
+    this.ImageURLs.push("../assets/images/lsmith1.jpg");
+    this.ImageURLs.push("../assets/images/gossage1.jpg");
+    this.ImageURLs.push("../assets/images/hoffman1.jpg");
+    this.ImageURLs.push("../assets/images/eckersley1.jpg");
+    this.ImageURLs.push("../assets/images/molitor1.jpg");
+    this.ImageURLs.push("../assets/images/yount1.jpg");
+    this.ImageURLs.push("../assets/images/halladay1.jpg");
+    this.ImageURLs.push("../assets/images/biggio1.jpg");
+    this.ImageURLs.push("../assets/images/price1.jpg");
+    this.ImageURLs.push("../assets/images/scherzer1.jpg");
+    this.ImageURLs.push("../assets/images/strasburg1.jpg");
+    this.ImageURLs.push("../assets/images/campanella1.jpg");
+    this.ImageURLs.push("../assets/images/snyder1.jpg");
+    this.ImageURLs.push("../assets/images/drysdale1.jpg");
+    this.ImageURLs.push("../assets/images/paige1.jpg");
 
     document.body.style.backgroundImage = "url('../assets/images/BaseballFieldBackground.jpg')";
 
