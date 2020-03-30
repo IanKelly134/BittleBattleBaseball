@@ -81,9 +81,10 @@
                 <tbody>
                     <tr>
                         <td>
-                            <div style="overflow: scroll;">
+                            <div style="max-height: 125px; overflow-y: scroll;">
                                 <ng-container *ngFor="let pbp of Game.PlayByPlays">
-                                    <span>{{pbp}}</span><br />
+                                    <span>{{pbp}}</span>
+                                    <hr />
                                 </ng-container>
                             </div>
 

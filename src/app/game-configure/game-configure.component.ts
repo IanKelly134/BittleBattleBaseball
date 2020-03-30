@@ -27,7 +27,7 @@ export class GameConfigureComponent implements OnInit {
   pitchSound = new Audio("../assets/assets/audio/caughtball.mp3");
   IsSoundMuted: boolean = false;
 
-  screenPctAdj: number = 0.66;
+  screenPctAdj: number = 0.62;
 
   leftFieldCornerX: number;
   leftFieldCornerY: number;
