@@ -12,6 +12,7 @@ import { HitterPlayerSeasonViewModel } from '../hitter-player-season-view-model'
 import { PitcherPlayerSeasonViewModel } from '../pitcher-player-season-view-model';
 import { PlayerViewModel } from '../player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-game-configure',
@@ -99,7 +100,7 @@ export class GameConfigureComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(private router: Router, mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService) //, private toastr: ToastrService
+  constructor(private router: Router, mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService, private toastr: ToastrService) //, private toastr: ToastrService
   {
     //console.log(this.router.getCurrentNavigation().extras.state);
     document.body.style.backgroundImage = "url('../assets/images/baseball-background6.jpg')";
@@ -493,18 +494,23 @@ export class GameConfigureComponent implements OnInit {
     let diceRoll = this.GenerateRandomNumber(1, 6);
     if (diceRoll == 1) {
       this.GroundBallSingleLeft1();
+      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
     }
     else if (diceRoll == 2) {
       this.HomerLeftFieldLine();
+      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers down the left field line.");
     }
     else if (diceRoll == 3) {
       this.LongHomerLeftFieldLine();
+      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " hits a long homerun to left.");
     }
     else if (diceRoll == 4) {
       this.HomerLeftField();
+      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to left field.");
     }
     else if (diceRoll == 5) {
       this.HomerLeftCenterField();
+      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to left-center field.");
     }
     else {
       this.GroundBallSingleLeft2();
@@ -517,8 +523,10 @@ export class GameConfigureComponent implements OnInit {
     let diceRoll = this.GenerateRandomNumber(1, 3);
     if (diceRoll == 1) {
       this.FlyBallOutToFirst();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to first.");
     } else {
       this.FlyBallOutToThird();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to third.");
     }
 
     this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
@@ -1304,14 +1312,25 @@ export class GameConfigureComponent implements OnInit {
   }
 
   showSuccess(msg: string) {
-    // this.toastr.success("", msg, {
-    //   timeOut: 3000,
-    //   positionClass: "toast-top-center",
-    //   messageClass: "toast-message"
-    // });
+    this.toastr.success("", msg, {
+      timeOut: 3000,
+      positionClass: "toast-top-center",
+      messageClass: "toast-message"
+    });
 
     this.Game.PlayByPlay += "\n" + " " + msg;
   }
+
+  showError(msg: string) {
+    this.toastr.error("", msg, {
+      timeOut: 3000,
+      positionClass: "toast-top-center",
+      messageClass: "toast-message"
+    });
+
+    this.Game.PlayByPlay += "\n" + " " + msg;
+  }
+
 
   FlipHomeAway() {
     this.Game.CurrentInning.IsBottomOfInning = !this.Game.CurrentInning.IsBottomOfInning;

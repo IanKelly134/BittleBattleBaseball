@@ -13,6 +13,7 @@ import { BattingAvgPipePipe } from './batting-avg-pipe.pipe';
 import { OnBasePctPipePipe } from './on-base-pct-pipe.pipe';
 import { DataLoadingComponent } from './data-loading/data-loading.component';
 import { BallParkCoordinatesConfiguratorComponent } from './ball-park-coordinates-configurator/ball-park-coordinates-configurator.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { GameViewModel } from './game-view-model';
 import { MLBYearByYearLeagueStatsServiceService } from './mlbyear-by-year-league-stats-service.service';
@@ -36,6 +37,7 @@ import { GameConfigureComponent } from './game-configure/game-configure.componen
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot() // ToastrModule added
   ],
   providers: [GameViewModel, MLBYearByYearLeagueStatsServiceService],
