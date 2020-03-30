@@ -850,7 +850,7 @@ export class GameplayComponent implements OnInit, AfterViewInit {
     //   messageClass: "toast-message"
     // });
 
-    this.Game.PlayByPlay += "\n" + " " + msg;
+    this.Game.PlayByPlays.push(msg);
   }
 
   FlipHomeAway() {

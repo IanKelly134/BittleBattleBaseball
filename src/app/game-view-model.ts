@@ -22,7 +22,7 @@ export class GameViewModel {
     HomeTeamErrors: number;
     AwayTeamErrors: number;
     Innings: GameInningViewModel[];
-    PlayByPlay: string;
+    PlayByPlays: string[] = [];
     CurrentInning: GameInningViewModel;
     CurrentAtBat: GameAtBatViewModel;
 
@@ -60,7 +60,7 @@ export class GameViewModel {
 
         this.NewAtBat();
 
-        this.PlayByPlay = "Top of the 1st inning.... Play Ball!";
+        this.PlayByPlays.push("Top of the 1st inning.... Play Ball!");
     }
 
     SetBattersOBRPAccordingToNewPitcherWHIP() {

@@ -169,6 +169,7 @@ export class GameConfigureComponent implements OnInit {
     pitherPitcherPlayerSeasonViewModel.whip = 1.46;
     pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Adam Wainwright";
+    pitherPitcherPlayerSeasonViewModel.player.bats = "R";
     var p = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
     p.BattingOrderNumber = 9;
     homeTeam.SetPitcher(p);
@@ -185,6 +186,7 @@ export class GameConfigureComponent implements OnInit {
     catcherHitterPlayerSeasonViewModel.bb = 100;
     catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     catcherHitterPlayerSeasonViewModel.player.playerName = "Yadi Molina";
+    catcherHitterPlayerSeasonViewModel.player.bats = "R";
     var c = new GamePlayerViewModel("C", catcherHitterPlayerSeasonViewModel, null);
     c.BattingOrderNumber = 8;
     homeTeam.SetCatcher(c);
@@ -201,7 +203,7 @@ export class GameConfigureComponent implements OnInit {
     firstBaseHitterPlayerSeasonViewModel.bb = 100;
     firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     firstBaseHitterPlayerSeasonViewModel.player.playerName = "Albert Pujols";
-
+    firstBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var fb = new GamePlayerViewModel("1B", firstBaseHitterPlayerSeasonViewModel, null);
     fb.BattingOrderNumber = 3;
     homeTeam.SetFirstBase(fb);
@@ -218,6 +220,7 @@ export class GameConfigureComponent implements OnInit {
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     secondBaseHitterPlayerSeasonViewModel.player.playerName = "Rogers Hornsby";
+    secondBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var sb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
     sb.BattingOrderNumber = 1;
     homeTeam.SetSecondBase(sb);
@@ -234,6 +237,7 @@ export class GameConfigureComponent implements OnInit {
     thirdBaseHitterPlayerSeasonViewModel.bb = 100;
     thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Scott Rolen";
+    thirdBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var tb = new GamePlayerViewModel("3B", thirdBaseHitterPlayerSeasonViewModel, null);
     tb.BattingOrderNumber = 4;
     homeTeam.SetThirdBase(tb);
@@ -250,6 +254,7 @@ export class GameConfigureComponent implements OnInit {
     shortstopHitterPlayerSeasonViewModel.bb = 100;
     shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     shortstopHitterPlayerSeasonViewModel.player.playerName = "Ozzie Smith";
+    shortstopHitterPlayerSeasonViewModel.player.bats = "S";
     var ss = new GamePlayerViewModel("SS", shortstopHitterPlayerSeasonViewModel, null);
     ss.BattingOrderNumber = 7;
     homeTeam.SetShortstop(ss);
@@ -266,6 +271,7 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
     leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     leftfielderHitterPlayerSeasonViewModel.player.playerName = "Matt Holliday";
+    leftfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var lf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
     lf.BattingOrderNumber = 5;
     homeTeam.SetLeftField(lf);
@@ -282,6 +288,7 @@ export class GameConfigureComponent implements OnInit {
     centerfielderHitterPlayerSeasonViewModel.bb = 100;
     centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     centerfielderHitterPlayerSeasonViewModel.player.playerName = "Lou Brock";
+    centerfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var cf = new GamePlayerViewModel("CF", centerfielderHitterPlayerSeasonViewModel, null);
     cf.BattingOrderNumber = 2;
     homeTeam.SetCenterField(cf);
@@ -298,6 +305,7 @@ export class GameConfigureComponent implements OnInit {
     rightfielderHitterPlayerSeasonViewModel.bb = 100;
     rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     rightfielderHitterPlayerSeasonViewModel.player.playerName = "Stan Musial";
+    rightfielderHitterPlayerSeasonViewModel.player.bats = "L";
     let rf = new GamePlayerViewModel("RF", rightfielderHitterPlayerSeasonViewModel, null);
     rf.BattingOrderNumber = 6;
     homeTeam.SetRightField(rf);
@@ -327,6 +335,7 @@ export class GameConfigureComponent implements OnInit {
     pitherPitcherPlayerSeasonViewModel.whip = 1.46;
     pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
+    pitherPitcherPlayerSeasonViewModel.player.bats = "R";
     var ap = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
     ap.BattingOrderNumber = 9;
     awayTeam.SetPitcher(ap);
@@ -343,6 +352,7 @@ export class GameConfigureComponent implements OnInit {
     catcherHitterPlayerSeasonViewModel.bb = 100;
     catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     catcherHitterPlayerSeasonViewModel.player.playerName = "Yorvit Torrealba";
+    catcherHitterPlayerSeasonViewModel.player.bats = "R";
     var ac = new GamePlayerViewModel("C", catcherHitterPlayerSeasonViewModel, null);
     ac.BattingOrderNumber = 8;
     awayTeam.SetCatcher(ac);
@@ -359,6 +369,7 @@ export class GameConfigureComponent implements OnInit {
     firstBaseHitterPlayerSeasonViewModel.bb = 100;
     firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     firstBaseHitterPlayerSeasonViewModel.player.playerName = "Todd Helton";
+    firstBaseHitterPlayerSeasonViewModel.player.bats = "L";
 
     var afb = new GamePlayerViewModel("1B", firstBaseHitterPlayerSeasonViewModel, null);
     afb.BattingOrderNumber = 3;
@@ -376,6 +387,7 @@ export class GameConfigureComponent implements OnInit {
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     secondBaseHitterPlayerSeasonViewModel.player.playerName = "Mike Lansing";
+    secondBaseHitterPlayerSeasonViewModel.player.bats = "S";
     var asb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
     asb.BattingOrderNumber = 1;
     awayTeam.SetSecondBase(asb);
@@ -392,6 +404,7 @@ export class GameConfigureComponent implements OnInit {
     thirdBaseHitterPlayerSeasonViewModel.bb = 100;
     thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Nolan Arenado";
+    thirdBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var atb = new GamePlayerViewModel("3B", thirdBaseHitterPlayerSeasonViewModel, null);
     atb.BattingOrderNumber = 4;
     awayTeam.SetThirdBase(atb);
@@ -408,6 +421,7 @@ export class GameConfigureComponent implements OnInit {
     shortstopHitterPlayerSeasonViewModel.bb = 100;
     shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     shortstopHitterPlayerSeasonViewModel.player.playerName = "Troy Tulowitzki";
+    shortstopHitterPlayerSeasonViewModel.player.bats = "R";
     var ass = new GamePlayerViewModel("SS", shortstopHitterPlayerSeasonViewModel, null);
     ass.BattingOrderNumber = 7;
     awayTeam.SetShortstop(ass);
@@ -424,6 +438,7 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
     leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     leftfielderHitterPlayerSeasonViewModel.player.playerName = "Carlos Gonzalez";
+    leftfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var alf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
     alf.BattingOrderNumber = 5;
     awayTeam.SetLeftField(alf);
@@ -440,6 +455,7 @@ export class GameConfigureComponent implements OnInit {
     centerfielderHitterPlayerSeasonViewModel.bb = 100;
     centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     centerfielderHitterPlayerSeasonViewModel.player.playerName = "Charlie Blackmon";
+    centerfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var acf = new GamePlayerViewModel("CF", centerfielderHitterPlayerSeasonViewModel, null);
     acf.BattingOrderNumber = 2;
     awayTeam.SetCenterField(acf);
@@ -456,6 +472,7 @@ export class GameConfigureComponent implements OnInit {
     rightfielderHitterPlayerSeasonViewModel.bb = 100;
     rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     rightfielderHitterPlayerSeasonViewModel.player.playerName = "Larry Walker";
+    rightfielderHitterPlayerSeasonViewModel.player.bats = "L";
     let arf = new GamePlayerViewModel("RF", rightfielderHitterPlayerSeasonViewModel, null);
     arf.BattingOrderNumber = 6;
     awayTeam.SetRightField(arf);
@@ -1318,7 +1335,7 @@ export class GameConfigureComponent implements OnInit {
       messageClass: "toast-message"
     });
 
-    this.Game.PlayByPlay += "\n" + " " + msg;
+    this.Game.PlayByPlays.push(msg);
   }
 
   showError(msg: string) {
@@ -1328,7 +1345,7 @@ export class GameConfigureComponent implements OnInit {
       messageClass: "toast-message"
     });
 
-    this.Game.PlayByPlay += "\n" + " " + msg;
+    this.Game.PlayByPlays.push(msg);
   }
 
 
