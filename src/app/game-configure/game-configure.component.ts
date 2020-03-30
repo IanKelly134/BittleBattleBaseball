@@ -49,10 +49,10 @@ export class GameConfigureComponent implements OnInit {
   thirdBaseX: number = 555 * this.screenPctAdj;
   thirdBaseY: number = 1013 * this.screenPctAdj;
 
-  rightHandedBatterX: number = 830 * this.screenPctAdj;
-  rightHandedBatterY: number = 940 * this.screenPctAdj;
-  leftHandedBatterX: number = 915 * this.screenPctAdj;
-  leftHandedBatterY: number = 940 * this.screenPctAdj;
+  rightHandedBatterX: number = 790 * this.screenPctAdj;
+  rightHandedBatterY: number = 1163 * this.screenPctAdj;
+  leftHandedBatterX: number = 985 * this.screenPctAdj;
+  leftHandedBatterY: number = 1135 * this.screenPctAdj;
 
   homeOnDeckBatterX: number = 1300 * this.screenPctAdj;
   homeOnDeckBatterY: number = 1173 * this.screenPctAdj;
@@ -606,15 +606,24 @@ export class GameConfigureComponent implements OnInit {
     this.DrawHitterOnHomeDeck();
     this.DrawHitterOnAwayDeck();
     this.DrawBatter();
-    this.DrawRunnerOnFirst();
-    this.DrawRunnerOnSecond();
-    this.DrawRunnerOnThird();
+    // this.DrawRunnerOnFirst();
+    // this.DrawRunnerOnSecond();
+    // this.DrawRunnerOnThird();
   }
 
   DrawBatter() {
     let img = new Image();
+    let color = 'blue';
     img.src = this.Game.CurrentAtBat.Batter.PlayerImageURL;
     img.title = this.Game.CurrentAtBat.Batter.Name;
+    if (this.Game.CurrentInning.IsBottomOfInning) {
+      color = 'red';
+    }
+
+    img.onerror = function () {
+      img.src = '../assets/images/emptyHeadshot.jpeg';
+    }
+
 
     img.onerror = function () {
       img.src = '../assets/images/emptyHeadshot.jpeg';
@@ -622,18 +631,60 @@ export class GameConfigureComponent implements OnInit {
 
     if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "r") {
       img.onload = () => {
+        this.ctx.beginPath();
+        this.ctx.rect(this.rightHandedBatterX, this.rightHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 4;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+
         this.ctx.drawImage(img,
           this.rightHandedBatterX, this.rightHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+        this.ctx.font = '8pt Calibri';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(img.title, this.rightHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.rightHandedBatterY - 5));
       }
     } else if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "l") {
       img.onload = () => {
+        this.ctx.beginPath();
+        this.ctx.rect(this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 4;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+
         this.ctx.drawImage(img,
           this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+        this.ctx.font = '8pt Calibri';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(img.title, this.leftHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.leftHandedBatterY - 5));
       }
     } else {
+
+      //TODO - switch sides based on current pitcher
+
       img.onload = () => {
+        this.ctx.beginPath();
+        this.ctx.rect(this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 4;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+
         this.ctx.drawImage(img,
           this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+        this.ctx.font = '8pt Calibri';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(img.title, this.leftHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.leftHandedBatterY - 5));
       }
     }
 
