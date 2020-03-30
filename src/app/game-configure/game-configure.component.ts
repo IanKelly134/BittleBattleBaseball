@@ -11,6 +11,7 @@ import { GamePlayerViewModel } from '../game-player-view-model';
 import { HitterPlayerSeasonViewModel } from '../hitter-player-season-view-model';
 import { PitcherPlayerSeasonViewModel } from '../pitcher-player-season-view-model';
 import { PlayerViewModel } from '../player-view-model';
+import { EnumAtBatResult } from '../enum-at-bat-result.enum';
 
 @Component({
   selector: 'app-game-configure',
@@ -508,6 +509,8 @@ export class GameConfigureComponent implements OnInit {
     else {
       this.GroundBallSingleLeft2();
     }
+
+    this.Game.NewAtBat();
   }
 
   ExecuteCurrentBatterIsOut() {
@@ -516,6 +519,33 @@ export class GameConfigureComponent implements OnInit {
       this.FlyBallOutToFirst();
     } else {
       this.FlyBallOutToThird();
+    }
+
+    this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
+
+
+    if (this.Game.CurrentInning.IsBottomOfInning) {
+      this.Game.CurrentInning.HomeOuts++;
+
+      if (this.Game.CurrentInning.HomeOuts == 3) {
+        this.Game.NextInning();
+        this.Game.NewAtBat();
+      }
+      else {
+        this.Game.NewAtBat();
+      }
+    }
+    else {
+      this.Game.CurrentInning.AwayOuts++;
+
+      if (this.Game.CurrentInning.AwayOuts == 3) {
+        this.Game.CurrentInning.IsBottomOfInning = true;
+        this.Game.CurrentInning.HomeRunsScored = 0;
+        this.Game.NewAtBat();
+      }
+      else {
+        this.Game.NewAtBat();
+      }
     }
 
   }
