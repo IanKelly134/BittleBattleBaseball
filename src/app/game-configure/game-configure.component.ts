@@ -508,29 +508,66 @@ export class GameConfigureComponent implements OnInit {
   }
 
   ExecuteCurrentBatterReachedBase() {
-    let diceRoll = this.GenerateRandomNumber(1, 6);
-    if (diceRoll == 1) {
-      this.GroundBallSingleLeft1();
-      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
+    let diceRoll = this.GenerateRandomNumber(1, 1000);
+
+    //TODO - Numbers based off of 2019 totals, need to pull in stats for year of batter
+    if (diceRoll <= 215) { //Walks
+      this.BatterWalked();
+      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " walked.");
     }
-    else if (diceRoll == 2) {
-      this.HomerLeftFieldLine();
-      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers down the left field line.");
+    else if (diceRoll > 215 && diceRoll <= 783) { //Singles
+
+      let singleHitDiceRoll = this.GenerateRandomNumber(1, 2);
+
+      if (singleHitDiceRoll <= 1) {
+        this.GroundBallSingleLeft1();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
+      } else {
+        this.GroundBallSingleLeft2();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
+      }
     }
-    else if (diceRoll == 3) {
-      this.LongHomerLeftFieldLine();
-      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " hits a long homerun to left.");
+    else if (diceRoll > 783 && diceRoll <= 959) { //Doubles
+      let doubleHitDiceRoll = this.GenerateRandomNumber(1, 2);
+
+      if (doubleHitDiceRoll <= 1) {
+        //this.GroundBallSingleLeft1();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
+      } else {
+        //this.GroundBallSingleLeft2();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
+      }
     }
-    else if (diceRoll == 4) {
-      this.HomerLeftField();
-      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to left field.");
+    else if (diceRoll > 959 && diceRoll <= 975) { //Triples
+      let tripleHitDiceRoll = this.GenerateRandomNumber(1, 2);
+
+      if (tripleHitDiceRoll <= 1) {
+        //this.GroundBallSingleLeft1();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " triples to left.");
+      } else {
+        //this.GroundBallSingleLeft2();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " triples to left.");
+      }
     }
-    else if (diceRoll == 5) {
-      this.HomerLeftCenterField();
-      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to left-center field.");
-    }
-    else {
-      this.GroundBallSingleLeft2();
+    else if (diceRoll > 975) { //Homers
+      let homerDiceRoll = this.GenerateRandomNumber(1, 4);
+
+      if (homerDiceRoll <= 1) {
+        this.HomerLeftFieldLine();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers down the left field line.");
+      }
+      else if (homerDiceRoll == 2) {
+        this.LongHomerLeftFieldLine();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " hits a long homerun to left.");
+      }
+      else if (homerDiceRoll == 3) {
+        this.HomerLeftField();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to left field.");
+      }
+      else if (homerDiceRoll == 4) {
+        this.HomerLeftCenterField();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to left-center field.");
+      }
     }
 
     this.Game.NewAtBat();
@@ -1151,8 +1188,12 @@ export class GameConfigureComponent implements OnInit {
     }
   }
 
+  BatterWalked() {
+    //TODO
+  }
+
   groundBallSingleLeft1X: number = 370 * this.screenPctAdj;
-  groundBallSingleLeft1Y: number = 500 * this.screenPctAdj;
+  groundBallSingleLeft1Y: number = 725 * this.screenPctAdj;
 
   GroundBallSingleLeft1() {
     this.GroundBallHit(this.groundBallSingleLeft1X, this.groundBallSingleLeft1Y, "Single down the left field line!");
