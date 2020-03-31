@@ -513,7 +513,9 @@ export class GameConfigureComponent implements OnInit {
     //TODO - Numbers based off of 2019 totals, need to pull in stats for year of batter
     if (diceRoll <= 215) { //Walks
       this.BatterWalked();
-      this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " walked.");
+      this.showInfo(this.Game.CurrentAtBat.Batter.Name + " walked.");
+
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.Walk;
     }
     else if (diceRoll > 215 && diceRoll <= 783) { //Singles
 
@@ -521,33 +523,39 @@ export class GameConfigureComponent implements OnInit {
 
       if (singleHitDiceRoll <= 1) {
         this.GroundBallSingleLeft1();
-        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
       } else {
         this.GroundBallSingleLeft2();
-        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
       }
+
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.Single;
     }
     else if (diceRoll > 783 && diceRoll <= 959) { //Doubles
       let doubleHitDiceRoll = this.GenerateRandomNumber(1, 2);
 
       if (doubleHitDiceRoll <= 1) {
         //this.GroundBallSingleLeft1();
-        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
       } else {
         //this.GroundBallSingleLeft2();
-        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
       }
+
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.Double;
     }
     else if (diceRoll > 959 && diceRoll <= 975) { //Triples
       let tripleHitDiceRoll = this.GenerateRandomNumber(1, 2);
 
       if (tripleHitDiceRoll <= 1) {
         //this.GroundBallSingleLeft1();
-        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " triples to left.");
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " triples to left.");
       } else {
         //this.GroundBallSingleLeft2();
-        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " triples to left.");
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " triples to left.");
       }
+
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.Triple;
     }
     else if (diceRoll > 975) { //Homers
       let homerDiceRoll = this.GenerateRandomNumber(1, 4);
@@ -567,6 +575,14 @@ export class GameConfigureComponent implements OnInit {
       else if (homerDiceRoll == 4) {
         this.HomerLeftCenterField();
         this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to left-center field.");
+      }
+
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.HomeRun;
+
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamRuns++;
+      } else {
+        this.Game.AwayTeamRuns++;
       }
     }
 
@@ -590,7 +606,6 @@ export class GameConfigureComponent implements OnInit {
     }
 
     this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
-
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts++;
@@ -1339,7 +1354,6 @@ export class GameConfigureComponent implements OnInit {
     // line color
     this.ctx.strokeStyle = 'white';
     this.ctx.stroke();
-    this.showSuccess(desc);
   }
 
   FlyBallHit(cp1x: number, cp1y: number, cp2x: number, cp2y: number, x: number, y: number) {
@@ -1352,8 +1366,6 @@ export class GameConfigureComponent implements OnInit {
     this.ctx.lineWidth = 2;
     // line color
     this.ctx.strokeStyle = 'white';
-
-    //   this.ctx.lineDashOffset = 4;
     this.ctx.stroke();
   }
 
@@ -1416,6 +1428,26 @@ export class GameConfigureComponent implements OnInit {
 
   showSuccess(msg: string) {
     this.toastr.success("", msg, {
+      timeOut: 3000,
+      positionClass: "toast-top-center",
+      messageClass: "toast-message"
+    });
+
+    this.Game.PlayByPlays.push(msg);
+  }
+
+  showInfo(msg: string) {
+    this.toastr.warning("", msg, {
+      timeOut: 3000,
+      positionClass: "toast-top-center",
+      messageClass: "toast-message"
+    });
+
+    this.Game.PlayByPlays.push(msg);
+  }
+
+  showWarning(msg: string) {
+    this.toastr.warning("", msg, {
       timeOut: 3000,
       positionClass: "toast-top-center",
       messageClass: "toast-message"
