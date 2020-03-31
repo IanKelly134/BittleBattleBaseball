@@ -94,6 +94,7 @@ export class GameConfigureComponent implements OnInit {
   _leagueAwayPitchingStats: MLBYearByYearPitchingStatsViewModel;
 
   ngAfterViewInit(): void {
+
     this.SetPlayingField();
   }
 
@@ -617,6 +618,7 @@ export class GameConfigureComponent implements OnInit {
 
     this.canvas = <HTMLCanvasElement>document.getElementById("ballparkCanvas");
     this.ctx = this.canvas.getContext("2d");
+
 
     let img = new Image();
     img.src = '../assets/images/GenericField2.png';
