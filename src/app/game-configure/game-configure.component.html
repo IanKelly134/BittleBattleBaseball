@@ -33,41 +33,44 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-5">
-            <table class="table table-bordered table-dark table-hover table-condensed"
-                style="margin-left: 5px; margin-right: 5px; margin-bottom: -10px; opacity: 0.8;">
-                <thead>
-                    <tr>
-                        <th></th>
-                        <ng-container *ngFor="let inning of Game.Innings">
-                            <th>{{inning.InningNumber}}</th>
-                        </ng-container>
-                        <th>R</th>
-                        <th>H</th>
-                        <th>E</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
-                        <ng-container *ngFor="let inning of Game.Innings">
-                            <td>{{inning.AwayRunsScored}}</td>
-                        </ng-container>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>{{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
-                        <ng-container *ngFor="let inning of Game.Innings">
-                            <td> {{inning.HomeRunsScored}}</td>
-                        </ng-container>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-lg-5">
+            <div style="overflow-x: scroll;">
+                <table class="table table-bordered table-dark table-hover table-condensed"
+                    style="margin-left: 5px; margin-right: 5px; margin-bottom: -10px; opacity: 0.8;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <ng-container *ngFor="let inning of Game.Innings">
+                                <th>{{inning.InningNumber}}</th>
+                            </ng-container>
+                            <th>R</th>
+                            <th>H</th>
+                            <th>E</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
+                            <ng-container *ngFor="let inning of Game.Innings">
+                                <td>{{inning.AwayRunsScored}}</td>
+                            </ng-container>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>{{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
+                            <ng-container *ngFor="let inning of Game.Innings">
+                                <td> {{inning.HomeRunsScored}}</td>
+                            </ng-container>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
 
         <div class="col-md-3">
@@ -125,7 +128,9 @@
         </div>
         <div class="col-md-8"> <canvas id="ballparkCanvas" style="max-width: 100%" [width]="canvasWidth"
                 [height]="canvasHeight"> </canvas><br />
-            <button class="btn btn-success btn-block" (click)=" ExecuteNextPlay()">Next Play</button>
+            <button class="btn btn-success btn-block" (click)=" ExecuteNextPlay()"><img
+                    style="cursor:pointer; max-width: 25px;" src="../assets/images/baseballicon.png" /> Next Play <i
+                    class="fa fa-arrow-right"></i></button>
         </div>
         <div class="col-md-2">
             <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"

@@ -49,10 +49,10 @@ export class GameConfigureComponent implements OnInit {
   thirdBaseX: number = 555 * this.screenPctAdj;
   thirdBaseY: number = 1013 * this.screenPctAdj;
 
-  rightHandedBatterX: number = 790 * this.screenPctAdj;
-  rightHandedBatterY: number = 1163 * this.screenPctAdj;
+  rightHandedBatterX: number = 840 * this.screenPctAdj;
+  rightHandedBatterY: number = 1120 * this.screenPctAdj;
   leftHandedBatterX: number = 985 * this.screenPctAdj;
-  leftHandedBatterY: number = 1135 * this.screenPctAdj;
+  leftHandedBatterY: number = 1120 * this.screenPctAdj;
 
   homeOnDeckBatterX: number = 1300 * this.screenPctAdj;
   homeOnDeckBatterY: number = 1173 * this.screenPctAdj;
@@ -61,16 +61,16 @@ export class GameConfigureComponent implements OnInit {
 
   catcherX: number = 915 * this.screenPctAdj;
   catcherY: number = 1217 * this.screenPctAdj;
-  pitcherX: number = 915 * this.screenPctAdj;
-  pitcherY: number = 883 * this.screenPctAdj;
+  pitcherX: number = 918 * this.screenPctAdj;
+  pitcherY: number = 870 * this.screenPctAdj;
   firstBasemanX: number = 1210 * this.screenPctAdj;
-  firstBasemanY: number = 833 * this.screenPctAdj;
+  firstBasemanY: number = 813 * this.screenPctAdj;
   secondBasemanX: number = 1045 * this.screenPctAdj;
-  secondBasemanY: number = 783 * this.screenPctAdj;
+  secondBasemanY: number = 763 * this.screenPctAdj;
   thirdBasemanX: number = 625 * this.screenPctAdj;
-  thirdBasemanY: number = 843 * this.screenPctAdj;
+  thirdBasemanY: number = 813 * this.screenPctAdj;
   shortstopX: number = 775 * this.screenPctAdj;
-  shortstopY: number = 783 * this.screenPctAdj;
+  shortstopY: number = 763 * this.screenPctAdj;
   leftFielderX: number = 430 * this.screenPctAdj;
   leftFielderY: number = 543 * this.screenPctAdj;
   centerFielderX: number = 935 * this.screenPctAdj;
@@ -504,8 +504,7 @@ export class GameConfigureComponent implements OnInit {
   }
 
   GenerateRandomNumber(from: number, to: number): number {
-    return Math.floor((Math.random() * to));
-
+    return Math.floor((Math.random() * to) + from);
   }
 
   ExecuteCurrentBatterReachedBase() {
@@ -572,6 +571,12 @@ export class GameConfigureComponent implements OnInit {
     }
 
     this.Game.NewAtBat();
+    if (this.Game.CurrentInning.IsBottomOfInning) {
+      this.DrawHitterOnHomeDeck();
+    }
+    else {
+      this.DrawHitterOnAwayDeck();
+    }
   }
 
   ExecuteCurrentBatterIsOut() {
@@ -729,45 +734,6 @@ export class GameConfigureComponent implements OnInit {
 
   }
 
-  // DrawLeftHandedBatter() {
-  //   let img = new Image();
-  //   if (this.Game.CurrentInning.IsBottomOfInning) {
-  //     img.src = this.Game.HomeTeam.RightFielder.PlayerImageURL;
-  //     img.title = this.Game.HomeTeam.RightFielder.Name;
-  //   }
-  //   else {
-  //     img.src = this.Game.AwayTeam.RightFielder.PlayerImageURL;
-  //     img.title = "TEST TEST";// this.Game.AwayTeam.RightFielder.Name;
-  //   }
-
-  //   img.onerror = function () {
-  //     img.src = '../assets/images/emptyHeadshot.jpeg';
-  //   }
-
-
-  // }
-
-  // DrawRightHandedBatter() {
-  //   let img = new Image();
-  //   if (this.Game.CurrentInning.IsBottomOfInning) {
-  //     img.src = this.Game.HomeTeam.FirstBaseman.PlayerImageURL;
-  //     img.title = this.Game.HomeTeam.FirstBaseman.Name;
-  //   }
-  //   else {
-  //     img.src = this.Game.AwayTeam.FirstBaseman.PlayerImageURL;
-  //     img.title = this.Game.AwayTeam.FirstBaseman.Name;
-  //   }
-
-  //   img.onerror = function () {
-  //     img.src = '../assets/images/emptyHeadshot.jpeg';
-  //   }
-
-  //   img.onload = () => {
-  //     this.ctx.drawImage(img,
-  //       this.rightHandedBatterX, this.rightHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
-  //   }
-  // }
-
   DrawRunnerOnFirst() {
     let img = new Image();
     if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -831,42 +797,65 @@ export class GameConfigureComponent implements OnInit {
 
   DrawHitterOnHomeDeck() {
     let img = new Image();
+    let color = 'red';
     if (this.Game.CurrentInning.IsBottomOfInning) {
-      img.src = this.Game.HomeTeam.LeftFielder.PlayerImageURL;
-      img.title = this.Game.HomeTeam.LeftFielder.Name;
-    } else {
-      img.src = this.Game.AwayTeam.LeftFielder.PlayerImageURL;
-      img.title = this.Game.AwayTeam.LeftFielder.Name;
+      img.src = this.Game.HomeTeam.NextBatter.PlayerImageURL;
+      img.title = this.Game.HomeTeam.NextBatter.Name;
+
+      img.onerror = function () {
+        img.src = '../assets/images/emptyHeadshot.jpeg';
+      }
+
+      img.onload = () => {
+        this.ctx.beginPath();
+        this.ctx.rect(this.homeOnDeckBatterX, this.homeOnDeckBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 4;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+
+        this.ctx.drawImage(img,
+          this.homeOnDeckBatterX, this.homeOnDeckBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+        this.ctx.font = '8pt Calibri';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(img.title, this.homeOnDeckBatterX + (this.playerFieldImgAvatarWidth / 2), (this.homeOnDeckBatterY - 5));
+      }
     }
 
-    img.onerror = function () {
-      img.src = '../assets/images/emptyHeadshot.jpeg';
-    }
 
-    img.onload = () => {
-      this.ctx.drawImage(img,
-        this.homeOnDeckBatterX, this.homeOnDeckBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
-    }
   }
 
   DrawHitterOnAwayDeck() {
     let img = new Image();
-    if (this.Game.CurrentInning.IsBottomOfInning) {
-      img.src = this.Game.HomeTeam.CenterFielder.PlayerImageURL;
-      img.title = this.Game.HomeTeam.CenterFielder.Name;
-    }
-    else {
-      img.src = this.Game.AwayTeam.CenterFielder.PlayerImageURL;
-      img.title = this.Game.AwayTeam.CenterFielder.Name;
-    }
+    let color = 'blue';
+    if (!this.Game.CurrentInning.IsBottomOfInning) {
+      img.src = this.Game.AwayTeam.NextBatter.PlayerImageURL;
+      img.title = this.Game.AwayTeam.NextBatter.Name;
 
-    img.onerror = function () {
-      img.src = '../assets/images/emptyHeadshot.jpeg';
-    }
+      img.onerror = function () {
+        img.src = '../assets/images/emptyHeadshot.jpeg';
+      }
 
-    img.onload = () => {
-      this.ctx.drawImage(img,
-        this.awayOnDeckBatterX, this.awayOnDeckBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      img.onload = () => {
+        this.ctx.beginPath();
+        this.ctx.rect(this.awayOnDeckBatterX, this.awayOnDeckBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 4;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+
+        this.ctx.drawImage(img,
+          this.awayOnDeckBatterX, this.awayOnDeckBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+        this.ctx.font = '8pt Calibri';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(img.title, this.awayOnDeckBatterX + (this.playerFieldImgAvatarWidth / 2), (this.awayOnDeckBatterY - 5));
+      }
     }
   }
 
@@ -1370,6 +1359,9 @@ export class GameConfigureComponent implements OnInit {
 
 
   ClearCanvas() {
+    this.canvas = null;
+    this.ctx = null;
+
     this.SetPlayingField();
     //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
