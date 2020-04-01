@@ -27,7 +27,7 @@ export class GameConfigureComponent implements OnInit {
   pitchSound = new Audio("../assets/assets/audio/caughtball.mp3");
   IsSoundMuted: boolean = false;
 
-  screenPctAdj: number = 0.57;
+  screenPctAdj: number = 0.65;
 
   IsPlayInProgress: boolean = false;
 
@@ -484,7 +484,7 @@ export class GameConfigureComponent implements OnInit {
     gameVM.AwayTeam = awayTeam;
 
 
-    gameVM.StartGame();
+    // gameVM.StartGame();
 
     return gameVM;
   }
