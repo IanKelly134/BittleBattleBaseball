@@ -34,7 +34,7 @@
             </table>
         </div>
         <div class="col-lg-5">
-            <div style="overflow-x: scroll;">
+            <div style="overflow-x: auto; overflow-y:inherit;">
                 <table class="table table-bordered table-dark table-hover table-condensed"
                     style="margin-left: 5px; margin-right: 5px; margin-bottom: -10px; opacity: 0.8;">
                     <thead>
@@ -84,7 +84,7 @@
                 <tbody>
                     <tr>
                         <td>
-                            <div style="max-height: 125px; overflow-y: scroll;">
+                            <div style="max-height: 110px; overflow-y: auto; ">
                                 <ng-container *ngFor="let pbp of Game.PlayByPlays">
                                     <span>{{pbp}}</span>
                                     <hr />
@@ -128,7 +128,7 @@
         </div>
         <div class="col-md-8"> <canvas id="ballparkCanvas" style="max-width: 100%" [width]="canvasWidth"
                 [height]="canvasHeight"> </canvas><br />
-            <button class="btn btn-success btn-block" (click)=" ExecuteNextPlay()"><img
+            <button class="btn btn-success btn-block" *ngIf="!IsPlayInProgress" (click)="ExecuteNextPlay()"><img
                     style="cursor:pointer; max-width: 25px;" src="../assets/images/baseballicon.png" /> Next Play <i
                     class="fa fa-arrow-right"></i></button>
         </div>

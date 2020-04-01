@@ -27,7 +27,9 @@ export class GameConfigureComponent implements OnInit {
   pitchSound = new Audio("../assets/assets/audio/caughtball.mp3");
   IsSoundMuted: boolean = false;
 
-  screenPctAdj: number = 0.62;
+  screenPctAdj: number = 0.57;
+
+  IsPlayInProgress: boolean = false;
 
   leftFieldCornerX: number;
   leftFieldCornerY: number;
@@ -489,6 +491,7 @@ export class GameConfigureComponent implements OnInit {
   //***
 
   ExecuteNextPlay() {
+    this.IsPlayInProgress = true;
     this.ClearCanvas();
 
     setTimeout(() => {
@@ -500,6 +503,12 @@ export class GameConfigureComponent implements OnInit {
       else {
         this.ExecuteCurrentBatterIsOut();
       }
+
+      setTimeout(() => {
+        this.IsPlayInProgress = false;
+        this.ClearCanvas();
+      }, 2500);
+
     }, 300);
   }
 
@@ -1348,7 +1357,6 @@ export class GameConfigureComponent implements OnInit {
 
     this.ctx.beginPath();
     this.ctx.moveTo(this.homePlateX, this.homePlateY);
-    this.ctx.lineTo(x, y);
     this.ctx.lineWidth = 2;
 
     // line color

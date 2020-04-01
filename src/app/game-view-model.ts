@@ -95,6 +95,19 @@ export class GameViewModel {
     NextInning() {
         this.CurrentInning = this.Innings[this.CurrentInning.InningNumber];//Current Inning becomes next inning
         this.CurrentInning.AwayRunsScored = 0;
+        let inningText = '';
+
+        if (this.CurrentInning.InningNumber == 2) {
+            inningText = "Top of the 2nd inning...";
+        }
+        else if (this.CurrentInning.InningNumber == 3) {
+            inningText = "Top of the 3rd inning...";
+        }
+        else {
+            inningText = "Top of the " + this.CurrentInning.InningNumber + "th inning...";
+        }
+
+        this.PlayByPlays.push(inningText);
     }
 
     NewAtBat() {
@@ -102,18 +115,33 @@ export class GameViewModel {
             let newAB = new GameAtBatViewModel();
             newAB.Pitcher = this.AwayTeam.Pitcher;
             this.HomeTeam.LastBatter = this.HomeTeam.CurrentBatter;
-            this.HomeTeam.CurrentBatter = this.HomeTeam.NextBatter;
-            this.HomeTeam.NextBatter = this.HomeTeam.GetBatterAtLineupPosition(this.HomeTeam.CurrentBatter.BattingOrderNumber + 1);
-            newAB.Batter = this.HomeTeam.CurrentBatter;
+            if (this.HomeTeam.CurrentBatter != null && this.HomeTeam.CurrentBatter.BattingOrderNumber < 9) {
+                this.HomeTeam.CurrentBatter = this.HomeTeam.NextBatter;
+                this.HomeTeam.NextBatter = this.HomeTeam.GetBatterAtLineupPosition(this.HomeTeam.CurrentBatter.BattingOrderNumber < 9 ? this.HomeTeam.CurrentBatter.BattingOrderNumber + 1 : 1);
+                newAB.Batter = this.HomeTeam.CurrentBatter;
+            } else {
+                this.HomeTeam.CurrentBatter = this.HomeTeam.GetBatterAtLineupPosition(1);
+                this.HomeTeam.NextBatter = this.HomeTeam.GetBatterAtLineupPosition(this.HomeTeam.CurrentBatter.BattingOrderNumber + 1);
+                newAB.Batter = this.HomeTeam.CurrentBatter;
+            }
+
             this.CurrentInning.HomeAtBats.push(newAB);
             this.CurrentAtBat = newAB;
         } else {
             let newAB = new GameAtBatViewModel();
             newAB.Pitcher = this.HomeTeam.Pitcher;
             this.AwayTeam.LastBatter = this.AwayTeam.CurrentBatter;
-            this.AwayTeam.CurrentBatter = this.AwayTeam.NextBatter;
-            this.AwayTeam.NextBatter = this.AwayTeam.GetBatterAtLineupPosition(this.AwayTeam.CurrentBatter.BattingOrderNumber + 1);
-            newAB.Batter = this.AwayTeam.CurrentBatter;
+            if (this.AwayTeam.CurrentBatter != null && this.AwayTeam.CurrentBatter.BattingOrderNumber < 9) {
+                this.AwayTeam.CurrentBatter = this.AwayTeam.NextBatter;
+                this.AwayTeam.NextBatter = this.AwayTeam.GetBatterAtLineupPosition(this.AwayTeam.CurrentBatter.BattingOrderNumber < 9 ? this.AwayTeam.CurrentBatter.BattingOrderNumber + 1 : 1);
+                newAB.Batter = this.AwayTeam.CurrentBatter;
+            }
+            else {
+                this.AwayTeam.CurrentBatter = this.AwayTeam.GetBatterAtLineupPosition(1);
+                this.AwayTeam.NextBatter = this.AwayTeam.GetBatterAtLineupPosition(this.AwayTeam.CurrentBatter.BattingOrderNumber + 1);
+                newAB.Batter = this.AwayTeam.CurrentBatter;
+            }
+
             this.CurrentInning.AwayAtBats.push(newAB);
             this.CurrentAtBat = newAB;
         }
