@@ -154,9 +154,9 @@ export class GameConfigureComponent implements OnInit {
     let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    pitcherHitterPlayerSeasonViewModel.obp = 0.400;
-    pitcherHitterPlayerSeasonViewModel.slg = 0.650;
-    pitcherHitterPlayerSeasonViewModel.avg = 0.300;
+    pitcherHitterPlayerSeasonViewModel.obp = 0.226;
+    pitcherHitterPlayerSeasonViewModel.slg = 0.305;
+    pitcherHitterPlayerSeasonViewModel.avg = 0.200;
     pitcherHitterPlayerSeasonViewModel.pa = 600;
     pitcherHitterPlayerSeasonViewModel.ab = 500;
     pitcherHitterPlayerSeasonViewModel.hr = 30;
@@ -167,9 +167,9 @@ export class GameConfigureComponent implements OnInit {
     pitcherHitterPlayerSeasonViewModel.player.playerName = "Adam Wainwright";
 
     var pitherPitcherPlayerSeasonViewModel = new PitcherPlayerSeasonViewModel();
-    pitherPitcherPlayerSeasonViewModel.era = 3.26;
+    pitherPitcherPlayerSeasonViewModel.era = 3.39;
     pitherPitcherPlayerSeasonViewModel.fldPct = .989;
-    pitherPitcherPlayerSeasonViewModel.whip = 1.46;
+    pitherPitcherPlayerSeasonViewModel.whip = 1.23;
     pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Adam Wainwright";
     pitherPitcherPlayerSeasonViewModel.player.bats = "R";
@@ -178,13 +178,13 @@ export class GameConfigureComponent implements OnInit {
     homeTeam.SetPitcher(p);
 
     var catcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    catcherHitterPlayerSeasonViewModel.obp = 0.400;
-    catcherHitterPlayerSeasonViewModel.slg = 0.650;
-    catcherHitterPlayerSeasonViewModel.avg = 0.300;
+    catcherHitterPlayerSeasonViewModel.obp = 0.333;
+    catcherHitterPlayerSeasonViewModel.slg = 0.405;
+    catcherHitterPlayerSeasonViewModel.avg = 0.282;
     catcherHitterPlayerSeasonViewModel.pa = 600;
     catcherHitterPlayerSeasonViewModel.ab = 500;
-    catcherHitterPlayerSeasonViewModel.hr = 30;
-    catcherHitterPlayerSeasonViewModel.rbi = 100;
+    catcherHitterPlayerSeasonViewModel.hr = 16;
+    catcherHitterPlayerSeasonViewModel.rbi = 59;
     catcherHitterPlayerSeasonViewModel.sb = 20;
     catcherHitterPlayerSeasonViewModel.bb = 100;
     catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -195,13 +195,13 @@ export class GameConfigureComponent implements OnInit {
     homeTeam.SetCatcher(c);
 
     var firstBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    firstBaseHitterPlayerSeasonViewModel.obp = 0.400;
-    firstBaseHitterPlayerSeasonViewModel.slg = 0.650;
+    firstBaseHitterPlayerSeasonViewModel.obp = 0.379;
+    firstBaseHitterPlayerSeasonViewModel.slg = 0.549;
     firstBaseHitterPlayerSeasonViewModel.avg = 0.300;
     firstBaseHitterPlayerSeasonViewModel.pa = 600;
     firstBaseHitterPlayerSeasonViewModel.ab = 500;
-    firstBaseHitterPlayerSeasonViewModel.hr = 30;
-    firstBaseHitterPlayerSeasonViewModel.rbi = 100;
+    firstBaseHitterPlayerSeasonViewModel.hr = 35;
+    firstBaseHitterPlayerSeasonViewModel.rbi = 110;
     firstBaseHitterPlayerSeasonViewModel.sb = 20;
     firstBaseHitterPlayerSeasonViewModel.bb = 100;
     firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -212,13 +212,13 @@ export class GameConfigureComponent implements OnInit {
     homeTeam.SetFirstBase(fb);
 
     var secondBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    secondBaseHitterPlayerSeasonViewModel.obp = 0.400;
-    secondBaseHitterPlayerSeasonViewModel.slg = 0.650;
-    secondBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    secondBaseHitterPlayerSeasonViewModel.obp = 0.434;
+    secondBaseHitterPlayerSeasonViewModel.slg = 0.577;
+    secondBaseHitterPlayerSeasonViewModel.avg = 0.358;
     secondBaseHitterPlayerSeasonViewModel.pa = 600;
     secondBaseHitterPlayerSeasonViewModel.ab = 500;
-    secondBaseHitterPlayerSeasonViewModel.hr = 30;
-    secondBaseHitterPlayerSeasonViewModel.rbi = 100;
+    secondBaseHitterPlayerSeasonViewModel.hr = 22;
+    secondBaseHitterPlayerSeasonViewModel.rbi = 114;
     secondBaseHitterPlayerSeasonViewModel.sb = 20;
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -229,13 +229,13 @@ export class GameConfigureComponent implements OnInit {
     homeTeam.SetSecondBase(sb);
 
     var thirdBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    thirdBaseHitterPlayerSeasonViewModel.obp = 0.400;
-    thirdBaseHitterPlayerSeasonViewModel.slg = 0.650;
-    thirdBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    thirdBaseHitterPlayerSeasonViewModel.obp = 0.364;
+    thirdBaseHitterPlayerSeasonViewModel.slg = 0.490;
+    thirdBaseHitterPlayerSeasonViewModel.avg = 0.281;
     thirdBaseHitterPlayerSeasonViewModel.pa = 600;
     thirdBaseHitterPlayerSeasonViewModel.ab = 500;
-    thirdBaseHitterPlayerSeasonViewModel.hr = 30;
-    thirdBaseHitterPlayerSeasonViewModel.rbi = 100;
+    thirdBaseHitterPlayerSeasonViewModel.hr = 25;
+    thirdBaseHitterPlayerSeasonViewModel.rbi = 102;
     thirdBaseHitterPlayerSeasonViewModel.sb = 20;
     thirdBaseHitterPlayerSeasonViewModel.bb = 100;
     thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -246,13 +246,13 @@ export class GameConfigureComponent implements OnInit {
     homeTeam.SetThirdBase(tb);
 
     var shortstopHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    shortstopHitterPlayerSeasonViewModel.obp = 0.400;
-    shortstopHitterPlayerSeasonViewModel.slg = 0.650;
-    shortstopHitterPlayerSeasonViewModel.avg = 0.300;
+    shortstopHitterPlayerSeasonViewModel.obp = 0.337;
+    shortstopHitterPlayerSeasonViewModel.slg = 0.328;
+    shortstopHitterPlayerSeasonViewModel.avg = 0.262;
     shortstopHitterPlayerSeasonViewModel.pa = 600;
     shortstopHitterPlayerSeasonViewModel.ab = 500;
-    shortstopHitterPlayerSeasonViewModel.hr = 30;
-    shortstopHitterPlayerSeasonViewModel.rbi = 100;
+    shortstopHitterPlayerSeasonViewModel.hr = 2;
+    shortstopHitterPlayerSeasonViewModel.rbi = 50;
     shortstopHitterPlayerSeasonViewModel.sb = 20;
     shortstopHitterPlayerSeasonViewModel.bb = 100;
     shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -263,30 +263,30 @@ export class GameConfigureComponent implements OnInit {
     homeTeam.SetShortstop(ss);
 
     var leftfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    leftfielderHitterPlayerSeasonViewModel.obp = 0.400;
-    leftfielderHitterPlayerSeasonViewModel.slg = 0.650;
-    leftfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    leftfielderHitterPlayerSeasonViewModel.obp = 0.379;
+    leftfielderHitterPlayerSeasonViewModel.slg = 0.510;
+    leftfielderHitterPlayerSeasonViewModel.avg = 0.299;
     leftfielderHitterPlayerSeasonViewModel.pa = 600;
     leftfielderHitterPlayerSeasonViewModel.ab = 500;
-    leftfielderHitterPlayerSeasonViewModel.hr = 30;
-    leftfielderHitterPlayerSeasonViewModel.rbi = 100;
+    leftfielderHitterPlayerSeasonViewModel.hr = 27;
+    leftfielderHitterPlayerSeasonViewModel.rbi = 104;
     leftfielderHitterPlayerSeasonViewModel.sb = 20;
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
     leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     leftfielderHitterPlayerSeasonViewModel.player.playerName = "Matt Holliday";
-    leftfielderHitterPlayerSeasonViewModel.player.bats = "L";
+    leftfielderHitterPlayerSeasonViewModel.player.bats = "R";
     var lf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
     lf.BattingOrderNumber = 5;
     homeTeam.SetLeftField(lf);
 
     var centerfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    centerfielderHitterPlayerSeasonViewModel.obp = 0.400;
-    centerfielderHitterPlayerSeasonViewModel.slg = 0.650;
-    centerfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    centerfielderHitterPlayerSeasonViewModel.obp = 0.343;
+    centerfielderHitterPlayerSeasonViewModel.slg = 0.410;
+    centerfielderHitterPlayerSeasonViewModel.avg = 0.293;
     centerfielderHitterPlayerSeasonViewModel.pa = 600;
     centerfielderHitterPlayerSeasonViewModel.ab = 500;
-    centerfielderHitterPlayerSeasonViewModel.hr = 30;
-    centerfielderHitterPlayerSeasonViewModel.rbi = 100;
+    centerfielderHitterPlayerSeasonViewModel.hr = 9;
+    centerfielderHitterPlayerSeasonViewModel.rbi = 56;
     centerfielderHitterPlayerSeasonViewModel.sb = 20;
     centerfielderHitterPlayerSeasonViewModel.bb = 100;
     centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -320,22 +320,22 @@ export class GameConfigureComponent implements OnInit {
     let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    pitcherHitterPlayerSeasonViewModel.obp = 0.400;
-    pitcherHitterPlayerSeasonViewModel.slg = 0.650;
-    pitcherHitterPlayerSeasonViewModel.avg = 0.300;
+    pitcherHitterPlayerSeasonViewModel.obp = 0.417;
+    pitcherHitterPlayerSeasonViewModel.slg = 0.559;
+    pitcherHitterPlayerSeasonViewModel.avg = 0.331;
     pitcherHitterPlayerSeasonViewModel.pa = 600;
     pitcherHitterPlayerSeasonViewModel.ab = 500;
-    pitcherHitterPlayerSeasonViewModel.hr = 30;
-    pitcherHitterPlayerSeasonViewModel.rbi = 100;
+    pitcherHitterPlayerSeasonViewModel.hr = 25;
+    pitcherHitterPlayerSeasonViewModel.rbi = 104;
     pitcherHitterPlayerSeasonViewModel.sb = 20;
     pitcherHitterPlayerSeasonViewModel.bb = 100;
     pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     pitcherHitterPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
 
     var pitherPitcherPlayerSeasonViewModel = new PitcherPlayerSeasonViewModel();
-    pitherPitcherPlayerSeasonViewModel.era = 3.26;
+    pitherPitcherPlayerSeasonViewModel.era = 4.67;
     pitherPitcherPlayerSeasonViewModel.fldPct = .989;
-    pitherPitcherPlayerSeasonViewModel.whip = 1.46;
+    pitherPitcherPlayerSeasonViewModel.whip = 1.374;
     pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
     pitherPitcherPlayerSeasonViewModel.player.bats = "R";
@@ -344,13 +344,13 @@ export class GameConfigureComponent implements OnInit {
     awayTeam.SetPitcher(ap);
 
     var catcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    catcherHitterPlayerSeasonViewModel.obp = 0.400;
-    catcherHitterPlayerSeasonViewModel.slg = 0.650;
-    catcherHitterPlayerSeasonViewModel.avg = 0.300;
+    catcherHitterPlayerSeasonViewModel.obp = 0.315;
+    catcherHitterPlayerSeasonViewModel.slg = 0.379;
+    catcherHitterPlayerSeasonViewModel.avg = 0.256;
     catcherHitterPlayerSeasonViewModel.pa = 600;
     catcherHitterPlayerSeasonViewModel.ab = 500;
-    catcherHitterPlayerSeasonViewModel.hr = 30;
-    catcherHitterPlayerSeasonViewModel.rbi = 100;
+    catcherHitterPlayerSeasonViewModel.hr = 10;
+    catcherHitterPlayerSeasonViewModel.rbi = 61;
     catcherHitterPlayerSeasonViewModel.sb = 20;
     catcherHitterPlayerSeasonViewModel.bb = 100;
     catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -361,13 +361,13 @@ export class GameConfigureComponent implements OnInit {
     awayTeam.SetCatcher(ac);
 
     var firstBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    firstBaseHitterPlayerSeasonViewModel.obp = 0.400;
-    firstBaseHitterPlayerSeasonViewModel.slg = 0.650;
-    firstBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    firstBaseHitterPlayerSeasonViewModel.obp = 0.414;
+    firstBaseHitterPlayerSeasonViewModel.slg = 0.539;
+    firstBaseHitterPlayerSeasonViewModel.avg = 0.316;
     firstBaseHitterPlayerSeasonViewModel.pa = 600;
     firstBaseHitterPlayerSeasonViewModel.ab = 500;
-    firstBaseHitterPlayerSeasonViewModel.hr = 30;
-    firstBaseHitterPlayerSeasonViewModel.rbi = 100;
+    firstBaseHitterPlayerSeasonViewModel.hr = 27;
+    firstBaseHitterPlayerSeasonViewModel.rbi = 101;
     firstBaseHitterPlayerSeasonViewModel.sb = 20;
     firstBaseHitterPlayerSeasonViewModel.bb = 100;
     firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -379,30 +379,30 @@ export class GameConfigureComponent implements OnInit {
     awayTeam.SetFirstBase(afb);
 
     var secondBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    secondBaseHitterPlayerSeasonViewModel.obp = 0.400;
-    secondBaseHitterPlayerSeasonViewModel.slg = 0.650;
-    secondBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    secondBaseHitterPlayerSeasonViewModel.obp = 0.354;
+    secondBaseHitterPlayerSeasonViewModel.slg = 0.423;
+    secondBaseHitterPlayerSeasonViewModel.avg = 0.302;
     secondBaseHitterPlayerSeasonViewModel.pa = 600;
     secondBaseHitterPlayerSeasonViewModel.ab = 500;
-    secondBaseHitterPlayerSeasonViewModel.hr = 30;
-    secondBaseHitterPlayerSeasonViewModel.rbi = 100;
+    secondBaseHitterPlayerSeasonViewModel.hr = 8;
+    secondBaseHitterPlayerSeasonViewModel.rbi = 50;
     secondBaseHitterPlayerSeasonViewModel.sb = 20;
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
-    secondBaseHitterPlayerSeasonViewModel.player.playerName = "Mike Lansing";
-    secondBaseHitterPlayerSeasonViewModel.player.bats = "S";
+    secondBaseHitterPlayerSeasonViewModel.player.playerName = "DJ LeMahieu";
+    secondBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var asb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
     asb.BattingOrderNumber = 1;
     awayTeam.SetSecondBase(asb);
 
     var thirdBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    thirdBaseHitterPlayerSeasonViewModel.obp = 0.400;
-    thirdBaseHitterPlayerSeasonViewModel.slg = 0.650;
-    thirdBaseHitterPlayerSeasonViewModel.avg = 0.300;
+    thirdBaseHitterPlayerSeasonViewModel.obp = 0.351;
+    thirdBaseHitterPlayerSeasonViewModel.slg = 0.546;
+    thirdBaseHitterPlayerSeasonViewModel.avg = 0.295;
     thirdBaseHitterPlayerSeasonViewModel.pa = 600;
     thirdBaseHitterPlayerSeasonViewModel.ab = 500;
-    thirdBaseHitterPlayerSeasonViewModel.hr = 30;
-    thirdBaseHitterPlayerSeasonViewModel.rbi = 100;
+    thirdBaseHitterPlayerSeasonViewModel.hr = 32;
+    thirdBaseHitterPlayerSeasonViewModel.rbi = 105;
     thirdBaseHitterPlayerSeasonViewModel.sb = 20;
     thirdBaseHitterPlayerSeasonViewModel.bb = 100;
     thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -413,13 +413,13 @@ export class GameConfigureComponent implements OnInit {
     awayTeam.SetThirdBase(atb);
 
     var shortstopHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    shortstopHitterPlayerSeasonViewModel.obp = 0.400;
-    shortstopHitterPlayerSeasonViewModel.slg = 0.650;
-    shortstopHitterPlayerSeasonViewModel.avg = 0.300;
+    shortstopHitterPlayerSeasonViewModel.obp = 0.361;
+    shortstopHitterPlayerSeasonViewModel.slg = 0.495;
+    shortstopHitterPlayerSeasonViewModel.avg = 0.290;
     shortstopHitterPlayerSeasonViewModel.pa = 600;
     shortstopHitterPlayerSeasonViewModel.ab = 500;
-    shortstopHitterPlayerSeasonViewModel.hr = 30;
-    shortstopHitterPlayerSeasonViewModel.rbi = 100;
+    shortstopHitterPlayerSeasonViewModel.hr = 17;
+    shortstopHitterPlayerSeasonViewModel.rbi = 60;
     shortstopHitterPlayerSeasonViewModel.sb = 20;
     shortstopHitterPlayerSeasonViewModel.bb = 100;
     shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -430,9 +430,9 @@ export class GameConfigureComponent implements OnInit {
     awayTeam.SetShortstop(ass);
 
     var leftfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    leftfielderHitterPlayerSeasonViewModel.obp = 0.400;
-    leftfielderHitterPlayerSeasonViewModel.slg = 0.650;
-    leftfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    leftfielderHitterPlayerSeasonViewModel.obp = 0.379;
+    leftfielderHitterPlayerSeasonViewModel.slg = 0.510;
+    leftfielderHitterPlayerSeasonViewModel.avg = 0.299;
     leftfielderHitterPlayerSeasonViewModel.pa = 600;
     leftfielderHitterPlayerSeasonViewModel.ab = 500;
     leftfielderHitterPlayerSeasonViewModel.hr = 30;
@@ -440,20 +440,20 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.sb = 20;
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
     leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
-    leftfielderHitterPlayerSeasonViewModel.player.playerName = "Carlos Gonzalez";
+    leftfielderHitterPlayerSeasonViewModel.player.playerName = "Matt Holliday";
     leftfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var alf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
     alf.BattingOrderNumber = 5;
     awayTeam.SetLeftField(alf);
 
     var centerfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    centerfielderHitterPlayerSeasonViewModel.obp = 0.400;
-    centerfielderHitterPlayerSeasonViewModel.slg = 0.650;
-    centerfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    centerfielderHitterPlayerSeasonViewModel.obp = 0.360;
+    centerfielderHitterPlayerSeasonViewModel.slg = 0.509;
+    centerfielderHitterPlayerSeasonViewModel.avg = 0.304;
     centerfielderHitterPlayerSeasonViewModel.pa = 600;
     centerfielderHitterPlayerSeasonViewModel.ab = 500;
-    centerfielderHitterPlayerSeasonViewModel.hr = 30;
-    centerfielderHitterPlayerSeasonViewModel.rbi = 100;
+    centerfielderHitterPlayerSeasonViewModel.hr = 19;
+    centerfielderHitterPlayerSeasonViewModel.rbi = 57;
     centerfielderHitterPlayerSeasonViewModel.sb = 20;
     centerfielderHitterPlayerSeasonViewModel.bb = 100;
     centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -464,13 +464,13 @@ export class GameConfigureComponent implements OnInit {
     awayTeam.SetCenterField(acf);
 
     var rightfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
-    rightfielderHitterPlayerSeasonViewModel.obp = 0.400;
-    rightfielderHitterPlayerSeasonViewModel.slg = 0.650;
-    rightfielderHitterPlayerSeasonViewModel.avg = 0.300;
+    rightfielderHitterPlayerSeasonViewModel.obp = 0.384;
+    rightfielderHitterPlayerSeasonViewModel.slg = 0.502;
+    rightfielderHitterPlayerSeasonViewModel.avg = 0.313;
     rightfielderHitterPlayerSeasonViewModel.pa = 600;
     rightfielderHitterPlayerSeasonViewModel.ab = 500;
     rightfielderHitterPlayerSeasonViewModel.hr = 30;
-    rightfielderHitterPlayerSeasonViewModel.rbi = 100;
+    rightfielderHitterPlayerSeasonViewModel.rbi = 90;
     rightfielderHitterPlayerSeasonViewModel.sb = 20;
     rightfielderHitterPlayerSeasonViewModel.bb = 100;
     rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
