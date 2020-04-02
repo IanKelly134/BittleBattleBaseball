@@ -495,7 +495,7 @@ export class GameConfigureComponent implements OnInit {
     this.ClearCanvas();
 
     setTimeout(() => {
-      let diceRoll = this.GenerateRandomNumber(0, 1000);
+      let diceRoll = this.GenerateRandomNumber(1, 1000);
 
       if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP <= (diceRoll * .001)) {
         this.ExecuteCurrentBatterReachedBase();
