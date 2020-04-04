@@ -496,8 +496,9 @@ export class GameConfigureComponent implements OnInit {
 
     setTimeout(() => {
       let diceRoll = this.GenerateRandomNumber(1, 1000);
+      //this.showWarning("Dice Roll is " + diceRoll + " Current Batter OBRP : " + this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP);
 
-      if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP <= (diceRoll * .001)) {
+      if (diceRoll <= (this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP * 1000)) {
         this.ExecuteCurrentBatterReachedBase();
       }
       else {
@@ -595,6 +596,8 @@ export class GameConfigureComponent implements OnInit {
       }
     }
 
+    this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
+
     this.Game.NewAtBat();
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.DrawHitterOnHomeDeck();
@@ -606,6 +609,8 @@ export class GameConfigureComponent implements OnInit {
 
   ExecuteCurrentBatterIsOut() {
     let diceRoll = this.GenerateRandomNumber(1, 3);
+    //this.showWarning("Dice Roll is " + diceRoll);
+
     if (diceRoll == 1) {
       this.FlyBallOutToFirst();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to first.");
@@ -674,7 +679,7 @@ export class GameConfigureComponent implements OnInit {
     this.DrawHitterOnHomeDeck();
     this.DrawHitterOnAwayDeck();
     this.DrawBatter();
-    // this.DrawRunnerOnFirst();
+    this.DrawRunnerOnFirst();
     // this.DrawRunnerOnSecond();
     // this.DrawRunnerOnThird();
   }
@@ -759,22 +764,37 @@ export class GameConfigureComponent implements OnInit {
   }
 
   DrawRunnerOnFirst() {
-    let img = new Image();
-    if (this.Game.CurrentInning.IsBottomOfInning) {
-      img.src = this.Game.HomeTeam.SecondBaseman.PlayerImageURL;
-      img.title = this.Game.HomeTeam.SecondBaseman.Name;
-    } else {
-      img.src = this.Game.AwayTeam.SecondBaseman.PlayerImageURL;
-      img.title = this.Game.AwayTeam.SecondBaseman.Name;
-    }
+    if (this.Game.RunnerOnFirst) {
+      let img = new Image();
+      let color = "blue";
+      img.src = this.Game.RunnerOnFirst.PlayerImageURL;
+      img.title = this.Game.RunnerOnFirst.Name;
 
-    img.onerror = function () {
-      img.src = '../assets/images/emptyHeadshot.jpeg';
-    }
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        color = "red";
+      }
 
-    img.onload = () => {
-      this.ctx.drawImage(img,
-        this.firstBaseX, this.firstBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      img.onerror = function () {
+        img.src = '../assets/images/emptyHeadshot.jpeg';
+      }
+
+      img.onload = () => {
+        this.ctx.beginPath();
+        this.ctx.rect(this.firstBaseX, this.firstBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 4;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+
+        this.ctx.drawImage(img,
+          this.firstBaseX, this.firstBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+        this.ctx.font = '8pt Calibri';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'white';
+        this.ctx.fillText(img.title, this.firstBaseX + (this.playerFieldImgAvatarWidth / 2), (this.firstBaseY - 5));
+      }
     }
   }
 
@@ -1434,9 +1454,12 @@ export class GameConfigureComponent implements OnInit {
   }
 
   showSuccess(msg: string) {
+
+    let position = this.Game.CurrentInning.IsBottomOfInning ? "toast-top-right" : "toast-top-left";
+
     this.toastr.success("", msg, {
       timeOut: 3000,
-      positionClass: "toast-top-center",
+      positionClass: position,
       messageClass: "toast-message"
     });
 
@@ -1444,9 +1467,11 @@ export class GameConfigureComponent implements OnInit {
   }
 
   showInfo(msg: string) {
+    let position = this.Game.CurrentInning.IsBottomOfInning ? "toast-top-right" : "toast-top-left";
+
     this.toastr.warning("", msg, {
       timeOut: 3000,
-      positionClass: "toast-top-center",
+      positionClass: position,
       messageClass: "toast-message"
     });
 
@@ -1454,9 +1479,11 @@ export class GameConfigureComponent implements OnInit {
   }
 
   showWarning(msg: string) {
+    let position = this.Game.CurrentInning.IsBottomOfInning ? "toast-top-right" : "toast-top-left";
+
     this.toastr.warning("", msg, {
       timeOut: 3000,
-      positionClass: "toast-top-center",
+      positionClass: position,
       messageClass: "toast-message"
     });
 
@@ -1464,9 +1491,11 @@ export class GameConfigureComponent implements OnInit {
   }
 
   showError(msg: string) {
+    let position = this.Game.CurrentInning.IsBottomOfInning ? "toast-top-right" : "toast-top-left";
+
     this.toastr.error("", msg, {
       timeOut: 3000,
-      positionClass: "toast-top-center",
+      positionClass: position,
       messageClass: "toast-message"
     });
 

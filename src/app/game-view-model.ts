@@ -26,6 +26,11 @@ export class GameViewModel {
     CurrentInning: GameInningViewModel;
     CurrentAtBat: GameAtBatViewModel;
 
+    RunnerOnFirst: GamePlayerViewModel;
+    RunnerOnSecond: GamePlayerViewModel;
+    RunnerOnThird: GamePlayerViewModel;
+    RunnersWhoScoredOnPlay: GamePlayerViewModel[];
+
     constructor() {
 
     }
