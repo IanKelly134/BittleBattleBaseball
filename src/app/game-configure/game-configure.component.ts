@@ -1379,8 +1379,7 @@ export class GameConfigureComponent implements OnInit {
 
 
   ClearCanvas() {
-    this.canvas = null;
-    this.ctx = null;
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
     this.SetPlayingField();
     //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
