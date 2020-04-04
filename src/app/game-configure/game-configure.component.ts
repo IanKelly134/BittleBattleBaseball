@@ -46,8 +46,8 @@ export class GameConfigureComponent implements OnInit {
   homePlateY: number = 1170 * this.screenPctAdj;
   firstBaseX: number = 1220 * this.screenPctAdj;
   firstBaseY: number = 900 * this.screenPctAdj;
-  secondBaseX: number = 905 * this.screenPctAdj;
-  secondBaseY: number = 913 * this.screenPctAdj;
+  secondBaseX: number = 910 * this.screenPctAdj;
+  secondBaseY: number = 750 * this.screenPctAdj;
   thirdBaseX: number = 555 * this.screenPctAdj;
   thirdBaseY: number = 1013 * this.screenPctAdj;
 
@@ -616,7 +616,24 @@ export class GameConfigureComponent implements OnInit {
       }
     }
 
+    //***
+    if (this.Game.RunnerOnFirst) {
+
+      if (this.Game.RunnerOnSecond) {
+
+        if (this.Game.RunnerOnThird) {
+          this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        }
+
+        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+      }
+
+      this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+    }
+
     this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
+
+    //***
 
     this.Game.NewAtBat();
     if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -704,8 +721,8 @@ export class GameConfigureComponent implements OnInit {
     this.DrawHitterOnAwayDeck();
     this.DrawBatter();
     this.DrawRunnerOnFirst();
-    // this.DrawRunnerOnSecond();
-    // this.DrawRunnerOnThird();
+    this.DrawRunnerOnSecond();
+    this.DrawRunnerOnThird();
   }
 
   DrawBatter() {
@@ -816,50 +833,79 @@ export class GameConfigureComponent implements OnInit {
 
         this.ctx.font = '8pt Calibri';
         this.ctx.textAlign = 'center';
-        this.ctx.fillStyle = 'white';
+        this.ctx.fillStyle = 'gray';
         this.ctx.fillText(img.title, this.firstBaseX + (this.playerFieldImgAvatarWidth / 2), (this.firstBaseY - 5));
       }
     }
   }
 
   DrawRunnerOnSecond() {
-    let img = new Image();
-    if (this.Game.CurrentInning.IsBottomOfInning) {
-      img.src = this.Game.HomeTeam.Shortstop.PlayerImageURL;
-      img.title = this.Game.HomeTeam.Shortstop.Name;
-    }
-    else {
-      img.src = this.Game.AwayTeam.Shortstop.PlayerImageURL;
-      img.title = this.Game.AwayTeam.Shortstop.Name;
-    }
+    if (this.Game.RunnerOnSecond) {
+      let img = new Image();
+      let color = "#00004E";
+      img.src = this.Game.RunnerOnSecond.PlayerImageURL;
+      img.title = this.Game.RunnerOnSecond.Name;
 
-    img.onerror = function () {
-      img.src = '../assets/images/emptyHeadshot.jpeg';
-    }
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        color = "red";
+      }
 
-    img.onload = () => {
-      this.ctx.drawImage(img,
-        this.secondBaseX, this.secondBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      img.onerror = function () {
+        img.src = '../assets/images/emptyHeadshot.jpeg';
+      }
+
+      img.onload = () => {
+        this.ctx.beginPath();
+        this.ctx.rect(this.secondBaseX, this.secondBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 4;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+
+        this.ctx.drawImage(img,
+          this.secondBaseX, this.secondBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+        this.ctx.font = '8pt Calibri';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'gray';
+        this.ctx.fillText(img.title, this.secondBaseX + (this.playerFieldImgAvatarWidth / 2), (this.secondBaseY - 5));
+      }
     }
   }
 
   DrawRunnerOnThird() {
-    let img = new Image();
-    if (this.Game.CurrentInning.IsBottomOfInning) {
-      img.src = this.Game.HomeTeam.ThirdBaseman.PlayerImageURL;
-      img.title = this.Game.HomeTeam.ThirdBaseman.Name;
-    } else {
-      img.src = this.Game.AwayTeam.ThirdBaseman.PlayerImageURL;
-      img.title = this.Game.AwayTeam.ThirdBaseman.Name;
-    }
+    if (this.Game.RunnerOnThird) {
+      let img = new Image();
+      let color = "#00004E";
+      img.src = this.Game.RunnerOnThird.PlayerImageURL;
+      img.title = this.Game.RunnerOnThird.Name;
 
-    img.onerror = function () {
-      img.src = '../assets/images/emptyHeadshot.jpeg';
-    }
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        color = "red";
+      }
 
-    img.onload = () => {
-      this.ctx.drawImage(img,
-        this.thirdBaseX, this.thirdBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+      img.onerror = function () {
+        img.src = '../assets/images/emptyHeadshot.jpeg';
+      }
+
+      img.onload = () => {
+        this.ctx.beginPath();
+        this.ctx.rect(this.thirdBaseX, this.thirdBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+        this.ctx.fillStyle = color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 4;
+        this.ctx.strokeStyle = color;
+        this.ctx.stroke();
+
+        this.ctx.drawImage(img,
+          this.thirdBaseX, this.thirdBaseY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
+
+        this.ctx.font = '8pt Calibri';
+        this.ctx.textAlign = 'center';
+        this.ctx.fillStyle = 'gray';
+        this.ctx.fillText(img.title, this.thirdBaseX + (this.playerFieldImgAvatarWidth / 2), (this.thirdBaseY - 5));
+      }
     }
   }
 
