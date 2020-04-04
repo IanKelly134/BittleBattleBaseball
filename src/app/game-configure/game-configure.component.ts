@@ -48,8 +48,8 @@ export class GameConfigureComponent implements OnInit {
   firstBaseY: number = 900 * this.screenPctAdj;
   secondBaseX: number = 910 * this.screenPctAdj;
   secondBaseY: number = 750 * this.screenPctAdj;
-  thirdBaseX: number = 555 * this.screenPctAdj;
-  thirdBaseY: number = 1013 * this.screenPctAdj;
+  thirdBaseX: number = 620 * this.screenPctAdj;
+  thirdBaseY: number = 880 * this.screenPctAdj;
 
   rightHandedBatterX: number = 840 * this.screenPctAdj;
   rightHandedBatterY: number = 1120 * this.screenPctAdj;
@@ -623,6 +623,17 @@ export class GameConfigureComponent implements OnInit {
 
         if (this.Game.RunnerOnThird) {
           this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+
+          if (this.Game.CurrentInning.IsBottomOfInning) {
+            this.Game.CurrentInning.HomeRunsScored++;
+          } else {
+            this.Game.CurrentInning.AwayRunsScored++;
+          }
+
+          for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
+            this.showSuccess(playerWhoScored.Name + " scored!");
+          }
+
         }
 
         this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
