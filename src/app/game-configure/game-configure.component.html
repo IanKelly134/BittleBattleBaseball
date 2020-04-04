@@ -1,5 +1,72 @@
 <div class="container-fluid" style="text-align: center; margin: 0px; padding: 0px;">
 
+
+
+    <div class="row" style="margin: 0px; padding: 0px;">
+        <div class="col-md-2">
+            <table *ngIf="Game && Game.AwayTeam" class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Pos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                        <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)"
+                            [class]="((Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-away' : undefined)">
+                            <td class="text-center">{{lineUpNumber}}</td>
+                            <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
+                            </td>
+                            <td>{{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
+                            <td class="text-center">
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8"> <canvas id="ballparkCanvas" style="max-width: 100%" [width]="canvasWidth"
+                [height]="canvasHeight"> </canvas><br />
+            <button class="btn btn-success btn-block" *ngIf="!IsPlayInProgress" (click)="ExecuteNextPlay()"><img
+                    style="cursor:pointer; max-width: 25px;" src="../assets/images/baseballicon.png" /> Next Play <i
+                    class="fa fa-arrow-right"></i></button>
+        </div>
+        <div class="col-md-2">
+            <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th></th>
+                        <th>Name</th>
+                        <th>Pos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                        <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)"
+                            [class]="((Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-home' : undefined)">
+                            <td class="text-center">{{lineUpNumber}}</td>
+                            <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
+                            </td>
+                            <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
+                            <td class="text-center">
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-md-4">
             <table class="table table-bordered table-dark table-hover table-condensed"
@@ -97,73 +164,6 @@
             </table>
         </div>
     </div>
-
-    <div class="row" style="margin: 0px; padding: 0px;">
-        <div class="col-md-2">
-            <table *ngIf="Game && Game.AwayTeam" class="table table-bordered table-dark table-hover table-condensed"
-                style="margin-top: 20px; opacity: 0.9;">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Pos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
-                        <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)"
-                            [class]="((Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-away' : undefined)">
-                            <td class="text-center">{{lineUpNumber}}</td>
-                            <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
-                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
-                            </td>
-                            <td>{{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
-                            <td class="text-center">
-                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
-                            </td>
-                        </tr>
-                    </ng-container>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-8"> <canvas id="ballparkCanvas" style="max-width: 100%" [width]="canvasWidth"
-                [height]="canvasHeight"> </canvas><br />
-            <button class="btn btn-success btn-block" *ngIf="!IsPlayInProgress" (click)="ExecuteNextPlay()"><img
-                    style="cursor:pointer; max-width: 25px;" src="../assets/images/baseballicon.png" /> Next Play <i
-                    class="fa fa-arrow-right"></i></button>
-        </div>
-        <div class="col-md-2">
-            <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
-                style="margin-top: 20px; opacity: 0.9;">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Pos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
-                        <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)"
-                            [class]="((Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-home' : undefined)">
-                            <td class="text-center">{{lineUpNumber}}</td>
-                            <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
-                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
-                            </td>
-                            <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
-                            <td class="text-center">
-                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
-                            </td>
-                        </tr>
-                    </ng-container>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
-
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-sm-2"></div>
         <div class="col-sm-8">
