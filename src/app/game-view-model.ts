@@ -98,6 +98,11 @@ export class GameViewModel {
     }
 
     NextInning() {
+        this.RunnerOnFirst = null;
+        this.RunnerOnSecond = null;
+        this.RunnerOnThird = null;
+        this.RunnersWhoScoredOnPlay = [];
+
         this.CurrentInning = this.Innings[this.CurrentInning.InningNumber];//Current Inning becomes next inning
         this.CurrentInning.AwayRunsScored = 0;
         let inningText = '';

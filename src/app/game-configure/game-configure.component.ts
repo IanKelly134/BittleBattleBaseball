@@ -45,7 +45,7 @@ export class GameConfigureComponent implements OnInit {
   homePlateX: number = 950 * this.screenPctAdj;
   homePlateY: number = 1170 * this.screenPctAdj;
   firstBaseX: number = 1220 * this.screenPctAdj;
-  firstBaseY: number = 1023 * this.screenPctAdj;
+  firstBaseY: number = 900 * this.screenPctAdj;
   secondBaseX: number = 905 * this.screenPctAdj;
   secondBaseY: number = 913 * this.screenPctAdj;
   thirdBaseX: number = 555 * this.screenPctAdj;
@@ -175,6 +175,7 @@ export class GameConfigureComponent implements OnInit {
     pitherPitcherPlayerSeasonViewModel.player.bats = "R";
     var p = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
     p.BattingOrderNumber = 9;
+    p.Id = 201;
     homeTeam.SetPitcher(p);
 
     var catcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -192,6 +193,7 @@ export class GameConfigureComponent implements OnInit {
     catcherHitterPlayerSeasonViewModel.player.bats = "R";
     var c = new GamePlayerViewModel("C", catcherHitterPlayerSeasonViewModel, null);
     c.BattingOrderNumber = 8;
+    c.Id = 202;
     homeTeam.SetCatcher(c);
 
     var firstBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -209,6 +211,7 @@ export class GameConfigureComponent implements OnInit {
     firstBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var fb = new GamePlayerViewModel("1B", firstBaseHitterPlayerSeasonViewModel, null);
     fb.BattingOrderNumber = 3;
+    fb.Id = 203;
     homeTeam.SetFirstBase(fb);
 
     var secondBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -226,6 +229,7 @@ export class GameConfigureComponent implements OnInit {
     secondBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var sb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
     sb.BattingOrderNumber = 1;
+    sb.Id = 204;
     homeTeam.SetSecondBase(sb);
 
     var thirdBaseHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -243,6 +247,7 @@ export class GameConfigureComponent implements OnInit {
     thirdBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var tb = new GamePlayerViewModel("3B", thirdBaseHitterPlayerSeasonViewModel, null);
     tb.BattingOrderNumber = 4;
+    tb.Id = 205;
     homeTeam.SetThirdBase(tb);
 
     var shortstopHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -260,6 +265,7 @@ export class GameConfigureComponent implements OnInit {
     shortstopHitterPlayerSeasonViewModel.player.bats = "S";
     var ss = new GamePlayerViewModel("SS", shortstopHitterPlayerSeasonViewModel, null);
     ss.BattingOrderNumber = 7;
+    ss.Id = 206;
     homeTeam.SetShortstop(ss);
 
     var leftfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -277,6 +283,7 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.player.bats = "R";
     var lf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
     lf.BattingOrderNumber = 5;
+    lf.Id = 207;
     homeTeam.SetLeftField(lf);
 
     var centerfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -294,6 +301,7 @@ export class GameConfigureComponent implements OnInit {
     centerfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var cf = new GamePlayerViewModel("CF", centerfielderHitterPlayerSeasonViewModel, null);
     cf.BattingOrderNumber = 2;
+    cf.Id = 208;
     homeTeam.SetCenterField(cf);
 
     var rightfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -311,6 +319,7 @@ export class GameConfigureComponent implements OnInit {
     rightfielderHitterPlayerSeasonViewModel.player.bats = "L";
     let rf = new GamePlayerViewModel("RF", rightfielderHitterPlayerSeasonViewModel, null);
     rf.BattingOrderNumber = 6;
+    rf.Id = 209;
     homeTeam.SetRightField(rf);
 
     gameVM.HomeTeam = homeTeam;
@@ -340,6 +349,7 @@ export class GameConfigureComponent implements OnInit {
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
     pitherPitcherPlayerSeasonViewModel.player.bats = "R";
     var ap = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
+    ap.Id = 103;
     ap.BattingOrderNumber = 9;
     awayTeam.SetPitcher(ap);
 
@@ -357,6 +367,7 @@ export class GameConfigureComponent implements OnInit {
     catcherHitterPlayerSeasonViewModel.player.playerName = "Yorvit Torrealba";
     catcherHitterPlayerSeasonViewModel.player.bats = "R";
     var ac = new GamePlayerViewModel("C", catcherHitterPlayerSeasonViewModel, null);
+    ac.Id = 102;
     ac.BattingOrderNumber = 8;
     awayTeam.SetCatcher(ac);
 
@@ -375,6 +386,7 @@ export class GameConfigureComponent implements OnInit {
     firstBaseHitterPlayerSeasonViewModel.player.bats = "L";
 
     var afb = new GamePlayerViewModel("1B", firstBaseHitterPlayerSeasonViewModel, null);
+    afb.Id = 101;
     afb.BattingOrderNumber = 3;
     awayTeam.SetFirstBase(afb);
 
@@ -390,8 +402,10 @@ export class GameConfigureComponent implements OnInit {
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     secondBaseHitterPlayerSeasonViewModel.player.playerName = "DJ LeMahieu";
+
     secondBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var asb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
+    asb.Id = 100;
     asb.BattingOrderNumber = 1;
     awayTeam.SetSecondBase(asb);
 
@@ -409,6 +423,7 @@ export class GameConfigureComponent implements OnInit {
     thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Nolan Arenado";
     thirdBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var atb = new GamePlayerViewModel("3B", thirdBaseHitterPlayerSeasonViewModel, null);
+    atb.Id = 104;
     atb.BattingOrderNumber = 4;
     awayTeam.SetThirdBase(atb);
 
@@ -427,6 +442,7 @@ export class GameConfigureComponent implements OnInit {
     shortstopHitterPlayerSeasonViewModel.player.bats = "R";
     var ass = new GamePlayerViewModel("SS", shortstopHitterPlayerSeasonViewModel, null);
     ass.BattingOrderNumber = 7;
+    ass.Id = 105;
     awayTeam.SetShortstop(ass);
 
     var leftfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -444,6 +460,7 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var alf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
     alf.BattingOrderNumber = 5;
+    alf.Id = 106;
     awayTeam.SetLeftField(alf);
 
     var centerfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -461,6 +478,7 @@ export class GameConfigureComponent implements OnInit {
     centerfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var acf = new GamePlayerViewModel("CF", centerfielderHitterPlayerSeasonViewModel, null);
     acf.BattingOrderNumber = 2;
+    acf.Id = 107;
     awayTeam.SetCenterField(acf);
 
     var rightfielderHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
@@ -478,6 +496,7 @@ export class GameConfigureComponent implements OnInit {
     rightfielderHitterPlayerSeasonViewModel.player.bats = "L";
     let arf = new GamePlayerViewModel("RF", rightfielderHitterPlayerSeasonViewModel, null);
     arf.BattingOrderNumber = 6;
+    arf.Id = 108;
     awayTeam.SetRightField(arf);
 
 
@@ -492,6 +511,7 @@ export class GameConfigureComponent implements OnInit {
 
   ExecuteNextPlay() {
     this.IsPlayInProgress = true;
+    this.Game.RunnersWhoScoredOnPlay = [];
     this.ClearCanvas();
 
     setTimeout(() => {
@@ -637,6 +657,10 @@ export class GameConfigureComponent implements OnInit {
 
       if (this.Game.CurrentInning.AwayOuts == 3) {
         this.Game.CurrentInning.IsBottomOfInning = true;
+        this.Game.RunnerOnFirst = null;
+        this.Game.RunnerOnSecond = null;
+        this.Game.RunnerOnThird = null;
+        this.Game.RunnersWhoScoredOnPlay = [];
         this.Game.CurrentInning.HomeRunsScored = 0;
         this.Game.NewAtBat();
       }
@@ -686,11 +710,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawBatter() {
     let img = new Image();
-    let color = 'blue';
+    let color = '#00004E';
     img.src = this.Game.CurrentAtBat.Batter.PlayerImageURL;
     img.title = this.Game.CurrentAtBat.Batter.Name;
     if (this.Game.CurrentInning.IsBottomOfInning) {
-      color = 'red';
+      color = '#B30000';
     }
 
     img.onerror = function () {
@@ -766,7 +790,7 @@ export class GameConfigureComponent implements OnInit {
   DrawRunnerOnFirst() {
     if (this.Game.RunnerOnFirst) {
       let img = new Image();
-      let color = "blue";
+      let color = "#00004E";
       img.src = this.Game.RunnerOnFirst.PlayerImageURL;
       img.title = this.Game.RunnerOnFirst.Name;
 
@@ -841,7 +865,7 @@ export class GameConfigureComponent implements OnInit {
 
   DrawHitterOnHomeDeck() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.HomeTeam.NextBatter.PlayerImageURL;
       img.title = this.Game.HomeTeam.NextBatter.Name;
@@ -874,7 +898,7 @@ export class GameConfigureComponent implements OnInit {
 
   DrawHitterOnAwayDeck() {
     let img = new Image();
-    let color = 'blue';
+    let color = '#00004E';
     if (!this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.NextBatter.PlayerImageURL;
       img.title = this.Game.AwayTeam.NextBatter.Name;
@@ -905,11 +929,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawPitcher() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.Pitcher.PlayerImageURL;
       img.title = this.Game.AwayTeam.Pitcher.Name;
-      color = 'blue';
+      color = '#00004E';
     }
     else {
       img.src = this.Game.HomeTeam.Pitcher.PlayerImageURL;
@@ -941,11 +965,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawCatcher() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.Catcher.PlayerImageURL;
       img.title = this.Game.AwayTeam.Catcher.Name;
-      color = 'blue';
+      color = '#00004E';
     }
     else {
       img.src = this.Game.HomeTeam.Catcher.PlayerImageURL;
@@ -977,11 +1001,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawFirstBasemen() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.FirstBaseman.PlayerImageURL;
       img.title = this.Game.AwayTeam.FirstBaseman.Name;
-      color = 'blue';
+      color = '#00004E';
     }
     else {
       img.src = this.Game.HomeTeam.FirstBaseman.PlayerImageURL;
@@ -1013,11 +1037,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawSecondBasemen() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.SecondBaseman.PlayerImageURL;
       img.title = this.Game.AwayTeam.SecondBaseman.Name;
-      color = 'blue';
+      color = '#00004E';
     } else {
       img.src = this.Game.HomeTeam.SecondBaseman.PlayerImageURL;
       img.title = this.Game.HomeTeam.SecondBaseman.Name;
@@ -1048,11 +1072,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawThirdBasemen() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.ThirdBaseman.PlayerImageURL;
       img.title = this.Game.AwayTeam.ThirdBaseman.Name;
-      color = 'blue';
+      color = '#00004E';
     } else {
       img.src = this.Game.HomeTeam.ThirdBaseman.PlayerImageURL;
       img.title = this.Game.HomeTeam.ThirdBaseman.Name;
@@ -1083,11 +1107,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawShortstop() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.Shortstop.PlayerImageURL;
       img.title = this.Game.AwayTeam.Shortstop.Name;
-      color = 'blue';
+      color = '#00004E';
     } else {
       img.src = this.Game.HomeTeam.Shortstop.PlayerImageURL;
       img.title = this.Game.HomeTeam.Shortstop.Name;
@@ -1118,11 +1142,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawLeftfielder() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.LeftFielder.PlayerImageURL;
       img.title = this.Game.AwayTeam.LeftFielder.Name;
-      color = 'blue';
+      color = '#00004E';
     } else {
       img.src = this.Game.HomeTeam.LeftFielder.PlayerImageURL;
       img.title = this.Game.HomeTeam.LeftFielder.Name;
@@ -1154,11 +1178,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawRightfielder() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.RightFielder.PlayerImageURL;
       img.title = this.Game.AwayTeam.RightFielder.Name;
-      color = 'blue';
+      color = '#00004E';
     }
     else {
       img.src = this.Game.HomeTeam.RightFielder.PlayerImageURL;
@@ -1190,11 +1214,11 @@ export class GameConfigureComponent implements OnInit {
 
   DrawCenterfielder() {
     let img = new Image();
-    let color = 'red';
+    let color = '#B30000';
     if (this.Game.CurrentInning.IsBottomOfInning) {
       img.src = this.Game.AwayTeam.CenterFielder.PlayerImageURL;
       img.title = this.Game.AwayTeam.CenterFielder.Name;
-      color = 'blue';
+      color = '#00004E';
     } else {
       img.src = this.Game.HomeTeam.CenterFielder.PlayerImageURL;
       img.title = this.Game.HomeTeam.CenterFielder.Name;

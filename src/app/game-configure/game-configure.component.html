@@ -112,7 +112,8 @@
                 </thead>
                 <tbody>
                     <ng-container *ngFor="let lineUpNumber of lineupNumbers">
-                        <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)">
+                        <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)"
+                            [class]="((Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-away' : undefined)">
                             <td class="text-center">{{lineUpNumber}}</td>
                             <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
                                     alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
@@ -145,7 +146,8 @@
                 </thead>
                 <tbody>
                     <ng-container *ngFor="let lineUpNumber of lineupNumbers">
-                        <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)">
+                        <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)"
+                            [class]="((Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-home' : undefined)">
                             <td class="text-center">{{lineUpNumber}}</td>
                             <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
                                     alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
