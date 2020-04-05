@@ -708,7 +708,7 @@ export class GameConfigureComponent implements OnInit {
       }
     }
     else if (diceRoll > 975) { //Homers
-      let homerDiceRoll = this.GenerateRandomNumber(1, 4);
+      let homerDiceRoll = this.GenerateRandomNumber(1, 7);
       basesAdded = 4;
       if (homerDiceRoll <= 1) {
         this.HomerLeftFieldLine();
@@ -725,6 +725,18 @@ export class GameConfigureComponent implements OnInit {
       else if (homerDiceRoll == 4) {
         this.HomerLeftCenterField();
         this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to left-center field.");
+      }
+      else if (homerDiceRoll == 5) {
+        this.HomerCenterField();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to center field.");
+      }
+      else if (homerDiceRoll == 6) {
+        this.HomerRightCenterField();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to right-center field.");
+      }
+      else if (homerDiceRoll == 7) {
+        this.HomerRightField();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to right-center field.");
       }
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.HomeRun;
@@ -1641,6 +1653,34 @@ export class GameConfigureComponent implements OnInit {
   HomerLeftCenterField() {
     this.FlyBallHit(this.homerLeftCenterFieldcp1X, this.homerLeftCenterFieldcp1Y, this.homerLeftCenterFieldcp2X,
       this.homerLeftCenterFieldcp2Y, 350, this.leftFielderY - 90);
+  }
+
+  homerCenterFieldcp1X: number = 900 * this.screenPctAdj;
+  homerCenterFieldcp1Y: number = 0;
+  homerCenterFieldcp2X: number = 900 * this.screenPctAdj;
+  homerCenterFieldcp2Y: number = -150;
+  HomerCenterField() {
+    this.FlyBallHit(this.homerCenterFieldcp1X, this.homerCenterFieldcp1Y, this.homerCenterFieldcp2X,
+      this.homerCenterFieldcp2Y, 625, this.centerFielderY - 90);
+  }
+
+
+  homerRightCenterFieldcp1X: number = 1175 * this.screenPctAdj;
+  homerRightCenterFieldcp1Y: number = 0;
+  homerRightCenterFieldcp2X: number = 1200 * this.screenPctAdj;
+  homerRightCenterFieldcp2Y: number = -150;
+  HomerRightCenterField() {
+    this.FlyBallHit(this.homerRightCenterFieldcp1X, this.homerRightCenterFieldcp1Y, this.homerRightCenterFieldcp2X,
+      this.homerRightCenterFieldcp2Y, ((this.rightFielderX + this.centerFielderX + 50) / 2) + 50, this.centerFielderY - 60);
+  }
+
+  homerRightFieldcp1X: number = 1375 * this.screenPctAdj;
+  homerRightFieldcp1Y: number = 0;
+  homerRightFieldcp2X: number = 1400 * this.screenPctAdj;
+  homerRightFieldcp2Y: number = -150;
+  HomerRightField() {
+    this.FlyBallHit(this.homerRightFieldcp1X, this.homerRightFieldcp1Y, this.homerRightFieldcp2X,
+      this.homerRightFieldcp2Y, this.rightFielderX + 100, this.rightFielderY - 85);
   }
 
   showSuccess(msg: string) {

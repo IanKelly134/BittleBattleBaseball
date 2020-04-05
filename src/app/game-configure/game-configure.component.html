@@ -33,9 +33,10 @@
         </div>
         <div class="col-md-8"> <canvas id="ballparkCanvas" style="max-width: 100%" [width]="canvasWidth"
                 [height]="canvasHeight"> </canvas><br />
-            <button class="btn btn-success btn-block" *ngIf="!IsPlayInProgress" (click)="ExecuteNextPlay()"><img
-                    style="cursor:pointer; max-width: 25px;" src="../assets/images/baseballicon.png" /> Next Play <i
-                    class="fa fa-arrow-right"></i></button>
+            <button class="btn btn-success btn-block" *ngIf="!IsPlayInProgress" style="padding: 25px;"
+                (click)="ExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
+                    src="../assets/images/baseballicon.png" />
+                Next Play <i class="fa fa-arrow-right"></i></button>
         </div>
         <div class="col-md-2">
             <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
@@ -185,18 +186,23 @@
                 Line</button></div>
         <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
                 (click)="HomerLeftField()">Homer Left Field</button></div>
-
         <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
                 (click)="HomerLeftCenterField()">Homer Left-Center
                 Field</button></div>
-
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block">Homer Center</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block">Homer Right Field Line</button>
-        </div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block">Homer Right-Center
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerCenterField()">Homer Center</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerRightCenterField()">Homer Right-Center
                 Field</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block">Homer Right Field</button>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerRightField()">Homer Right Field</button>
         </div>
+
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block">Homer Right Field
+                Line</button>
+        </div>
+
+
         <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
                 (click)="Fastball()">Fastball</button></div>
         <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
