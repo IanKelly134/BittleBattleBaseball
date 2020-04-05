@@ -533,22 +533,28 @@ export class GameConfigureComponent implements OnInit {
     this.ClearCanvas();
 
     setTimeout(() => {
-      let diceRoll = this.GenerateRandomNumber(1, 1000);
-      //this.showWarning("Dice Roll is " + diceRoll + " Current Batter OBRP : " + this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP);
-
-      if (diceRoll <= (this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP * 1000)) {
-        this.ExecuteCurrentBatterReachedBase();
-      }
-      else {
-        this.ExecuteCurrentBatterIsOut();
-      }
+      this.Pitch();
 
       setTimeout(() => {
-        this.IsPlayInProgress = false;
-        this.ClearCanvas();
-      }, 2500);
+        let diceRoll = this.GenerateRandomNumber(1, 1000);
+        //this.showWarning("Dice Roll is " + diceRoll + " Current Batter OBRP : " + this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP);
 
-    }, 300);
+        if (diceRoll <= (this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP * 1000)) {
+          this.ExecuteCurrentBatterReachedBase();
+        }
+        else {
+          this.ExecuteCurrentBatterIsOut();
+        }
+
+        setTimeout(() => {
+          this.IsPlayInProgress = false;
+          this.ClearCanvas();
+        }, 2500);
+
+      }, 300);
+    }, 200);
+
+
   }
 
   GenerateRandomNumber(from: number, to: number): number {
@@ -1004,7 +1010,7 @@ export class GameConfigureComponent implements OnInit {
 
         this.ctx.font = '8pt Calibri';
         this.ctx.textAlign = 'center';
-        this.ctx.fillStyle = 'gray';
+        this.ctx.fillStyle = 'white';
         this.ctx.fillText(img.title, this.secondBaseX + (this.playerFieldImgAvatarWidth / 2), (this.secondBaseY - 5));
       }
     }
@@ -1562,18 +1568,18 @@ export class GameConfigureComponent implements OnInit {
     this.PlayPitchSound();
   }
 
-  Fastball() {
+  Pitch() {
 
     this.ctx.beginPath();
-    this.ctx.moveTo(this.pitcherX + 10, this.pitcherY + 10);
-    this.ctx.lineTo(this.catcherX + 10, this.catcherY + 10);
+    this.ctx.moveTo(this.pitcherX + 20, this.pitcherY + this.playerFieldImgAvatarHeight);
+    this.ctx.lineTo(this.homePlateX, this.homePlateY);
     this.ctx.lineWidth = 3;
-
+    this.ctx.lineCap = 'round';
     // line color
-    this.ctx.strokeStyle = 'gray';
+    this.ctx.strokeStyle = 'lightgray';
     this.ctx.stroke();
 
-    this.PlayPitchSound();
+    // this.PlayPitchSound();
   }
 
   GroundBallHit(x: number, y: number, desc: string) {
