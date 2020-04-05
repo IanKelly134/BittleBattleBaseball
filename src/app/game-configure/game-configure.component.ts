@@ -51,7 +51,7 @@ export class GameConfigureComponent implements OnInit {
   thirdBaseX: number = 620 * this.screenPctAdj;
   thirdBaseY: number = 880 * this.screenPctAdj;
 
-  rightHandedBatterX: number = 840 * this.screenPctAdj;
+  rightHandedBatterX: number = 848 * this.screenPctAdj;
   rightHandedBatterY: number = 1120 * this.screenPctAdj;
   leftHandedBatterX: number = 985 * this.screenPctAdj;
   leftHandedBatterY: number = 1120 * this.screenPctAdj;
@@ -172,6 +172,7 @@ export class GameConfigureComponent implements OnInit {
     pitherPitcherPlayerSeasonViewModel.whip = 1.23;
     pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Adam Wainwright";
+    pitherPitcherPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/425794.jpg";
     pitherPitcherPlayerSeasonViewModel.player.bats = "R";
     var p = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
     p.BattingOrderNumber = 9;
@@ -190,6 +191,7 @@ export class GameConfigureComponent implements OnInit {
     catcherHitterPlayerSeasonViewModel.bb = 100;
     catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     catcherHitterPlayerSeasonViewModel.player.playerName = "Yadi Molina";
+    catcherHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/425877.jpg";
     catcherHitterPlayerSeasonViewModel.player.bats = "R";
     var c = new GamePlayerViewModel("C", catcherHitterPlayerSeasonViewModel, null);
     c.BattingOrderNumber = 8;
@@ -208,6 +210,7 @@ export class GameConfigureComponent implements OnInit {
     firstBaseHitterPlayerSeasonViewModel.bb = 100;
     firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     firstBaseHitterPlayerSeasonViewModel.player.playerName = "Albert Pujols";
+    firstBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/405395.jpg";
     firstBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var fb = new GamePlayerViewModel("1B", firstBaseHitterPlayerSeasonViewModel, null);
     fb.BattingOrderNumber = 3;
@@ -226,6 +229,7 @@ export class GameConfigureComponent implements OnInit {
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     secondBaseHitterPlayerSeasonViewModel.player.playerName = "Rogers Hornsby";
+    secondBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/116156.jpg";
     secondBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var sb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
     sb.BattingOrderNumber = 1;
@@ -244,6 +248,7 @@ export class GameConfigureComponent implements OnInit {
     thirdBaseHitterPlayerSeasonViewModel.bb = 100;
     thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Scott Rolen";
+    thirdBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/121409.jpg";
     thirdBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var tb = new GamePlayerViewModel("3B", thirdBaseHitterPlayerSeasonViewModel, null);
     tb.BattingOrderNumber = 4;
@@ -262,6 +267,7 @@ export class GameConfigureComponent implements OnInit {
     shortstopHitterPlayerSeasonViewModel.bb = 100;
     shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     shortstopHitterPlayerSeasonViewModel.player.playerName = "Ozzie Smith";
+    shortstopHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/122439.jpg";
     shortstopHitterPlayerSeasonViewModel.player.bats = "S";
     var ss = new GamePlayerViewModel("SS", shortstopHitterPlayerSeasonViewModel, null);
     ss.BattingOrderNumber = 7;
@@ -280,6 +286,7 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
     leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     leftfielderHitterPlayerSeasonViewModel.player.playerName = "Matt Holliday";
+    leftfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/407812.jpg";
     leftfielderHitterPlayerSeasonViewModel.player.bats = "R";
     var lf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
     lf.BattingOrderNumber = 5;
@@ -298,6 +305,7 @@ export class GameConfigureComponent implements OnInit {
     centerfielderHitterPlayerSeasonViewModel.bb = 100;
     centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     centerfielderHitterPlayerSeasonViewModel.player.playerName = "Lou Brock";
+    centerfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/111495.jpg";
     centerfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var cf = new GamePlayerViewModel("CF", centerfielderHitterPlayerSeasonViewModel, null);
     cf.BattingOrderNumber = 2;
@@ -316,6 +324,7 @@ export class GameConfigureComponent implements OnInit {
     rightfielderHitterPlayerSeasonViewModel.bb = 100;
     rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     rightfielderHitterPlayerSeasonViewModel.player.playerName = "Stan Musial";
+    rightfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/119602.jpg";
     rightfielderHitterPlayerSeasonViewModel.player.bats = "L";
     let rf = new GamePlayerViewModel("RF", rightfielderHitterPlayerSeasonViewModel, null);
     rf.BattingOrderNumber = 6;
@@ -347,6 +356,7 @@ export class GameConfigureComponent implements OnInit {
     pitherPitcherPlayerSeasonViewModel.whip = 1.374;
     pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
+    pitherPitcherPlayerSeasonViewModel.player.playerImageURL = "http://bittlebattlebaseball.azurewebsites.net/assets/images/emptyHeadshot.jpeg";
     pitherPitcherPlayerSeasonViewModel.player.bats = "R";
     var ap = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
     ap.Id = 103;
@@ -365,6 +375,7 @@ export class GameConfigureComponent implements OnInit {
     catcherHitterPlayerSeasonViewModel.bb = 100;
     catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     catcherHitterPlayerSeasonViewModel.player.playerName = "Yorvit Torrealba";
+    catcherHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/150275.jpg";
     catcherHitterPlayerSeasonViewModel.player.bats = "R";
     var ac = new GamePlayerViewModel("C", catcherHitterPlayerSeasonViewModel, null);
     ac.Id = 102;
@@ -383,6 +394,7 @@ export class GameConfigureComponent implements OnInit {
     firstBaseHitterPlayerSeasonViewModel.bb = 100;
     firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     firstBaseHitterPlayerSeasonViewModel.player.playerName = "Todd Helton";
+    firstBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/115732.jpg";
     firstBaseHitterPlayerSeasonViewModel.player.bats = "L";
 
     var afb = new GamePlayerViewModel("1B", firstBaseHitterPlayerSeasonViewModel, null);
@@ -402,6 +414,7 @@ export class GameConfigureComponent implements OnInit {
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     secondBaseHitterPlayerSeasonViewModel.player.playerName = "DJ LeMahieu";
+    secondBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/518934.jpg";
 
     secondBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var asb = new GamePlayerViewModel("2B", secondBaseHitterPlayerSeasonViewModel, null);
@@ -421,6 +434,7 @@ export class GameConfigureComponent implements OnInit {
     thirdBaseHitterPlayerSeasonViewModel.bb = 100;
     thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Nolan Arenado";
+    thirdBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/571448.jpg";
     thirdBaseHitterPlayerSeasonViewModel.player.bats = "R";
     var atb = new GamePlayerViewModel("3B", thirdBaseHitterPlayerSeasonViewModel, null);
     atb.Id = 104;
@@ -439,6 +453,7 @@ export class GameConfigureComponent implements OnInit {
     shortstopHitterPlayerSeasonViewModel.bb = 100;
     shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     shortstopHitterPlayerSeasonViewModel.player.playerName = "Troy Tulowitzki";
+    shortstopHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/453064.jpg";
     shortstopHitterPlayerSeasonViewModel.player.bats = "R";
     var ass = new GamePlayerViewModel("SS", shortstopHitterPlayerSeasonViewModel, null);
     ass.BattingOrderNumber = 7;
@@ -457,7 +472,8 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
     leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     leftfielderHitterPlayerSeasonViewModel.player.playerName = "Matt Holliday";
-    leftfielderHitterPlayerSeasonViewModel.player.bats = "L";
+    leftfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/407812.jpg";
+    leftfielderHitterPlayerSeasonViewModel.player.bats = "R";
     var alf = new GamePlayerViewModel("LF", leftfielderHitterPlayerSeasonViewModel, null);
     alf.BattingOrderNumber = 5;
     alf.Id = 106;
@@ -475,6 +491,7 @@ export class GameConfigureComponent implements OnInit {
     centerfielderHitterPlayerSeasonViewModel.bb = 100;
     centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     centerfielderHitterPlayerSeasonViewModel.player.playerName = "Charlie Blackmon";
+    centerfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/453568.jpg";
     centerfielderHitterPlayerSeasonViewModel.player.bats = "L";
     var acf = new GamePlayerViewModel("CF", centerfielderHitterPlayerSeasonViewModel, null);
     acf.BattingOrderNumber = 2;
@@ -493,6 +510,7 @@ export class GameConfigureComponent implements OnInit {
     rightfielderHitterPlayerSeasonViewModel.bb = 100;
     rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     rightfielderHitterPlayerSeasonViewModel.player.playerName = "Larry Walker";
+    rightfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/123833.jpg";
     rightfielderHitterPlayerSeasonViewModel.player.bats = "L";
     let arf = new GamePlayerViewModel("RF", rightfielderHitterPlayerSeasonViewModel, null);
     arf.BattingOrderNumber = 6;
