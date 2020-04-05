@@ -708,7 +708,7 @@ export class GameConfigureComponent implements OnInit {
       }
     }
     else if (diceRoll > 975) { //Homers
-      let homerDiceRoll = this.GenerateRandomNumber(1, 7);
+      let homerDiceRoll = this.GenerateRandomNumber(1, 8);
       basesAdded = 4;
       if (homerDiceRoll <= 1) {
         this.HomerLeftFieldLine();
@@ -736,7 +736,11 @@ export class GameConfigureComponent implements OnInit {
       }
       else if (homerDiceRoll == 7) {
         this.HomerRightField();
-        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to right-center field.");
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers to right field.");
+      }
+      else if (homerDiceRoll == 8) {
+        this.HomerRightFieldLine();
+        this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers down the right field line.");
       }
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.HomeRun;
@@ -1681,6 +1685,15 @@ export class GameConfigureComponent implements OnInit {
   HomerRightField() {
     this.FlyBallHit(this.homerRightFieldcp1X, this.homerRightFieldcp1Y, this.homerRightFieldcp2X,
       this.homerRightFieldcp2Y, this.rightFielderX + 100, this.rightFielderY - 85);
+  }
+
+  homerRightFieldLinecp1X: number = 1550 * this.screenPctAdj;
+  homerRightFieldLinecp1Y: number = 0;
+  homerRightFieldLinecp2X: number = 1575 * this.screenPctAdj;
+  homerRightFieldLinecp2Y: number = -100;
+  HomerRightFieldLine() {
+    this.FlyBallHit(this.homerRightFieldLinecp1X, this.homerRightFieldLinecp1Y, this.homerRightFieldLinecp2X,
+      this.homerRightFieldLinecp2Y, this.rightFielderX + 240, this.rightFielderY - 65);
   }
 
   showSuccess(msg: string) {
