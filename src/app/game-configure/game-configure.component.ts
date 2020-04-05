@@ -558,12 +558,40 @@ export class GameConfigureComponent implements OnInit {
   ExecuteCurrentBatterReachedBase() {
     let diceRoll = this.GenerateRandomNumber(1, 1000);
 
+    let basesAdded = 1;
     //TODO - Numbers based off of 2019 totals, need to pull in stats for year of batter
     if (diceRoll <= 215) { //Walks
       this.BatterWalked();
       this.showInfo(this.Game.CurrentAtBat.Batter.Name + " walked.");
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.Walk;
+
+      if (this.Game.RunnerOnFirst) {
+
+        if (this.Game.RunnerOnSecond) {
+
+          if (this.Game.RunnerOnThird) {
+            this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+
+            if (this.Game.CurrentInning.IsBottomOfInning) {
+              this.Game.CurrentInning.HomeRunsScored++;
+            } else {
+              this.Game.CurrentInning.AwayRunsScored++;
+            }
+
+            for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
+              this.showSuccess(playerWhoScored.Name + " scored!");
+            }
+
+          }
+
+          this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+        }
+
+        this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+      }
+
+      this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
     }
     else if (diceRoll > 215 && diceRoll <= 783) { //Singles
 
@@ -578,10 +606,40 @@ export class GameConfigureComponent implements OnInit {
       }
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.Single;
+
+      //Force
+      if (this.Game.RunnerOnFirst) {
+
+        if (this.Game.RunnerOnSecond) {
+          this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+        }
+
+        this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+      }
+
+      if (this.Game.RunnerOnThird) {
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+      }
+
+      // if(this.Game.RunnerOnSecond){
+      //   this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnSecond);
+      // }
+
+      for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
+        if (this.Game.CurrentInning.IsBottomOfInning) {
+          this.Game.CurrentInning.HomeRunsScored++;
+        } else {
+          this.Game.CurrentInning.AwayRunsScored++;
+        }
+
+        this.showSuccess(playerWhoScored.Name + " scored!");
+      }
+
+      this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
     }
     else if (diceRoll > 783 && diceRoll <= 959) { //Doubles
       let doubleHitDiceRoll = this.GenerateRandomNumber(1, 2);
-
+      basesAdded = 2;
       if (doubleHitDiceRoll <= 1) {
         //this.GroundBallSingleLeft1();
         this.showInfo(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
@@ -591,10 +649,32 @@ export class GameConfigureComponent implements OnInit {
       }
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.Double;
+
+      if (this.Game.RunnerOnThird) {
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+      }
+
+      if (this.Game.RunnerOnSecond) {
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnSecond);
+      }
+
+      if (this.Game.RunnerOnFirst) {
+        this.Game.RunnerOnThird = this.Game.RunnerOnFirst;
+      }
+
+      for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
+        if (this.Game.CurrentInning.IsBottomOfInning) {
+          this.Game.CurrentInning.HomeRunsScored++;
+        } else {
+          this.Game.CurrentInning.AwayRunsScored++;
+        }
+
+        this.showSuccess(playerWhoScored.Name + " scored!");
+      }
     }
     else if (diceRoll > 959 && diceRoll <= 975) { //Triples
       let tripleHitDiceRoll = this.GenerateRandomNumber(1, 2);
-
+      basesAdded = 3;
       if (tripleHitDiceRoll <= 1) {
         //this.GroundBallSingleLeft1();
         this.showInfo(this.Game.CurrentAtBat.Batter.Name + " triples to left.");
@@ -604,10 +684,32 @@ export class GameConfigureComponent implements OnInit {
       }
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.Triple;
+
+      if (this.Game.RunnerOnThird) {
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+      }
+
+      if (this.Game.RunnerOnSecond) {
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnSecond);
+      }
+
+      if (this.Game.RunnerOnFirst) {
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnFirst);
+      }
+
+      for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
+        if (this.Game.CurrentInning.IsBottomOfInning) {
+          this.Game.CurrentInning.HomeRunsScored++;
+        } else {
+          this.Game.CurrentInning.AwayRunsScored++;
+        }
+
+        this.showSuccess(playerWhoScored.Name + " scored!");
+      }
     }
     else if (diceRoll > 975) { //Homers
       let homerDiceRoll = this.GenerateRandomNumber(1, 4);
-
+      basesAdded = 4;
       if (homerDiceRoll <= 1) {
         this.HomerLeftFieldLine();
         this.showSuccess(this.Game.CurrentAtBat.Batter.Name + " homers down the left field line.");
@@ -627,43 +729,32 @@ export class GameConfigureComponent implements OnInit {
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.HomeRun;
 
-      if (this.Game.CurrentInning.IsBottomOfInning) {
-        this.Game.HomeTeamRuns++;
-      } else {
-        this.Game.AwayTeamRuns++;
+      if (this.Game.RunnerOnThird) {
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
       }
-    }
-
-    //***
-    if (this.Game.RunnerOnFirst) {
 
       if (this.Game.RunnerOnSecond) {
-
-        if (this.Game.RunnerOnThird) {
-          this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
-
-          if (this.Game.CurrentInning.IsBottomOfInning) {
-            this.Game.CurrentInning.HomeRunsScored++;
-          } else {
-            this.Game.CurrentInning.AwayRunsScored++;
-          }
-
-          for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
-            this.showSuccess(playerWhoScored.Name + " scored!");
-          }
-
-        }
-
-        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnSecond);
       }
 
-      this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+      if (this.Game.RunnerOnFirst) {
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnFirst);
+      }
+
+      this.Game.RunnersWhoScoredOnPlay.push(this.Game.CurrentAtBat.Batter);
+
+      for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
+        if (this.Game.CurrentInning.IsBottomOfInning) {
+          this.Game.CurrentInning.HomeRunsScored++;
+        } else {
+          this.Game.CurrentInning.AwayRunsScored++;
+        }
+
+        this.showSuccess(playerWhoScored.Name + " scored!");
+      }
     }
 
-    this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
-
     //***
-
     this.Game.NewAtBat();
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.DrawHitterOnHomeDeck();
