@@ -13,6 +13,7 @@ import { PitcherPlayerSeasonViewModel } from '../pitcher-player-season-view-mode
 import { PlayerViewModel } from '../player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
 import { ToastrService } from 'ngx-toastr';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-game-configure',
@@ -98,6 +99,16 @@ export class GameConfigureComponent implements OnInit {
   ngAfterViewInit(): void {
 
     this.SetPlayingField();
+
+    swal({
+      title: "Welcome to " + this.Game.Ballpark,
+      text: "Today's matchup between the " + this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " and the " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + ". Play Ball!",
+      icon: "success",
+      dangerMode: true,
+    })
+      .then(willDelete => {
+
+      });
   }
 
   ngOnInit() {
@@ -835,27 +846,55 @@ export class GameConfigureComponent implements OnInit {
     this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
-      this.Game.CurrentInning.HomeOuts++;
 
-      if (this.Game.CurrentInning.HomeOuts == 3) {
-        this.Game.NextInning();
-        this.Game.NewAtBat();
+      if (this.Game.CurrentInning.InningNumber == 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns) {
+        swal({
+          title: "Game Over!",
+          text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
+          icon: "success",
+          dangerMode: true,
+        })
+          .then(willDelete => {
+
+          });
       }
       else {
-        this.Game.NewAtBat();
+        this.Game.CurrentInning.HomeOuts++;
+
+        if (this.Game.CurrentInning.HomeOuts == 3) {
+          this.Game.NextInning();
+          this.Game.NewAtBat();
+        }
+        else {
+          this.Game.NewAtBat();
+        }
       }
     }
     else {
       this.Game.CurrentInning.AwayOuts++;
 
       if (this.Game.CurrentInning.AwayOuts == 3) {
-        this.Game.CurrentInning.IsBottomOfInning = true;
-        this.Game.RunnerOnFirst = null;
-        this.Game.RunnerOnSecond = null;
-        this.Game.RunnerOnThird = null;
-        this.Game.RunnersWhoScoredOnPlay = [];
-        this.Game.CurrentInning.HomeRunsScored = 0;
-        this.Game.NewAtBat();
+
+        if (this.Game.CurrentInning.InningNumber == 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
+          swal({
+            title: "Game Over!",
+            text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
+            icon: "success",
+            dangerMode: true,
+          })
+            .then(willDelete => {
+
+            });
+        } else {
+
+          this.Game.CurrentInning.IsBottomOfInning = true;
+          this.Game.RunnerOnFirst = null;
+          this.Game.RunnerOnSecond = null;
+          this.Game.RunnerOnThird = null;
+          this.Game.RunnersWhoScoredOnPlay = [];
+          this.Game.CurrentInning.HomeRunsScored = 0;
+          this.Game.NewAtBat();
+        }
       }
       else {
         this.Game.NewAtBat();
