@@ -613,23 +613,20 @@ export class GameConfigureComponent implements OnInit {
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.Single;
 
-      //Force
-      if (this.Game.RunnerOnFirst) {
-
-        if (this.Game.RunnerOnSecond) {
-          this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
-        }
-
-        this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
-      }
-
       if (this.Game.RunnerOnThird) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
       }
 
-      // if(this.Game.RunnerOnSecond){
-      //   this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnSecond);
-      // }
+      if (this.Game.RunnerOnSecond) {
+        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+        this.Game.RunnerOnSecond = null;
+      }
+
+      if (this.Game.RunnerOnFirst) {
+        this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+        this.Game.RunnerOnFirst = null;
+      }
 
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -658,15 +655,19 @@ export class GameConfigureComponent implements OnInit {
 
       if (this.Game.RunnerOnThird) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
       }
 
       if (this.Game.RunnerOnSecond) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnSecond);
+        this.Game.RunnerOnSecond = null;
       }
 
       if (this.Game.RunnerOnFirst) {
         this.Game.RunnerOnThird = this.Game.RunnerOnFirst;
+        this.Game.RunnerOnFirst = null;
       }
+
 
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -677,6 +678,8 @@ export class GameConfigureComponent implements OnInit {
 
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
+
+      this.Game.RunnerOnSecond = this.Game.CurrentAtBat.Batter;
     }
     else if (diceRoll > 959 && diceRoll <= 975) { //Triples
       let tripleHitDiceRoll = this.GenerateRandomNumber(1, 2);
@@ -693,15 +696,19 @@ export class GameConfigureComponent implements OnInit {
 
       if (this.Game.RunnerOnThird) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
       }
 
       if (this.Game.RunnerOnSecond) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnSecond);
+        this.Game.RunnerOnSecond = null;
       }
 
       if (this.Game.RunnerOnFirst) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnFirst);
+        this.Game.RunnerOnFirst = null;
       }
+
 
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -712,6 +719,8 @@ export class GameConfigureComponent implements OnInit {
 
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
+
+      this.Game.RunnerOnThird = this.Game.CurrentAtBat.Batter;
     }
     else if (diceRoll > 975) { //Homers
       let homerDiceRoll = this.GenerateRandomNumber(1, 8);
@@ -753,14 +762,17 @@ export class GameConfigureComponent implements OnInit {
 
       if (this.Game.RunnerOnThird) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
       }
 
       if (this.Game.RunnerOnSecond) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnSecond);
+        this.Game.RunnerOnSecond = null;
       }
 
       if (this.Game.RunnerOnFirst) {
         this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnFirst);
+        this.Game.RunnerOnFirst = null;
       }
 
       this.Game.RunnersWhoScoredOnPlay.push(this.Game.CurrentAtBat.Batter);
