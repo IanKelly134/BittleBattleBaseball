@@ -24,6 +24,7 @@ export class GamePlayerViewModel {
         }
 
         if (pitcher) {
+            this.HittingSeasonStats = hitter;
             this.PitchingSeasonStats = pitcher;
             this.Name = this.PitchingSeasonStats.player.playerName;
             this.Id = this.PitchingSeasonStats.player.id;

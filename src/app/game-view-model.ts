@@ -4,6 +4,8 @@ import { GameInningViewModel } from './game-inning-view-model';
 import { TeamSearchResultViewModel } from './team-search-result-view-model';
 import { GameAtBatViewModel } from './game-at-bat-view-model';
 import { Injectable } from '@angular/core';
+import { HitterPlayerSeasonViewModel } from './hitter-player-season-view-model';
+import { PlayerViewModel } from './player-view-model';
 
 @Injectable()
 export class GameViewModel {
@@ -74,9 +76,20 @@ export class GameViewModel {
     }
 
     SetAWAYTEAMBattersOBRPAccordingToNewPitcherWHIP() {
-        this.AwayTeam.Pitcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Pitcher.HittingSeasonStats.obp;
-        this.AwayTeam.Catcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Catcher.HittingSeasonStats.obp;
-        this.AwayTeam.FirstBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
+        var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+        pitcherHitterPlayerSeasonViewModel.obp = 0.226;
+        pitcherHitterPlayerSeasonViewModel.slg = 0.305;
+        pitcherHitterPlayerSeasonViewModel.avg = 0.200;
+        pitcherHitterPlayerSeasonViewModel.pa = 600;
+        pitcherHitterPlayerSeasonViewModel.ab = 500;
+        pitcherHitterPlayerSeasonViewModel.hr = 30;
+        pitcherHitterPlayerSeasonViewModel.rbi = 100;
+        pitcherHitterPlayerSeasonViewModel.sb = 20;
+        pitcherHitterPlayerSeasonViewModel.bb = 100;
+        pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+        pitcherHitterPlayerSeasonViewModel.player.playerName = this.AwayTeam.Pitcher.Name;
+        this.AwayTeam.Pitcher.HittingSeasonStats = pitcherHitterPlayerSeasonViewModel;
+        this.AwayTeam.Pitcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * .225;//TODO - FIX.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
         this.AwayTeam.SecondBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.SecondBaseman.HittingSeasonStats.obp;
         this.AwayTeam.Shortstop.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Shortstop.HittingSeasonStats.obp;
         this.AwayTeam.ThirdBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.ThirdBaseman.HittingSeasonStats.obp;
@@ -86,7 +99,20 @@ export class GameViewModel {
     }
 
     SetHOMETEAMBattersOBRPAccordingToNewPitcherWHIP() {
-        this.HomeTeam.Pitcher.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.Pitcher.HittingSeasonStats.obp;
+        var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+        pitcherHitterPlayerSeasonViewModel.obp = 0.226;
+        pitcherHitterPlayerSeasonViewModel.slg = 0.305;
+        pitcherHitterPlayerSeasonViewModel.avg = 0.200;
+        pitcherHitterPlayerSeasonViewModel.pa = 600;
+        pitcherHitterPlayerSeasonViewModel.ab = 500;
+        pitcherHitterPlayerSeasonViewModel.hr = 30;
+        pitcherHitterPlayerSeasonViewModel.rbi = 100;
+        pitcherHitterPlayerSeasonViewModel.sb = 20;
+        pitcherHitterPlayerSeasonViewModel.bb = 100;
+        pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+        pitcherHitterPlayerSeasonViewModel.player.playerName = this.HomeTeam.Pitcher.Name;
+        this.HomeTeam.Pitcher.HittingSeasonStats = pitcherHitterPlayerSeasonViewModel;
+        this.HomeTeam.Pitcher.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * .225;//TODO - FIX.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
         this.HomeTeam.Catcher.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.Catcher.HittingSeasonStats.obp;
         this.HomeTeam.FirstBaseman.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.FirstBaseman.HittingSeasonStats.obp;
         this.HomeTeam.SecondBaseman.HittingSeasonStats.OBRP = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * this.HomeTeam.SecondBaseman.HittingSeasonStats.obp;
