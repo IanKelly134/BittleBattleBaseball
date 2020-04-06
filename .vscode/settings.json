@@ -1,3 +1,4 @@
 {
-    "appService.deploySubpath": "dist\\BittleBattleBaseball"
+    "appService.deploySubpath": "",
+    "appService.defaultWebAppToDeploy": "/subscriptions/79efe445-75ee-4315-9218-e60544a014a9/resourceGroups/BittleBattleBaseballResourceGroup/providers/Microsoft.Web/sites/BittleBattleBaseball"
 }
