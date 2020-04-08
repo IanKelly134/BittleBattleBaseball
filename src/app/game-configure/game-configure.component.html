@@ -166,49 +166,69 @@
         </div>
     </div>
     <div class="row" style="margin: 0px; padding: 0px;">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-8">
-        </div>
-        <div class="col-sm-2"></div>
-    </div>
-    <div class="row" style="margin: 0px; padding: 0px;">
 
 
-        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block"
                 (click)="GroundBallSingleLeft1()">Ground Ball Single Left 1</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
                 (click)="GroundBallSingleLeft2()">Ground-ball Left 2</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
                 (click)="GroundBallSingleCenter1()">Ground-ball Center 1</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
                 (click)="GroundBallSingleCenter2()">Ground-ball Center 2</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
                 (click)="GroundBallSingleRight1()">Ground-ball Right 1</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
                 (click)="GroundBallSingleRight2()">Ground-ball Right 2</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
-                (click)="FlyBallDoubleLeft1()">Fly-ball Left 1</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
+
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
                 (click)="FlyBallDoubleLeft2()">Fly-ball Left 2</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
                 (click)="FlyBallDoubleLeftCenter()">Fly-ball Left-Center
                 1</button></div>
-        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-success btn-block"
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
                 (click)="FlyBallDoubleRightCenter()">Fly-ball Right-Center
                 1</button></div>
         <div class="col-sm-6 col-m-2 col-lg-1">
-            <button class="btn btn-success btn-block" (click)="FlyBallDoubleRight1()">Fly-ball Right 1</button></div>
+            <button class="btn btn-default btn-block" (click)="FlyBallDoubleRight1()">Fly-ball Right 1</button></div>
 
 
 
+        <div class="col-sm-6 col-m-2 col-lg-1">
+            <button class="btn btn-default btn-block" (click)="FlyBallDoubleRight1()">Fly-Out To Left</button></div>
 
 
         <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-warning btn-block"
                 (click)="FlipHomeAway()">Flip Home/Away</button> </div>
+
+        <!-- Fly Ball Outs -->
         <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
                 (click)="FlyBallOutToFirst()">Fly Out To First</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToSecond()">Fly Out To Second</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToShortstop()">Fly Out To Shortstop</button></div>
         <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block"
                 (click)="FlyBallOutToThird()">Fly Out To Third</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block "
+                (click)="FlyBallOutToLeftField()">Fly Out To Left Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block "
+                (click)="FlyBallOutToCenterField()">Fly Out To Center Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block "
+                (click)="FlyBallOutToRightField()">Fly Out To Right Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block "
+                (click)="FlyBallOutToPitcher()">Fly Out To Pitcher</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block "
+                (click)="FlyBallOutToCatcher()">Fly Out To Catcher</button></div>
+
+        <!-- Doubles -->
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="FlyBallDoubleLeft1()">Fly-ball Double Left 1</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="FlyBallDoubleLeftCenter1()">Fly-ball Double Left-Center 1</button></div>
+
+
+        <!-- Homers -->
         <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
                 (click)="HomerLeftFieldLine()">Homer Left Field Line</button></div>
         <div class="col-sm-6 col-m-2 col-lg-1 done">
@@ -233,6 +253,8 @@
         </div>
 
 
+
+        <!-- Pitches -->
         <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
                 (click)="Pitch()">Fastball</button></div>
         <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
