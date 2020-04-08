@@ -837,7 +837,7 @@ export class GameConfigureComponent implements OnInit {
   }
 
   ExecuteCurrentBatterIsOut() {
-    let diceRoll = this.GenerateRandomNumber(1, 4);
+    let diceRoll = this.GenerateRandomNumber(1, 9);
     //this.showWarning("Dice Roll is " + diceRoll);
 
     if (diceRoll == 1) {
@@ -855,6 +855,26 @@ export class GameConfigureComponent implements OnInit {
     else if (diceRoll == 4) {
       this.FlyBallOutToShortstop();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to shortstop.");
+    }
+    else if (diceRoll == 5) {
+      this.FlyBallOutToLeftField();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to left field.");
+    }
+    else if (diceRoll == 6) {
+      this.FlyBallOutToCenterField();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to center field.");
+    }
+    else if (diceRoll == 7) {
+      this.FlyBallOutToRightField();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to right field.");
+    }
+    else if (diceRoll == 8) {
+      this.FlyBallOutToPitcher();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to pitcher.");
+    }
+    else if (diceRoll == 9) {
+      this.FlyBallOutToCatcher();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to catcher.");
     }
 
     this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
@@ -1679,6 +1699,41 @@ export class GameConfigureComponent implements OnInit {
   flyBallInfieldOut2cp2Y: number = 150 * this.screenPctAdj;
   FlyBallOutToThird() {
     this.FlyBallHit(this.flyBallInfieldOut2cp1X, this.flyBallInfieldOut2cp1Y, this.flyBallInfieldOut2cp2X, this.flyBallInfieldOut2cp2Y, (this.leftFielderX + this.centerFielderX) / 2, this.secondBasemanY + 30);
+  }
+
+  flyBallOutToLeftFieldcp1X: number = 675 * this.screenPctAdj;
+  flyBallOutToLeftFieldcp1Y: number = -100;
+  flyBallOutToLeftFieldcp2X: number = 525 * this.screenPctAdj;
+  flyBallOutToLeftFieldcp2Y: number = -150;
+  FlyBallOutToLeftField() {
+    this.FlyBallHit(this.flyBallOutToLeftFieldcp1X, this.flyBallOutToLeftFieldcp1Y, this.flyBallOutToLeftFieldcp2X,
+      this.flyBallOutToLeftFieldcp2Y, this.leftFielderX + 15, this.leftFielderY);
+  }
+
+  flyBallOutToCenterFieldcp1X: number = 900 * this.screenPctAdj;
+  flyBallOutToCenterFieldcp1Y: number = 0;
+  flyBallOutToCenterFieldcp2X: number = 900 * this.screenPctAdj;
+  flyBallOutToCenterFieldcp2Y: number = -200;
+  FlyBallOutToCenterField() {
+    this.FlyBallHit(this.flyBallOutToCenterFieldcp1X, this.flyBallOutToCenterFieldcp1Y, this.flyBallOutToCenterFieldcp2X,
+      this.flyBallOutToCenterFieldcp2Y, this.centerFielderX + 15, this.centerFielderY);
+  }
+
+  flyBallOutToRightFieldcp1X: number = 1275 * this.screenPctAdj;
+  flyBallOutToRightFieldcp1Y: number = 0;
+  flyBallOutToRightFieldcp2X: number = 1300 * this.screenPctAdj;
+  flyBallOutToRightFieldcp2Y: number = -150;
+  FlyBallOutToRightField() {
+    this.FlyBallHit(this.flyBallOutToRightFieldcp1X, this.flyBallOutToRightFieldcp1Y, this.flyBallOutToRightFieldcp2X,
+      this.flyBallOutToRightFieldcp2Y, this.rightFielderX + 15, this.rightFielderY);
+  }
+
+  FlyBallOutToPitcher() {
+
+  }
+
+  FlyBallOutToCatcher() {
+
   }
 
   BreakingBallRH() {
