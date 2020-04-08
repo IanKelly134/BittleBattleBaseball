@@ -1728,12 +1728,22 @@ export class GameConfigureComponent implements OnInit {
       this.flyBallOutToRightFieldcp2Y, this.rightFielderX + 15, this.rightFielderY);
   }
 
+  flyBallOutToPitcher1cp1X: number = this.pitcherX - 10;
+  flyBallOutToPitcher1cp1Y: number = 10 * this.screenPctAdj;
+  flyBallOutToPitcher1cp2X: number = this.pitcherX + 20;
+  flyBallOutToPitcher1cp2Y: number = 50 * this.screenPctAdj;
   FlyBallOutToPitcher() {
-
+    this.FlyBallHit(this.flyBallOutToPitcher1cp1X, this.flyBallOutToPitcher1cp1Y, this.flyBallOutToPitcher1cp2X, this.flyBallOutToPitcher1cp2Y,
+      this.pitcherX + 20, this.pitcherY);
   }
 
+  flyBallOutToCatcher1cp1X: number = this.pitcherX - 10;
+  flyBallOutToCatcher1cp1Y: number = 10 * this.screenPctAdj;
+  flyBallOutToCatcher1cp2X: number = this.pitcherX + 20;
+  flyBallOutToCatcher1cp2Y: number = 50 * this.screenPctAdj;
   FlyBallOutToCatcher() {
-
+    this.FlyBallHit(this.flyBallOutToCatcher1cp1X, this.flyBallOutToCatcher1cp1Y, this.flyBallOutToCatcher1cp2X, this.flyBallOutToCatcher1cp2Y,
+      this.catcherX + 20, this.catcherY + 30);
   }
 
   BreakingBallRH() {
