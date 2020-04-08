@@ -880,7 +880,7 @@ export class GameConfigureComponent implements OnInit {
     this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
-
+      this.Game.CurrentInning.HomeOuts++;
       if (this.Game.CurrentInning.InningNumber == 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns) {
         swal({
           title: "Game Over!",
@@ -893,7 +893,7 @@ export class GameConfigureComponent implements OnInit {
           });
       }
       else {
-        this.Game.CurrentInning.HomeOuts++;
+
 
         if (this.Game.CurrentInning.HomeOuts == 3) {
           this.Game.NextInning();
