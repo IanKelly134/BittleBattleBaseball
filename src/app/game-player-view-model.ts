@@ -26,6 +26,7 @@ export class GamePlayerViewModel {
         if (pitcher) {
             this.HittingSeasonStats = hitter;
             this.PitchingSeasonStats = pitcher;
+            this.PitchingSeasonStats.PX = 1.0; // Default
             this.Name = this.PitchingSeasonStats.player.playerName;
             this.Id = this.PitchingSeasonStats.player.id;
             this.PlayerImageURL = this.PitchingSeasonStats.player.playerImageURL;

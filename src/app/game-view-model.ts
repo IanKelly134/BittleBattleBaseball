@@ -90,6 +90,8 @@ export class GameViewModel {
         pitcherHitterPlayerSeasonViewModel.player.playerName = this.AwayTeam.Pitcher.Name;
         this.AwayTeam.Pitcher.HittingSeasonStats = pitcherHitterPlayerSeasonViewModel;
         this.AwayTeam.Pitcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * .225;//TODO - FIX.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
+        this.AwayTeam.Catcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Catcher.HittingSeasonStats.obp;
+        this.AwayTeam.FirstBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
         this.AwayTeam.SecondBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.SecondBaseman.HittingSeasonStats.obp;
         this.AwayTeam.Shortstop.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Shortstop.HittingSeasonStats.obp;
         this.AwayTeam.ThirdBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.ThirdBaseman.HittingSeasonStats.obp;
