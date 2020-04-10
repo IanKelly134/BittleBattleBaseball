@@ -122,7 +122,7 @@
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td>{{inning.AwayRunsScored}}</td>
                             </ng-container>
-                            <td>{{Game.AwayRunsScored}}</td>
+                            <td>{{Game.AwayTeamRuns}}</td>
                             <td>{{Game.AwayTeamHits}}</td>
                             <td>{{Game.AwayTeamErrors}}</td>
                         </tr>
@@ -131,7 +131,7 @@
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td> {{inning.HomeRunsScored}}</td>
                             </ng-container>
-                            <td>{{Game.HomeRunsScored}}</td>
+                            <td>{{Game.HomeTeamRuns}}</td>
                             <td>{{Game.HomeTeamHits}}</td>
                             <td>{{Game.HomeTeamErrors}}</td>
                         </tr>
