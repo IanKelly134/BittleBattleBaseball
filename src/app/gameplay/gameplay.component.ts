@@ -615,14 +615,31 @@ export class GameplayComponent implements OnInit {
     }
     else if (diceRoll > 215 && diceRoll <= 783) { //Singles
 
-      let singleHitDiceRoll = this.GenerateRandomNumber(1, 2);
+      let singleHitDiceRoll = this.GenerateRandomNumber(1, 6);
 
       if (singleHitDiceRoll <= 1) {
         this.GroundBallSingleLeft1();
         this.showInfo(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
-      } else {
+      }
+      else if (singleHitDiceRoll == 2) {
         this.GroundBallSingleLeft2();
         this.showInfo(this.Game.CurrentAtBat.Batter.Name + " singles to left.");
+      }
+      else if (singleHitDiceRoll == 3) {
+        this.GroundBallSingleCenter1();
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " singles to center.");
+      }
+      else if (singleHitDiceRoll == 4) {
+        this.GroundBallSingleCenter2();
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " singles to center.");
+      }
+      else if (singleHitDiceRoll == 5) {
+        this.GroundBallSingleRight1();
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " singles to right.");
+      }
+      else if (singleHitDiceRoll == 6) {
+        this.GroundBallSingleRight2();
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " singles to right.");
       }
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.Single;
@@ -1580,7 +1597,7 @@ export class GameplayComponent implements OnInit {
     this.GroundBallHit(this.groundBallSingleRight1X, this.groundBallSingleRight1Y, "Single down the right field line!");
   }
 
-  groundBallSingleRight2X: number = 1450 * this.screenPctAdj;
+  groundBallSingleRight2X: number = 1520 * this.screenPctAdj;
   groundBallSingleRight2Y: number = 720 * this.screenPctAdj;
 
   GroundBallSingleRight2() {
@@ -1758,8 +1775,9 @@ export class GameplayComponent implements OnInit {
 
     this.ctx.beginPath();
     this.ctx.moveTo(this.homePlateX, this.homePlateY);
-    this.ctx.lineWidth = 2;
 
+    this.ctx.lineWidth = 2;
+    this.ctx.lineTo(x, y);
     // line color
     this.ctx.strokeStyle = 'white';
     this.ctx.stroke();
