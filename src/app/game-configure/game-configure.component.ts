@@ -601,8 +601,10 @@ export class GameConfigureComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -611,6 +613,13 @@ export class GameConfigureComponent implements OnInit {
       this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
     }
     else if (diceRoll > 215 && diceRoll <= 783) { //Singles
+
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamHits++;
+      }
+      else {
+        this.Game.AwayTeamHits++;
+      }
 
       let singleHitDiceRoll = this.GenerateRandomNumber(1, 6);
 
@@ -659,8 +668,10 @@ export class GameConfigureComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -674,6 +685,14 @@ export class GameConfigureComponent implements OnInit {
       }
     }
     else if (diceRoll > 783 && diceRoll <= 959) { //Doubles
+
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamHits++;
+      }
+      else {
+        this.Game.AwayTeamHits++;
+      }
+
       let doubleHitDiceRoll = this.GenerateRandomNumber(1, 3);
       basesAdded = 2;
       if (doubleHitDiceRoll <= 1) {
@@ -710,8 +729,10 @@ export class GameConfigureComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -725,6 +746,13 @@ export class GameConfigureComponent implements OnInit {
       }
     }
     else if (diceRoll > 959 && diceRoll <= 975) { //Triples
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamHits++;
+      }
+      else {
+        this.Game.AwayTeamHits++;
+      }
+
       let tripleHitDiceRoll = this.GenerateRandomNumber(1, 2);
       basesAdded = 3;
       if (tripleHitDiceRoll <= 1) {
@@ -756,8 +784,10 @@ export class GameConfigureComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -772,6 +802,13 @@ export class GameConfigureComponent implements OnInit {
       }
     }
     else if (diceRoll > 975) { //Homers
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamHits++;
+      }
+      else {
+        this.Game.AwayTeamHits++;
+      }
+
       let homerDiceRoll = this.GenerateRandomNumber(1, 8);
       basesAdded = 4;
       if (homerDiceRoll <= 1) {
@@ -829,8 +866,10 @@ export class GameConfigureComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");

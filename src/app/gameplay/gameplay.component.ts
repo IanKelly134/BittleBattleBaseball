@@ -604,8 +604,10 @@ export class GameplayComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -614,6 +616,13 @@ export class GameplayComponent implements OnInit {
       this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
     }
     else if (diceRoll > 215 && diceRoll <= 783) { //Singles
+
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamHits++;
+      }
+      else {
+        this.Game.AwayTeamHits++;
+      }
 
       let singleHitDiceRoll = this.GenerateRandomNumber(1, 6);
 
@@ -662,8 +671,10 @@ export class GameplayComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -677,14 +688,27 @@ export class GameplayComponent implements OnInit {
       }
     }
     else if (diceRoll > 783 && diceRoll <= 959) { //Doubles
-      let doubleHitDiceRoll = this.GenerateRandomNumber(1, 2);
+
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamHits++;
+      }
+      else {
+        this.Game.AwayTeamHits++;
+      }
+
+      let doubleHitDiceRoll = this.GenerateRandomNumber(1, 3);
       basesAdded = 2;
       if (doubleHitDiceRoll <= 1) {
-        //this.GroundBallSingleLeft1();
-        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
-      } else {
-        //this.GroundBallSingleLeft2();
-        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " doubles to left.");
+        this.FlyBallDoubleLeft1();
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " doubles on fly to left.");
+      }
+      else if (doubleHitDiceRoll == 2) {
+        this.FlyBallDoubleLeftCenter1();
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " doubles on fly to left-center.");
+      }
+      else {
+        this.GroundBallDoubleLeft1();
+        this.showInfo(this.Game.CurrentAtBat.Batter.Name + " doubles on ground-ball to left.");
       }
 
       this.Game.CurrentAtBat.Result = EnumAtBatResult.Double;
@@ -708,8 +732,10 @@ export class GameplayComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -723,6 +749,13 @@ export class GameplayComponent implements OnInit {
       }
     }
     else if (diceRoll > 959 && diceRoll <= 975) { //Triples
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamHits++;
+      }
+      else {
+        this.Game.AwayTeamHits++;
+      }
+
       let tripleHitDiceRoll = this.GenerateRandomNumber(1, 2);
       basesAdded = 3;
       if (tripleHitDiceRoll <= 1) {
@@ -754,8 +787,10 @@ export class GameplayComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -770,6 +805,13 @@ export class GameplayComponent implements OnInit {
       }
     }
     else if (diceRoll > 975) { //Homers
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.HomeTeamHits++;
+      }
+      else {
+        this.Game.AwayTeamHits++;
+      }
+
       let homerDiceRoll = this.GenerateRandomNumber(1, 8);
       basesAdded = 4;
       if (homerDiceRoll <= 1) {
@@ -827,8 +869,10 @@ export class GameplayComponent implements OnInit {
       for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentInning.HomeRunsScored++;
+          this.Game.HomeTeamRuns++;
         } else {
           this.Game.CurrentInning.AwayRunsScored++;
+          this.Game.AwayTeamRuns++;
         }
 
         this.showSuccess(playerWhoScored.Name + " scored!");
@@ -1612,6 +1656,22 @@ export class GameplayComponent implements OnInit {
   FlyBallDoubleLeft1() {
     this.FlyBallHit(this.flyBallDoubleLeft1cp1X, this.flyBallDoubleLeft1cp1Y, this.flyBallDoubleLeft1cp2X,
       this.flyBallDoubleLeft1cp2Y, this.leftFielderX - 180, this.leftFielderY + 30);
+  }
+
+  flyBallDoubleLeftCenter1cp1X: number = 700 * this.screenPctAdj;
+  flyBallDoubleLeftCenter1cp1Y: number = 0;
+  flyBallDoubleLeftCenter1cp2X: number = 600 * this.screenPctAdj;
+  flyBallDoubleLeftCenter1cp2Y: number = 0;
+  FlyBallDoubleLeftCenter1() {
+    this.FlyBallHit(this.flyBallDoubleLeftCenter1cp1X, this.flyBallDoubleLeftCenter1cp1Y, this.flyBallDoubleLeftCenter1cp2X,
+      this.flyBallDoubleLeftCenter1cp2Y, 400, this.leftFielderY - 25);
+  }
+
+  groundBallDoubleLeft1X: number = 370 * this.screenPctAdj;
+  groundBallDoubleLeft1Y: number = 725 * this.screenPctAdj;
+
+  GroundBallDoubleLeft1() {
+    this.GroundBallHit(this.groundBallDoubleLeft1X, this.groundBallDoubleLeft1Y, "Double down the left field line!");
   }
 
   flyBallDoubleLeft2cp1X: number = 675 * this.screenPctAdj;

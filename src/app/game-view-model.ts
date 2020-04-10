@@ -17,12 +17,12 @@ export class GameViewModel {
     AwayTeam: GameTeamViewModel;
     HomeTeamBench: GamePlayerViewModel[];
     AwayTeamBench: GamePlayerViewModel[];
-    HomeTeamRuns: number;
-    AwayTeamRuns: number;
-    HomeTeamHits: number;
-    AwayTeamHits: number;
-    HomeTeamErrors: number;
-    AwayTeamErrors: number;
+    HomeTeamRuns: number = 0;
+    AwayTeamRuns: number = 0;
+    HomeTeamHits: number = 0;
+    AwayTeamHits: number = 0;
+    HomeTeamErrors: number = 0;
+    AwayTeamErrors: number = 0;
     Innings: GameInningViewModel[];
     PlayByPlays: string[] = [];
     CurrentInning: GameInningViewModel;
