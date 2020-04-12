@@ -3,11 +3,9 @@ import { GamePlayerViewModel } from './game-player-view-model';
 import { GameInningViewModel } from './game-inning-view-model';
 import { TeamSearchResultViewModel } from './team-search-result-view-model';
 import { GameAtBatViewModel } from './game-at-bat-view-model';
-import { Injectable } from '@angular/core';
 import { HitterPlayerSeasonViewModel } from './hitter-player-season-view-model';
 import { PlayerViewModel } from './player-view-model';
 
-@Injectable()
 export class GameViewModel {
 
     GameDate: Date;
@@ -60,6 +58,10 @@ export class GameViewModel {
     }
 
     StartGame() {
+        this.PlayByPlays = [];
+        this.RunnerOnFirst = null;
+        this.RunnerOnSecond = null;
+        this.RunnerOnThird = null;
         this.SetBattersOBRPAccordingToNewPitcherWHIP();
 
         this.HomeTeam.NextBatter = this.HomeTeam.GetBatterAtLineupPosition(1);

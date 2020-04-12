@@ -65,12 +65,12 @@
 
             <table
                 *ngIf="!SearchingHomeTeams && !GameSetup.HomeTeamSelection && HomeSearchResults && HomeSearchResults.length > 0"
-                class="table table-bordered table-dark table-hover table-condensed"
+                class="table table-bordered table-dark table-hover table-responsive-sm"
                 style="margin-top: 20px; opacity: 0.7;">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Ballpark</th>
+                        <th class="d-none d-md-block">Ballpark</th>
                         <th>League</th>
                         <th></th>
                     </tr>
@@ -78,7 +78,7 @@
                 <tbody>
                     <tr *ngFor="let homeTeamSearchResult of HomeSearchResults">
                         <td>{{homeTeamSearchResult.teamName}}</td>
-                        <td>{{homeTeamSearchResult.ballpark}}</td>
+                        <td class="d-none d-md-block">{{homeTeamSearchResult.ballpark}}</td>
                         <td class="text-center">{{homeTeamSearchResult.league}}</td>
                         <td class="text-center"><button class="btn btn-danger"
                                 (click)="SetHomeTeamSelection(homeTeamSearchResult)">Select</button></td>
@@ -91,11 +91,12 @@
             <div *ngIf="SearchingAwayTeams" class="loader"></div>
             <table
                 *ngIf="!SearchingAwayTeams && !GameSetup.AwayTeamSelection && AwaySearchResults && AwaySearchResults.length > 0"
-                class="table table-bordered table-dark table-hover" style="margin-top: 20px; opacity: 0.7;">
+                class="table table-bordered table-dark table-hover table-responsive-sm"
+                style="margin-top: 20px; opacity: 0.7;">
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Ballpark</th>
+                        <th class="d-none d-md-block">Ballpark</th>
                         <th>League</th>
                         <th></th>
                     </tr>
@@ -103,7 +104,7 @@
                 <tbody>
                     <tr *ngFor="let awayTeamSearchResult of AwaySearchResults">
                         <td>{{awayTeamSearchResult.teamName}}</td>
-                        <td>{{awayTeamSearchResult.ballpark}}</td>
+                        <td class="d-none d-md-block">{{awayTeamSearchResult.ballpark}}</td>
                         <td class="text-center">{{awayTeamSearchResult.league}}</td>
                         <td class="text-center"><button class="btn btn-primary"
                                 (click)="SetAwayTeamSelection(awayTeamSearchResult)">Select</button></td>

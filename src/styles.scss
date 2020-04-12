@@ -143,8 +143,19 @@ td {
 
   .row {
     padding: 2px !important;
-    margin: 2px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
  }
+
+ .container-fluid{
+     padding: 2px !important;
+     margin: 0px !important;
+ }
+
+ .container{
+    padding: 2px !important;
+    margin: 0px !important;
+}
 
  .done {
      border: 3px solid green;
