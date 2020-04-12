@@ -1018,8 +1018,38 @@ export class GameplayComponent implements OnInit {
     img.src = '../assets/images/GenericField2.png';
     img.onload = () => {
       this.ctx.drawImage(img, 0, 0, this.canvasWidth, this.canvasHeight);
-      this.SetDefensivePlayers();
-      this.DrawOffensivePlayers();
+
+      setTimeout(() => {
+        this.DrawOuts();
+        this.SetDefensivePlayers();
+        this.DrawOffensivePlayers();
+      }, 100);
+    }
+  }
+
+  DrawOuts() {
+    //var canvas = document.getElementById('myCanvas');
+    //var context = canvas.getContext('2d');
+    let centerX: number = 100;
+    let centerY: number = 570;
+    let radius = 5;
+    let outs = this.Game.CurrentInning.IsBottomOfInning ? this.Game.CurrentInning.HomeOuts : this.Game.CurrentInning.AwayOuts;
+    for (let i = 1; i <= outs; i++) {
+      this.ctx.beginPath();
+      this.ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      this.ctx.fillStyle = 'white';
+      this.ctx.fill();
+      this.ctx.lineWidth = 5;
+      this.ctx.strokeStyle = 'white';
+      this.ctx.stroke();
+      centerX += 20;
+    }
+
+    if (outs > 0) {
+      this.ctx.font = '14pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText("OUTS", 110, 550);
     }
   }
 
