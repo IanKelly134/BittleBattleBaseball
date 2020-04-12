@@ -1062,7 +1062,7 @@ export class GameplayComponent implements OnInit {
       img.src = '../assets/images/emptyHeadshot.jpeg';
     }
 
-    if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "r") {
+    if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats && this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "r") {
       img.onload = () => {
         this.ctx.beginPath();
         this.ctx.rect(this.rightHandedBatterX, this.rightHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -1079,8 +1079,10 @@ export class GameplayComponent implements OnInit {
         this.ctx.textAlign = 'center';
         this.ctx.fillStyle = 'white';
         this.ctx.fillText(img.title, this.rightHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.rightHandedBatterY - 5));
+
+        this.DrawBatterImgData(img);
       }
-    } else if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "l") {
+    } else if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats && this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "l") {
       img.onload = () => {
         this.ctx.beginPath();
         this.ctx.rect(this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -1097,6 +1099,10 @@ export class GameplayComponent implements OnInit {
         this.ctx.textAlign = 'center';
         this.ctx.fillStyle = 'white';
         this.ctx.fillText(img.title, this.leftHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.leftHandedBatterY - 5));
+
+        this.DrawBatterImgData(img);
+
+
       }
     } else {
 
@@ -1118,9 +1124,36 @@ export class GameplayComponent implements OnInit {
         this.ctx.textAlign = 'center';
         this.ctx.fillStyle = 'white';
         this.ctx.fillText(img.title, this.leftHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.leftHandedBatterY - 5));
+
+        this.DrawBatterImgData(img);
       }
     }
 
+  }
+
+  private DrawBatterImgData(img: HTMLImageElement) {
+    this.ctx.font = '12pt Calibri';
+    this.ctx.textAlign = 'right';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText("BATTER", 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 625);
+    this.ctx.fillText(img.title, 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 650);
+    this.ctx.fillText(this.Game.CurrentAtBat.Batter.HittingSeasonStats.season + " STATS", 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 690);
+
+
+    this.ctx.fillText(this.FormatPct(this.Game.CurrentAtBat.Batter.HittingSeasonStats.avg) + " " +
+      this.Game.CurrentAtBat.Batter.HittingSeasonStats.hr + "HR " +
+      this.Game.CurrentAtBat.Batter.HittingSeasonStats.rbi + "RBI"
+      , 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 715);
+
+
+    //Draw Current Batter Info
+    this.ctx.drawImage(img,
+      1080, 600, this.playerFieldImgAvatarWidth * 2, this.playerFieldImgAvatarHeight * 2);
+  }
+
+  private FormatPct(pct: number): string {
+    let str = pct.toString();
+    return str.replace(/^0+([^\d])/, "$1");
   }
 
   DrawRunnerOnFirst() {
@@ -1325,6 +1358,22 @@ export class GameplayComponent implements OnInit {
       this.ctx.textAlign = 'center';
       this.ctx.fillStyle = 'white';
       this.ctx.fillText(img.title, this.pitcherX + (this.playerFieldImgAvatarWidth / 2), (this.pitcherY - 5));
+
+      //Draw Current Pitcher Info
+      this.ctx.drawImage(img,
+        80, 600, this.playerFieldImgAvatarWidth * 2, this.playerFieldImgAvatarHeight * 2);
+
+      this.ctx.font = '12pt Calibri';
+      this.ctx.textAlign = 'left';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText("PITCHER", 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 625);
+      this.ctx.fillText(img.title, 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 650);
+      this.ctx.fillText(this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.season + " STATS", 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 690);
+
+      this.ctx.fillText(this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.wins + "-" + this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.losses + " " +
+        this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.era + "ERA " +
+        this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.whip + "WHIP"
+        , 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 715);
     }
   }
 

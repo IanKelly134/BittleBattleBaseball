@@ -14,6 +14,7 @@ import { PlayerViewModel } from '../player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert';
+import { BattingAvgPipePipe } from '../batting-avg-pipe.pipe';
 
 @Component({
   selector: 'app-game-configure',
@@ -174,6 +175,7 @@ export class GameConfigureComponent implements OnInit {
     pitcherHitterPlayerSeasonViewModel.rbi = 100;
     pitcherHitterPlayerSeasonViewModel.sb = 20;
     pitcherHitterPlayerSeasonViewModel.bb = 100;
+    pitcherHitterPlayerSeasonViewModel.season = 2011;
     pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     pitcherHitterPlayerSeasonViewModel.player.playerName = "Adam Wainwright";
 
@@ -181,6 +183,9 @@ export class GameConfigureComponent implements OnInit {
     pitherPitcherPlayerSeasonViewModel.era = 3.39;
     pitherPitcherPlayerSeasonViewModel.fldPct = .989;
     pitherPitcherPlayerSeasonViewModel.whip = 1.23;
+    pitherPitcherPlayerSeasonViewModel.wins = 19;
+    pitherPitcherPlayerSeasonViewModel.losses = 7;
+    pitherPitcherPlayerSeasonViewModel.season = 2011;
     pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Adam Wainwright";
     pitherPitcherPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/425794.jpg";
@@ -200,6 +205,7 @@ export class GameConfigureComponent implements OnInit {
     catcherHitterPlayerSeasonViewModel.rbi = 59;
     catcherHitterPlayerSeasonViewModel.sb = 20;
     catcherHitterPlayerSeasonViewModel.bb = 100;
+    catcherHitterPlayerSeasonViewModel.season = 2011;
     catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     catcherHitterPlayerSeasonViewModel.player.playerName = "Yadi Molina";
     catcherHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/425877.jpg";
@@ -219,6 +225,7 @@ export class GameConfigureComponent implements OnInit {
     firstBaseHitterPlayerSeasonViewModel.rbi = 110;
     firstBaseHitterPlayerSeasonViewModel.sb = 20;
     firstBaseHitterPlayerSeasonViewModel.bb = 100;
+    firstBaseHitterPlayerSeasonViewModel.season = 2011;
     firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     firstBaseHitterPlayerSeasonViewModel.player.playerName = "Albert Pujols";
     firstBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/405395.jpg";
@@ -238,6 +245,7 @@ export class GameConfigureComponent implements OnInit {
     secondBaseHitterPlayerSeasonViewModel.rbi = 114;
     secondBaseHitterPlayerSeasonViewModel.sb = 20;
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
+    secondBaseHitterPlayerSeasonViewModel.season = 2011;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     secondBaseHitterPlayerSeasonViewModel.player.playerName = "Rogers Hornsby";
     secondBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/116156.jpg";
@@ -257,6 +265,7 @@ export class GameConfigureComponent implements OnInit {
     thirdBaseHitterPlayerSeasonViewModel.rbi = 102;
     thirdBaseHitterPlayerSeasonViewModel.sb = 20;
     thirdBaseHitterPlayerSeasonViewModel.bb = 100;
+    thirdBaseHitterPlayerSeasonViewModel.season = 2011;
     thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Scott Rolen";
     thirdBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/121409.jpg";
@@ -276,6 +285,7 @@ export class GameConfigureComponent implements OnInit {
     shortstopHitterPlayerSeasonViewModel.rbi = 50;
     shortstopHitterPlayerSeasonViewModel.sb = 20;
     shortstopHitterPlayerSeasonViewModel.bb = 100;
+    shortstopHitterPlayerSeasonViewModel.season = 2011;
     shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     shortstopHitterPlayerSeasonViewModel.player.playerName = "Ozzie Smith";
     shortstopHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/122439.jpg";
@@ -295,6 +305,7 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.rbi = 104;
     leftfielderHitterPlayerSeasonViewModel.sb = 20;
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
+    leftfielderHitterPlayerSeasonViewModel.season = 2011;
     leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     leftfielderHitterPlayerSeasonViewModel.player.playerName = "Matt Holliday";
     leftfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/407812.jpg";
@@ -314,6 +325,7 @@ export class GameConfigureComponent implements OnInit {
     centerfielderHitterPlayerSeasonViewModel.rbi = 56;
     centerfielderHitterPlayerSeasonViewModel.sb = 20;
     centerfielderHitterPlayerSeasonViewModel.bb = 100;
+    centerfielderHitterPlayerSeasonViewModel.season = 2011;
     centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     centerfielderHitterPlayerSeasonViewModel.player.playerName = "Lou Brock";
     centerfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/111495.jpg";
@@ -333,6 +345,7 @@ export class GameConfigureComponent implements OnInit {
     rightfielderHitterPlayerSeasonViewModel.rbi = 100;
     rightfielderHitterPlayerSeasonViewModel.sb = 20;
     rightfielderHitterPlayerSeasonViewModel.bb = 100;
+    rightfielderHitterPlayerSeasonViewModel.season = 2011;
     rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     rightfielderHitterPlayerSeasonViewModel.player.playerName = "Stan Musial";
     rightfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/119602.jpg";
@@ -358,6 +371,7 @@ export class GameConfigureComponent implements OnInit {
     pitcherHitterPlayerSeasonViewModel.rbi = 104;
     pitcherHitterPlayerSeasonViewModel.sb = 20;
     pitcherHitterPlayerSeasonViewModel.bb = 100;
+    pitcherHitterPlayerSeasonViewModel.season = 1998;
     pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     pitcherHitterPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
 
@@ -365,6 +379,9 @@ export class GameConfigureComponent implements OnInit {
     pitherPitcherPlayerSeasonViewModel.era = 4.67;
     pitherPitcherPlayerSeasonViewModel.fldPct = .989;
     pitherPitcherPlayerSeasonViewModel.whip = 1.374;
+    pitherPitcherPlayerSeasonViewModel.season = 1998;
+    pitherPitcherPlayerSeasonViewModel.wins = 14;
+    pitherPitcherPlayerSeasonViewModel.losses = 9;
     pitherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     pitherPitcherPlayerSeasonViewModel.player.playerName = "Pedro Astacio";
     pitherPitcherPlayerSeasonViewModel.player.playerImageURL = "http://bittlebattlebaseball.azurewebsites.net/assets/images/emptyHeadshot.jpeg";
@@ -384,6 +401,7 @@ export class GameConfigureComponent implements OnInit {
     catcherHitterPlayerSeasonViewModel.rbi = 61;
     catcherHitterPlayerSeasonViewModel.sb = 20;
     catcherHitterPlayerSeasonViewModel.bb = 100;
+    catcherHitterPlayerSeasonViewModel.season = 1998;
     catcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     catcherHitterPlayerSeasonViewModel.player.playerName = "Yorvit Torrealba";
     catcherHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/150275.jpg";
@@ -403,6 +421,7 @@ export class GameConfigureComponent implements OnInit {
     firstBaseHitterPlayerSeasonViewModel.rbi = 101;
     firstBaseHitterPlayerSeasonViewModel.sb = 20;
     firstBaseHitterPlayerSeasonViewModel.bb = 100;
+    firstBaseHitterPlayerSeasonViewModel.season = 1998;
     firstBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     firstBaseHitterPlayerSeasonViewModel.player.playerName = "Todd Helton";
     firstBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/115732.jpg";
@@ -423,6 +442,7 @@ export class GameConfigureComponent implements OnInit {
     secondBaseHitterPlayerSeasonViewModel.rbi = 50;
     secondBaseHitterPlayerSeasonViewModel.sb = 20;
     secondBaseHitterPlayerSeasonViewModel.bb = 100;
+    secondBaseHitterPlayerSeasonViewModel.season = 1998;
     secondBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     secondBaseHitterPlayerSeasonViewModel.player.playerName = "DJ LeMahieu";
     secondBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/518934.jpg";
@@ -443,6 +463,7 @@ export class GameConfigureComponent implements OnInit {
     thirdBaseHitterPlayerSeasonViewModel.rbi = 105;
     thirdBaseHitterPlayerSeasonViewModel.sb = 20;
     thirdBaseHitterPlayerSeasonViewModel.bb = 100;
+    thirdBaseHitterPlayerSeasonViewModel.season = 1998;
     thirdBaseHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     thirdBaseHitterPlayerSeasonViewModel.player.playerName = "Nolan Arenado";
     thirdBaseHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/571448.jpg";
@@ -462,6 +483,7 @@ export class GameConfigureComponent implements OnInit {
     shortstopHitterPlayerSeasonViewModel.rbi = 60;
     shortstopHitterPlayerSeasonViewModel.sb = 20;
     shortstopHitterPlayerSeasonViewModel.bb = 100;
+    shortstopHitterPlayerSeasonViewModel.season = 1998;
     shortstopHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     shortstopHitterPlayerSeasonViewModel.player.playerName = "Troy Tulowitzki";
     shortstopHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/453064.jpg";
@@ -481,6 +503,7 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.rbi = 100;
     leftfielderHitterPlayerSeasonViewModel.sb = 20;
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
+    leftfielderHitterPlayerSeasonViewModel.season = 1998;
     leftfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     leftfielderHitterPlayerSeasonViewModel.player.playerName = "Matt Holliday";
     leftfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/407812.jpg";
@@ -500,6 +523,7 @@ export class GameConfigureComponent implements OnInit {
     centerfielderHitterPlayerSeasonViewModel.rbi = 57;
     centerfielderHitterPlayerSeasonViewModel.sb = 20;
     centerfielderHitterPlayerSeasonViewModel.bb = 100;
+    centerfielderHitterPlayerSeasonViewModel.season = 1998;
     centerfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     centerfielderHitterPlayerSeasonViewModel.player.playerName = "Charlie Blackmon";
     centerfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/453568.jpg";
@@ -519,6 +543,7 @@ export class GameConfigureComponent implements OnInit {
     rightfielderHitterPlayerSeasonViewModel.rbi = 90;
     rightfielderHitterPlayerSeasonViewModel.sb = 20;
     rightfielderHitterPlayerSeasonViewModel.bb = 100;
+    rightfielderHitterPlayerSeasonViewModel.season = 1998;
     rightfielderHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     rightfielderHitterPlayerSeasonViewModel.player.playerName = "Larry Walker";
     rightfielderHitterPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/123833.jpg";
@@ -1060,7 +1085,7 @@ export class GameConfigureComponent implements OnInit {
       img.src = '../assets/images/emptyHeadshot.jpeg';
     }
 
-    if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "r") {
+    if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats && this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "r") {
       img.onload = () => {
         this.ctx.beginPath();
         this.ctx.rect(this.rightHandedBatterX, this.rightHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -1077,8 +1102,10 @@ export class GameConfigureComponent implements OnInit {
         this.ctx.textAlign = 'center';
         this.ctx.fillStyle = 'white';
         this.ctx.fillText(img.title, this.rightHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.rightHandedBatterY - 5));
+
+        this.DrawBatterImgData(img);
       }
-    } else if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "l") {
+    } else if (this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats && this.Game.CurrentAtBat.Batter.HittingSeasonStats.player.bats.toLowerCase() == "l") {
       img.onload = () => {
         this.ctx.beginPath();
         this.ctx.rect(this.leftHandedBatterX, this.leftHandedBatterY, this.playerFieldImgAvatarWidth, this.playerFieldImgAvatarHeight);
@@ -1095,6 +1122,10 @@ export class GameConfigureComponent implements OnInit {
         this.ctx.textAlign = 'center';
         this.ctx.fillStyle = 'white';
         this.ctx.fillText(img.title, this.leftHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.leftHandedBatterY - 5));
+
+        this.DrawBatterImgData(img);
+
+
       }
     } else {
 
@@ -1116,9 +1147,36 @@ export class GameConfigureComponent implements OnInit {
         this.ctx.textAlign = 'center';
         this.ctx.fillStyle = 'white';
         this.ctx.fillText(img.title, this.leftHandedBatterX + (this.playerFieldImgAvatarWidth / 2), (this.leftHandedBatterY - 5));
+
+        this.DrawBatterImgData(img);
       }
     }
 
+  }
+
+  private DrawBatterImgData(img: HTMLImageElement) {
+    this.ctx.font = '12pt Calibri';
+    this.ctx.textAlign = 'right';
+    this.ctx.fillStyle = 'white';
+    this.ctx.fillText("BATTER", 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 625);
+    this.ctx.fillText(img.title, 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 650);
+    this.ctx.fillText(this.Game.CurrentAtBat.Batter.HittingSeasonStats.season + " STATS", 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 690);
+
+
+    this.ctx.fillText(this.FormatPct(this.Game.CurrentAtBat.Batter.HittingSeasonStats.avg) + " " +
+      this.Game.CurrentAtBat.Batter.HittingSeasonStats.hr + "HR " +
+      this.Game.CurrentAtBat.Batter.HittingSeasonStats.rbi + "RBI"
+      , 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 715);
+
+
+    //Draw Current Batter Info
+    this.ctx.drawImage(img,
+      1080, 600, this.playerFieldImgAvatarWidth * 2, this.playerFieldImgAvatarHeight * 2);
+  }
+
+  private FormatPct(pct: number): string {
+    let str = pct.toString();
+    return str.replace(/^0+([^\d])/, "$1");
   }
 
   DrawRunnerOnFirst() {
@@ -1324,13 +1382,21 @@ export class GameConfigureComponent implements OnInit {
       this.ctx.fillStyle = 'white';
       this.ctx.fillText(img.title, this.pitcherX + (this.playerFieldImgAvatarWidth / 2), (this.pitcherY - 5));
 
+      //Draw Current Pitcher Info
       this.ctx.drawImage(img,
-        80, 600, this.playerFieldImgAvatarWidth * 3, this.playerFieldImgAvatarHeight * 3);
+        80, 600, this.playerFieldImgAvatarWidth * 2, this.playerFieldImgAvatarHeight * 2);
 
       this.ctx.font = '12pt Calibri';
-      this.ctx.textAlign = 'center';
+      this.ctx.textAlign = 'left';
       this.ctx.fillStyle = 'white';
-      this.ctx.fillText("Pitching - " + img.title, 80 + ((this.playerFieldImgAvatarWidth * 3) / 2), (600 - 5));
+      this.ctx.fillText("PITCHER", 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 625);
+      this.ctx.fillText(img.title, 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 650);
+      this.ctx.fillText(this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.season + " STATS", 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 690);
+
+      this.ctx.fillText(this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.wins + "-" + this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.losses + " " +
+        this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.era + "ERA " +
+        this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.whip + "WHIP"
+        , 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 715);
     }
   }
 
