@@ -1323,6 +1323,14 @@ export class GameConfigureComponent implements OnInit {
       this.ctx.textAlign = 'center';
       this.ctx.fillStyle = 'white';
       this.ctx.fillText(img.title, this.pitcherX + (this.playerFieldImgAvatarWidth / 2), (this.pitcherY - 5));
+
+      this.ctx.drawImage(img,
+        80, 600, this.playerFieldImgAvatarWidth * 3, this.playerFieldImgAvatarHeight * 3);
+
+      this.ctx.font = '12pt Calibri';
+      this.ctx.textAlign = 'center';
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillText("Pitching - " + img.title, 80 + ((this.playerFieldImgAvatarWidth * 3) / 2), (600 - 5));
     }
   }
 
