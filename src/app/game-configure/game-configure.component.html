@@ -48,6 +48,7 @@
                     </thead>
                     <tbody>
                         <tr>
+
                             <td>{{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td>{{inning.AwayRunsScored}}</td>
@@ -68,8 +69,6 @@
                     </tbody>
                 </table>
             </div>
-
-
             <br />
             <canvas id="ballparkCanvas" style="max-width: 100%; margin-top: -10%;" [width]="canvasWidth"
                 [height]="canvasHeight">
