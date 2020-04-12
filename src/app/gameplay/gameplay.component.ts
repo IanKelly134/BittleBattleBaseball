@@ -4,7 +4,6 @@ import { MLBYearByYearBattingStatsViewModel } from '../mlbyear-by-year-batting-s
 import { MLBYearByYearPitchingStatsViewModel } from '../mlbyear-by-year-pitching-stats-view-model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MLBYearByYearLeagueStatsServiceService } from '../mlbyear-by-year-league-stats-service.service';
-import { TeamViewModel } from '../team-view-model';
 import { GameTeamViewModel } from '../game-team-view-model';
 import { TeamSearchResultViewModel } from '../team-search-result-view-model';
 import { GamePlayerViewModel } from '../game-player-view-model';
@@ -587,13 +586,17 @@ export class GameplayComponent implements OnInit {
       this.Game.CurrentAtBat.Result = EnumAtBatResult.Walk;
 
       if (this.Game.RunnerOnThird) {
-        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
-        this.Game.RunnerOnThird = null;
+        if (this.Game.RunnerOnSecond && this.Game.RunnerOnFirst) {
+          this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+          this.Game.RunnerOnThird = null;
+        }
       }
 
       if (this.Game.RunnerOnSecond) {
-        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
-        this.Game.RunnerOnSecond = null;
+        if (this.Game.RunnerOnFirst) {
+          this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+          this.Game.RunnerOnSecond = null;
+        }
       }
 
       if (this.Game.RunnerOnFirst) {
@@ -896,7 +899,7 @@ export class GameplayComponent implements OnInit {
   }
 
   ExecuteCurrentBatterIsOut() {
-    let diceRoll = this.GenerateRandomNumber(1, 9);
+    let diceRoll = this.GenerateRandomNumber(1, 11);
     //this.showWarning("Dice Roll is " + diceRoll);
 
     if (diceRoll == 1) {
@@ -934,6 +937,14 @@ export class GameplayComponent implements OnInit {
     else if (diceRoll == 9) {
       this.FlyBallOutToCatcher();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to catcher.");
+    }
+    else if (diceRoll == 10) {
+      this.FlyBallOutToCatcher();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " strikes out swinging.");
+    }
+    else if (diceRoll == 11) {
+      this.FlyBallOutToCatcher();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " strikes out looking.");
     }
 
     this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
