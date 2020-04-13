@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { GameViewModel } from '../game-view-model';
 import { MLBYearByYearBattingStatsViewModel } from '../mlbyear-by-year-batting-stats-view-model';
 import { MLBYearByYearPitchingStatsViewModel } from '../mlbyear-by-year-pitching-stats-view-model';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { MLBYearByYearLeagueStatsServiceService } from '../mlbyear-by-year-league-stats-service.service';
-import { TeamViewModel } from '../team-view-model';
 import { GameTeamViewModel } from '../game-team-view-model';
 import { TeamSearchResultViewModel } from '../team-search-result-view-model';
 import { GamePlayerViewModel } from '../game-player-view-model';
@@ -14,7 +13,6 @@ import { PlayerViewModel } from '../player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert';
-import { BattingAvgPipePipe } from '../batting-avg-pipe.pipe';
 
 @Component({
   selector: 'app-game-configure',
@@ -100,22 +98,12 @@ export class GameConfigureComponent implements OnInit {
   ngAfterViewInit(): void {
 
     this.SetPlayingField();
-
-    // swal({
-    //   title: "Welcome to " + this.Game.Ballpark,
-    //   text: "Today's matchup between the " + this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " and the " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + ". Play Ball!",
-    //   icon: "success",
-    //   dangerMode: true,
-    // })
-    //   .then(willDelete => {
-
-    //   });
   }
 
   ngOnInit() {
   }
 
-  constructor(private router: Router, mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService, private toastr: ToastrService) //, private toastr: ToastrService
+  constructor(mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService, private toastr: ToastrService) //, private toastr: ToastrService
   {
     //console.log(this.router.getCurrentNavigation().extras.state);
     document.body.style.backgroundImage = "url('../assets/images/baseball-background6.jpg')";
@@ -599,7 +587,6 @@ export class GameConfigureComponent implements OnInit {
 
   ExecuteCurrentBatterReachedBase() {
     let diceRoll = this.GenerateRandomNumber(1, 1000);
-
     let basesAdded = 1;
     //TODO - Numbers based off of 2019 totals, need to pull in stats for year of batter
     if (diceRoll <= 215) { //Walks
@@ -981,7 +968,7 @@ export class GameConfigureComponent implements OnInit {
           icon: "success",
           dangerMode: true,
         })
-          .then(willDelete => {
+          .then(() => {
 
           });
       }
@@ -1009,7 +996,7 @@ export class GameConfigureComponent implements OnInit {
             icon: "success",
             dangerMode: true,
           })
-            .then(willDelete => {
+            .then(() => {
 
             });
         } else {
@@ -1724,35 +1711,35 @@ export class GameConfigureComponent implements OnInit {
   groundBallSingleLeft1Y: number = 725 * this.screenPctAdj;
 
   GroundBallSingleLeft1() {
-    this.GroundBallHit(this.groundBallSingleLeft1X, this.groundBallSingleLeft1Y, "Single down the left field line!");
+    this.GroundBallHit(this.groundBallSingleLeft1X, this.groundBallSingleLeft1Y);
   }
 
   groundBallHitLeft2X: number = 639 * this.screenPctAdj;
   groundBallHitLeft2Y: number = 710 * this.screenPctAdj;
 
   GroundBallSingleLeft2() {
-    this.GroundBallHit(this.groundBallHitLeft2X, this.groundBallHitLeft2Y, "Single to left field!");
+    this.GroundBallHit(this.groundBallHitLeft2X, this.groundBallHitLeft2Y);
   }
 
   groundBallDoubleLeft1X: number = 370 * this.screenPctAdj;
   groundBallDoubleLeft1Y: number = 725 * this.screenPctAdj;
 
   GroundBallDoubleLeft1() {
-    this.GroundBallHit(this.groundBallDoubleLeft1X, this.groundBallDoubleLeft1Y, "Double down the left field line!");
+    this.GroundBallHit(this.groundBallDoubleLeft1X, this.groundBallDoubleLeft1Y);
   }
 
   groundBallSingleCenter1X: number = 875 * this.screenPctAdj;
   groundBallSingleCenter1Y: number = 680 * this.screenPctAdj;
 
   GroundBallSingleCenter1() {
-    this.GroundBallHit(this.groundBallSingleCenter1X, this.groundBallSingleCenter1Y, "Base Hit to center!");
+    this.GroundBallHit(this.groundBallSingleCenter1X, this.groundBallSingleCenter1Y);
   }
 
   groundBallSingleCenter2X: number = 1025 * this.screenPctAdj;
   groundBallSingleCenter2Y: number = 680 * this.screenPctAdj;
 
   GroundBallSingleCenter2() {
-    this.GroundBallHit(this.groundBallSingleCenter2X, this.groundBallSingleCenter2Y, "Single to center field!");
+    this.GroundBallHit(this.groundBallSingleCenter2X, this.groundBallSingleCenter2Y);
   }
 
   groundBallSingleRight1X: number = 1250 * this.screenPctAdj;
@@ -1760,14 +1747,14 @@ export class GameConfigureComponent implements OnInit {
 
   GroundBallSingleRight1() {
 
-    this.GroundBallHit(this.groundBallSingleRight1X, this.groundBallSingleRight1Y, "Single down the right field line!");
+    this.GroundBallHit(this.groundBallSingleRight1X, this.groundBallSingleRight1Y);
   }
 
   groundBallSingleRight2X: number = 1520 * this.screenPctAdj;
   groundBallSingleRight2Y: number = 720 * this.screenPctAdj;
 
   GroundBallSingleRight2() {
-    this.GroundBallHit(this.groundBallSingleRight2X, this.groundBallSingleRight2Y, "Single to right field!");
+    this.GroundBallHit(this.groundBallSingleRight2X, this.groundBallSingleRight2Y);
   }
 
   flyBallDoubleLeft1cp1X: number = 400 * this.screenPctAdj;
@@ -1943,7 +1930,7 @@ export class GameConfigureComponent implements OnInit {
     // this.PlayPitchSound();
   }
 
-  GroundBallHit(x: number, y: number, desc: string) {
+  GroundBallHit(x: number, y: number) {
     // this.SetPlayingField();
     this.PlayBatHittingBallSound();
 
