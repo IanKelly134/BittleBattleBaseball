@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { GameViewModel } from '../game-view-model';
 import { MLBYearByYearBattingStatsViewModel } from '../mlbyear-by-year-batting-stats-view-model';
 import { MLBYearByYearPitchingStatsViewModel } from '../mlbyear-by-year-pitching-stats-view-model';
-import { Router } from '@angular/router';
 import { MLBYearByYearLeagueStatsServiceService } from '../mlbyear-by-year-league-stats-service.service';
 import { GameTeamViewModel } from '../game-team-view-model';
 import { TeamSearchResultViewModel } from '../team-search-result-view-model';
@@ -112,23 +111,44 @@ export class GameConfigureComponent implements OnInit {
     //var parsedGame = ) as GameViewModel;
     //Object.assign(this.Game, JSON.parse(localStorage.getItem('bittlebattlebaseball_game_instance' + this.GameId)));
 
-
     this.Game = this.BuildMockGame();
+
+    try {
+      mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
+        this._leagueAwayPitchingStats = data;
+      });
+    }
+    catch {
+      console.log("Can't get pitching league stats for Away Team...");
+    }
+
+    try {
+      mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
+        this._leagueHomePitchingStats = data;
+      });
+    }
+    catch {
+      console.log("Can't get pitching league stats for Home Team...");
+    }
 
     mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
       this._leagueHomeBattingStats = data;
-    });
-    mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
-      this._leagueAwayBattingStats = data;
-    });
-    mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
-      this._leagueHomePitchingStats = data;
-    });
-    mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
-      this._leagueAwayPitchingStats = data;
+
+      mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
+        this._leagueAwayBattingStats = data;
+
+        this.Game.StartGame();
+      });
     });
 
-    this.Game.StartGame();
+
+
+
+
+
+
+
+
   }
 
   //***
@@ -586,7 +606,16 @@ export class GameConfigureComponent implements OnInit {
   }
 
   ExecuteCurrentBatterReachedBase() {
-    let diceRoll = this.GenerateRandomNumber(1, 1000);
+    let typeOfReachedBase = this.GenerateRandomNumber(1, 1000);
+    let diceRoll: Number;
+    if (this.Game.CurrentInning.IsBottomOfInning) {
+      let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueHomeBattingStats.sLG;
+      diceRoll = addedPower * typeOfReachedBase;
+    } else {
+      let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueAwayBattingStats.sLG;
+      diceRoll = addedPower * typeOfReachedBase;
+    }
+
     let basesAdded = 1;
     //TODO - Numbers based off of 2019 totals, need to pull in stats for year of batter
     if (diceRoll <= 215) { //Walks

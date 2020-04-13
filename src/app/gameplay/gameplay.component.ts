@@ -128,20 +128,33 @@ export class GameplayComponent implements OnInit {
     this.Game = game;
     //  this.Game = this.BuildMockGame();
 
+    try {
+      mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
+        this._leagueAwayPitchingStats = data;
+      });
+    }
+    catch {
+      console.log("Can't get pitching league stats for Away Team...");
+    }
+
+    try {
+      mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
+        this._leagueHomePitchingStats = data;
+      });
+    }
+    catch {
+      console.log("Can't get pitching league stats for Home Team...");
+    }
+
     mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
       this._leagueHomeBattingStats = data;
-    });
-    mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
-      this._leagueAwayBattingStats = data;
-    });
-    mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
-      this._leagueHomePitchingStats = data;
-    });
-    mlbYearByYearLeagueStatsServiceService.GetLeaguePitchingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
-      this._leagueAwayPitchingStats = data;
-    });
 
-    this.Game.StartGame();
+      mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
+        this._leagueAwayBattingStats = data;
+
+        this.Game.StartGame();
+      });
+    });
   }
 
   //***
@@ -575,7 +588,15 @@ export class GameplayComponent implements OnInit {
   }
 
   ExecuteCurrentBatterReachedBase() {
-    let diceRoll = this.GenerateRandomNumber(1, 1000);
+    let typeOfReachedBase = this.GenerateRandomNumber(1, 1000);
+    let diceRoll: Number;
+    if (this.Game.CurrentInning.IsBottomOfInning) {
+      let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueHomeBattingStats.sLG;
+      diceRoll = addedPower * typeOfReachedBase;
+    } else {
+      let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueAwayBattingStats.sLG;
+      diceRoll = addedPower * typeOfReachedBase;
+    }
 
     let basesAdded = 1;
     //TODO - Numbers based off of 2019 totals, need to pull in stats for year of batter
