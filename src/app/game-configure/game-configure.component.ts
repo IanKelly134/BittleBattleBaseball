@@ -131,11 +131,11 @@ export class GameConfigureComponent implements OnInit {
       console.log("Can't get pitching league stats for Home Team...");
     }
 
-    mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(data => {
-      this._leagueHomeBattingStats = data;
+    mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.HomeTeam.TeamSeason).subscribe(homeData => {
+      this._leagueHomeBattingStats = homeData;
 
-      mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(data => {
-        this._leagueAwayBattingStats = data;
+      mlbYearByYearLeagueStatsServiceService.GetLeagueBattingStatsByYear(this.Game.AwayTeam.TeamSeason).subscribe(awayData => {
+        this._leagueAwayBattingStats = awayData;
 
         this.Game.StartGame();
       });
@@ -609,10 +609,10 @@ export class GameConfigureComponent implements OnInit {
     let typeOfReachedBase = this.GenerateRandomNumber(1, 1000);
     let diceRoll: Number;
     if (this.Game.CurrentInning.IsBottomOfInning) {
-      let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueHomeBattingStats.sLG;
+      let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueHomeBattingStats.slg;
       diceRoll = addedPower * typeOfReachedBase;
     } else {
-      let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueAwayBattingStats.sLG;
+      let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueAwayBattingStats.slg;
       diceRoll = addedPower * typeOfReachedBase;
     }
 
@@ -978,11 +978,9 @@ export class GameConfigureComponent implements OnInit {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to catcher.");
     }
     else if (diceRoll == 10) {
-      this.FlyBallOutToCatcher();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " strikes out swinging.");
     }
     else if (diceRoll == 11) {
-      this.FlyBallOutToCatcher();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " strikes out looking.");
     }
 
