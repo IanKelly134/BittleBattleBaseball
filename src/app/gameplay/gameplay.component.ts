@@ -1758,10 +1758,10 @@ export class GameplayComponent implements OnInit {
     this.GroundBallHit(this.groundBallSingleRight2X, this.groundBallSingleRight2Y, "Single to right field!");
   }
 
-  flyBallDoubleLeft1cp1X: number = 450 * this.screenPctAdj;
-  flyBallDoubleLeft1cp1Y: number = 320 * this.screenPctAdj;
-  flyBallDoubleLeft1cp2X: number = 370 * this.screenPctAdj;
-  flyBallDoubleLeft1cp2Y: number = 520 * this.screenPctAdj;
+  flyBallDoubleLeft1cp1X: number = 400 * this.screenPctAdj;
+  flyBallDoubleLeft1cp1Y: number = 200 * this.screenPctAdj;
+  flyBallDoubleLeft1cp2X: number = 250 * this.screenPctAdj;
+  flyBallDoubleLeft1cp2Y: number = 300 * this.screenPctAdj;
 
   FlyBallDoubleLeft1() {
     this.FlyBallHit(this.flyBallDoubleLeft1cp1X, this.flyBallDoubleLeft1cp1Y, this.flyBallDoubleLeft1cp2X,
