@@ -12,6 +12,7 @@ import { PlayerViewModel } from '../player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-configure',
@@ -102,7 +103,7 @@ export class GameConfigureComponent implements OnInit {
   ngOnInit() {
   }
 
-  constructor(mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService, private toastr: ToastrService) //, private toastr: ToastrService
+  constructor(private router: Router, mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService, private toastr: ToastrService) //, private toastr: ToastrService
   {
     //console.log(this.router.getCurrentNavigation().extras.state);
     document.body.style.backgroundImage = "url('../assets/images/baseball-background6.jpg')";
@@ -996,7 +997,7 @@ export class GameConfigureComponent implements OnInit {
           dangerMode: true,
         })
           .then(() => {
-
+            this.router.navigateByUrl("/home");
           });
       }
       else {

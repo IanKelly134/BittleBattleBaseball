@@ -10,6 +10,7 @@ import { GameConfigureComponent } from './game-configure/game-configure.componen
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
+  { path: "home", component: HomeComponent },
   { path: "searchteams", component: SearchTeamsComponent },
   { path: "setlineups/:newGameId", component: SetStartingLineupsComponent },
   { path: "game/:gameId", component: GameplayComponent },

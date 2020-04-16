@@ -1007,6 +1007,7 @@ export class GameplayComponent implements OnInit {
             dangerMode: true,
           })
             .then(willDelete => {
+              this.router.navigateByUrl("/home");
 
             });
         } else {
