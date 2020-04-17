@@ -172,7 +172,7 @@ export class GameConfigureComponent implements OnInit {
 
     //---------------
 
-    let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III");
+    let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III", "https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/br/STL-2011.png");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     pitcherHitterPlayerSeasonViewModel.obp = 0.226;
@@ -368,7 +368,7 @@ export class GameConfigureComponent implements OnInit {
 
     //---------------
 
-    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field");
+    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field", "https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/br/COL-1998.png");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     pitcherHitterPlayerSeasonViewModel.obp = 0.417;

@@ -38,8 +38,8 @@ export class GameViewModel {
     SetValues(gameId: number, homeTeam: TeamSearchResultViewModel, awayTeam: TeamSearchResultViewModel) {
         this.GameId = gameId;
         this.Ballpark = homeTeam.ballpark;
-        this.HomeTeam = new GameTeamViewModel(homeTeam.name, homeTeam.id, homeTeam.city, homeTeam.season, homeTeam.ballpark);
-        this.AwayTeam = new GameTeamViewModel(awayTeam.name, awayTeam.id, awayTeam.city, awayTeam.season, awayTeam.ballpark);
+        this.HomeTeam = new GameTeamViewModel(homeTeam.name, homeTeam.id, homeTeam.city, homeTeam.season, homeTeam.ballpark, homeTeam.logoUrl);
+        this.AwayTeam = new GameTeamViewModel(awayTeam.name, awayTeam.id, awayTeam.city, awayTeam.season, awayTeam.ballpark, awayTeam.logoUrl);
         this.Innings = [
             new GameInningViewModel(1),
             new GameInningViewModel(2),

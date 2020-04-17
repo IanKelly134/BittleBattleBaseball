@@ -9,7 +9,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th></th>
+                        <th><img [src]="Game.AwayTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
+                        </th>
                         <th>Name</th>
                         <th>Pos</th>
                     </tr>
@@ -49,7 +50,8 @@
                     <tbody>
                         <tr>
 
-                            <td>{{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
+                            <td><img [src]="Game.AwayTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
+                                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td>{{inning.AwayRunsScored}}</td>
                             </ng-container>
@@ -58,7 +60,8 @@
                             <td>{{Game.AwayTeamErrors}}</td>
                         </tr>
                         <tr>
-                            <td>{{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
+                            <td><img [src]="Game.HomeTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
+                                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td> {{inning.HomeRunsScored}}</td>
                             </ng-container>
@@ -84,7 +87,8 @@
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th></th>
+                        <th><img [src]="Game.HomeTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
+                        </th>
                         <th>Name</th>
                         <th>Pos</th>
                     </tr>

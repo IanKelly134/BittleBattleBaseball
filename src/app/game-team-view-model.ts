@@ -6,6 +6,7 @@ export class GameTeamViewModel {
     TeamCity: string;
     TeamSeason: number;
     Ballpark: string;
+    TeamLogoUrl: string;
 
     Catcher: GamePlayerViewModel;
     FirstBaseman: GamePlayerViewModel;
@@ -239,11 +240,12 @@ export class GameTeamViewModel {
         return null;
     }
 
-    constructor(teamName: string, teamId: number, teamCity: string, teamSeason: number, ballpark: string) {
+    constructor(teamName: string, teamId: number, teamCity: string, teamSeason: number, ballpark: string, logo: string) {
         this.TeamName = teamName;
         this.TeamId = teamId;
         this.TeamCity = teamCity;
         this.TeamSeason = teamSeason;
         this.Ballpark = ballpark;
+        this.TeamLogoUrl = logo;
     }
 }

@@ -178,7 +178,7 @@ export class GameplayComponent implements OnInit {
 
     //---------------
 
-    let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III");
+    let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III", "");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     pitcherHitterPlayerSeasonViewModel.obp = 0.226;
@@ -362,7 +362,7 @@ export class GameplayComponent implements OnInit {
 
     //---------------
 
-    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field");
+    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field", "");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     pitcherHitterPlayerSeasonViewModel.obp = 0.417;
