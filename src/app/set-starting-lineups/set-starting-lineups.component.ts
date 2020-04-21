@@ -170,7 +170,10 @@ export class SetStartingLineupsComponent implements OnInit {
       }
     }
 
-    this.scrollToTop();
+    if (this.HomeTeamRoster.suggestedLineup && this.AwayTeamRoster.suggestedLineup
+      && this.HomeTeamRoster.suggestedRotation && this.AwayTeamRoster.suggestedRotation) {
+      this.scrollToTop();
+    }
   }
 
   playerIsInStartingLineup(isHome: boolean, playerId): boolean {

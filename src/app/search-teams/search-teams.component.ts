@@ -63,12 +63,17 @@ export class SearchTeamsComponent implements OnInit {
 
   SetHomeTeamSelection(selection: TeamSearchResultViewModel) {
     this.GameSetup.HomeTeamSelection = selection;
-    this.scrollToTop();
+
+    if (this.GameSetup.AwayTeamSelection) {
+      this.scrollToTop();
+    }
   }
 
   SetAwayTeamSelection(selection: TeamSearchResultViewModel) {
     this.GameSetup.AwayTeamSelection = selection;
-    this.scrollToTop();
+    if (this.GameSetup.HomeTeamSelection) {
+      this.scrollToTop();
+    }
   }
 
   scrollToTop() {
