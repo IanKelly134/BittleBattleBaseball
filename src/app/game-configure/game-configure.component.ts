@@ -1202,7 +1202,7 @@ export class GameConfigureComponent implements OnInit {
   }
 
   private DrawBatterImgData(img: HTMLImageElement) {
-    this.ctx.font = '12pt Calibri';
+    this.ctx.font = '18pt Calibri';
     this.ctx.textAlign = 'right';
     this.ctx.fillStyle = 'white';
     this.ctx.fillText("BATTER", 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 625);
@@ -1433,7 +1433,7 @@ export class GameConfigureComponent implements OnInit {
       this.ctx.drawImage(img,
         80, 600, this.playerFieldImgAvatarWidth * 2, this.playerFieldImgAvatarHeight * 2);
 
-      this.ctx.font = '12pt Calibri';
+      this.ctx.font = '18pt Calibri';
       this.ctx.textAlign = 'left';
       this.ctx.fillStyle = 'white';
       this.ctx.fillText("PITCHER", 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 625);
@@ -2133,4 +2133,69 @@ export class GameConfigureComponent implements OnInit {
     this.Game.CurrentInning.IsBottomOfInning = !this.Game.CurrentInning.IsBottomOfInning;
   }
 
+  myRectangle: any = {
+    x: this.pitcherX,
+    y: this.pitcherY,
+    width: 10,
+    height: 10,
+    borderWidth: 1
+  };
+
+  requestAnimFrame(callback) {
+    if (callback) {
+      window.setTimeout(callback, 1000 / 60);
+    }
+  }
+
+
+  ThrowPitch() {
+    // this.requestAnimFrame(null);
+
+    this.drawRectangle(this.myRectangle);
+
+    // wait one second before starting animation
+    setTimeout(() => {
+      var startTime = (new Date()).getTime();
+      this.animate(this.myRectangle, startTime);
+    }, 1000);
+  }
+
+
+  drawRectangle(myRectangle) {
+    this.ctx.beginPath();
+    this.ctx.rect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
+    this.ctx.fillStyle = '#8ED6FF';
+    this.ctx.fill();
+    // this.ctx.lineWidth = myRectangle.borderWidth;
+    // this.ctx.strokeStyle = 'black';
+    //this.ctx.stroke();
+  }
+
+  animate(myRectangle, startTime) {
+
+    this.ctx.clearRect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
+
+    // update
+    var time = (new Date()).getTime() - startTime;
+
+    var linearSpeed = 1000;
+    // pixels / second
+    var newY = linearSpeed * time / 1000;
+
+    if (newY < this.canvas.height - myRectangle.height / 2) {
+      myRectangle.y = newY;
+
+    }
+
+    // clear
+    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+
+    this.drawRectangle(myRectangle);
+
+    // request new frame
+    this.requestAnimFrame(() => {
+      this.animate(myRectangle, startTime);
+    });
+  }
 }

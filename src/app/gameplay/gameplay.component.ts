@@ -1183,7 +1183,7 @@ export class GameplayComponent implements OnInit {
   }
 
   private DrawBatterImgData(img: HTMLImageElement) {
-    this.ctx.font = '12pt Calibri';
+    this.ctx.font = '18pt Calibri';
     this.ctx.textAlign = 'right';
     this.ctx.fillStyle = 'white';
     this.ctx.fillText("BATTER", 1010 + ((this.playerFieldImgAvatarWidth * 3) / 2), 625);
@@ -1414,7 +1414,7 @@ export class GameplayComponent implements OnInit {
       this.ctx.drawImage(img,
         80, 600, this.playerFieldImgAvatarWidth * 2, this.playerFieldImgAvatarHeight * 2);
 
-      this.ctx.font = '12pt Calibri';
+      this.ctx.font = '18pt Calibri';
       this.ctx.textAlign = 'left';
       this.ctx.fillStyle = 'white';
       this.ctx.fillText("PITCHER", 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 625);
