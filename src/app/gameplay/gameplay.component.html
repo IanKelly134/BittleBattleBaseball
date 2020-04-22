@@ -113,36 +113,7 @@
     </div>
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-md-4">
-            <table class="table table-bordered table-dark table-hover table-responsive-sm"
-                style="margin: 5px; opacity: 0.8;">
-                <thead>
-                    <tr>
-                        <th>Pitcher</th>
-                        <th>Batter</th>
-                        <th>Outs</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td *ngIf="Game && Game.CurrentAtBat && Game.CurrentAtBat.Pitcher"><img
-                                [src]="Game.CurrentAtBat.Pitcher.PlayerImageURL" alt="!"
-                                onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
-                            {{Game.CurrentAtBat.Pitcher.Name}}</td>
-                        <td *ngIf="Game && Game.CurrentAtBat && Game.CurrentAtBat.Batter"><img
-                                [src]="Game.CurrentAtBat.Batter.PlayerImageURL" alt="!"
-                                onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
-                            {{Game.CurrentAtBat.Batter.Name}}</td>
-                        <td>
-                            <ng-container *ngIf="Game.CurrentInning.IsBottomOfInning">
-                                {{ Game.CurrentInning.HomeOuts }}
-                            </ng-container>
-                            <ng-container *ngIf="!Game.CurrentInning.IsBottomOfInning">
-                                {{ Game.CurrentInning.AwayOuts }}
-                            </ng-container>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+
         </div>
         <div class="col-lg-5">
 
