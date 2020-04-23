@@ -13,6 +13,7 @@ import { EnumAtBatResult } from '../enum-at-bat-result.enum';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
+import { GameInningViewModel } from '../game-inning-view-model';
 
 @Component({
   selector: 'app-game-configure',
@@ -1027,9 +1028,12 @@ export class GameConfigureComponent implements OnInit {
           });
       }
       else {
-
-
         if (this.Game.CurrentInning.HomeOuts == 3) {
+
+          if (this.Game.CurrentInning.InningNumber >= 9) {
+            this.Game.Innings.push(new GameInningViewModel(this.Game.CurrentInning.InningNumber + 1))
+          }
+
           this.Game.NextInning();
           this.Game.NewAtBat();
         }
