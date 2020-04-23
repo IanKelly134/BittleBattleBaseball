@@ -23,7 +23,14 @@
                             <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
                                     alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
                             </td>
-                            <td>{{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
+                            <td>
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
+                                <hr />
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+
+                            </td>
                             <td class="text-center">
                                 {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
                             </td>
@@ -101,7 +108,12 @@
                             <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
                                     alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
                             </td>
-                            <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
+                            <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
+                                <hr />
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                            </td>
                             <td class="text-center">
                                 {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
                             </td>
