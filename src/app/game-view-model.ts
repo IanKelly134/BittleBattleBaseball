@@ -157,10 +157,6 @@ export class GameViewModel {
             inningText = "Top of the " + this.CurrentInning.InningNumber + "th inning...";
         }
 
-        let pitcherTiredFactor = 1.02;
-        this.AwayTeam.Pitcher.PitchingSeasonStats.PX = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
-        this.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
-
         this.PlayByPlays.push(inningText);
     }
 

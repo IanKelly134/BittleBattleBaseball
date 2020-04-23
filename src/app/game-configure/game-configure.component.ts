@@ -588,6 +588,7 @@ export class GameConfigureComponent implements OnInit {
         setTimeout(() => {
           this.IsPlayInProgress = false;
           this.ClearCanvas();
+
         }, 2500);
 
       }, 300);
@@ -923,12 +924,15 @@ export class GameConfigureComponent implements OnInit {
     }
 
     //***
+    let pitcherTiredFactor = 1.004355;
     this.Game.NewAtBat();
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.DrawHitterOnHomeDeck();
+      this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX = this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
     else {
       this.DrawHitterOnAwayDeck();
+      this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
   }
 
@@ -1000,6 +1004,14 @@ export class GameConfigureComponent implements OnInit {
     }
 
     this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
+
+    let pitcherTiredFactor = 1.004355;
+    if (this.Game.CurrentInning.IsBottomOfInning) {
+      this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX = this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
+    }
+    else {
+      this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
+    }
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts++;
