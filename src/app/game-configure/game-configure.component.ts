@@ -141,15 +141,6 @@ export class GameConfigureComponent implements OnInit {
         this.Game.StartGame();
       });
     });
-
-
-
-
-
-
-
-
-
   }
 
   //***
@@ -576,6 +567,9 @@ export class GameConfigureComponent implements OnInit {
     this.IsPlayInProgress = true;
     this.Game.RunnersWhoScoredOnPlay = [];
     this.ClearCanvas();
+
+    this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP =
+      this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.PX * this.Game.CurrentAtBat.Batter.HittingSeasonStats.obp;
 
     setTimeout(() => {
       this.Pitch();

@@ -97,7 +97,10 @@ export class GameViewModel {
         pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
         pitcherHitterPlayerSeasonViewModel.player.playerName = this.AwayTeam.Pitcher.Name;
         this.AwayTeam.Pitcher.HittingSeasonStats = pitcherHitterPlayerSeasonViewModel;
-        this.AwayTeam.Pitcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * .225;//TODO - FIX.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
+
+        /*
+          this.AwayTeam.Pitcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * .225;//TODO - FIX.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
+        
         this.AwayTeam.Catcher.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.Catcher.HittingSeasonStats.obp;
         this.AwayTeam.FirstBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.FirstBaseman.HittingSeasonStats.obp;
         this.AwayTeam.SecondBaseman.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.SecondBaseman.HittingSeasonStats.obp;
@@ -106,6 +109,7 @@ export class GameViewModel {
         this.AwayTeam.LeftFielder.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.LeftFielder.HittingSeasonStats.obp;
         this.AwayTeam.CenterFielder.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.CenterFielder.HittingSeasonStats.obp;
         this.AwayTeam.RightFielder.HittingSeasonStats.OBRP = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * this.AwayTeam.RightFielder.HittingSeasonStats.obp;
+        */
     }
 
     SetHOMETEAMBattersOBRPAccordingToNewPitcherWHIP() {
@@ -152,6 +156,10 @@ export class GameViewModel {
         else {
             inningText = "Top of the " + this.CurrentInning.InningNumber + "th inning...";
         }
+
+        let pitcherTiredFactor = 1.02;
+        this.AwayTeam.Pitcher.PitchingSeasonStats.PX = this.AwayTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
+        this.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
 
         this.PlayByPlays.push(inningText);
     }

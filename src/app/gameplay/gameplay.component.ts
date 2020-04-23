@@ -559,6 +559,9 @@ export class GameplayComponent implements OnInit {
     this.Game.RunnersWhoScoredOnPlay = [];
     this.ClearCanvas();
 
+    this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP =
+      this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.PX * this.Game.CurrentAtBat.Batter.HittingSeasonStats.obp;
+
     setTimeout(() => {
       this.Pitch();
 
