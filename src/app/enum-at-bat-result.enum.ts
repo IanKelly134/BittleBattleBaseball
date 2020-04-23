@@ -5,7 +5,11 @@ export enum EnumAtBatResult {
     Triple,
     HomeRun,
     Out,
+    StrikeOut,
     GIDP,
     GITP,
-    HBP
+    HBP,
+    FieldersChoice,
+    Sacrifce,
+    Error
 }

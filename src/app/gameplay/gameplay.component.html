@@ -1,7 +1,5 @@
-<div class="container-fluid" style="text-align: center; margin: 0px; padding: 0px;">
-
-
-
+<div class="container-fluid"
+    style="text-align: center; margin: 0px; padding: 0px; background-color: transparent; color: white;">
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-md-2">
             <table *ngIf="Game && Game.AwayTeam" class="table table-bordered table-dark table-hover table-responsive-sm"
@@ -152,6 +150,102 @@
 
                         </td>
                     </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br />
+    <br />
+    <!-- BOX SCORE -->
+    <div class="row" style="margin: 0px; padding: 0px;">
+        <div class="col-md-6">
+            <h4><img [src]="Game.HomeTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
+                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}} BOX SCORE</h4>
+            <hr />
+            <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>Hitter</th>
+                        <th>AB</th>
+                        <th>R</th>
+                        <th>H</th>
+                        <th>RBI</th>
+                        <th>BB</th>
+                        <th>K</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="Game && Game.HomeTeam">
+                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                        <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)"
+                            [class]="((Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-away' : undefined)">
+                            <td class="text-left"> {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}} -
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}</td>
+                            <td>
+                                {{Game.GetAtBats(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id, true)}}
+                            </td>
+                            <td>
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).RunsScored}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHits(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id, true)}}
+                            </td>
+                            <td>
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).RBIs}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetWalks(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id, true)}}
+                            </td>
+                            <td> {{Game.GetStrikeouts(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id, true)}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+
+            <h4><img [src]="Game.AwayTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
+                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}} BOX SCORE</h4>
+            <hr />
+            <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>Hitter</th>
+                        <th>AB</th>
+                        <th>R</th>
+                        <th>H</th>
+                        <th>RBI</th>
+                        <th>BB</th>
+                        <th>K</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="Game && Game.AwayTeam">
+                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                        <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)"
+                            [class]="((Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-away' : undefined)">
+                            <td class="text-left"> {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}} -
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}</td>
+                            <td>
+                                {{Game.GetAtBats(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id, false)}}
+                            </td>
+                            <td>
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).RunsScored}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHits(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id, false)}}
+                            </td>
+                            <td>
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).RBIs}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetWalks(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id, false)}}
+                            </td>
+                            <td> {{Game.GetStrikeouts(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id, false)}}
+                            </td>
+                        </tr>
+                    </ng-container>
                 </tbody>
             </table>
         </div>

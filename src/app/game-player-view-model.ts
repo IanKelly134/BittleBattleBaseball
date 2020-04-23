@@ -13,6 +13,8 @@ export class GamePlayerViewModel {
     PitchingSeasonStats: PitcherPlayerSeasonViewModel;
     OpposingPitcherMultiplier: number;
     PlayerImageURL: string;
+    RunsScored: number = 0;
+    RBIs: number = 0;
 
     constructor(pos: string, hitter: HitterPlayerSeasonViewModel, pitcher: PitcherPlayerSeasonViewModel) {
         this.Position = pos;

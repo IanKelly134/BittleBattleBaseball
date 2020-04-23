@@ -5,6 +5,7 @@ import { TeamSearchResultViewModel } from './team-search-result-view-model';
 import { GameAtBatViewModel } from './game-at-bat-view-model';
 import { HitterPlayerSeasonViewModel } from './hitter-player-season-view-model';
 import { PlayerViewModel } from './player-view-model';
+import { EnumAtBatResult } from './enum-at-bat-result.enum';
 
 export class GameViewModel {
 
@@ -196,4 +197,77 @@ export class GameViewModel {
             this.CurrentAtBat = newAB;
         }
     }
+
+    GetAtBats(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.HomeAtBats : inning.AwayAtBats)) {
+                    if (ab.Batter.Id == playerId && (ab.Result != EnumAtBatResult.Walk && ab.Result != EnumAtBatResult.HBP
+                        && ab.Result != EnumAtBatResult.Sacrifce && ab.Result != EnumAtBatResult.Error)) {
+                        returnVal++;
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
+
+    GetHits(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.HomeAtBats : inning.AwayAtBats)) {
+                    if (ab.Batter.Id == playerId) {
+                        if (ab.Result == EnumAtBatResult.Single || ab.Result == EnumAtBatResult.Double || ab.Result == EnumAtBatResult.Triple || ab.Result == EnumAtBatResult.HomeRun) {
+                            returnVal++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
+
+    GetWalks(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.HomeAtBats : inning.AwayAtBats)) {
+                    if (ab.Batter.Id == playerId) {
+                        if (ab.Result == EnumAtBatResult.Walk) {
+                            returnVal++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
+
+    GetStrikeouts(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.HomeAtBats : inning.AwayAtBats)) {
+                    if (ab.Batter.Id == playerId) {
+                        if (ab.Result == EnumAtBatResult.StrikeOut) {
+                            returnVal++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
+
+
 }
