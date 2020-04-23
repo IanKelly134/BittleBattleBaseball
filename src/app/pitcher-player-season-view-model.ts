@@ -6,4 +6,5 @@ export class PitcherPlayerSeasonViewModel extends PlayerSeasonViewModel {
     wins: number;
     losses: number;
     PX: number = 1;
+    StartingPX: number = 1;
 }

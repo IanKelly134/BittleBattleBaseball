@@ -28,6 +28,7 @@ export class GamePlayerViewModel {
             this.PitchingSeasonStats = pitcher;
             if (!this.PitchingSeasonStats.PX) {
                 this.PitchingSeasonStats.PX = this.PitchingSeasonStats.whip / 1.355; // Default
+                this.PitchingSeasonStats.StartingPX = this.PitchingSeasonStats.PX;
             }
             this.Name = this.PitchingSeasonStats.player.playerName;
             this.Id = this.PitchingSeasonStats.player.id;

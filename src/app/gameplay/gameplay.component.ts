@@ -1448,6 +1448,38 @@ export class GameplayComponent implements OnInit {
         this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.era + "ERA " +
         this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.whip + "WHIP"
         , 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 715);
+
+      //Draw pitcher tired percentage      
+      let pctLeft = this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.StartingPX / this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.PX;
+      this.ctx.beginPath();
+      this.ctx.rect(80, 725, 325, 15);
+      this.ctx.fillStyle = 'black';
+      this.ctx.fill();
+
+      let left = 325 * pctLeft;
+      this.ctx.beginPath();
+      this.ctx.rect(80, 725, left, 15);
+      if (left > 292) {
+        var grd = this.ctx.createLinearGradient(0, 0, left, 15);
+        // dark green
+        grd.addColorStop(0, '#006400');
+
+        // light green
+        grd.addColorStop(1, '#00e400');
+
+        this.ctx.fillStyle = grd;
+      } else {
+        var grd = this.ctx.createLinearGradient(0, 0, left, 15);
+
+        // dark red
+        grd.addColorStop(0, '#B30000');
+
+        // light red
+        grd.addColorStop(1, '#ff9a9a');
+
+        this.ctx.fillStyle = grd;
+      }
+      this.ctx.fill();
     }
   }
 
