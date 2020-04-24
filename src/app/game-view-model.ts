@@ -91,8 +91,8 @@ export class GameViewModel {
         pitcherHitterPlayerSeasonViewModel.avg = 0.200;
         pitcherHitterPlayerSeasonViewModel.pa = 600;
         pitcherHitterPlayerSeasonViewModel.ab = 500;
-        pitcherHitterPlayerSeasonViewModel.hr = 30;
-        pitcherHitterPlayerSeasonViewModel.rbi = 100;
+        pitcherHitterPlayerSeasonViewModel.hr = 1;
+        pitcherHitterPlayerSeasonViewModel.rbi = 19;
         pitcherHitterPlayerSeasonViewModel.sb = 20;
         pitcherHitterPlayerSeasonViewModel.bb = 100;
         pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
@@ -120,8 +120,8 @@ export class GameViewModel {
         pitcherHitterPlayerSeasonViewModel.avg = 0.200;
         pitcherHitterPlayerSeasonViewModel.pa = 600;
         pitcherHitterPlayerSeasonViewModel.ab = 500;
-        pitcherHitterPlayerSeasonViewModel.hr = 30;
-        pitcherHitterPlayerSeasonViewModel.rbi = 100;
+        pitcherHitterPlayerSeasonViewModel.hr = 3;
+        pitcherHitterPlayerSeasonViewModel.rbi = 21;
         pitcherHitterPlayerSeasonViewModel.sb = 20;
         pitcherHitterPlayerSeasonViewModel.bb = 100;
         pitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();

@@ -172,8 +172,8 @@ export class GameConfigureComponent implements OnInit {
     pitcherHitterPlayerSeasonViewModel.avg = 0.200;
     pitcherHitterPlayerSeasonViewModel.pa = 600;
     pitcherHitterPlayerSeasonViewModel.ab = 500;
-    pitcherHitterPlayerSeasonViewModel.hr = 30;
-    pitcherHitterPlayerSeasonViewModel.rbi = 100;
+    pitcherHitterPlayerSeasonViewModel.hr = 2;
+    pitcherHitterPlayerSeasonViewModel.rbi = 19;
     pitcherHitterPlayerSeasonViewModel.sb = 20;
     pitcherHitterPlayerSeasonViewModel.bb = 100;
     pitcherHitterPlayerSeasonViewModel.season = 2011;
@@ -500,8 +500,8 @@ export class GameConfigureComponent implements OnInit {
     leftfielderHitterPlayerSeasonViewModel.avg = 0.299;
     leftfielderHitterPlayerSeasonViewModel.pa = 600;
     leftfielderHitterPlayerSeasonViewModel.ab = 500;
-    leftfielderHitterPlayerSeasonViewModel.hr = 30;
-    leftfielderHitterPlayerSeasonViewModel.rbi = 100;
+    leftfielderHitterPlayerSeasonViewModel.hr = 3;
+    leftfielderHitterPlayerSeasonViewModel.rbi = 18;
     leftfielderHitterPlayerSeasonViewModel.sb = 20;
     leftfielderHitterPlayerSeasonViewModel.bb = 100;
     leftfielderHitterPlayerSeasonViewModel.season = 1998;

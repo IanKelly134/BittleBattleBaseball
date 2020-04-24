@@ -23,10 +23,11 @@
                             </td>
                             <td>
                                 {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
-                                <hr />
-                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
-                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
-                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                <label class="small">
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                </label>
                             </td>
                             <td class="text-center">
                                 {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
@@ -37,8 +38,8 @@
             </table>
         </div>
         <div class="col-md-8">
-            <div style="overflow-x: scroll !important;">
-                <table class="table table-bordered table-dark table-hover table-condensed"
+            <div>
+                <table class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
                     style="margin-left: 5px; margin-right: 5px; margin-bottom: -10px; opacity: 0.8;">
                     <thead>
                         <tr>
@@ -54,8 +55,10 @@
                     <tbody>
                         <tr>
 
-                            <td><img [src]="Game.AwayTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
-                                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
+                            <td class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
+                                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                                {{Game.AwayTeam.TeamSeason}}
+                                {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td>{{inning.AwayRunsScored}}</td>
                             </ng-container>
@@ -64,8 +67,10 @@
                             <td>{{Game.AwayTeamErrors}}</td>
                         </tr>
                         <tr>
-                            <td><img [src]="Game.HomeTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
-                                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
+                            <td class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
+                                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                                {{Game.HomeTeam.TeamSeason}}
+                                {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td> {{inning.HomeRunsScored}}</td>
                             </ng-container>
@@ -77,13 +82,14 @@
                 </table>
             </div>
             <br />
-            <canvas id="ballparkCanvas" style="max-width: 100%" [width]="canvasWidth" [height]="canvasHeight">
+            <canvas id="ballparkCanvas" style="max-width: 100%; margin-top: -10%;" [width]="canvasWidth"
+                [height]="canvasHeight">
             </canvas><br />
             <button class="btn btn-success btn-block" *ngIf="!IsPlayInProgress" style="padding: 25px;"
                 (click)="ExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
                     src="../assets/images/baseballicon.png" />
                 Next Play <i class="fa fa-arrow-right"></i></button>
-        </div>
+        </div>533333333
         <div class="col-md-2">
             <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-responsive-sm"
                 style="margin-top: 20px; opacity: 0.9;">
@@ -106,10 +112,11 @@
                             </td>
                             <td>
                                 {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
-                                <hr />
-                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
-                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
-                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                <label class="small">
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                </label>
                             </td>
                             <td class="text-center">
                                 {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}

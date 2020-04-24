@@ -1,8 +1,5 @@
 <div class="container-fluid"
     style="text-align: center; margin: 0px; padding: 0px; background-color: transparent; color: white;">
-
-
-
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-md-2">
             <table *ngIf="Game && Game.AwayTeam" class="table table-bordered table-dark table-hover table-condensed"
@@ -26,11 +23,11 @@
                             </td>
                             <td>
                                 {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
-                                <hr />
-                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
-                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
-                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
-
+                                <label class="small">
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                </label>
                             </td>
                             <td class="text-center">
                                 {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
@@ -41,8 +38,8 @@
             </table>
         </div>
         <div class="col-md-8">
-            <div style="overflow-x: scroll !important;">
-                <table class="table table-bordered table-dark table-hover table-condensed"
+            <div>
+                <table class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
                     style="margin-left: 5px; margin-right: 5px; margin-bottom: -10px; opacity: 0.8;">
                     <thead>
                         <tr>
@@ -58,8 +55,10 @@
                     <tbody>
                         <tr>
 
-                            <td><img [src]="Game.AwayTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
-                                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
+                            <td class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
+                                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                                {{Game.AwayTeam.TeamSeason}}
+                                {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td>{{inning.AwayRunsScored}}</td>
                             </ng-container>
@@ -68,8 +67,10 @@
                             <td>{{Game.AwayTeamErrors}}</td>
                         </tr>
                         <tr>
-                            <td><img [src]="Game.HomeTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
-                                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
+                            <td class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
+                                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                                {{Game.HomeTeam.TeamSeason}}
+                                {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td> {{inning.HomeRunsScored}}</td>
                             </ng-container>
@@ -110,10 +111,12 @@
                                     alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
                             </td>
                             <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
-                                <hr />
-                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
-                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
-                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                <label class="small">
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                </label>
+
                             </td>
                             <td class="text-center">
                                 {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
