@@ -545,6 +545,8 @@ export class GameplayComponent implements OnInit {
     let diceRoll = this.GenerateRandomNumber(1, 16);
     //this.showWarning("Dice Roll is " + diceRoll);
 
+    this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
+
     if (diceRoll == 1) {
       this.FlyBallOutToFirst();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to first.");
@@ -583,9 +585,11 @@ export class GameplayComponent implements OnInit {
     }
     else if (diceRoll == 10) {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " strikes out swinging.");
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.StrikeOut;
     }
     else if (diceRoll == 11) {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " strikes out looking.");
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.StrikeOut;
     }
     else if (diceRoll == 12) {
       this.GroundBallOutToThird();
@@ -608,7 +612,7 @@ export class GameplayComponent implements OnInit {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " grounds out to pitcher.");
     }
 
-    this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
+
 
     let pitcherTiredFactor = 1.004355;
     if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -627,12 +631,13 @@ export class GameplayComponent implements OnInit {
           icon: "success",
           dangerMode: true,
         })
-          .then(willDelete => {
-
+          .then(() => {
+            this.router.navigateByUrl("/home");
           });
       }
       else {
         if (this.Game.CurrentInning.HomeOuts == 3) {
+
           if (this.Game.CurrentInning.InningNumber >= 9) {
             this.Game.Innings.push(new GameInningViewModel(this.Game.CurrentInning.InningNumber + 1))
           }
@@ -657,8 +662,7 @@ export class GameplayComponent implements OnInit {
             icon: "success",
             dangerMode: true,
           })
-            .then(willDelete => {
-              this.router.navigateByUrl("/home");
+            .then(() => {
 
             });
         } else {

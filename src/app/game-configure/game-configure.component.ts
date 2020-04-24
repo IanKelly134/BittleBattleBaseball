@@ -951,6 +951,8 @@ export class GameConfigureComponent implements OnInit {
     let diceRoll = this.GenerateRandomNumber(1, 16);
     //this.showWarning("Dice Roll is " + diceRoll);
 
+    this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
+
     if (diceRoll == 1) {
       this.FlyBallOutToFirst();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to first.");
@@ -989,9 +991,11 @@ export class GameConfigureComponent implements OnInit {
     }
     else if (diceRoll == 10) {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " strikes out swinging.");
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.StrikeOut;
     }
     else if (diceRoll == 11) {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " strikes out looking.");
+      this.Game.CurrentAtBat.Result = EnumAtBatResult.StrikeOut;
     }
     else if (diceRoll == 12) {
       this.GroundBallOutToThird();
@@ -1014,7 +1018,7 @@ export class GameConfigureComponent implements OnInit {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " grounds out to pitcher.");
     }
 
-    this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
+
 
     let pitcherTiredFactor = 1.004355;
     if (this.Game.CurrentInning.IsBottomOfInning) {
