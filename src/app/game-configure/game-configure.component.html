@@ -39,8 +39,9 @@
         </div>
         <div class="col-md-8">
             <div>
-                <table class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
-                    style="margin-left: 5px; margin-right: 5px; margin-bottom: -10px; opacity: 0.8;">
+                <table [style.visibility]="IsPlayInProgress ? 'hidden' : 'visible'"
+                    class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
+                    style="margin-left: 5px; margin-right: 5px; margin-bottom: -55px; opacity: 0.8;">
                     <thead>
                         <tr>
                             <th></th>
