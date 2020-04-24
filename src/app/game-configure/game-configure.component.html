@@ -41,7 +41,7 @@
             <div>
                 <table [style.visibility]="IsPlayInProgress ? 'hidden' : 'visible'"
                     class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
-                    style="margin-left: 5px; margin-right: 5px; margin-bottom: -55px; opacity: 0.8;">
+                    style="margin-left: 5px; margin-right: 5px; margin-bottom: -40px; opacity: 0.8;">
                     <thead>
                         <tr>
                             <th></th>
@@ -276,11 +276,12 @@
     <!-- BOX SCORE -->
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-md-6">
-
-            <h4><img [src]="Game.HomeTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
-                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}} BOX SCORE</h4>
+            <h5 clas="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
+                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}} Hitting</h5>
             <hr />
-            <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
+            <table *ngIf="Game && Game.HomeTeam"
+                class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
                 style="margin-top: 20px; opacity: 0.9;">
                 <thead>
                     <tr>
@@ -322,11 +323,12 @@
             </table>
         </div>
         <div class="col-md-6">
-
-            <h4><img [src]="Game.AwayTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
-                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}} BOX SCORE</h4>
+            <h5 class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
+                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}} Hitting</h5>
             <hr />
-            <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
+            <table *ngIf="Game && Game.HomeTeam"
+                class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
                 style="margin-top: 20px; opacity: 0.9;">
                 <thead>
                     <tr>
