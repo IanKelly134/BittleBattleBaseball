@@ -243,6 +243,8 @@ export class GameplayComponent implements OnInit {
           this.Game.AwayTeamRuns++;
         }
 
+        playerWhoScored.RunsScored++;
+        this.Game.CurrentAtBat.Batter.RBIs++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -310,6 +312,8 @@ export class GameplayComponent implements OnInit {
           this.Game.AwayTeamRuns++;
         }
 
+        playerWhoScored.RunsScored++;
+        this.Game.CurrentAtBat.Batter.RBIs++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -371,6 +375,8 @@ export class GameplayComponent implements OnInit {
           this.Game.AwayTeamRuns++;
         }
 
+        playerWhoScored.RunsScored++;
+        this.Game.CurrentAtBat.Batter.RBIs++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -426,6 +432,8 @@ export class GameplayComponent implements OnInit {
           this.Game.AwayTeamRuns++;
         }
 
+        playerWhoScored.RunsScored++;
+        this.Game.CurrentAtBat.Batter.RBIs++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -508,6 +516,8 @@ export class GameplayComponent implements OnInit {
           this.Game.AwayTeamRuns++;
         }
 
+        playerWhoScored.RunsScored++;
+        this.Game.CurrentAtBat.Batter.RBIs++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
