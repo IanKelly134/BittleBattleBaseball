@@ -27,6 +27,53 @@
                     {{NewGameSetup.HomeTeamSelection.season}} {{NewGameSetup.HomeTeamSelection.name}}
                 </h3>
                 <div class="row">
+                    <table class="table table-bordered table-dark table-hover table-condensed"
+                        style="margin-top: 20px; opacity: 0.9;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Pos</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                                <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)">
+                                    <td class="text-center">{{lineUpNumber}}</td>
+                                    <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                            alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'"
+                                            height="70px">
+                                    </td>
+                                    <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
+                                        <br />
+                                        <label class="small"
+                                            *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position != 'SP'">
+                                            {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                            {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                            {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI</label>
+                                    </td>
+                                    <td class="text-center">
+                                        {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-danger"
+                                            (click)="Game.HomeTeam.MovePlayerUpInOrder(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
+                                                class="fa fa-arrow-up"></i></button>
+                                        <button class="btn btn-danger"
+                                            (click)="Game.HomeTeam.MovePlayerDownInOrder(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
+                                                class="fa fa-arrow-down"></i></button>
+                                        <button class="btn btn-danger"
+                                            (click)="RemoveHomePlayerAtLineupNumber(lineUpNumber)"><i
+                                                class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
                     <div class="col-lg-6" *ngIf="HomeTeamRoster && HomeTeamRoster.suggestedLineup" class="alert-danger"
                         style="padding: 10px; font-size: small; opacity: .9; width: 100%; margin: 3px;">
                         <h5>Suggested Batting Order <button (click)="UseSuggestedHomeLineup()" class="btn btn-success"
@@ -59,43 +106,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <table class="table table-bordered table-dark table-hover table-condensed"
-                    style="margin-top: 20px; opacity: 0.9;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Pos</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let lineUpNumber of lineupNumbers">
-                            <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)">
-                                <td class="text-center">{{lineUpNumber}}</td>
-                                <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
-                                        alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="70px">
-                                </td>
-                                <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
-                                <td class="text-center">
-                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
-                                </td>
-                                <td class="text-center">
-                                    <button class="btn btn-danger"
-                                        (click)="Game.HomeTeam.MovePlayerUpInOrder(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
-                                            class="fa fa-arrow-up"></i></button>
-                                    <button class="btn btn-danger"
-                                        (click)="Game.HomeTeam.MovePlayerDownInOrder(Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
-                                            class="fa fa-arrow-down"></i></button>
-                                    <button class="btn btn-danger"
-                                        (click)="RemoveHomePlayerAtLineupNumber(lineUpNumber)"><i
-                                            class="fa fa-times"></i></button>
-                                </td>
-                            </tr>
-                        </ng-container>
-                    </tbody>
-                </table>
+
             </ng-container>
         </div>
         <div class="col-lg-6">
@@ -104,6 +115,53 @@
                 <h3><img [src]="NewGameSetup.AwayTeamSelection.logoUrl"
                         style="height: 75px; border: 3px solid white;" /> Away Lineup -
                     {{NewGameSetup.AwayTeamSelection.season}} {{NewGameSetup.AwayTeamSelection.name}}</h3>
+                <div class="row">
+                    <table class="table table-bordered table-dark table-hover table-condensed"
+                        style="margin-top: 20px; opacity: 0.9;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Pos</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                                <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)">
+                                    <td class="text-center">{{lineUpNumber}}</td>
+                                    <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                            alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'"
+                                            height="70px">
+                                    </td>
+                                    <td>{{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
+                                        <br />
+                                        <label class="small"
+                                            *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position != 'SP'">
+                                            {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                            {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                            {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI</label>
+                                    </td>
+                                    <td class="text-center">
+                                        {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
+                                    </td>
+                                    <td class="text-center">
+                                        <button class="btn btn-primary"
+                                            (click)="Game.AwayTeam.MovePlayerUpInOrder(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
+                                                class="fa fa-arrow-up"></i></button>
+                                        <button class="btn btn-primary"
+                                            (click)="Game.AwayTeam.MovePlayerDownInOrder(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
+                                                class="fa fa-arrow-down"></i></button>
+                                        <button class="btn btn-primary"
+                                            (click)="RemoveAwayPlayerAtLineupNumber(lineUpNumber)"><i
+                                                class="fa fa-times"></i></button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                </div>
                 <div class="row">
                     <div class="col-sm-6" *ngIf="AwayTeamRoster && AwayTeamRoster.suggestedLineup" class="alert-primary"
                         style="padding: 10px; font-size: small; opacity: .9; width: 100%; margin: 3px;">
@@ -137,43 +195,7 @@
                         </ng-container>
                     </div>
                 </div>
-                <table class="table table-bordered table-dark table-hover table-condensed"
-                    style="margin-top: 20px; opacity: 0.9;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th></th>
-                            <th>Name</th>
-                            <th>Pos</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let lineUpNumber of lineupNumbers">
-                            <tr *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)">
-                                <td class="text-center">{{lineUpNumber}}</td>
-                                <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
-                                        alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="70px">
-                                </td>
-                                <td>{{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}</td>
-                                <td class="text-center">
-                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
-                                </td>
-                                <td class="text-center">
-                                    <button class="btn btn-primary"
-                                        (click)="Game.AwayTeam.MovePlayerUpInOrder(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
-                                            class="fa fa-arrow-up"></i></button>
-                                    <button class="btn btn-primary"
-                                        (click)="Game.AwayTeam.MovePlayerDownInOrder(Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber))"><i
-                                            class="fa fa-arrow-down"></i></button>
-                                    <button class="btn btn-primary"
-                                        (click)="RemoveAwayPlayerAtLineupNumber(lineUpNumber)"><i
-                                            class="fa fa-times"></i></button>
-                                </td>
-                            </tr>
-                        </ng-container>
-                    </tbody>
-                </table>
+
             </ng-container>
         </div>
     </div>
