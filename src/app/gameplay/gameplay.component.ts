@@ -1911,4 +1911,151 @@ export class GameplayComponent implements OnInit {
     this.Game.CurrentInning.IsBottomOfInning = !this.Game.CurrentInning.IsBottomOfInning;
   }
 
+  setLineupPosition(pos: string, isHome: boolean, player: GamePlayerViewModel, index: number) {
+
+    if (isHome) {
+      if (pos == "P") {
+        this.Game.HomeTeam.BenchPitchers.splice(index, 1);
+        player.BattingOrderNumber = this.Game.HomeTeam.Pitcher.BattingOrderNumber;
+        this.Game.HomeTeam.Pitcher.BattingOrderNumber = 0;
+        this.Game.HomeTeam.Pitcher.IsEligible = false;
+        this.Game.HomeTeam.BenchPitchers.push(this.Game.HomeTeam.Pitcher);
+        this.Game.HomeTeam.SetPitcher(player);
+      }
+      else {
+        this.Game.HomeTeam.BenchPositionPlayers.splice(index, 1);
+
+        if (pos == "C") {
+          player.BattingOrderNumber = this.Game.HomeTeam.Catcher.BattingOrderNumber;
+          this.Game.HomeTeam.Catcher.BattingOrderNumber = 0;
+          this.Game.HomeTeam.Catcher.IsEligible = false;
+          this.Game.HomeTeam.BenchPositionPlayers.push(this.Game.HomeTeam.Catcher);
+          this.Game.HomeTeam.SetCatcher(player);
+        }
+        else if (pos == "1B") {
+          player.BattingOrderNumber = this.Game.HomeTeam.FirstBaseman.BattingOrderNumber;
+          this.Game.HomeTeam.FirstBaseman.BattingOrderNumber = 0;
+          this.Game.HomeTeam.FirstBaseman.IsEligible = false;
+          this.Game.HomeTeam.BenchPositionPlayers.push(this.Game.HomeTeam.FirstBaseman);
+          this.Game.HomeTeam.SetFirstBase(player);
+        }
+        else if (pos == "2B") {
+          player.BattingOrderNumber = this.Game.HomeTeam.SecondBaseman.BattingOrderNumber;
+          this.Game.HomeTeam.SecondBaseman.BattingOrderNumber = 0;
+          this.Game.HomeTeam.SecondBaseman.IsEligible = false;
+          this.Game.HomeTeam.BenchPositionPlayers.push(this.Game.HomeTeam.SecondBaseman);
+          this.Game.HomeTeam.SetSecondBase(player);
+        }
+        else if (pos == "SS") {
+          player.BattingOrderNumber = this.Game.HomeTeam.Shortstop.BattingOrderNumber;
+          this.Game.HomeTeam.Shortstop.BattingOrderNumber = 0;
+          this.Game.HomeTeam.Shortstop.IsEligible = false;
+          this.Game.HomeTeam.BenchPositionPlayers.push(this.Game.HomeTeam.Shortstop);
+          this.Game.HomeTeam.SetShortstop(player);
+        }
+        else if (pos == "3B") {
+          player.BattingOrderNumber = this.Game.HomeTeam.ThirdBaseman.BattingOrderNumber;
+          this.Game.HomeTeam.ThirdBaseman.BattingOrderNumber = 0;
+          this.Game.HomeTeam.ThirdBaseman.IsEligible = false;
+          this.Game.HomeTeam.BenchPositionPlayers.push(this.Game.HomeTeam.ThirdBaseman);
+          this.Game.HomeTeam.SetThirdBase(player);
+        }
+        else if (pos == "LF") {
+          player.BattingOrderNumber = this.Game.HomeTeam.LeftFielder.BattingOrderNumber;
+          this.Game.HomeTeam.LeftFielder.BattingOrderNumber = 0;
+          this.Game.HomeTeam.LeftFielder.IsEligible = false;
+          this.Game.HomeTeam.BenchPositionPlayers.push(this.Game.HomeTeam.LeftFielder);
+          this.Game.HomeTeam.SetLeftField(player);
+        }
+        else if (pos == "CF") {
+          player.BattingOrderNumber = this.Game.HomeTeam.CenterFielder.BattingOrderNumber;
+          this.Game.HomeTeam.CenterFielder.BattingOrderNumber = 0;
+          this.Game.HomeTeam.CenterFielder.IsEligible = false;
+          this.Game.HomeTeam.BenchPositionPlayers.push(this.Game.HomeTeam.CenterFielder);
+          this.Game.HomeTeam.SetCenterField(player);
+        }
+        else if (pos == "RF") {
+          player.BattingOrderNumber = this.Game.HomeTeam.RightFielder.BattingOrderNumber;
+          this.Game.HomeTeam.RightFielder.BattingOrderNumber = 0;
+          this.Game.HomeTeam.RightFielder.IsEligible = false;
+          this.Game.HomeTeam.BenchPositionPlayers.push(this.Game.HomeTeam.RightFielder);
+          this.Game.HomeTeam.SetRightField(player);
+        }
+      }
+    }
+    else {
+      if (pos == "P") {
+        this.Game.AwayTeam.BenchPitchers.splice(index, 1);
+        player.BattingOrderNumber = this.Game.AwayTeam.Pitcher.BattingOrderNumber;
+        this.Game.AwayTeam.Pitcher.BattingOrderNumber = 0;
+        this.Game.AwayTeam.Pitcher.IsEligible = false;
+        this.Game.AwayTeam.BenchPitchers.push(this.Game.AwayTeam.Pitcher);
+        this.Game.AwayTeam.SetPitcher(player);
+      }
+      else {
+        this.Game.AwayTeam.BenchPositionPlayers.splice(index, 1);
+
+        if (pos == "C") {
+          player.BattingOrderNumber = this.Game.AwayTeam.Catcher.BattingOrderNumber;
+          this.Game.AwayTeam.Catcher.BattingOrderNumber = 0;
+          this.Game.AwayTeam.Catcher.IsEligible = false;
+          this.Game.AwayTeam.BenchPositionPlayers.push(this.Game.AwayTeam.Catcher);
+          this.Game.AwayTeam.SetCatcher(player);
+        }
+        else if (pos == "1B") {
+          player.BattingOrderNumber = this.Game.AwayTeam.FirstBaseman.BattingOrderNumber;
+          this.Game.AwayTeam.FirstBaseman.BattingOrderNumber = 0;
+          this.Game.AwayTeam.FirstBaseman.IsEligible = false;
+          this.Game.AwayTeam.BenchPositionPlayers.push(this.Game.AwayTeam.FirstBaseman);
+          this.Game.AwayTeam.SetFirstBase(player);
+        }
+        else if (pos == "2B") {
+          player.BattingOrderNumber = this.Game.AwayTeam.SecondBaseman.BattingOrderNumber;
+          this.Game.AwayTeam.SecondBaseman.BattingOrderNumber = 0;
+          this.Game.AwayTeam.SecondBaseman.IsEligible = false;
+          this.Game.AwayTeam.BenchPositionPlayers.push(this.Game.AwayTeam.SecondBaseman);
+          this.Game.AwayTeam.SetSecondBase(player);
+        }
+        else if (pos == "SS") {
+          player.BattingOrderNumber = this.Game.AwayTeam.Shortstop.BattingOrderNumber;
+          this.Game.AwayTeam.Shortstop.BattingOrderNumber = 0;
+          this.Game.AwayTeam.Shortstop.IsEligible = false;
+          this.Game.AwayTeam.BenchPositionPlayers.push(this.Game.AwayTeam.Shortstop);
+          this.Game.AwayTeam.SetShortstop(player);
+        }
+        else if (pos == "3B") {
+          player.BattingOrderNumber = this.Game.AwayTeam.ThirdBaseman.BattingOrderNumber;
+          this.Game.AwayTeam.ThirdBaseman.BattingOrderNumber = 0;
+          this.Game.AwayTeam.ThirdBaseman.IsEligible = false;
+          this.Game.AwayTeam.BenchPositionPlayers.push(this.Game.AwayTeam.ThirdBaseman);
+          this.Game.AwayTeam.SetThirdBase(player);
+        }
+        else if (pos == "LF") {
+          player.BattingOrderNumber = this.Game.AwayTeam.LeftFielder.BattingOrderNumber;
+          this.Game.AwayTeam.LeftFielder.BattingOrderNumber = 0;
+          this.Game.AwayTeam.LeftFielder.IsEligible = false;
+          this.Game.AwayTeam.BenchPositionPlayers.push(this.Game.AwayTeam.LeftFielder);
+          this.Game.AwayTeam.SetLeftField(player);
+        }
+        else if (pos == "CF") {
+          player.BattingOrderNumber = this.Game.AwayTeam.CenterFielder.BattingOrderNumber;
+          this.Game.AwayTeam.CenterFielder.BattingOrderNumber = 0;
+          this.Game.AwayTeam.CenterFielder.IsEligible = false;
+          this.Game.AwayTeam.BenchPositionPlayers.push(this.Game.AwayTeam.CenterFielder);
+          this.Game.AwayTeam.SetCenterField(player);
+        }
+        else if (pos == "RF") {
+          player.BattingOrderNumber = this.Game.AwayTeam.RightFielder.BattingOrderNumber;
+          this.Game.AwayTeam.RightFielder.BattingOrderNumber = 0;
+          this.Game.AwayTeam.RightFielder.IsEligible = false;
+          this.Game.AwayTeam.BenchPositionPlayers.push(this.Game.AwayTeam.RightFielder);
+          this.Game.AwayTeam.SetRightField(player);
+        }
+      }
+
+
+    }
+
+    this.ClearCanvas();
+  }
 }

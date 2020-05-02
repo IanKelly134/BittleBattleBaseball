@@ -22,6 +22,9 @@ export class GameTeamViewModel {
     LastBatter: GamePlayerViewModel;
     NextBatter: GamePlayerViewModel;
 
+    BenchPositionPlayers: Array<GamePlayerViewModel> = new Array<GamePlayerViewModel>();
+    BenchPitchers: Array<GamePlayerViewModel> = new Array<GamePlayerViewModel>();
+
     private numberOfBatters(): number {
         let returnVal = 0;
 
@@ -53,6 +56,14 @@ export class GameTeamViewModel {
             returnVal++;
 
         return returnVal;
+    }
+
+    SetRosterBenchPositionPlayer(player: GamePlayerViewModel) {
+        this.BenchPositionPlayers.push(player);
+    }
+
+    SetRosterBenchPitcher(player: GamePlayerViewModel) {
+        this.BenchPitchers.push(player);
     }
 
     SetPitcher(player: GamePlayerViewModel) {

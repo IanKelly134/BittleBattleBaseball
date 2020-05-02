@@ -284,6 +284,52 @@ export class SetStartingLineupsComponent implements OnInit {
     this.Game.AwayTeam.RightFielder = null;
   }
 
+  SaveHomeTeamBenchPlayers() {
+    for (let player of this.HomeTeamRoster.hitters) {
+      if (this.Game.HomeTeam.Catcher.Id != player.player.id &&
+        this.Game.HomeTeam.FirstBaseman.Id != player.player.id &&
+        this.Game.HomeTeam.SecondBaseman.Id != player.player.id &&
+        this.Game.HomeTeam.Shortstop.Id != player.player.id &&
+        this.Game.HomeTeam.ThirdBaseman.Id != player.player.id &&
+        this.Game.HomeTeam.LeftFielder.Id != player.player.id &&
+        this.Game.HomeTeam.CenterFielder.Id != player.player.id &&
+        this.Game.HomeTeam.RightFielder.Id != player.player.id) {
+        this.Game.HomeTeam.SetRosterBenchPositionPlayer(new GamePlayerViewModel(player.player.position, player, null));
+      }
+    }
+  }
+
+  SaveHomeTeamBenchPitchers() {
+    for (let player of this.HomeTeamRoster.pitchers) {
+      if (this.Game.HomeTeam.Pitcher.Id != player.player.id) {
+        this.Game.HomeTeam.SetRosterBenchPitcher(new GamePlayerViewModel(player.player.position, null, player));
+      }
+    }
+  }
+
+  SaveAwayTeamBenchPlayers() {
+    for (let player of this.AwayTeamRoster.hitters) {
+      if (this.Game.AwayTeam.Catcher.Id != player.player.id &&
+        this.Game.AwayTeam.FirstBaseman.Id != player.player.id &&
+        this.Game.AwayTeam.SecondBaseman.Id != player.player.id &&
+        this.Game.AwayTeam.Shortstop.Id != player.player.id &&
+        this.Game.AwayTeam.ThirdBaseman.Id != player.player.id &&
+        this.Game.AwayTeam.LeftFielder.Id != player.player.id &&
+        this.Game.AwayTeam.CenterFielder.Id != player.player.id &&
+        this.Game.AwayTeam.RightFielder.Id != player.player.id) {
+        this.Game.AwayTeam.SetRosterBenchPositionPlayer(new GamePlayerViewModel(player.player.position, player, null));
+      }
+    }
+  }
+
+  SaveAwayTeamBenchPitchers() {
+    for (let player of this.AwayTeamRoster.pitchers) {
+      if (this.Game.AwayTeam.Pitcher.Id != player.player.id) {
+        this.Game.AwayTeam.SetRosterBenchPitcher(new GamePlayerViewModel(player.player.position, null, player));
+      }
+    }
+  }
+
   RemoveHomePlayerAtLineupNumber(lineupNumber: number) {
     this.Game.HomeTeam.RemovePlayerAtLineupNumber(lineupNumber);
   }
@@ -293,6 +339,10 @@ export class SetStartingLineupsComponent implements OnInit {
   }
 
   StartGame() {
+    this.SaveHomeTeamBenchPlayers();
+    this.SaveAwayTeamBenchPlayers();
+    this.SaveHomeTeamBenchPitchers();
+    this.SaveAwayTeamBenchPitchers();
     localStorage.setItem('bittlebattlebaseball_game_instance' + this.GameId, JSON.stringify(this.Game));
     this.router.navigateByUrl("/game/" + this.GameId);
     //   this.router.navigateByUrl("/game/" + this.GameId, { state: this.Game });

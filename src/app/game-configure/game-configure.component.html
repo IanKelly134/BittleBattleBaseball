@@ -319,15 +319,78 @@
                             </td>
                         </tr>
                     </ng-container>
+                    <tr>
+                        <td colspan="7">
+                            <label>BENCH</label>
+                        </td>
+                    </tr>
+
+                    <ng-container *ngFor="let benchPlayer of Game.HomeTeam.BenchPositionPlayers">
+                        <tr>
+                            <td class="text-left"><label class="small" *ngIf="!benchPlayer.IsEligible">X-</label>
+                                {{benchPlayer.Name}} -
+                                {{benchPlayer.Position}}
+                                <span style="float: right;" *ngIf="benchPlayer.IsEligible">
+                                    <button *ngIf="benchPlayer.Position == 'C'" class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('C', true, benchPlayer, i)">C</button>
+                                    <button class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('1B', true, benchPlayer, i)">1B</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == '2B' || benchPlayer.Position == 'SS' || benchPlayer.Position == '3B')"
+                                        class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('2B', true, benchPlayer, i)">2B</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == '2B' || benchPlayer.Position == 'SS' || benchPlayer.Position == '3B')"
+                                        class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('SS', true, benchPlayer, i)">SS</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == '2B' || benchPlayer.Position == 'SS' || benchPlayer.Position == '3B' || benchPlayer.Position == '1B')"
+                                        class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('3B', true, benchPlayer, i)">3B</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == 'LF' || benchPlayer.Position == 'CF' || benchPlayer.Position == 'RF' || benchPlayer.Position == 'OF' )"
+                                        class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('LF', true, benchPlayer, i)">LF</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == 'LF' || benchPlayer.Position == 'CF' || benchPlayer.Position == 'RF' || benchPlayer.Position == 'OF' )"
+                                        class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('CF', true, benchPlayer, i)">CF</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == 'LF' || benchPlayer.Position == 'CF' || benchPlayer.Position == 'RF' || benchPlayer.Position == 'OF' )"
+                                        class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('RF', true, benchPlayer, i)">RF</button>
+                                </span>
+                            </td>
+                            <td>
+                                {{Game.GetAtBats(benchPlayer.Id, false)}}
+                            </td>
+                            <td>
+                                {{benchPlayer.RunsScored}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHits(benchPlayer.Id, false)}}
+                            </td>
+                            <td>
+                                {{benchPlayer.RBIs}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetWalks(benchPlayer.Id, false)}}
+                            </td>
+                            <td> {{Game.GetStrikeouts(benchPlayer.Id, false)}}
+                            </td>
+                        </tr>
+                    </ng-container>
                 </tbody>
             </table>
+            <br />
+            <button class="btn btn-danger btn-pos"> </button> <label> = Substitution</label>
         </div>
         <div class="col-md-6">
             <h5 class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
                 {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}} Hitting</h5>
             <hr />
-            <table *ngIf="Game && Game.HomeTeam"
+            <table *ngIf="Game && Game.AwayTeam"
                 class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
                 style="margin-top: 20px; opacity: 0.9;">
                 <thead>
@@ -366,8 +429,70 @@
                             </td>
                         </tr>
                     </ng-container>
+                    <tr>
+                        <td colspan="7">
+                            <label>BENCH</label>
+                        </td>
+                    </tr>
+                    <ng-container *ngFor="let benchPlayer of Game.AwayTeam.BenchPositionPlayers; let i = index;">
+                        <tr>
+                            <td class="text-left"><label class="small" *ngIf="!benchPlayer.IsEligible">X-</label>
+                                {{benchPlayer.Name}} -
+                                {{benchPlayer.Position}}
+                                <span style="float: right;" *ngIf="benchPlayer.IsEligible">
+                                    <button *ngIf="benchPlayer.Position == 'C'" class="btn btn-primary btn-pos"
+                                        (click)="setLineupPosition('C', false, benchPlayer, i)">C</button>
+                                    <button class="btn btn-primary btn-pos"
+                                        (click)="setLineupPosition('1B', false, benchPlayer, i)">1B</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == '2B' || benchPlayer.Position == 'SS' || benchPlayer.Position == '3B')"
+                                        class="btn btn-primary btn-pos"
+                                        (click)="setLineupPosition('2B', false, benchPlayer, i)">2B</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == '2B' || benchPlayer.Position == 'SS' || benchPlayer.Position == '3B')"
+                                        class="btn btn-primary btn-pos"
+                                        (click)="setLineupPosition('SS', false, benchPlayer, i)">SS</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == '2B' || benchPlayer.Position == 'SS' || benchPlayer.Position == '3B' || benchPlayer.Position == '1B')"
+                                        class="btn btn-primary btn-pos"
+                                        (click)="setLineupPosition('3B', false, benchPlayer, i)">3B</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == 'LF' || benchPlayer.Position == 'CF' || benchPlayer.Position == 'RF' || benchPlayer.Position == 'OF' )"
+                                        class="btn btn-primary btn-pos"
+                                        (click)="setLineupPosition('LF', false, benchPlayer, i)">LF</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == 'LF' || benchPlayer.Position == 'CF' || benchPlayer.Position == 'RF' || benchPlayer.Position == 'OF' )"
+                                        class="btn btn-primary btn-pos"
+                                        (click)="setLineupPosition('CF', false, benchPlayer, i)">CF</button>
+                                    <button
+                                        *ngIf="(benchPlayer.Position == 'LF' || benchPlayer.Position == 'CF' || benchPlayer.Position == 'RF' || benchPlayer.Position == 'OF' )"
+                                        class="btn btn-primary btn-pos"
+                                        (click)="setLineupPosition('RF', false, benchPlayer, i)">RF</button>
+                                </span>
+                            </td>
+                            <td>
+                                {{Game.GetAtBats(benchPlayer.Id, false)}}
+                            </td>
+                            <td>
+                                {{benchPlayer.RunsScored}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHits(benchPlayer.Id, false)}}
+                            </td>
+                            <td>
+                                {{benchPlayer.RBIs}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetWalks(benchPlayer.Id, false)}}
+                            </td>
+                            <td> {{Game.GetStrikeouts(benchPlayer.Id, false)}}
+                            </td>
+                        </tr>
+                    </ng-container>
                 </tbody>
             </table>
+            <br />
+            <button class="btn btn-primary btn-pos"> </button> <label> = Substitution</label>
         </div>
     </div>
 </div>

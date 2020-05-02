@@ -15,6 +15,7 @@ export class GamePlayerViewModel {
     PlayerImageURL: string;
     RunsScored: number = 0;
     RBIs: number = 0;
+    IsEligible: boolean = true;
 
     constructor(pos: string, hitter: HitterPlayerSeasonViewModel, pitcher: PitcherPlayerSeasonViewModel) {
         this.Position = pos;
