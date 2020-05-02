@@ -624,7 +624,7 @@ export class GameplayComponent implements OnInit {
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts++;
-      if (this.Game.CurrentInning.InningNumber == 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns) {
+      if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns) {
         swal({
           title: "Game Over!",
           text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
@@ -632,7 +632,7 @@ export class GameplayComponent implements OnInit {
           dangerMode: true,
         })
           .then(() => {
-            this.router.navigateByUrl("/home");
+            this.Game.IsGameInProgress = false;
           });
       }
       else {
@@ -655,7 +655,7 @@ export class GameplayComponent implements OnInit {
 
       if (this.Game.CurrentInning.AwayOuts == 3) {
 
-        if (this.Game.CurrentInning.InningNumber == 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
+        if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
           swal({
             title: "Game Over!",
             text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
@@ -663,7 +663,7 @@ export class GameplayComponent implements OnInit {
             dangerMode: true,
           })
             .then(() => {
-
+              this.Game.IsGameInProgress = false;
             });
         } else {
 

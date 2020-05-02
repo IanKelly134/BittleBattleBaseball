@@ -32,6 +32,8 @@ export class GameViewModel {
     RunnerOnThird: GamePlayerViewModel;
     RunnersWhoScoredOnPlay: GamePlayerViewModel[];
 
+    IsGameInProgress: boolean = true;
+
     constructor() {
 
     }
