@@ -215,7 +215,7 @@
                         </td>
                     </tr>
 
-                    <ng-container *ngFor="let benchPlayer of Game.HomeTeam.BenchPositionPlayers">
+                    <ng-container *ngFor="let benchPlayer of Game.HomeTeam.BenchPositionPlayers; let i = index;">
                         <tr>
                             <td class="text-left"><label class="small" *ngIf="!benchPlayer.IsEligible">X-</label>
                                 {{benchPlayer.Name}} -
