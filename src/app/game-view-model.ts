@@ -271,5 +271,123 @@ export class GameViewModel {
         return returnVal;
     }
 
+    GetInningsPitched(playerId: number, isHome: boolean): string {
+        let outsRecorded = 0;
 
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.AwayAtBats : inning.HomeAtBats)) {
+                    if (ab.Pitcher.Id == playerId && (ab.Result == EnumAtBatResult.FieldersChoice
+                        || ab.Result == EnumAtBatResult.GIDP || ab.Result == EnumAtBatResult.GITP || ab.Result == EnumAtBatResult.Out
+                        || ab.Result == EnumAtBatResult.Sacrifce || ab.Result == EnumAtBatResult.StrikeOut)) {
+
+                        if (ab.Result == EnumAtBatResult.GITP) {
+                            outsRecorded += 3;
+                        }
+                        else if (ab.Result == EnumAtBatResult.GIDP) {
+                            outsRecorded += 2;
+                        } else {
+                            outsRecorded++;
+                        }
+                    }
+                }
+            }
+        }
+
+        let inningsPitched = Math.floor(outsRecorded / 3);
+        let inningsPitchedPartial = outsRecorded % 3;
+
+        let returnVal = inningsPitched + "." + inningsPitchedPartial;
+
+        return returnVal;
+    }
+
+    GetHitsAllowed(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.AwayAtBats : inning.HomeAtBats)) {
+                    if (ab.Pitcher.Id == playerId) {
+                        if (ab.Result == EnumAtBatResult.Single || ab.Result == EnumAtBatResult.Double
+                            || ab.Result == EnumAtBatResult.Triple || ab.Result == EnumAtBatResult.HomeRun) {
+                            returnVal++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
+
+    GetWalksAllowed(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.AwayAtBats : inning.HomeAtBats)) {
+                    if (ab.Pitcher.Id == playerId) {
+                        if (ab.Result == EnumAtBatResult.Walk) {
+                            returnVal++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
+
+    GetStrikeoutsByPitcher(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.AwayAtBats : inning.HomeAtBats)) {
+                    if (ab.Pitcher.Id == playerId) {
+                        if (ab.Result == EnumAtBatResult.StrikeOut) {
+                            returnVal++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
+
+    GetRunsAllowed(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.AwayAtBats : inning.HomeAtBats)) {
+                    if (ab.Pitcher.Id == playerId) {
+                        returnVal += ab.RunsScored;
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
+
+    GetHomeRunsAllowed(playerId: number, isHome: boolean): number {
+        let returnVal = 0;
+
+        if (this.Innings) {
+            for (let inning of this.Innings) {
+                for (let ab of (isHome ? inning.AwayAtBats : inning.HomeAtBats)) {
+                    if (ab.Pitcher.Id == playerId) {
+                        if (ab.Result == EnumAtBatResult.HomeRun) {
+                            returnVal++;
+                        }
+                    }
+                }
+            }
+        }
+
+        return returnVal;
+    }
 }

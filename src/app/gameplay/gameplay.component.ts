@@ -245,6 +245,7 @@ export class GameplayComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -314,6 +315,7 @@ export class GameplayComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -377,6 +379,7 @@ export class GameplayComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -434,6 +437,7 @@ export class GameplayComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -518,6 +522,7 @@ export class GameplayComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -528,18 +533,21 @@ export class GameplayComponent implements OnInit {
       }
     }
 
-    //***
-    let pitcherTiredFactor = 1.004355;
+    //***    
     this.Game.NewAtBat();
+
     if (this.Game.CurrentInning.IsBottomOfInning) {
+      let pitcherTiredFactor = this.Game.AwayTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
       this.DrawHitterOnHomeDeck();
       this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX = this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
     else {
+      let pitcherTiredFactor = this.Game.HomeTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
       this.DrawHitterOnAwayDeck();
       this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
   }
+
 
   ExecuteCurrentBatterIsOut() {
     let diceRoll = this.GenerateRandomNumber(1, 16);
@@ -1915,6 +1923,7 @@ export class GameplayComponent implements OnInit {
 
     if (isHome) {
       if (pos == "P") {
+        this.Game.HomeTeam.HasReliefPitcherBeenUsed = true;
         this.Game.HomeTeam.BenchPitchers.splice(index, 1);
         player.BattingOrderNumber = this.Game.HomeTeam.Pitcher.BattingOrderNumber;
         this.Game.HomeTeam.Pitcher.BattingOrderNumber = 0;
@@ -1985,6 +1994,7 @@ export class GameplayComponent implements OnInit {
     }
     else {
       if (pos == "P") {
+        this.Game.AwayTeam.HasReliefPitcherBeenUsed = true;
         this.Game.AwayTeam.BenchPitchers.splice(index, 1);
         player.BattingOrderNumber = this.Game.AwayTeam.Pitcher.BattingOrderNumber;
         this.Game.AwayTeam.Pitcher.BattingOrderNumber = 0;
@@ -2052,8 +2062,6 @@ export class GameplayComponent implements OnInit {
           this.Game.AwayTeam.SetRightField(player);
         }
       }
-
-
     }
 
     this.ClearCanvas();

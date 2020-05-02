@@ -7,4 +7,5 @@ export class GameAtBatViewModel {
     Result: EnumAtBatResult;
     Balls: number;
     Strikes: number;
+    RunsScored: number = 0;
 }

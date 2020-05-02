@@ -389,4 +389,174 @@
             <button class="btn btn-primary btn-pos"> </button> <label> = Substitution</label>
         </div>
     </div>
+    <hr />
+    <!-- PITCHING -->
+    <div class="row" style="margin: 0px; padding: 0px;">
+        <div class="col-md-6">
+            <h5 clas="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
+                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}} Pitching</h5>
+            <hr />
+            <table *ngIf="Game && Game.HomeTeam"
+                class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>Pitcher</th>
+                        <th>IP</th>
+                        <th>H</th>
+                        <th>R</th>
+                        <th>BB</th>
+                        <th>K</th>
+                        <th>HR</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="Game && Game.HomeTeam">
+                    <ng-container>
+                        <tr>
+                            <td class="text-left"> {{Game.HomeTeam.Pitcher.Name}}</td>
+                            <td>
+                                {{Game.GetInningsPitched(Game.HomeTeam.Pitcher.Id, true)}}
+                            </td>
+                            <td>
+                                {{Game.GetHitsAllowed(Game.HomeTeam.Pitcher.Id, true)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetRunsAllowed(Game.HomeTeam.Pitcher.Id, true)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHitsAllowed(Game.HomeTeam.Pitcher.Id, true)}}
+                            </td>
+                            <td>
+                                {{Game.GetStrikeoutsByPitcher(Game.HomeTeam.Pitcher.Id, true)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHomeRunsAllowed(Game.HomeTeam.Pitcher.Id, true)}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <tr>
+                        <td colspan="9">
+                            <label>BULLPEN</label>
+                        </td>
+                    </tr>
+                    <ng-container *ngFor="let benchPlayer of Game.HomeTeam.BenchPitchers; let i = index;">
+                        <tr>
+                            <td class="text-left"><label class="small" *ngIf="!benchPlayer.IsEligible">X-</label>
+                                {{benchPlayer.Name}}
+                                <span style="float: right;" *ngIf="benchPlayer.IsEligible">
+                                    <button *ngIf="benchPlayer.Position == 'P' || benchPlayer.Position == 'SP'"
+                                        class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('P', true, benchPlayer, i)">P</button>
+                                </span>
+                            </td>
+                            <td>
+                                {{Game.GetInningsPitched(benchPlayer.Id, true)}}
+                            </td>
+                            <td>
+                                {{Game.GetHitsAllowed(benchPlayer.Id, true)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetRunsAllowed(benchPlayer.Id, true)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHitsAllowed(benchPlayer.Id, true)}}
+                            </td>
+                            <td>
+                                {{Game.GetStrikeoutsByPitcher(benchPlayer.Id, true)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHomeRunsAllowed(benchPlayer.Id, true)}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <br />
+            <button class="btn btn-danger btn-pos"> </button> <label> = Substitution</label>
+        </div>
+        <div class="col-md-6">
+            <h5 class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
+                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}} Pitching</h5>
+            <hr />
+            <table *ngIf="Game && Game.AwayTeam"
+                class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>Pitcher</th>
+                        <th>IP</th>
+                        <th>H</th>
+                        <th>R</th>
+                        <th>BB</th>
+                        <th>K</th>
+                        <th>HR</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="Game && Game.AwayTeam">
+                    <ng-container>
+                        <tr>
+                            <td class="text-left"> {{Game.AwayTeam.Pitcher.Name}}</td>
+                            <td>
+                                {{Game.GetInningsPitched(Game.AwayTeam.Pitcher.Id, false)}}
+                            </td>
+                            <td>
+                                {{Game.GetHitsAllowed(Game.AwayTeam.Pitcher.Id, false)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetRunsAllowed(Game.AwayTeam.Pitcher.Id, false)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHitsAllowed(Game.AwayTeam.Pitcher.Id, false)}}
+                            </td>
+                            <td>
+                                {{Game.GetStrikeoutsByPitcher(Game.AwayTeam.Pitcher.Id, false)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHomeRunsAllowed(Game.AwayTeam.Pitcher.Id, false)}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                    <tr>
+                        <td colspan="9">
+                            <label>BULLPEN</label>
+                        </td>
+                    </tr>
+                    <ng-container *ngFor="let benchPlayer of Game.AwayTeam.BenchPitchers; let i = index;">
+                        <tr>
+                            <td class="text-left"><label class="small" *ngIf="!benchPlayer.IsEligible">X-</label>
+                                {{benchPlayer.Name}}
+                                <span style="float: right;" *ngIf="benchPlayer.IsEligible">
+                                    <button *ngIf="benchPlayer.Position == 'P' || benchPlayer.Position == 'SP'"
+                                        class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('P', false, benchPlayer, i)">P</button>
+                                </span>
+                            </td>
+                            <td>
+                                {{Game.GetInningsPitched(benchPlayer.Id, false)}}
+                            </td>
+                            <td>
+                                {{Game.GetHitsAllowed(benchPlayer.Id, false)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetRunsAllowed(benchPlayer.Id, false)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHitsAllowed(benchPlayer.Id, false)}}
+                            </td>
+                            <td>
+                                {{Game.GetStrikeoutsByPitcher(benchPlayer.Id, false)}}
+                            </td>
+                            <td class="text-center">
+                                {{Game.GetHomeRunsAllowed(benchPlayer.Id, false)}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+            <br />
+            <button class="btn btn-danger btn-pos"> </button> <label> = Substitution</label>
+        </div>
+    </div>
 </div>

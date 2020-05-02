@@ -196,6 +196,35 @@ export class GameConfigureComponent implements OnInit {
     p.Id = 201;
     homeTeam.SetPitcher(p);
 
+    var benchPitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
+    benchPitcherHitterPlayerSeasonViewModel.obp = 0.226;
+    benchPitcherHitterPlayerSeasonViewModel.slg = 0.305;
+    benchPitcherHitterPlayerSeasonViewModel.avg = 0.200;
+    benchPitcherHitterPlayerSeasonViewModel.pa = 600;
+    benchPitcherHitterPlayerSeasonViewModel.ab = 500;
+    benchPitcherHitterPlayerSeasonViewModel.hr = 2;
+    benchPitcherHitterPlayerSeasonViewModel.rbi = 19;
+    benchPitcherHitterPlayerSeasonViewModel.sb = 20;
+    benchPitcherHitterPlayerSeasonViewModel.bb = 100;
+    benchPitcherHitterPlayerSeasonViewModel.season = 2011;
+    benchPitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
+    benchPitcherHitterPlayerSeasonViewModel.player.playerName = "Jason Isringhausen";
+    var benchPitcherPitcherPlayerSeasonViewModel = new PitcherPlayerSeasonViewModel();
+    benchPitcherPitcherPlayerSeasonViewModel.era = 3.39;
+    benchPitcherPitcherPlayerSeasonViewModel.fldPct = .989;
+    benchPitcherPitcherPlayerSeasonViewModel.whip = 1.23;
+    benchPitcherPitcherPlayerSeasonViewModel.wins = 19;
+    benchPitcherPitcherPlayerSeasonViewModel.losses = 7;
+    benchPitcherPitcherPlayerSeasonViewModel.season = 2011;
+    benchPitcherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
+    benchPitcherPitcherPlayerSeasonViewModel.player.playerName = "Jason Isringhausen";
+    benchPitcherPitcherPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/425794.jpg";
+    benchPitcherPitcherPlayerSeasonViewModel.player.bats = "R";
+    var brp = new GamePlayerViewModel("SP", benchPitcherHitterPlayerSeasonViewModel, benchPitcherPitcherPlayerSeasonViewModel);
+    brp.BattingOrderNumber = 9;
+    brp.Id = 241;
+    homeTeam.SetRosterBenchPitcher(brp);
+
     var catcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     catcherHitterPlayerSeasonViewModel.obp = 0.333;
     catcherHitterPlayerSeasonViewModel.slg = 0.405;
@@ -731,6 +760,7 @@ export class GameConfigureComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -800,6 +830,7 @@ export class GameConfigureComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -863,6 +894,7 @@ export class GameConfigureComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -920,6 +952,7 @@ export class GameConfigureComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -1004,6 +1037,7 @@ export class GameConfigureComponent implements OnInit {
 
         playerWhoScored.RunsScored++;
         this.Game.CurrentAtBat.Batter.RBIs++;
+        this.Game.CurrentAtBat.RunsScored++;
         this.showSuccess(playerWhoScored.Name + " scored!");
       }
 
@@ -1015,13 +1049,14 @@ export class GameConfigureComponent implements OnInit {
     }
 
     //***
-    let pitcherTiredFactor = 1.004355;
     this.Game.NewAtBat();
     if (this.Game.CurrentInning.IsBottomOfInning) {
+      let pitcherTiredFactor = this.Game.AwayTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
       this.DrawHitterOnHomeDeck();
       this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX = this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
     else {
+      let pitcherTiredFactor = this.Game.HomeTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
       this.DrawHitterOnAwayDeck();
       this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
@@ -2435,6 +2470,7 @@ export class GameConfigureComponent implements OnInit {
 
     if (isHome) {
       if (pos == "P") {
+        this.Game.HomeTeam.HasReliefPitcherBeenUsed = true;
         this.Game.HomeTeam.BenchPitchers.splice(index, 1);
         player.BattingOrderNumber = this.Game.HomeTeam.Pitcher.BattingOrderNumber;
         this.Game.HomeTeam.Pitcher.BattingOrderNumber = 0;
@@ -2505,6 +2541,7 @@ export class GameConfigureComponent implements OnInit {
     }
     else {
       if (pos == "P") {
+        this.Game.AwayTeam.HasReliefPitcherBeenUsed = true;
         this.Game.AwayTeam.BenchPitchers.splice(index, 1);
         player.BattingOrderNumber = this.Game.AwayTeam.Pitcher.BattingOrderNumber;
         this.Game.AwayTeam.Pitcher.BattingOrderNumber = 0;

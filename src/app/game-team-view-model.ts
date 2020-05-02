@@ -22,6 +22,8 @@ export class GameTeamViewModel {
     LastBatter: GamePlayerViewModel;
     NextBatter: GamePlayerViewModel;
 
+    HasReliefPitcherBeenUsed: boolean = false;
+
     BenchPositionPlayers: Array<GamePlayerViewModel> = new Array<GamePlayerViewModel>();
     BenchPitchers: Array<GamePlayerViewModel> = new Array<GamePlayerViewModel>();
 
