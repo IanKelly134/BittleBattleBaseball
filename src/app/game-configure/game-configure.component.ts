@@ -1133,13 +1133,12 @@ export class GameConfigureComponent implements OnInit {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " grounds out to pitcher.");
     }
 
-
-
-    let pitcherTiredFactor = 1.004355;
     if (this.Game.CurrentInning.IsBottomOfInning) {
+      let pitcherTiredFactor = this.Game.AwayTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
       this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX = this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
     else {
+      let pitcherTiredFactor = this.Game.HomeTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
       this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
 
