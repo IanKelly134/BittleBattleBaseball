@@ -27,12 +27,29 @@ export class GamePlayerViewModel {
         }
 
         if (pitcher) {
+
+            //TODO - Pull in these stats
+            if (!hitter) {
+                hitter = new HitterPlayerSeasonViewModel();
+                hitter.obp = 0.226;
+                hitter.slg = 0.305;
+                hitter.avg = 0.200;
+                hitter.pa = 600;
+                hitter.ab = 500;
+                hitter.hr = 2;
+                hitter.rbi = 19;
+                hitter.sb = 20;
+                hitter.bb = 100;
+                hitter.season = pitcher.season;
+            }
+
             this.HittingSeasonStats = hitter;
             this.PitchingSeasonStats = pitcher;
             if (!this.PitchingSeasonStats.PX) {
                 this.PitchingSeasonStats.PX = this.PitchingSeasonStats.whip / 1.355; // Default
                 this.PitchingSeasonStats.StartingPX = this.PitchingSeasonStats.PX;
             }
+
             this.Name = this.PitchingSeasonStats.player.playerName;
             this.Id = this.PitchingSeasonStats.player.id;
             this.PlayerImageURL = this.PitchingSeasonStats.player.playerImageURL;
