@@ -210,15 +210,15 @@ export class GameConfigureComponent implements OnInit {
     benchPitcherHitterPlayerSeasonViewModel.player = new PlayerViewModel();
     benchPitcherHitterPlayerSeasonViewModel.player.playerName = "Jason Isringhausen";
     var benchPitcherPitcherPlayerSeasonViewModel = new PitcherPlayerSeasonViewModel();
-    benchPitcherPitcherPlayerSeasonViewModel.era = 3.39;
+    benchPitcherPitcherPlayerSeasonViewModel.era = 4.19;
     benchPitcherPitcherPlayerSeasonViewModel.fldPct = .989;
     benchPitcherPitcherPlayerSeasonViewModel.whip = 1.23;
-    benchPitcherPitcherPlayerSeasonViewModel.wins = 19;
-    benchPitcherPitcherPlayerSeasonViewModel.losses = 7;
+    benchPitcherPitcherPlayerSeasonViewModel.wins = 2;
+    benchPitcherPitcherPlayerSeasonViewModel.losses = 1;
     benchPitcherPitcherPlayerSeasonViewModel.season = 2011;
     benchPitcherPitcherPlayerSeasonViewModel.player = new PlayerViewModel();
     benchPitcherPitcherPlayerSeasonViewModel.player.playerName = "Jason Isringhausen";
-    benchPitcherPitcherPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/425794.jpg";
+    benchPitcherPitcherPlayerSeasonViewModel.player.playerImageURL = "https://securea.mlb.com/mlb/images/players/head_shot/116414.jpg";
     benchPitcherPitcherPlayerSeasonViewModel.player.bats = "R";
     var brp = new GamePlayerViewModel("SP", benchPitcherHitterPlayerSeasonViewModel, benchPitcherPitcherPlayerSeasonViewModel);
     brp.BattingOrderNumber = 9;
@@ -2476,6 +2476,10 @@ export class GameConfigureComponent implements OnInit {
         this.Game.HomeTeam.Pitcher.IsEligible = false;
         this.Game.HomeTeam.BenchPitchers.push(this.Game.HomeTeam.Pitcher);
         this.Game.HomeTeam.SetPitcher(player);
+
+        if (!this.Game.CurrentInning.IsBottomOfInning) {
+          this.Game.CurrentAtBat.Pitcher = player;
+        }
       }
       else {
         this.Game.HomeTeam.BenchPositionPlayers.splice(index, 1);
@@ -2537,6 +2541,10 @@ export class GameConfigureComponent implements OnInit {
           this.Game.HomeTeam.SetRightField(player);
         }
       }
+
+      if (this.Game.CurrentAtBat.Batter.Position == pos && this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.CurrentAtBat.Batter = player;
+      }
     }
     else {
       if (pos == "P") {
@@ -2547,6 +2555,10 @@ export class GameConfigureComponent implements OnInit {
         this.Game.AwayTeam.Pitcher.IsEligible = false;
         this.Game.AwayTeam.BenchPitchers.push(this.Game.AwayTeam.Pitcher);
         this.Game.AwayTeam.SetPitcher(player);
+
+        if (this.Game.CurrentInning.IsBottomOfInning) {
+          this.Game.CurrentAtBat.Pitcher = player;
+        }
       }
       else {
         this.Game.AwayTeam.BenchPositionPlayers.splice(index, 1);
@@ -2608,9 +2620,15 @@ export class GameConfigureComponent implements OnInit {
           this.Game.AwayTeam.SetRightField(player);
         }
       }
+
+      if (this.Game.CurrentAtBat.Batter.Position == pos && !this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.CurrentAtBat.Batter = player;
+      }
     }
 
-    this.ClearCanvas();
+    setTimeout(() => {
+      this.ClearCanvas();
+    }, 200);
   }
 
 
