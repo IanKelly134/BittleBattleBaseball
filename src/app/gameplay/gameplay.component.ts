@@ -574,14 +574,131 @@ export class GameplayComponent implements OnInit {
     else if (diceRoll == 5) {
       this.FlyBallOutToLeftField();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to left field.");
+
+      //Sac Fly Logic
+      if ((this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.HomeOuts <= 1) || (!this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.AwayOuts <= 1)) {
+        if (this.Game.RunnerOnThird) {
+          if (this.Game.RunnerOnThird.Position == "CF" || this.Game.RunnerOnThird.Position == "SS" || this.Game.RunnerOnThird.Position == "2B") {
+            let random = this.GenerateRandomNumber(1, 5);
+            this.DrawThrowFromLeftFieldToHome();
+            if (random != 1) {//Runner Scores on sac fly
+              this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
+              this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+              this.Game.RunnerOnThird = null;
+            } else { //runner out on sac fly       
+              this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
+              this.Game.RunnerOnThird = null;
+              if (this.Game.CurrentInning.IsBottomOfInning) {
+                this.Game.CurrentInning.HomeOuts++;
+              } else {
+                this.Game.CurrentInning.AwayOuts++;
+              }
+            }
+          } else if (this.Game.RunnerOnThird.Position == "LF" || this.Game.RunnerOnThird.Position == "3B" || this.Game.RunnerOnThird.Position == "RF") {
+            let random = this.GenerateRandomNumber(0, 1);
+            this.DrawThrowFromLeftFieldToHome();
+            if (random == 1) {//Runner Scores on sac fly
+              this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
+              this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+              this.Game.RunnerOnThird = null;
+            } else { //runner out on sac fly       
+              this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
+              this.Game.RunnerOnThird = null;
+              if (this.Game.CurrentInning.IsBottomOfInning) {
+                this.Game.CurrentInning.HomeOuts++;
+              } else {
+                this.Game.CurrentInning.AwayOuts++;
+              }
+            }
+          }
+        }
+      }
     }
     else if (diceRoll == 6) {
       this.FlyBallOutToCenterField();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to center field.");
+
+      //Sac Fly Logic
+      if ((this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.HomeOuts <= 1) || (!this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.AwayOuts <= 1)) {
+        if (this.Game.RunnerOnThird) {
+          if (this.Game.RunnerOnThird.Position == "CF" || this.Game.RunnerOnThird.Position == "SS" || this.Game.RunnerOnThird.Position == "2B") {
+            let random = this.GenerateRandomNumber(1, 4);
+            this.DrawThrowFromCenterFieldToHome();
+            if (random != 1) {//Runner Scores on sac fly
+              this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
+              this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+              this.Game.RunnerOnThird = null;
+            } else { //runner out on sac fly       
+              this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
+              this.Game.RunnerOnThird = null;
+              if (this.Game.CurrentInning.IsBottomOfInning) {
+                this.Game.CurrentInning.HomeOuts++;
+              } else {
+                this.Game.CurrentInning.AwayOuts++;
+              }
+            }
+          } else if (this.Game.RunnerOnThird.Position == "LF" || this.Game.RunnerOnThird.Position == "3B" || this.Game.RunnerOnThird.Position == "RF") {
+            let random = this.GenerateRandomNumber(0, 2);
+            this.DrawThrowFromCenterFieldToHome();
+            if (random == 1) {//Runner Scores on sac fly
+              this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
+              this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+              this.Game.RunnerOnThird = null;
+            } else { //runner out on sac fly       
+              this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
+              this.Game.RunnerOnThird = null;
+              if (this.Game.CurrentInning.IsBottomOfInning) {
+                this.Game.CurrentInning.HomeOuts++;
+              } else {
+                this.Game.CurrentInning.AwayOuts++;
+              }
+            }
+          }
+        }
+      }
     }
     else if (diceRoll == 7) {
       this.FlyBallOutToRightField();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " pops out to right field.");
+
+      //Sac Fly Logic
+      if ((this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.HomeOuts <= 1) || (!this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.AwayOuts <= 1)) {
+        if (this.Game.RunnerOnThird) {
+          if (this.Game.RunnerOnThird.Position == "CF" || this.Game.RunnerOnThird.Position == "SS" || this.Game.RunnerOnThird.Position == "2B") {
+            let random = this.GenerateRandomNumber(1, 6);
+            this.DrawThrowFromRightFieldToHome();
+            if (random != 1) {//Runner Scores on sac fly
+              this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
+              this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+              this.Game.RunnerOnThird = null;
+            } else { //runner out on sac fly       
+              this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
+              this.Game.RunnerOnThird = null;
+              if (this.Game.CurrentInning.IsBottomOfInning) {
+                this.Game.CurrentInning.HomeOuts++;
+              } else {
+                this.Game.CurrentInning.AwayOuts++;
+              }
+            }
+          } else if (this.Game.RunnerOnThird.Position == "LF" || this.Game.RunnerOnThird.Position == "3B" || this.Game.RunnerOnThird.Position == "RF") {
+            let random = this.GenerateRandomNumber(0, 2);
+            this.DrawThrowFromRightFieldToHome();
+            if (random == 1) {//Runner Scores on sac fly
+              this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
+              this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+              this.Game.RunnerOnThird = null;
+            } else { //runner out on sac fly       
+              this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
+              this.Game.RunnerOnThird = null;
+              if (this.Game.CurrentInning.IsBottomOfInning) {
+                this.Game.CurrentInning.HomeOuts++;
+              } else {
+                this.Game.CurrentInning.AwayOuts++;
+              }
+            }
+          }
+        }
+      }
     }
     else if (diceRoll == 8) {
       this.FlyBallOutToPitcher();
@@ -619,8 +736,6 @@ export class GameplayComponent implements OnInit {
       this.GroundBallOutToPitcher();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " grounds out to pitcher.");
     }
-
-
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
       let pitcherTiredFactor = this.Game.AwayTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
@@ -690,6 +805,36 @@ export class GameplayComponent implements OnInit {
       }
     }
 
+  }
+
+  DrawThrowFromLeftFieldToHome() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.leftFielderX + this.playerFieldImgAvatarWidth / 2, this.leftFielderY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.bezierCurveTo(this.leftFielderX + this.playerFieldImgAvatarWidth / 2, this.leftFielderY + this.playerFieldImgAvatarHeight / 2, this.leftFielderX + 75, this.leftFielderY - 50, this.homePlateX, this.homePlateY);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+  DrawThrowFromCenterFieldToHome() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.centerFielderX + this.playerFieldImgAvatarWidth / 2, this.centerFielderY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.bezierCurveTo(this.centerFielderX + this.playerFieldImgAvatarWidth / 2, this.centerFielderY + this.playerFieldImgAvatarHeight / 2, this.centerFielderX - 15, this.centerFielderY - 20, this.homePlateX, this.homePlateY);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+  DrawThrowFromRightFieldToHome() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.rightFielderX + this.playerFieldImgAvatarWidth / 2, this.rightFielderY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.bezierCurveTo(this.rightFielderX + this.playerFieldImgAvatarWidth / 2, this.rightFielderY + this.playerFieldImgAvatarHeight / 2, this.rightFielderX - 15, this.rightFielderY - 20, this.homePlateX, this.homePlateY);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
   }
 
 
