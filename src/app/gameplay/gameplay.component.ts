@@ -197,6 +197,7 @@ export class GameplayComponent implements OnInit {
   }
 
   ExecuteCurrentBatterReachedBase() {
+    this.Game.RunnersWhoScoredOnPlay = [];
     let typeOfReachedBase = this.GenerateRandomNumber(1, 1000);
     let diceRoll: Number;
     if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -533,9 +534,8 @@ export class GameplayComponent implements OnInit {
       }
     }
 
-    //***    
+    //***
     this.Game.NewAtBat();
-
     if (this.Game.CurrentInning.IsBottomOfInning) {
       let pitcherTiredFactor = this.Game.AwayTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
       this.DrawHitterOnHomeDeck();
@@ -549,6 +549,7 @@ export class GameplayComponent implements OnInit {
   }
 
   ExecuteCurrentBatterIsOut() {
+    this.Game.RunnersWhoScoredOnPlay = [];
     let diceRoll = this.GenerateRandomNumber(1, 24);
     //this.showWarning("Dice Roll is " + diceRoll);
 
@@ -766,6 +767,21 @@ export class GameplayComponent implements OnInit {
     else if (diceRoll == 24) {
       this.LineOutToRight();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to right.");
+    }
+
+    for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
+      if (this.Game.CurrentInning.IsBottomOfInning) {
+        this.Game.CurrentInning.HomeRunsScored++;
+        this.Game.HomeTeamRuns++;
+      } else {
+        this.Game.CurrentInning.AwayRunsScored++;
+        this.Game.AwayTeamRuns++;
+      }
+
+      playerWhoScored.RunsScored++;
+      this.Game.CurrentAtBat.Batter.RBIs++;
+      this.Game.CurrentAtBat.RunsScored++;
+      this.showSuccess(playerWhoScored.Name + " scored!");
     }
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
