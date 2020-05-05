@@ -548,9 +548,8 @@ export class GameplayComponent implements OnInit {
     }
   }
 
-
   ExecuteCurrentBatterIsOut() {
-    let diceRoll = this.GenerateRandomNumber(1, 16);
+    let diceRoll = this.GenerateRandomNumber(1, 24);
     //this.showWarning("Dice Roll is " + diceRoll);
 
     this.Game.CurrentAtBat.Result = EnumAtBatResult.Out;
@@ -735,6 +734,38 @@ export class GameplayComponent implements OnInit {
     else if (diceRoll == 16) {
       this.GroundBallOutToPitcher();
       this.showError(this.Game.CurrentAtBat.Batter.Name + " grounds out to pitcher.");
+    }
+    else if (diceRoll == 17) {
+      this.LineOutToThird();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to third.");
+    }
+    else if (diceRoll == 18) {
+      this.LineOutToShort();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to short.");
+    }
+    else if (diceRoll == 19) {
+      this.LineOutToSecond();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to second.");
+    }
+    else if (diceRoll == 20) {
+      this.LineOutToFirst();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to first.");
+    }
+    else if (diceRoll == 21) {
+      this.LineOutToPitcher();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to pitcher.");
+    }
+    else if (diceRoll == 22) {
+      this.LineOutToLeft();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to left.");
+    }
+    else if (diceRoll == 23) {
+      this.LineOutToCenter();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to center.");
+    }
+    else if (diceRoll == 24) {
+      this.LineOutToRight();
+      this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to right.");
     }
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -1784,6 +1815,88 @@ export class GameplayComponent implements OnInit {
       this.ctx.strokeStyle = 'white';
       this.ctx.stroke();
     }, 200);
+  }
+
+  //Line Drive Outs
+  LineOutToLeft() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+    this.ctx.bezierCurveTo(this.homePlateX, this.homePlateY, (this.homePlateX + this.leftFielderX) / 2, this.leftFielderY + 20, this.leftFielderX + this.playerFieldImgAvatarWidth / 2, this.leftFielderY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+
+  LineOutToCenter() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+    this.ctx.bezierCurveTo(this.homePlateX, this.homePlateY, (this.homePlateX + this.centerFielderX) / 2, this.centerFielderY + 20, this.centerFielderX + this.playerFieldImgAvatarWidth / 2, this.centerFielderY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+  LineOutToRight() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+    this.ctx.bezierCurveTo(this.homePlateX, this.homePlateY, (this.homePlateX + this.rightFielderX) / 2, this.rightFielderY + 20, this.rightFielderX + this.playerFieldImgAvatarWidth / 2, this.rightFielderY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+  LineOutToThird() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+    this.ctx.bezierCurveTo(this.homePlateX, this.homePlateY, (this.homePlateX + this.thirdBasemanX) / 2, this.thirdBasemanY + 20, this.thirdBasemanX + this.playerFieldImgAvatarWidth / 2, this.thirdBasemanY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+  LineOutToShort() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+    this.ctx.bezierCurveTo(this.homePlateX, this.homePlateY, (this.homePlateX + this.shortstopX) / 2, this.shortstopY + 20, this.shortstopX + this.playerFieldImgAvatarWidth / 2, this.shortstopY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+  LineOutToSecond() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+    this.ctx.bezierCurveTo(this.homePlateX, this.homePlateY, (this.homePlateX + this.secondBasemanX) / 2, this.secondBasemanY + 20, this.secondBasemanX + this.playerFieldImgAvatarWidth / 2, this.secondBasemanY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+  LineOutToFirst() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+    this.ctx.bezierCurveTo(this.homePlateX, this.homePlateY, (this.homePlateX + this.firstBasemanX) / 2, this.firstBasemanY + 20, this.firstBasemanX + this.playerFieldImgAvatarWidth / 2, this.firstBasemanY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+  }
+
+  LineOutToPitcher() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+    this.ctx.bezierCurveTo(this.homePlateX, this.homePlateY, (this.homePlateX + this.pitcherX) / 2, this.pitcherY + 20, this.pitcherX + this.playerFieldImgAvatarWidth / 2, this.pitcherY + this.playerFieldImgAvatarHeight / 2);
+    this.ctx.lineWidth = 2;
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
   }
 
   flyBallInfieldOut1cp1X: number = 1000 * this.screenPctAdj;
