@@ -71,6 +71,7 @@ export class GameViewModel {
         this.AwayTeamHits = 0;
         this.AwayTeamRuns = 0;
         this.AwayTeamErrors = 0;
+        this.IsGameInProgress = true;
         this.SetBattersOBRPAccordingToNewPitcherWHIP();
 
         this.HomeTeam.NextBatter = this.HomeTeam.GetBatterAtLineupPosition(1);
