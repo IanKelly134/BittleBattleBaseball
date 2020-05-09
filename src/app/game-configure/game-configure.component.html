@@ -1,316 +1,312 @@
 <div class="container-fluid"
     style="text-align: center; margin: 0px; padding: 0px; background-color: transparent; color: white;">
-    <ng-container *ngIf="Game.IsGameInProgress">
-        <div class="row" style="margin: 0px; padding: 0px;">
-            <div class="col-md-2">
-                <table *ngIf="Game && Game.AwayTeam" class="table table-bordered table-dark table-hover table-condensed"
-                    style="margin-top: 20px; opacity: 0.9;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th><img [src]="Game.AwayTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
-                            </th>
-                            <th>Name</th>
-                            <th>Pos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let lineUpNumber of lineupNumbers">
-                            <tr *ngIf="Game && Game.AwayTeam && Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)"
-                                [class]="((Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-away' : undefined)">
-                                <td class="text-center">{{lineUpNumber}}</td>
-                                <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
-                                        alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
-                                </td>
-                                <td>
-                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
-                                    <label class="small">
-                                        {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
-                                        {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
-                                        {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
-                                    </label>
-                                </td>
-                                <td class="text-center">
-                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
-                                </td>
-                            </tr>
-                        </ng-container>
-                    </tbody>
-                </table>
-            </div>
-            <div class="col-md-8">
-                <div>
-                    <table [style.visibility]="IsPlayInProgress ? 'hidden' : 'visible'"
-                        class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
-                        style="margin-left: 5px; margin-right: 5px; margin-bottom: -40px; opacity: 0.8;">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <ng-container *ngFor="let inning of Game.Innings">
-                                    <th>{{inning.InningNumber}}</th>
-                                </ng-container>
-                                <th>R</th>
-                                <th>H</th>
-                                <th>E</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
 
-                                <td class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
-                                        style="height: 50px; border: 3px solid white; margin-right: 15px;" />
-                                    {{Game.AwayTeam.TeamSeason}}
-                                    {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
-                                <ng-container *ngFor="let inning of Game.Innings">
-                                    <td>{{inning.AwayRunsScored}}</td>
-                                </ng-container>
-                                <td>{{Game.AwayTeamRuns}}</td>
-                                <td>{{Game.AwayTeamHits}}</td>
-                                <td>{{Game.AwayTeamErrors}}</td>
-                            </tr>
-                            <tr>
-                                <td class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
-                                        style="height: 50px; border: 3px solid white; margin-right: 15px;" />
-                                    {{Game.HomeTeam.TeamSeason}}
-                                    {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
-                                <ng-container *ngFor="let inning of Game.Innings">
-                                    <td> {{inning.HomeRunsScored}}</td>
-                                </ng-container>
-                                <td>{{Game.HomeTeamRuns}}</td>
-                                <td>{{Game.HomeTeamHits}}</td>
-                                <td>{{Game.HomeTeamErrors}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br />
-                <canvas id="ballparkCanvas" style="max-width: 100%; margin-top: -10%;" [width]="canvasWidth"
-                    [height]="canvasHeight">
-                </canvas><br />
-                <button class="btn btn-success btn-block" *ngIf="!IsPlayInProgress" style="padding: 25px;"
-                    (click)="ExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
-                        src="../assets/images/baseballicon.png" />
-                    Next Play <i class="fa fa-arrow-right"></i></button>
-            </div>
-            <div class="col-md-2">
-                <table *ngIf="Game && Game.HomeTeam" class="table table-bordered table-dark table-hover table-condensed"
-                    style="margin-top: 20px; opacity: 0.9;">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th><img [src]="Game.HomeTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
-                            </th>
-                            <th>Name</th>
-                            <th>Pos</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <ng-container *ngFor="let lineUpNumber of lineupNumbers">
-                            <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)"
-                                [class]="((Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-home' : undefined)">
-                                <td class="text-center">{{lineUpNumber}}</td>
-                                <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
-                                        alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
-                                </td>
-                                <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
-                                    <label class="small">
-                                        {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
-                                        {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
-                                        {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
-                                    </label>
-
-                                </td>
-                                <td class="text-center">
-                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
-                                </td>
-                            </tr>
-                        </ng-container>
-                    </tbody>
-                </table>
-            </div>
-
-        </div>
-        <div class="row" style="margin: 0px; padding: 0px;">
-            <div class="col-md-4">
-
-            </div>
-            <div class="col-lg-5">
-
-            </div>
-
-            <div class="col-md-3">
-                <table class="table table-bordered table-dark table-hover table-condensed"
-                    style="margin: 5px; opacity: 0.8;">
-                    <thead>
-                        <tr>
-                            <th>Play-By-Play Summary</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
+    <div class="row" style="margin: 0px; padding: 0px;">
+        <div class="col-md-2">
+            <table *ngIf="Game && Game.AwayTeam && Game.IsGameInProgress"
+                class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th><img [src]="Game.AwayTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
+                        </th>
+                        <th>Name</th>
+                        <th>Pos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                        <tr *ngIf="Game && Game.AwayTeam && Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber)"
+                            [class]="((Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-away' : undefined)">
+                            <td class="text-center">{{lineUpNumber}}</td>
+                            <td><img [src]="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
+                            </td>
                             <td>
-                                <div style="max-height: 80px; overflow-y: auto; ">
-                                    <ng-container *ngFor="let pbp of Game.PlayByPlays">
-                                        <span>{{pbp}}</span>
-                                        <hr />
-                                    </ng-container>
-                                </div>
-
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
+                                <label class="small">
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                </label>
+                            </td>
+                            <td class="text-center">
+                                {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
                             </td>
                         </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8">
+            <div>
+                <table [style.visibility]="IsPlayInProgress ? 'hidden' : 'visible'"
+                    class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
+                    style="margin-left: 5px; margin-right: 5px; margin-bottom: -11.7%; opacity: 0.8;">
+                    <thead>
+                        <tr>
+                            <th>{{ Game.Ballpark }}</th>
+                            <ng-container *ngFor="let inning of Game.Innings">
+                                <th>{{inning.InningNumber}}</th>
+                            </ng-container>
+                            <th>R</th>
+                            <th>H</th>
+                            <th>E</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+
+                            <td class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
+                                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                                {{Game.AwayTeam.TeamSeason}}
+                                {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
+                            <ng-container *ngFor="let inning of Game.Innings">
+                                <td>{{inning.AwayRunsScored}}</td>
+                            </ng-container>
+                            <td>{{Game.AwayTeamRuns}}</td>
+                            <td>{{Game.AwayTeamHits}}</td>
+                            <td>{{Game.AwayTeamErrors}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
+                                    style="height: 50px; border: 3px solid white; margin-right: 15px;" />
+                                {{Game.HomeTeam.TeamSeason}}
+                                {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
+                            <ng-container *ngFor="let inning of Game.Innings">
+                                <td> {{inning.HomeRunsScored}}</td>
+                            </ng-container>
+                            <td>{{Game.HomeTeamRuns}}</td>
+                            <td>{{Game.HomeTeamHits}}</td>
+                            <td>{{Game.HomeTeamErrors}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
+            <br />
+            <canvas *ngIf="Game.IsGameInProgress" id="ballparkCanvas" style="max-width: 100%; margin-top: -10%;"
+                [width]="canvasWidth" [height]="canvasHeight">
+            </canvas><br />
+            <button class="btn btn-success btn-block" *ngIf="Game.IsGameInProgress && !IsPlayInProgress"
+                style="padding: 25px;" (click)="ExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
+                    src="../assets/images/baseballicon.png" />
+                Next Play <i class="fa fa-arrow-right"></i></button>
         </div>
-        <div class="row" style="margin: 0px; padding: 0px;">
+        <div class="col-md-2">
+            <table *ngIf="Game && Game.HomeTeam && Game.IsGameInProgress"
+                class="table table-bordered table-dark table-hover table-condensed"
+                style="margin-top: 20px; opacity: 0.9;">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th><img [src]="Game.HomeTeam.TeamLogoUrl" style="height: 50px; border: 3px solid white;" />
+                        </th>
+                        <th>Name</th>
+                        <th>Pos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let lineUpNumber of lineupNumbers">
+                        <tr *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber)"
+                            [class]="((Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Id == Game.CurrentAtBat.Batter.Id) ? 'table-home' : undefined)">
+                            <td class="text-center">{{lineUpNumber}}</td>
+                            <td><img [src]="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).PlayerImageURL"
+                                    alt="!" onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="40px">
+                            </td>
+                            <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
+                                <label class="small">
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
+                                </label>
 
-            <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block" (click)="ThrowPitch()">Throw
-                    Pitch</button></div>
-
-            <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block"
-                    (click)="GroundBallOutToThird()">Ground Out To Third</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block"
-                    (click)="GroundBallOutToShort()">Ground Out To Short</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block"
-                    (click)="GroundBallOutToSecond()">Ground Out To Second</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block"
-                    (click)="GroundBallOutToFirst()">Ground Out To First</button></div>
-
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="GroundBallSingleLeft1()">Ground Ball Single Left 1</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="GroundBallSingleLeft2()">Ground-ball Left 2</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="GroundBallSingleCenter1()">Ground-ball Center 1</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="GroundBallSingleCenter2()">Ground-ball Center 2</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="GroundBallSingleRight1()">Ground-ball Right 1</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="GroundBallSingleRight2()">Ground-ball Right 2</button></div>
-
-            <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
-                    (click)="FlyBallDoubleLeft2()">Fly-ball Left 2</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
-                    (click)="FlyBallDoubleLeftCenter()">Fly-ball Left-Center
-                    1</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
-                    (click)="FlyBallDoubleRightCenter()">Fly-ball Right-Center
-                    1</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1">
-                <button class="btn btn-default btn-block" (click)="FlyBallDoubleRight1()">Fly-ball Right 1</button>
-            </div>
-
-
-
-            <div class="col-sm-6 col-m-2 col-lg-1">
-                <button class="btn btn-default btn-block" (click)="FlyBallDoubleRight1()">Fly-Out To Left</button></div>
-
-
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-warning btn-block"
-                    (click)="FlipHomeAway()">Flip Home/Away</button> </div>
-
-
-            <!-- THROWS -->
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="DrawThrowFromLeftFieldToHome()">THrow Home From Left Field</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="DrawThrowFromCenterFieldToHome()">THrow Home From Center Field</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="DrawThrowFromRightFieldToHome()">THrow Home From Right Field</button></div>
-
-
-
-
-            <!-- LINE OUTS -->
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="LineOutToThird()">Line Out To Third</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="LineOutToShort()">Line Out To Short</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="LineOutToSecond()">Line Out To Second</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="LineOutToFirst()">Line Out To First</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="LineOutToPitcher()">Line Out To Pitcher</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="LineOutToLeft()">Line Out To Left</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="LineOutToCenter()">Line Out To Center</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
-                    (click)="LineOutToRight()">Line Out To Right</button></div>
-
-
-            <!-- Fly Ball Outs -->
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
-                    (click)="FlyBallOutToFirst()">Fly Out To First</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
-                    (click)="FlyBallOutToSecond()">Fly Out To Second</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
-                    (click)="FlyBallOutToShortstop()">Fly Out To Shortstop</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block"
-                    (click)="FlyBallOutToThird()">Fly Out To Third</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
-                    (click)="FlyBallOutToLeftField()">Fly Out To Left Field</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
-                    (click)="FlyBallOutToCenterField()">Fly Out To Center Field</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
-                    (click)="FlyBallOutToRightField()">Fly Out To Right Field</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
-                    (click)="FlyBallOutToPitcher()">Fly Out To Pitcher</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
-                    (click)="FlyBallOutToCatcher()">Fly Out To Catcher</button></div>
-
-            <!-- Doubles -->
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="FlyBallDoubleLeft1()">Fly-ball Double Left 1</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="FlyBallDoubleLeftCenter1()">Fly-ball Double Left-Center 1</button></div>
-
-
-            <!-- Homers -->
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="HomerLeftFieldLine()">Homer Left Field Line</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done">
-                <button class="btn btn-success btn-block" (click)="LongHomerLeftFieldLine()">Long Homer Left Field
-                    Line</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="HomerLeftField()">Homer Left Field</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="HomerLeftCenterField()">Homer Left-Center
-                    Field</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="HomerCenterField()">Homer Center</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="HomerRightCenterField()">Homer Right-Center
-                    Field</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="HomerRightField()">Homer Right Field</button>
-            </div>
-            <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
-                    (click)="HomerRightFieldLine()">Homer Right Field
-                    Line</button>
-            </div>
-
-
-
-            <!-- Pitches -->
-            <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
-                    (click)="Pitch()">Fastball</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
-                    (click)="BreakingBallRH()">BreakingBallRH</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
-                    (click)="BreakingBallLH()">BreakingBallLH</button></div>
-            <div class="col-sm-6 col-m-2 col-lg-1"></div>
-
+                            </td>
+                            <td class="text-center">
+                                {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
         </div>
-        <br />
-        <br />
-    </ng-container>
+
+    </div>
+    <div class="row" style="margin: 0px; padding: 0px;">
+        <div class="col-sm-12">
+            <table class="table table-bordered table-dark table-hover table-condensed"
+                style="margin: 5px; opacity: 0.8;">
+                <thead>
+                    <tr>
+                        <th>Play-By-Play Summary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="max-height: 80px; overflow-y: auto; ">
+                                <ng-container *ngFor="let pbp of Game.PlayByPlays">
+                                    <span>{{pbp}}</span>
+                                    <hr />
+                                </ng-container>
+                            </div>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- TESTS -->
+    <div class="row" style="margin: 0px; padding: 0px;">
+
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block" (click)="ThrowPitch()">Throw
+                Pitch</button></div>
+
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block"
+                (click)="GroundBallOutToThird()">Ground Out To Third</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block"
+                (click)="GroundBallOutToShort()">Ground Out To Short</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block"
+                (click)="GroundBallOutToSecond()">Ground Out To Second</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 "> <button class="btn btn-info btn-block"
+                (click)="GroundBallOutToFirst()">Ground Out To First</button></div>
+
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="GroundBallSingleLeft1()">Ground Ball Single Left 1</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="GroundBallSingleLeft2()">Ground-ball Left 2</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="GroundBallSingleCenter1()">Ground-ball Center 1</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="GroundBallSingleCenter2()">Ground-ball Center 2</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="GroundBallSingleRight1()">Ground-ball Right 1</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="GroundBallSingleRight2()">Ground-ball Right 2</button></div>
+
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
+                (click)="FlyBallDoubleLeft2()">Fly-ball Left 2</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
+                (click)="FlyBallDoubleLeftCenter()">Fly-ball Left-Center
+                1</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-info btn-block"
+                (click)="FlyBallDoubleRightCenter()">Fly-ball Right-Center
+                1</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1">
+            <button class="btn btn-default btn-block" (click)="FlyBallDoubleRight1()">Fly-ball Right 1</button>
+        </div>
+
+
+
+        <div class="col-sm-6 col-m-2 col-lg-1">
+            <button class="btn btn-default btn-block" (click)="FlyBallDoubleRight1()">Fly-Out To Left</button></div>
+
+
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-warning btn-block"
+                (click)="FlipHomeAway()">Flip Home/Away</button> </div>
+
+
+        <!-- THROWS -->
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="DrawThrowFromLeftFieldToHome()">THrow Home From Left Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="DrawThrowFromCenterFieldToHome()">THrow Home From Center Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="DrawThrowFromRightFieldToHome()">THrow Home From Right Field</button></div>
+
+
+
+
+        <!-- LINE OUTS -->
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="LineOutToThird()">Line Out To Third</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="LineOutToShort()">Line Out To Short</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="LineOutToSecond()">Line Out To Second</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="LineOutToFirst()">Line Out To First</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="LineOutToPitcher()">Line Out To Pitcher</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="LineOutToLeft()">Line Out To Left</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="LineOutToCenter()">Line Out To Center</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-info btn-block "
+                (click)="LineOutToRight()">Line Out To Right</button></div>
+
+
+        <!-- Fly Ball Outs -->
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToFirst()">Fly Out To First</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToSecond()">Fly Out To Second</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToShortstop()">Fly Out To Shortstop</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block"
+                (click)="FlyBallOutToThird()">Fly Out To Third</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToLeftField()">Fly Out To Left Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToCenterField()">Fly Out To Center Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToRightField()">Fly Out To Right Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToPitcher()">Fly Out To Pitcher</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-danger btn-block "
+                (click)="FlyBallOutToCatcher()">Fly Out To Catcher</button></div>
+
+        <!-- Doubles -->
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="FlyBallDoubleLeft1()">Fly-ball Double Left 1</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="FlyBallDoubleLeftCenter1()">Fly-ball Double Left-Center 1</button></div>
+
+
+        <!-- Homers -->
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerLeftFieldLine()">Homer Left Field Line</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done">
+            <button class="btn btn-success btn-block" (click)="LongHomerLeftFieldLine()">Long Homer Left Field
+                Line</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerLeftField()">Homer Left Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerLeftCenterField()">Homer Left-Center
+                Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerCenterField()">Homer Center</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerRightCenterField()">Homer Right-Center
+                Field</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerRightField()">Homer Right Field</button>
+        </div>
+        <div class="col-sm-6 col-m-2 col-lg-1 done"> <button class="btn btn-success btn-block"
+                (click)="HomerRightFieldLine()">Homer Right Field
+                Line</button>
+        </div>
+
+
+
+        <!-- Pitches -->
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
+                (click)="Pitch()">Fastball</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
+                (click)="BreakingBallRH()">BreakingBallRH</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1"> <button class="btn btn-danger btn-block"
+                (click)="BreakingBallLH()">BreakingBallLH</button></div>
+        <div class="col-sm-6 col-m-2 col-lg-1"></div>
+
+    </div>
+    <br />
+    <br />
+
     <!-- BOX SCORE -->
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-md-6">
-            <h5 clas="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
+            <h5 class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
                 {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}} Hitting</h5>
             <hr />
@@ -533,7 +529,7 @@
     <!-- PITCHING -->
     <div class="row" style="margin: 0px; padding: 0px;">
         <div class="col-md-6">
-            <h5 clas="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
+            <h5 class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
                 {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}} Pitching</h5>
             <hr />

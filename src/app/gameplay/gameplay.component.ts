@@ -795,7 +795,7 @@ export class GameplayComponent implements OnInit {
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts++;
-      if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns) {
+      if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts == 3) {
         swal({
           title: "Game Over!",
           text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,

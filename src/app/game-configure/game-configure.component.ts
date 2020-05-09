@@ -107,7 +107,9 @@ export class GameConfigureComponent implements OnInit {
   constructor(private router: Router, mlbYearByYearLeagueStatsServiceService: MLBYearByYearLeagueStatsServiceService, private toastr: ToastrService) //, private toastr: ToastrService
   {
     //console.log(this.router.getCurrentNavigation().extras.state);
-    document.body.style.backgroundImage = "url('../assets/images/baseball-background6.jpg')";
+    let d = new Date();
+    let t = d.getTime().toString();
+    document.body.style.backgroundImage = "url('../assets/images/baseball-background" + t.substring(t.length - 1, t.length) + ".jpg')";
 
     //this.GameId = activatedRoute.snapshot.params["gameId"];
     //var parsedGame = ) as GameViewModel;
@@ -1310,7 +1312,7 @@ export class GameConfigureComponent implements OnInit {
 
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts++;
-      if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns) {
+      if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts == 3) {
         swal({
           title: "Game Over!",
           text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
