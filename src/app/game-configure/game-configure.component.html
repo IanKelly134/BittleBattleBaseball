@@ -85,13 +85,23 @@
                 </table>
             </div>
             <br />
-            <canvas *ngIf="Game.IsGameInProgress" id="ballparkCanvas" style="max-width: 100%; margin-top: -10%;"
-                [width]="canvasWidth" [height]="canvasHeight">
-            </canvas><br />
-            <button class="btn btn-success btn-block" *ngIf="Game.IsGameInProgress && !IsPlayInProgress"
-                style="padding: 25px;" (click)="ExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
-                    src="../assets/images/baseballicon.png" />
-                Next Play <i class="fa fa-arrow-right"></i></button>
+            <div style="position: relative;">
+                <canvas *ngIf="Game.IsGameInProgress" id="ballparkCanvas"
+                    style="max-width: 100%; margin-top: -10%; z-index: 0;" [width]="canvasWidth"
+                    [height]="canvasHeight">
+                </canvas>
+                <canvas id="ballCanvas" *ngIf="Game.IsGameInProgress"
+                    style="max-width: 100%; margin-top: -891px; z-index: 1;" [width]="canvasWidth"
+                    [height]="canvasHeight">
+                </canvas>
+                <br />
+                <button class="btn btn-success btn-block" *ngIf="Game.IsGameInProgress && !IsPlayInProgress"
+                    style="padding: 25px;" (click)="ExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
+                        src="../assets/images/baseballicon.png" />
+                    Next Play <i class="fa fa-arrow-right"></i></button>
+            </div>
+
+
         </div>
         <div class="col-md-2">
             <table *ngIf="Game && Game.HomeTeam && Game.IsGameInProgress"

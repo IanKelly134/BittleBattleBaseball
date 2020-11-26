@@ -23,7 +23,9 @@ import { GameInningViewModel } from '../game-inning-view-model';
 export class GameConfigureComponent implements OnInit {
 
   canvas: HTMLCanvasElement;
+  ballCanvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
+  ballCtx: CanvasRenderingContext2D;
   batHittingBallSound = new Audio("../assets/audio/batHittingBall.mp3");
   pitchSound = new Audio("../assets/assets/audio/caughtball.mp3");
   IsSoundMuted: boolean = false;
@@ -679,6 +681,9 @@ export class GameConfigureComponent implements OnInit {
     this.IsPlayInProgress = true;
     this.Game.RunnersWhoScoredOnPlay = [];
     this.ClearCanvas();
+
+    this.myBaseball.x = this.pitcherX + this.playerFieldImgAvatarWidth / 2;
+    this.myBaseball.y = this.pitcherY + this.playerFieldImgAvatarHeight / 2;
 
     this.Game.CurrentAtBat.Batter.HittingSeasonStats.OBRP =
       this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.PX * this.Game.CurrentAtBat.Batter.HittingSeasonStats.obp;
@@ -1407,6 +1412,8 @@ export class GameConfigureComponent implements OnInit {
     this.canvas = <HTMLCanvasElement>document.getElementById("ballparkCanvas");
     this.ctx = this.canvas.getContext("2d");
 
+    this.ballCanvas = <HTMLCanvasElement>document.getElementById("ballCanvas");
+    this.ballCtx = this.ballCanvas.getContext("2d");
 
     let img = new Image();
     img.src = '../assets/images/GenericField2.png';
@@ -2529,16 +2536,18 @@ export class GameConfigureComponent implements OnInit {
 
   Pitch() {
 
-    this.ctx.beginPath();
-    this.ctx.moveTo(this.pitcherX + 20, this.pitcherY + this.playerFieldImgAvatarHeight);
-    this.ctx.lineTo(this.homePlateX, this.homePlateY);
-    this.ctx.lineWidth = 3;
-    this.ctx.lineCap = 'round';
-    // line color
-    this.ctx.strokeStyle = 'lightgray';
-    this.ctx.stroke();
+    // this.ctx.beginPath();
+    // this.ctx.moveTo(this.pitcherX + 20, this.pitcherY + this.playerFieldImgAvatarHeight);
+    // this.ctx.lineTo(this.homePlateX, this.homePlateY);
+    // this.ctx.lineWidth = 3;
+    // this.ctx.lineCap = 'round';
+    // // line color
+    // this.ctx.strokeStyle = 'lightgray';
+    // this.ctx.stroke();
 
-    // this.PlayPitchSound();
+    // // this.PlayPitchSound();
+
+    this.ThrowPitch();
   }
 
   GroundBallHit(x: number, y: number) {
@@ -2572,7 +2581,7 @@ export class GameConfigureComponent implements OnInit {
 
   ClearCanvas() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
+    this.ballCtx.clearRect(0, 0, this.ballCanvas.width, this.ballCanvas.height);
     this.SetPlayingField();
     //this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
@@ -2714,33 +2723,6 @@ export class GameConfigureComponent implements OnInit {
 
   FlipHomeAway() {
     this.Game.CurrentInning.IsBottomOfInning = !this.Game.CurrentInning.IsBottomOfInning;
-  }
-
-  myRectangle: any = {
-    x: this.pitcherX,
-    y: this.pitcherY,
-    width: 10,
-    height: 10,
-    borderWidth: 1
-  };
-
-  requestAnimFrame(callback) {
-    if (callback) {
-      window.setTimeout(callback, 1000 / 60);
-    }
-  }
-
-
-  ThrowPitch() {
-    // this.requestAnimFrame(null);
-
-    this.drawRectangle(this.myRectangle);
-
-    // wait one second before starting animation
-    setTimeout(() => {
-      var startTime = (new Date()).getTime();
-      this.animate(this.myRectangle, startTime);
-    }, 1000);
   }
 
   setLineupPosition(pos: string, isHome: boolean, player: GamePlayerViewModel, index: number) {
@@ -2909,42 +2891,66 @@ export class GameConfigureComponent implements OnInit {
     }, 200);
   }
 
+  myBaseball: any = {
+    x: this.pitcherX + this.playerFieldImgAvatarWidth / 2,
+    y: this.pitcherY + this.playerFieldImgAvatarHeight / 2,
+    width: 1,
+    height: 1,
+    borderWidth: 0
+  };
 
-  drawRectangle(myRectangle) {
-    this.ctx.beginPath();
-    this.ctx.rect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
-    this.ctx.fillStyle = '#8ED6FF';
-    this.ctx.fill();
-    // this.ctx.lineWidth = myRectangle.borderWidth;
-    // this.ctx.strokeStyle = 'black';
-    //this.ctx.stroke();
+  requestAnimFrame(callback) {
+    if (callback) {
+      window.setTimeout(callback, 500 / 60);
+    }
   }
 
-  animate(myRectangle, startTime) {
 
-    this.ctx.clearRect(myRectangle.x, myRectangle.y, myRectangle.width, myRectangle.height);
+  ThrowPitch() {
+    // this.requestAnimFrame(null);
 
+    this.drawBaseball(this.myBaseball);
+
+    // wait one second before starting animation
+    setTimeout(() => {
+      var startTime = (new Date()).getTime();
+      this.animate(this.myBaseball, startTime);
+    }, 100);
+  }
+
+
+  drawBaseball(myBaseball) {
+    var radius = myBaseball.width / 2;
+    this.ballCtx.beginPath();
+    this.ballCtx.arc(myBaseball.x, myBaseball.y, radius, 0, 2 * Math.PI, false);
+    this.ballCtx.fillStyle = 'white';
+    this.ballCtx.fill();
+    this.ballCtx.lineWidth = 5;
+    this.ballCtx.strokeStyle = 'white';
+    this.ballCtx.stroke();
+  }
+
+  animate(myBaseball, startTime) {
+
+    this.ballCtx.clearRect(0, 0, this.ballCanvas.width, this.ballCanvas.height);
+    this.ballCtx.moveTo(myBaseball.x, myBaseball.y);
     // update
     var time = (new Date()).getTime() - startTime;
 
-    var linearSpeed = 1000;
+    var linearSpeed = 500;
     // pixels / second
-    var newY = linearSpeed * time / 1000;
+    var newY = myBaseball.y + (linearSpeed * time / 1000);
 
-    if (newY < this.canvas.height - myRectangle.height / 2) {
-      myRectangle.y = newY;
+    if (newY < this.canvas.height - myBaseball.height / 2) {
+      myBaseball.y = newY;
 
     }
 
-    // clear
-    // this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
-
-    this.drawRectangle(myRectangle);
+    this.drawBaseball(myBaseball);
 
     // request new frame
     this.requestAnimFrame(() => {
-      this.animate(myRectangle, startTime);
+      this.animate(myBaseball, startTime);
     });
   }
 }
