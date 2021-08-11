@@ -771,6 +771,7 @@ export class GameplayComponent implements OnInit {
       this.showError(this.Game.CurrentAtBat.Batter.Name + " lines out to right.");
     }
 
+    //Process players who scored
     for (let playerWhoScored of this.Game.RunnersWhoScoredOnPlay) {
       if (this.Game.CurrentInning.IsBottomOfInning) {
         this.Game.CurrentInning.HomeRunsScored++;
@@ -786,6 +787,7 @@ export class GameplayComponent implements OnInit {
       this.showSuccess(playerWhoScored.Name + " scored!");
     }
 
+    //Add to pitcher fatigue
     if (this.Game.CurrentInning.IsBottomOfInning) {
       let pitcherTiredFactor = this.Game.AwayTeam.HasReliefPitcherBeenUsed ? 1.030485 : 1.004355;
       this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX = this.Game.AwayTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
@@ -1738,16 +1740,50 @@ export class GameplayComponent implements OnInit {
     this.ctx.strokeStyle = 'white';
     this.ctx.stroke();
 
-    setTimeout(() => {
-      this.ctx.beginPath();
-      this.ctx.moveTo(this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2) + 15, this.thirdBasemanY + (this.playerFieldImgAvatarHeight / 2) + 15);
+    let _543doublePlayExecuted: boolean = false;
+    let _54doublePlayExecuted: boolean = false;
+    let _53doublePlayExecuted: boolean = false;
+    //Force-Out Multiple Outs Logic
+    if (this.IsDoublePlayPossible()) {
+      let diceRoll = this.GenerateRandomNumber(1, 1000);
+      if (diceRoll < 346) { //Baseball prospectus says about 34.5% of double plays are successful     
+        if (this.Game.RunnerOnFirst) {
+          if (this.Game.RunnerOnSecond) {
+            if (this.Game.RunnerOnThird) {
 
-      this.ctx.lineWidth = 2;
-      this.ctx.lineTo(this.firstBaseX + (this.playerFieldImgAvatarWidth / 2), this.firstBaseY + (this.playerFieldImgAvatarHeight / 2));
-      // line color
-      this.ctx.strokeStyle = 'white';
-      this.ctx.stroke();
-    }, 200);
+            }
+
+          }
+        }
+      } else {
+        if (this.Game.RunnerOnFirst) {
+          if (this.Game.RunnerOnSecond) {
+            if (this.Game.RunnerOnThird) {
+
+            }
+
+          }
+        }
+      }
+    }
+    else {
+      setTimeout(() => {
+        this.ctx.beginPath();
+        this.ctx.moveTo(this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2) + 15, this.thirdBasemanY + (this.playerFieldImgAvatarHeight / 2) + 15);
+
+        this.ctx.lineWidth = 2;
+        this.ctx.lineTo(this.firstBaseX + (this.playerFieldImgAvatarWidth / 2), this.firstBaseY + (this.playerFieldImgAvatarHeight / 2));
+        // line color
+        this.ctx.strokeStyle = 'white';
+        this.ctx.stroke();
+      }, 200);
+    }
+
+  }
+
+  IsDoublePlayPossible(): boolean {
+    return (this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.HomeOuts < 2) ||
+      (!this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.AwayOuts < 2);
   }
 
   GroundBallOutToShort() {
