@@ -41,15 +41,18 @@
     <div class="row">
         <div class="col-md-3">
             <select class="form-control" (change)="SearchTeams(true, $event.target.value)">
+                <option selected value="-1">--SELECT--</option>
                 <option *ngFor="let year of SearchableSeasons" value={{year}}>{{year}}</option>
             </select>
             <br />
         </div>
         <div class="col-md-3">
-            <button class="btn btn-danger"><i class="fa fa-search"></i> Season</button>
+            <button class="btn btn-danger"><i class="fa fa-search"></i>
+                Season</button>
         </div>
         <div class="col-md-3">
             <select class="form-control" (change)="SearchTeams(false, $event.target.value)">
+                <option selected value="-1">--SELECT--</option>
                 <option *ngFor="let year of SearchableSeasons" value={{year}}>{{year}}</option>
             </select>
             <br />

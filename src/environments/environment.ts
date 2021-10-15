@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  //API_URL: "http://localhost:50438/api/"
-  API_URL: "http://bittlebattlebaseballwebapi-dev.us-east-2.elasticbeanstalk.com/api/"
+  API_URL: "http://localhost:50438/api/"
+  //API_URL: "http://bittlebattlebaseballwebapi-dev.us-east-2.elasticbeanstalk.com/api/"
 };
 
 /*
