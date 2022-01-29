@@ -10,10 +10,10 @@ import { HitterPlayerSeasonViewModel } from '../hitter-player-season-view-model'
 import { PitcherPlayerSeasonViewModel } from '../pitcher-player-season-view-model';
 import { PlayerViewModel } from '../player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
-import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert';
-import { Router } from '@angular/router';
+import { Router } from '@angular/router'
 import { GameInningViewModel } from '../game-inning-view-model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-game-configure',
