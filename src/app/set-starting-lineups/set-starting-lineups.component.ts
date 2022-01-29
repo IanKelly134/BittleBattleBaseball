@@ -33,63 +33,66 @@ export class SetStartingLineupsComponent implements OnInit {
     this.Game = game;
     this.Game.SetValues(this.GameId, this.NewGameSetup.HomeTeamSelection, this.NewGameSetup.AwayTeamSelection);
 
-    if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("fenway", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/fenway1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("yankee", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/yankeeStadium1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("busch", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/busch1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("coors", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/coorsField1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("ebbets", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/ebbettsField1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("tiger", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/tigerStadium1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("wrigley", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/wrigley1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("safeco", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/safeco1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("minute maid", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/minutemaid1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("polo ground", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/pologrounds1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("pnc park", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/pncpark1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("at&t park", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/attpark1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("camden", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/camden1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("target", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/targetField.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("citi field", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/citiField1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("kauffman", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/kauffmanStadium1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("nationals park", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/nationalsPark1.jpg')";
-    }
-    else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("dodger stadium", 0) > -1) {
-      document.body.style.backgroundImage = "url('../assets/images/dodgerStadium1.jpg')";
-    }
-    else {
-      document.body.style.backgroundImage = "url('../assets/images/BaseballFieldBackground.jpg')";
-    }
+    // if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("fenway", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/fenway1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("yankee", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/yankeeStadium1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("busch", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/busch1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("coors", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/coorsField1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("ebbets", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/ebbettsField1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("tiger", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/tigerStadium1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("wrigley", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/wrigley1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("safeco", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/safeco1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("minute maid", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/minutemaid1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("polo ground", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/pologrounds1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("pnc park", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/pncpark1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("at&t park", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/attpark1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("camden", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/camden1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("target", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/targetField.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("citi field", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/citiField1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("kauffman", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/kauffmanStadium1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("nationals park", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/nationalsPark1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("dodger stadium", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/dodgerStadium1.jpg')";
+    // }
+    // else if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("comiskey", 0) > -1) {
+    //   document.body.style.backgroundImage = "url('../assets/images/comiskey_park1.jpg')";
+    // }
+    // else {
+    //document.body.style.backgroundImage = "url('../assets/images/BaseballFieldBackground.jpg')";
+    //}
 
     this.HomeTeamDataLoading = true;
     this.searchTeamsService.GetRosterBySeason(this.NewGameSetup.HomeTeamSelection.season,
@@ -167,7 +170,10 @@ export class SetStartingLineupsComponent implements OnInit {
       }
     }
 
-    this.scrollToTop();
+    if (this.HomeTeamRoster.suggestedLineup && this.AwayTeamRoster.suggestedLineup
+      && this.HomeTeamRoster.suggestedRotation && this.AwayTeamRoster.suggestedRotation) {
+      this.scrollToTop();
+    }
   }
 
   playerIsInStartingLineup(isHome: boolean, playerId): boolean {
@@ -278,6 +284,52 @@ export class SetStartingLineupsComponent implements OnInit {
     this.Game.AwayTeam.RightFielder = null;
   }
 
+  SaveHomeTeamBenchPlayers() {
+    for (let player of this.HomeTeamRoster.hitters) {
+      if (this.Game.HomeTeam.Catcher.Id != player.player.id &&
+        this.Game.HomeTeam.FirstBaseman.Id != player.player.id &&
+        this.Game.HomeTeam.SecondBaseman.Id != player.player.id &&
+        this.Game.HomeTeam.Shortstop.Id != player.player.id &&
+        this.Game.HomeTeam.ThirdBaseman.Id != player.player.id &&
+        this.Game.HomeTeam.LeftFielder.Id != player.player.id &&
+        this.Game.HomeTeam.CenterFielder.Id != player.player.id &&
+        this.Game.HomeTeam.RightFielder.Id != player.player.id) {
+        this.Game.HomeTeam.SetRosterBenchPositionPlayer(new GamePlayerViewModel(player.player.position, player, null));
+      }
+    }
+  }
+
+  SaveHomeTeamBenchPitchers() {
+    for (let player of this.HomeTeamRoster.pitchers) {
+      if (this.Game.HomeTeam.Pitcher.Id != player.player.id) {
+        this.Game.HomeTeam.SetRosterBenchPitcher(new GamePlayerViewModel(player.player.position, null, player));
+      }
+    }
+  }
+
+  SaveAwayTeamBenchPlayers() {
+    for (let player of this.AwayTeamRoster.hitters) {
+      if (this.Game.AwayTeam.Catcher.Id != player.player.id &&
+        this.Game.AwayTeam.FirstBaseman.Id != player.player.id &&
+        this.Game.AwayTeam.SecondBaseman.Id != player.player.id &&
+        this.Game.AwayTeam.Shortstop.Id != player.player.id &&
+        this.Game.AwayTeam.ThirdBaseman.Id != player.player.id &&
+        this.Game.AwayTeam.LeftFielder.Id != player.player.id &&
+        this.Game.AwayTeam.CenterFielder.Id != player.player.id &&
+        this.Game.AwayTeam.RightFielder.Id != player.player.id) {
+        this.Game.AwayTeam.SetRosterBenchPositionPlayer(new GamePlayerViewModel(player.player.position, player, null));
+      }
+    }
+  }
+
+  SaveAwayTeamBenchPitchers() {
+    for (let player of this.AwayTeamRoster.pitchers) {
+      if (this.Game.AwayTeam.Pitcher.Id != player.player.id) {
+        this.Game.AwayTeam.SetRosterBenchPitcher(new GamePlayerViewModel(player.player.position, null, player));
+      }
+    }
+  }
+
   RemoveHomePlayerAtLineupNumber(lineupNumber: number) {
     this.Game.HomeTeam.RemovePlayerAtLineupNumber(lineupNumber);
   }
@@ -287,6 +339,10 @@ export class SetStartingLineupsComponent implements OnInit {
   }
 
   StartGame() {
+    this.SaveHomeTeamBenchPlayers();
+    this.SaveAwayTeamBenchPlayers();
+    this.SaveHomeTeamBenchPitchers();
+    this.SaveAwayTeamBenchPitchers();
     localStorage.setItem('bittlebattlebaseball_game_instance' + this.GameId, JSON.stringify(this.Game));
     this.router.navigateByUrl("/game/" + this.GameId);
     //   this.router.navigateByUrl("/game/" + this.GameId, { state: this.Game });

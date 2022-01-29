@@ -3,6 +3,7 @@ import { TeamSearchResultViewModel } from './team-search-result-view-model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RosterSearchResultViewModel } from './roster-search-result-view-model';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class SearchTeamsServiceService {
   constructor(private http: HttpClient) { }
 
   GetTeamsBySeason(season: number): Observable<TeamSearchResultViewModel[]> {
-    return this.http.get<TeamSearchResultViewModel[]>("http://localhost:50438/api/Team/" + season,
+    return this.http.get<TeamSearchResultViewModel[]>(environment.API_URL + "Team/" + season,
       {
         responseType: "json"
       }
@@ -20,7 +21,7 @@ export class SearchTeamsServiceService {
   }
 
   GetRosterBySeason(season: number, teamId: number): Observable<RosterSearchResultViewModel> {
-    return this.http.get<RosterSearchResultViewModel>("http://localhost:50438/api/Team/" + season + "/" + teamId,
+    return this.http.get<RosterSearchResultViewModel>(environment.API_URL + "Team/" + season + "/" + teamId,
       {
         responseType: "json"
       }

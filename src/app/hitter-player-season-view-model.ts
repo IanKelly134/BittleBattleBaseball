@@ -29,4 +29,6 @@ export class HitterPlayerSeasonViewModel extends PlayerSeasonViewModel {
     //Walks
     bb: number;
 
+    //On Base Roll Probability adjusted by current opposing pitcher WHIP
+    OBRP: number;
 }

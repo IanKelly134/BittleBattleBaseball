@@ -6,6 +6,7 @@ export class GameTeamViewModel {
     TeamCity: string;
     TeamSeason: number;
     Ballpark: string;
+    TeamLogoUrl: string;
 
     Catcher: GamePlayerViewModel;
     FirstBaseman: GamePlayerViewModel;
@@ -20,6 +21,11 @@ export class GameTeamViewModel {
     CurrentBatter: GamePlayerViewModel;
     LastBatter: GamePlayerViewModel;
     NextBatter: GamePlayerViewModel;
+
+    HasReliefPitcherBeenUsed: boolean = false;
+
+    BenchPositionPlayers: Array<GamePlayerViewModel> = new Array<GamePlayerViewModel>();
+    BenchPitchers: Array<GamePlayerViewModel> = new Array<GamePlayerViewModel>();
 
     private numberOfBatters(): number {
         let returnVal = 0;
@@ -52,6 +58,14 @@ export class GameTeamViewModel {
             returnVal++;
 
         return returnVal;
+    }
+
+    SetRosterBenchPositionPlayer(player: GamePlayerViewModel) {
+        this.BenchPositionPlayers.push(player);
+    }
+
+    SetRosterBenchPitcher(player: GamePlayerViewModel) {
+        this.BenchPitchers.push(player);
     }
 
     SetPitcher(player: GamePlayerViewModel) {
@@ -239,11 +253,12 @@ export class GameTeamViewModel {
         return null;
     }
 
-    constructor(teamName: string, teamId: number, teamCity: string, teamSeason: number, ballpark: string) {
+    constructor(teamName: string, teamId: number, teamCity: string, teamSeason: number, ballpark: string, logo: string) {
         this.TeamName = teamName;
         this.TeamId = teamId;
         this.TeamCity = teamCity;
         this.TeamSeason = teamSeason;
         this.Ballpark = ballpark;
+        this.TeamLogoUrl = logo;
     }
 }
