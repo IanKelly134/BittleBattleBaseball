@@ -12,16 +12,16 @@ export class SearchTeamsServiceService {
 
   constructor(private http: HttpClient) { }
 
-  GetTeamsBySeason(season: number): Observable<TeamSearchResultViewModel[]> {
-    return this.http.get<TeamSearchResultViewModel[]>(environment.API_URL + "Team/mlb/" + season,
+  GetTeamsBySeason(league: string, season: number): Observable<TeamSearchResultViewModel[]> {
+    return this.http.get<TeamSearchResultViewModel[]>(environment.API_URL + "Team/" + league + "/" + season,
       {
         responseType: "json"
       }
     );
   }
 
-  GetRosterBySeason(season: number, teamId: number): Observable<RosterSearchResultViewModel> {
-    return this.http.get<RosterSearchResultViewModel>(environment.API_URL + "Team/mlb/" + season + "/" + teamId,
+  GetRosterBySeason(season: number, teamId: number, league: string): Observable<RosterSearchResultViewModel> {
+    return this.http.get<RosterSearchResultViewModel>(environment.API_URL + "Team/" + league + "/" + season + "/" + teamId,
       {
         responseType: "json"
       }

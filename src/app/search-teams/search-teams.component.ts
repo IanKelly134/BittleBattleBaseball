@@ -16,6 +16,7 @@ export class SearchTeamsComponent implements OnInit {
   SearchingAwayTeams: boolean;
   constructor(private router: Router, private searchTeamsService: SearchTeamsServiceService) {
     this.GameSetup = new NewGameSetupViewModel();
+    this.GameSetup.League = 'mlb';
     let today = new Date();
     for (let i: number = today.getFullYear(); i > 1900; i--) {
       this.SearchableSeasons.push(i);
@@ -45,7 +46,7 @@ export class SearchTeamsComponent implements OnInit {
     if (isHomeTeam) {
       this.SearchingHomeTeams = true;
       this.HomeSearchResults = [];
-      this.searchTeamsService.GetTeamsBySeason(year).subscribe(results => {
+      this.searchTeamsService.GetTeamsBySeason(this.GameSetup.League, year).subscribe(results => {
         this.HomeSearchResults = results;
         this.SearchingHomeTeams = false;
       });
@@ -54,7 +55,7 @@ export class SearchTeamsComponent implements OnInit {
     else {
       this.SearchingAwayTeams = true;
       this.AwaySearchResults = [];
-      this.searchTeamsService.GetTeamsBySeason(year).subscribe(results => {
+      this.searchTeamsService.GetTeamsBySeason(this.GameSetup.League, year).subscribe(results => {
         this.AwaySearchResults = results;
         this.SearchingAwayTeams = false;
       });

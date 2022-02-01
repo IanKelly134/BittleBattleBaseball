@@ -23,13 +23,14 @@ export class SetStartingLineupsComponent implements OnInit {
   Game: GameViewModel;
   lineupNumbers: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9];
   GameId: number;
+  League: string;
   constructor(private router: Router, private searchTeamsService: SearchTeamsServiceService, activatedRoute: ActivatedRoute, game: GameViewModel) {
 
     this.HomeTeamRoster = null;
 
     this.GameId = activatedRoute.snapshot.params["newGameId"];
     this.NewGameSetup = JSON.parse(localStorage.getItem('game_setup_' + this.GameId)) as NewGameSetupViewModel;
-
+    this.League = this.NewGameSetup.League;
     this.Game = game;
     this.Game.SetValues(this.GameId, this.NewGameSetup.HomeTeamSelection, this.NewGameSetup.AwayTeamSelection);
 
@@ -96,14 +97,14 @@ export class SetStartingLineupsComponent implements OnInit {
 
     this.HomeTeamDataLoading = true;
     this.searchTeamsService.GetRosterBySeason(this.NewGameSetup.HomeTeamSelection.season,
-      this.NewGameSetup.HomeTeamSelection.id).subscribe(result => {
+      this.NewGameSetup.HomeTeamSelection.id, this.NewGameSetup.League).subscribe(result => {
         this.HomeTeamRoster = result;
         this.HomeTeamDataLoading = false;
       });
 
     this.AwayTeamDataLoading = true;
     this.searchTeamsService.GetRosterBySeason(this.NewGameSetup.AwayTeamSelection.season,
-      this.NewGameSetup.AwayTeamSelection.id).subscribe(result => {
+      this.NewGameSetup.AwayTeamSelection.id, this.NewGameSetup.League).subscribe(result => {
         this.AwayTeamRoster = result;
         this.AwayTeamDataLoading = false;
       });
