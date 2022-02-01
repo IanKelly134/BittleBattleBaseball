@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SearchTeamsServiceService {
+export class SearchNlTeamsService {
 
   constructor(private http: HttpClient) { }
 
   GetTeamsBySeason(season: number): Observable<TeamSearchResultViewModel[]> {
-    return this.http.get<TeamSearchResultViewModel[]>(environment.API_URL + "Team/mlb/" + season,
+    return this.http.get<TeamSearchResultViewModel[]>(environment.API_URL + "Team/nlb/" + season,
       {
         responseType: "json"
       }
@@ -21,7 +21,7 @@ export class SearchTeamsServiceService {
   }
 
   GetRosterBySeason(season: number, teamId: number): Observable<RosterSearchResultViewModel> {
-    return this.http.get<RosterSearchResultViewModel>(environment.API_URL + "Team/mlb/" + season + "/" + teamId,
+    return this.http.get<RosterSearchResultViewModel>(environment.API_URL + "Team/nlb/" + season + "/" + teamId,
       {
         responseType: "json"
       }
