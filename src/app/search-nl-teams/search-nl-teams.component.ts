@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TeamSearchResultViewModel } from '../team-search-result-view-model';
-import { SearchNlTeamsService } from '../search-nl-teams.service'
+import { SearchTeamsServiceService } from '../search-teams-service.service'
 import { NewGameSetupViewModel } from '../new-game-setup-view-model';
 
 
@@ -15,8 +15,9 @@ export class SearchNlTeamsComponent implements OnInit {
   SearchableSeasons: number[] = new Array<number>();
   SearchingHomeTeams: boolean;
   SearchingAwayTeams: boolean;
-  constructor(private router: Router, private searchNlTeamsService: SearchNlTeamsService) {
+  constructor(private router: Router, private searchNlTeamsService: SearchTeamsServiceService) {
     this.GameSetup = new NewGameSetupViewModel();
+    this.GameSetup.League = 'nlb';
     let today = new Date();
     for (let i: number = 1948; i > 1919; i--) {
       this.SearchableSeasons.push(i);
@@ -46,7 +47,7 @@ export class SearchNlTeamsComponent implements OnInit {
     if (isHomeTeam) {
       this.SearchingHomeTeams = true;
       this.HomeSearchResults = [];
-      this.searchNlTeamsService.GetTeamsBySeason(year).subscribe(results => {
+      this.searchNlTeamsService.GetTeamsBySeason(this.GameSetup.League, year).subscribe(results => {
         this.HomeSearchResults = results;
         this.SearchingHomeTeams = false;
       });
@@ -55,7 +56,7 @@ export class SearchNlTeamsComponent implements OnInit {
     else {
       this.SearchingAwayTeams = true;
       this.AwaySearchResults = [];
-      this.searchNlTeamsService.GetTeamsBySeason(year).subscribe(results => {
+      this.searchNlTeamsService.GetTeamsBySeason(this.GameSetup.League, year).subscribe(results => {
         this.AwaySearchResults = results;
         this.SearchingAwayTeams = false;
       });
