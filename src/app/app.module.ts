@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { GameViewModel } from './game-view-model';
 import { MLBYearByYearLeagueStatsServiceService } from './mlbyear-by-year-league-stats-service.service';
 import { GameConfigureComponent } from './game-configure/game-configure.component';
+import { SearchNlTeamsComponent } from './search-nl-teams/search-nl-teams.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { GameConfigureComponent } from './game-configure/game-configure.componen
     OnBasePctPipePipe,
     DataLoadingComponent,
     BallParkCoordinatesConfiguratorComponent,
-    GameConfigureComponent
+    GameConfigureComponent,
+    SearchNlTeamsComponent
   ],
   imports: [
     BrowserModule,
