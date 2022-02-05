@@ -9,6 +9,7 @@ import { GameConfigureComponent } from './game-configure/game-configure.componen
 import { SearchNlTeamsComponent } from './search-nl-teams/search-nl-teams.component';
 import { SearchMilbAaaTeamsComponent } from './search-milb-aaa-teams/search-milb-aaa-teams.component';
 import { SearchMilbAaTeamsComponent } from './search-milb-aa-teams/search-milb-aa-teams.component';
+import { SearchMilbATeamsComponent } from './search-milb-ateams/search-milb-ateams.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: "searchnlteams", component: SearchNlTeamsComponent },
   { path: "searchmilbaaateams", component: SearchMilbAaaTeamsComponent },
   { path: "searchmilbaateams", component: SearchMilbAaTeamsComponent },
+  { path: "searchmilbateams", component: SearchMilbATeamsComponent },
   { path: "setlineups/:newGameId", component: SetStartingLineupsComponent },
   { path: "game/:gameId", component: GameplayComponent },
   { path: "ballparkconfigure", component: BallParkCoordinatesConfiguratorComponent },

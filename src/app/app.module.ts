@@ -21,6 +21,7 @@ import { GameConfigureComponent } from './game-configure/game-configure.componen
 import { SearchNlTeamsComponent } from './search-nl-teams/search-nl-teams.component';
 import { SearchMilbAaaTeamsComponent } from './search-milb-aaa-teams/search-milb-aaa-teams.component';
 import { SearchMilbAaTeamsComponent } from './search-milb-aa-teams/search-milb-aa-teams.component';
+import { SearchMilbATeamsComponent } from './search-milb-ateams/search-milb-ateams.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { SearchMilbAaTeamsComponent } from './search-milb-aa-teams/search-milb-a
     GameConfigureComponent,
     SearchNlTeamsComponent,
     SearchMilbAaaTeamsComponent,
-    SearchMilbAaTeamsComponent
+    SearchMilbAaTeamsComponent,
+    SearchMilbATeamsComponent
   ],
   imports: [
     BrowserModule,
