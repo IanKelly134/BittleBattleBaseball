@@ -19,6 +19,9 @@ import { GameViewModel } from './game-view-model';
 import { MLBYearByYearLeagueStatsServiceService } from './mlbyear-by-year-league-stats-service.service';
 import { GameConfigureComponent } from './game-configure/game-configure.component';
 import { SearchNlTeamsComponent } from './search-nl-teams/search-nl-teams.component';
+import { SearchMilbAaaTeamsComponent } from './search-milb-aaa-teams/search-milb-aaa-teams.component';
+import { SearchMilbAaTeamsComponent } from './search-milb-aa-teams/search-milb-aa-teams.component';
+import { SearchMilbATeamsComponent } from './search-milb-ateams/search-milb-ateams.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +36,10 @@ import { SearchNlTeamsComponent } from './search-nl-teams/search-nl-teams.compon
     DataLoadingComponent,
     BallParkCoordinatesConfiguratorComponent,
     GameConfigureComponent,
-    SearchNlTeamsComponent
+    SearchNlTeamsComponent,
+    SearchMilbAaaTeamsComponent,
+    SearchMilbAaTeamsComponent,
+    SearchMilbATeamsComponent
   ],
   imports: [
     BrowserModule,
