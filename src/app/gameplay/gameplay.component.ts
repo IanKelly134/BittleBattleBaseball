@@ -169,7 +169,7 @@ export class GameplayComponent implements OnInit {
       if (this.IsAutoPlayEnabled) {
         this.ExecuteNextPlay();
       }
-    }, 3500);
+    }, 4500);
   }
 
   setAutoPlay() {
