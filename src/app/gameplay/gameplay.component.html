@@ -26,7 +26,8 @@
                             <td>
                                 {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
                                 <label class="small">
-                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                    {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg |
+                                    battingAvgPipe }}
                                     {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
                                     {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
                                 </label>
@@ -61,7 +62,7 @@
                             <td class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
                                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
                                 {{Game.AwayTeam.TeamSeason}}
-                                {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}}</td>
+                                {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.FullTeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td>{{inning.AwayRunsScored}}</td>
                             </ng-container>
@@ -73,7 +74,7 @@
                             <td class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
                                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
                                 {{Game.HomeTeam.TeamSeason}}
-                                {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}}</td>
+                                {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.FullTeamName}}</td>
                             <ng-container *ngFor="let inning of Game.Innings">
                                 <td> {{inning.HomeRunsScored}}</td>
                             </ng-container>
@@ -116,7 +117,8 @@
                             </td>
                             <td>{{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Name}}
                                 <label class="small">
-                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                    {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg |
+                                    battingAvgPipe }}
                                     {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
                                     {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI
                                 </label>
@@ -163,7 +165,7 @@
         <div class="col-md-6">
             <h5 class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
-                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}} Hitting</h5>
+                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.FullTeamName}} Hitting</h5>
             <hr />
             <table *ngIf="Game && Game.AwayTeam"
                 class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
@@ -272,7 +274,7 @@
         <div class="col-md-6">
             <h5 class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
-                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}} Hitting</h5>
+                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.FullTeamName}} Hitting</h5>
             <hr />
             <table *ngIf="Game && Game.HomeTeam"
                 class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
@@ -387,7 +389,7 @@
         <div class="col-md-6">
             <h5 class="text-left"><img [src]="Game.AwayTeam.TeamLogoUrl"
                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
-                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.TeamName}} Pitching</h5>
+                {{Game.AwayTeam.TeamSeason}} {{Game.AwayTeam.TeamCity}} {{Game.AwayTeam.FullTeamName}} Pitching</h5>
             <hr />
             <table *ngIf="Game && Game.AwayTeam"
                 class="table table-bordered table-dark table-hover table-condensed table-responsive-md"
@@ -470,7 +472,7 @@
         <div class="col-md-6">
             <h5 class="text-left"><img [src]="Game.HomeTeam.TeamLogoUrl"
                     style="height: 50px; border: 3px solid white; margin-right: 15px;" />
-                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.TeamName}} Pitching</h5>
+                {{Game.HomeTeam.TeamSeason}} {{Game.HomeTeam.TeamCity}} {{Game.HomeTeam.FullTeamName}} Pitching</h5>
             <hr />
             <table *ngIf="Game && Game.HomeTeam"
                 class="table table-bordered table-dark table-hover table-condensed table-responsive-md"

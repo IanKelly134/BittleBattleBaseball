@@ -1,7 +1,9 @@
+import { iif } from 'rxjs';
 import { GamePlayerViewModel } from './game-player-view-model';
 
 export class GameTeamViewModel {
     TeamName: string;
+    FullTeamName: string;
     TeamId: number;
     TeamCity: string;
     TeamSeason: number;
@@ -17,6 +19,8 @@ export class GameTeamViewModel {
     CenterFielder: GamePlayerViewModel;
     RightFielder: GamePlayerViewModel;
     Pitcher: GamePlayerViewModel;
+    DesignatedHitter: GamePlayerViewModel;
+    IsDesignatedHitterEnabled: boolean;
 
     CurrentBatter: GamePlayerViewModel;
     LastBatter: GamePlayerViewModel;
@@ -30,7 +34,7 @@ export class GameTeamViewModel {
     private numberOfBatters(): number {
         let returnVal = 0;
 
-        if (this.Pitcher)
+        if (!this.IsDesignatedHitterEnabled && this.Pitcher)
             returnVal++;
 
         if (this.Catcher)
@@ -57,6 +61,9 @@ export class GameTeamViewModel {
         if (this.RightFielder)
             returnVal++;
 
+        if (this.IsDesignatedHitterEnabled && this.DesignatedHitter)
+            returnVal++;
+
         return returnVal;
     }
 
@@ -68,12 +75,14 @@ export class GameTeamViewModel {
         this.BenchPitchers.push(player);
     }
 
-    SetPitcher(player: GamePlayerViewModel) {
+    SetPitcher(player: GamePlayerViewModel, isDHEnabled: boolean) {
 
         this.Pitcher = player;
-        if (!this.Pitcher.BattingOrderNumber) {
-            let numberOfBatters = this.numberOfBatters();
-            this.Pitcher.BattingOrderNumber = numberOfBatters;
+        if (!isDHEnabled) {
+            if (!this.Pitcher.BattingOrderNumber) {
+                let numberOfBatters = this.numberOfBatters();
+                this.Pitcher.BattingOrderNumber = numberOfBatters;
+            }
         }
     }
 
@@ -141,6 +150,14 @@ export class GameTeamViewModel {
         }
     }
 
+    SetDesignatedHitter(player: GamePlayerViewModel) {
+        this.DesignatedHitter = player;
+        if (!this.DesignatedHitter.BattingOrderNumber) {
+            let numberOfBatters = this.numberOfBatters();
+            this.DesignatedHitter.BattingOrderNumber = numberOfBatters;
+        }
+    }
+
     MovePlayerUpInOrder(player: GamePlayerViewModel) {
         let playerToSwitchWith: GamePlayerViewModel = null;
         if (player.BattingOrderNumber == 1) {
@@ -171,7 +188,8 @@ export class GameTeamViewModel {
 
     get IsRosterSet(): boolean {
         if (this.Catcher && this.Pitcher && this.FirstBaseman &&
-            this.SecondBaseman && this.Shortstop && this.ThirdBaseman && this.LeftFielder && this.CenterFielder && this.RightFielder) {
+            this.SecondBaseman && this.Shortstop && this.ThirdBaseman && this.LeftFielder && this.CenterFielder && this.RightFielder
+            && ((this.IsDesignatedHitterEnabled && this.DesignatedHitter) || !this.IsDesignatedHitterEnabled)) {
             return true;
         }
         else {
@@ -225,7 +243,10 @@ export class GameTeamViewModel {
             this.RightFielder = null;
             return;
         }
-
+        else if (this.IsDesignatedHitterEnabled && this.DesignatedHitter && this.DesignatedHitter.BattingOrderNumber == lineupNumber) {
+            this.DesignatedHitter = null;
+            return;
+        }
 
     }
 
@@ -247,18 +268,24 @@ export class GameTeamViewModel {
             return this.CenterFielder;
         else if (this.RightFielder && this.RightFielder.BattingOrderNumber == battingOrderNumber)
             return this.RightFielder;
-        else if (this.Pitcher && this.Pitcher.BattingOrderNumber == battingOrderNumber)
-            return this.Pitcher;
+        else {
+            if (this.IsDesignatedHitterEnabled && this.DesignatedHitter && this.DesignatedHitter.BattingOrderNumber == battingOrderNumber)
+                return this.DesignatedHitter;
+            else if (this.Pitcher && this.Pitcher.BattingOrderNumber == battingOrderNumber)
+                return this.Pitcher;
+        }
 
         return null;
     }
 
-    constructor(teamName: string, teamId: number, teamCity: string, teamSeason: number, ballpark: string, logo: string) {
+    constructor(teamName: string, teamId: number, teamCity: string, teamSeason: number, ballpark: string, logo: string, isDesignatedHitterEnabled: boolean, fullName: string) {
         this.TeamName = teamName;
+        this.FullTeamName = fullName;
         this.TeamId = teamId;
         this.TeamCity = teamCity;
         this.TeamSeason = teamSeason;
         this.Ballpark = ballpark;
         this.TeamLogoUrl = logo;
+        this.IsDesignatedHitterEnabled = isDesignatedHitterEnabled;
     }
 }

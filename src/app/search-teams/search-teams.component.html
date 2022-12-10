@@ -4,6 +4,13 @@
     </div>
 
     <hr />
+    <div class="row">
+        <label>
+            <input type="checkbox" [checked]="GameSetup.IsDesignatedHitterEnabled" (change)="setDH($event)" />
+            Is Designated Hitter Enabled?
+        </label>
+
+    </div>
     <div class="row" *ngIf="(GameSetup.HomeTeamSelection && GameSetup.AwayTeamSelection)">
         <div class="col-sm-12" style="text-align: center;">
             <button class="btn btn-success" (click)="SetLineups()"
@@ -16,15 +23,15 @@
         <div class="col-md-6">
             <div *ngIf="GameSetup.HomeTeamSelection" class="alert alert-danger" style="padding: 17px;">
                 <strong>Home Team Selected!</strong> {{GameSetup.HomeTeamSelection.season}} -
-                {{GameSetup.HomeTeamSelection.teamName}}
-                <button class="btn btn-danger" style="float: right;" (click)="GameSetup.HomeTeamSelection = null;"><i
+                {{GameSetup.HomeTeamSelection.fullTeamName}}
+                <button class="btn btn-danger" style="float: right;" (click)="GameSetup.SetHomeTeamSelection(null);"><i
                         class="fa fa-times" aria-hidden="true"></i></button>
             </div>
         </div>
         <div class="col-md-6">
             <div *ngIf="GameSetup.AwayTeamSelection" class="alert alert-primary" style="padding: 17px;">
                 <strong>Away Team Selected!</strong> {{GameSetup.AwayTeamSelection.season}} -
-                {{GameSetup.AwayTeamSelection.teamName}}
+                {{GameSetup.AwayTeamSelection.fullTeamName}}
                 <button class="btn btn-primary" style="float: right;" (click)="GameSetup.AwayTeamSelection = null;"><i
                         class="fa fa-times" aria-hidden="true"></i></button>
             </div>
@@ -80,7 +87,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let homeTeamSearchResult of HomeSearchResults">
-                        <td>{{homeTeamSearchResult.teamName}}</td>
+                        <td>{{homeTeamSearchResult.fullTeamName}}</td>
                         <td class="d-none d-md-block">{{homeTeamSearchResult.ballpark}}</td>
                         <td class="text-center">{{homeTeamSearchResult.league}}</td>
                         <td class="text-center"><button class="btn btn-danger"
@@ -106,7 +113,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let awayTeamSearchResult of AwaySearchResults">
-                        <td>{{awayTeamSearchResult.teamName}}</td>
+                        <td>{{awayTeamSearchResult.fullTeamName}}</td>
                         <td class="d-none d-md-block">{{awayTeamSearchResult.ballpark}}</td>
                         <td class="text-center">{{awayTeamSearchResult.league}}</td>
                         <td class="text-center"><button class="btn btn-primary"

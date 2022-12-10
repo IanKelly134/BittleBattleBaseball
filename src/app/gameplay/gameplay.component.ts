@@ -2242,7 +2242,7 @@ export class GameplayComponent implements OnInit {
         this.Game.HomeTeam.Pitcher.BattingOrderNumber = 0;
         this.Game.HomeTeam.Pitcher.IsEligible = false;
         this.Game.HomeTeam.BenchPitchers.push(this.Game.HomeTeam.Pitcher);
-        this.Game.HomeTeam.SetPitcher(player);
+        this.Game.HomeTeam.SetPitcher(player, this.Game.IsDesignatedHitterEnabled);
 
         if (!this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentAtBat.Pitcher = player;
@@ -2321,7 +2321,7 @@ export class GameplayComponent implements OnInit {
         this.Game.AwayTeam.Pitcher.BattingOrderNumber = 0;
         this.Game.AwayTeam.Pitcher.IsEligible = false;
         this.Game.AwayTeam.BenchPitchers.push(this.Game.AwayTeam.Pitcher);
-        this.Game.AwayTeam.SetPitcher(player);
+        this.Game.AwayTeam.SetPitcher(player, this.Game.IsDesignatedHitterEnabled);
 
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentAtBat.Pitcher = player;

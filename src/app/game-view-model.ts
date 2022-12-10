@@ -26,7 +26,7 @@ export class GameViewModel {
     PlayByPlays: string[] = [];
     CurrentInning: GameInningViewModel;
     CurrentAtBat: GameAtBatViewModel;
-
+    IsDesignatedHitterEnabled: boolean;
     RunnerOnFirst: GamePlayerViewModel;
     RunnerOnSecond: GamePlayerViewModel;
     RunnerOnThird: GamePlayerViewModel;
@@ -38,11 +38,12 @@ export class GameViewModel {
 
     }
 
-    SetValues(gameId: number, homeTeam: TeamSearchResultViewModel, awayTeam: TeamSearchResultViewModel) {
+    SetValues(gameId: number, homeTeam: TeamSearchResultViewModel, awayTeam: TeamSearchResultViewModel, isDesignatedHitterEnabled: boolean) {
         this.GameId = gameId;
         this.Ballpark = homeTeam.ballpark;
-        this.HomeTeam = new GameTeamViewModel(homeTeam.name, homeTeam.id, homeTeam.city, homeTeam.season, homeTeam.ballpark, homeTeam.logoUrl);
-        this.AwayTeam = new GameTeamViewModel(awayTeam.name, awayTeam.id, awayTeam.city, awayTeam.season, awayTeam.ballpark, awayTeam.logoUrl);
+        this.IsDesignatedHitterEnabled = isDesignatedHitterEnabled;
+        this.HomeTeam = new GameTeamViewModel(homeTeam.name, homeTeam.id, homeTeam.city, homeTeam.season, homeTeam.ballpark, homeTeam.logoUrl, isDesignatedHitterEnabled, homeTeam.fullTeamName);
+        this.AwayTeam = new GameTeamViewModel(awayTeam.name, awayTeam.id, awayTeam.city, awayTeam.season, awayTeam.ballpark, awayTeam.logoUrl, isDesignatedHitterEnabled, awayTeam.fullTeamName);
         this.Innings = [
             new GameInningViewModel(1),
             new GameInningViewModel(2),
