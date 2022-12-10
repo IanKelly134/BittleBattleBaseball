@@ -97,6 +97,9 @@ export class GameplayComponent implements OnInit {
   _leagueHomePitchingStats: MLBYearByYearPitchingStatsViewModel;
   _leagueAwayPitchingStats: MLBYearByYearPitchingStatsViewModel;
 
+  IsAutoPlayEnabled: boolean;
+
+
   ngAfterViewInit(): void {
 
     this.SetPlayingField();
@@ -161,7 +164,20 @@ export class GameplayComponent implements OnInit {
 
   }
 
+  SetAutoExecuteNextPlay() {
+    setInterval(() => {
+      if (this.IsAutoPlayEnabled) {
+        this.ExecuteNextPlay();
+      }
+    }, 3500);
+  }
+
+  setAutoPlay() {
+    this.IsAutoPlayEnabled = !this.IsAutoPlayEnabled;
+  }
+
   ExecuteNextPlay() {
+
     this.IsPlayInProgress = true;
     this.Game.RunnersWhoScoredOnPlay = [];
     this.ClearCanvas();
@@ -800,6 +816,7 @@ export class GameplayComponent implements OnInit {
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts++;
       if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts == 3) {
+        this.IsAutoPlayEnabled = false;
         swal({
           title: "Game Over!",
           text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
@@ -831,6 +848,7 @@ export class GameplayComponent implements OnInit {
       if (this.Game.CurrentInning.AwayOuts == 3) {
 
         if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
+          this.IsAutoPlayEnabled = false;
           swal({
             title: "Game Over!",
             text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,

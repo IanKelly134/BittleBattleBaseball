@@ -89,10 +89,22 @@
             <canvas *ngIf="Game.IsGameInProgress" id="ballparkCanvas" style="max-width: 100%; margin-top: -10%;"
                 [width]="canvasWidth" [height]="canvasHeight">
             </canvas><br />
-            <button class="btn btn-success btn-block" *ngIf="Game.IsGameInProgress && !IsPlayInProgress"
-                style="padding: 25px;" (click)="ExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
+            <button class="btn btn-success btn-block"
+                *ngIf="!IsAutoPlayEnabled && Game.IsGameInProgress && !IsPlayInProgress" style="padding: 25px;"
+                (click)="ExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
                     src="../assets/images/baseballicon.png" />
                 Next Play <i class="fa fa-arrow-right"></i></button>
+
+            <button class="btn btn-success btn-block"
+                *ngIf="IsAutoPlayEnabled && Game.IsGameInProgress && !IsPlayInProgress" style="padding: 25px;"
+                (click)="SetAutoExecuteNextPlay()"><img style="cursor:pointer; max-width: 25px;"
+                    src="../assets/images/baseballicon.png" />
+                Next Play - Set Auto Play <i class="fa fa-arrow-right"></i></button>
+
+            <label>
+                <input type="checkbox" [checked]="IsAutoPlayEnabled" (change)="setAutoPlay($event)" />
+                Is Auto-play Enabled
+            </label>
         </div>
         <div class="col-md-2">
             <table *ngIf="Game && Game.HomeTeam && Game.IsGameInProgress"
