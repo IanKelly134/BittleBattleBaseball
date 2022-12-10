@@ -50,7 +50,8 @@
                                         <br />
                                         <label class="small"
                                             *ngIf="Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).Position != 'SP'">
-                                            {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                            {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg
+                                            | battingAvgPipe }}
                                             {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
                                             {{Game.HomeTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI</label>
                                     </td>
@@ -138,7 +139,8 @@
                                         <br />
                                         <label class="small"
                                             *ngIf="Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).Position != 'SP'">
-                                            {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg | battingAvgPipe }}
+                                            {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.avg
+                                            | battingAvgPipe }}
                                             {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.hr}}HR
                                             {{Game.AwayTeam.GetBatterAtLineupPosition(lineUpNumber).HittingSeasonStats.rbi}}RBI</label>
                                     </td>
@@ -277,6 +279,10 @@
                                     *ngIf="!Game.HomeTeam.RightFielder && (hitter.player.position == 'LF' || hitter.player.position == 'CF' || hitter.player.position == 'RF' || hitter.player.position == 'OF' )"
                                     class="btn btn-danger btn-pos"
                                     (click)="setLineupPosition('RF', true, hitter, null)">RF</button>
+                                <ng-container *ngIf="Game.IsDesignatedHitterEnabled">
+                                    <button *ngIf="!Game.HomeTeam.DesignatedHitter" class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('DH', true, hitter, null)">DH</button>
+                                </ng-container>
                             </td>
                         </tr>
                     </ng-container>
@@ -396,6 +402,10 @@
                                     *ngIf="!Game.AwayTeam.RightFielder && (hitter.player.position == 'LF' || hitter.player.position == 'CF' || hitter.player.position == 'RF' || hitter.player.position == 'OF' )"
                                     class="btn btn-primary btn-pos"
                                     (click)="setLineupPosition('RF', false, hitter, null)">RF</button>
+                                <ng-container *ngIf="Game.IsDesignatedHitterEnabled">
+                                    <button *ngIf="!Game.AwayTeam.DesignatedHitter" class="btn btn-danger btn-pos"
+                                        (click)="setLineupPosition('DH', false, hitter, null)">DH</button>
+                                </ng-container>
                             </td>
                         </tr>
                     </ng-container>

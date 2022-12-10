@@ -20,8 +20,8 @@ export class SearchTeamsServiceService {
     );
   }
 
-  GetRosterBySeason(season: number, teamId: number, league: string): Observable<RosterSearchResultViewModel> {
-    return this.http.get<RosterSearchResultViewModel>(environment.API_URL + "Team/" + league + "/" + season + "/" + teamId,
+  GetRosterBySeason(season: number, teamId: number, league: string, isDesignatedHitterEnabled: boolean): Observable<RosterSearchResultViewModel> {
+    return this.http.get<RosterSearchResultViewModel>(environment.API_URL + "Team/" + league + "/" + season + "/" + teamId + "/" + isDesignatedHitterEnabled,
       {
         responseType: "json"
       }

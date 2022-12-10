@@ -38,6 +38,10 @@ export class SearchTeamsComponent implements OnInit {
     this.router.navigateByUrl("/setlineups/" + newGameId);
   }
 
+  setDH() {
+    this.GameSetup.IsDesignatedHitterEnabled = !this.GameSetup.IsDesignatedHitterEnabled;
+  }
+
   HomeSearchResults: TeamSearchResultViewModel[] = new Array<TeamSearchResultViewModel>();
 
   AwaySearchResults: TeamSearchResultViewModel[] = new Array<TeamSearchResultViewModel>();
@@ -63,7 +67,7 @@ export class SearchTeamsComponent implements OnInit {
   }
 
   SetHomeTeamSelection(selection: TeamSearchResultViewModel) {
-    this.GameSetup.HomeTeamSelection = selection;
+    this.GameSetup.SetHomeTeamSelection(selection);
 
     if (this.GameSetup.AwayTeamSelection) {
       this.scrollToTop();

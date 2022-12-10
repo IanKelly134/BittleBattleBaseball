@@ -164,11 +164,11 @@ export class GameConfigureComponent implements OnInit {
     awayTeamSearchResult.ballpark = "Coors Field";
     awayTeamSearchResult.teamName = "Rockies";
 
-    gameVM.SetValues(1010101, homeTeamSearchResult, awayTeamSearchResult);
+    gameVM.SetValues(1010101, homeTeamSearchResult, awayTeamSearchResult, true);
 
     //---------------
 
-    let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III", "https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/br/STL-2011.png");
+    let homeTeam = new GameTeamViewModel("Cardinals", 1234, "St. Louis", 2011, "Busch Stadium III", "https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/br/STL-2011.png", false, "St. Louis Cardinals");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     pitcherHitterPlayerSeasonViewModel.obp = 0.226;
@@ -198,7 +198,7 @@ export class GameConfigureComponent implements OnInit {
     var p = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
     p.BattingOrderNumber = 9;
     p.Id = 201;
-    homeTeam.SetPitcher(p);
+    homeTeam.SetPitcher(p, true);
 
     var benchPitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     benchPitcherHitterPlayerSeasonViewModel.obp = 0.226;
@@ -433,7 +433,7 @@ export class GameConfigureComponent implements OnInit {
 
     //---------------
 
-    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field", "https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/br/COL-1998.png");
+    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field", "https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/br/COL-1998.png", false, "Coloreado Rockies");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     pitcherHitterPlayerSeasonViewModel.obp = 0.417;
@@ -463,7 +463,7 @@ export class GameConfigureComponent implements OnInit {
     var ap = new GamePlayerViewModel("SP", pitcherHitterPlayerSeasonViewModel, pitherPitcherPlayerSeasonViewModel);
     ap.Id = 103;
     ap.BattingOrderNumber = 9;
-    awayTeam.SetPitcher(ap);
+    awayTeam.SetPitcher(ap, true);
 
     var catcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     catcherHitterPlayerSeasonViewModel.obp = 0.315;
@@ -2735,7 +2735,7 @@ export class GameConfigureComponent implements OnInit {
         this.Game.HomeTeam.Pitcher.BattingOrderNumber = 0;
         this.Game.HomeTeam.Pitcher.IsEligible = false;
         this.Game.HomeTeam.BenchPitchers.push(this.Game.HomeTeam.Pitcher);
-        this.Game.HomeTeam.SetPitcher(player);
+        this.Game.HomeTeam.SetPitcher(player, true);
 
         if (!this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentAtBat.Pitcher = player;
@@ -2814,7 +2814,7 @@ export class GameConfigureComponent implements OnInit {
         this.Game.AwayTeam.Pitcher.BattingOrderNumber = 0;
         this.Game.AwayTeam.Pitcher.IsEligible = false;
         this.Game.AwayTeam.BenchPitchers.push(this.Game.AwayTeam.Pitcher);
-        this.Game.AwayTeam.SetPitcher(player);
+        this.Game.AwayTeam.SetPitcher(player, true);
 
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentAtBat.Pitcher = player;

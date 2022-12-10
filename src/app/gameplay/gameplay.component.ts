@@ -97,12 +97,15 @@ export class GameplayComponent implements OnInit {
   _leagueHomePitchingStats: MLBYearByYearPitchingStatsViewModel;
   _leagueAwayPitchingStats: MLBYearByYearPitchingStatsViewModel;
 
+  IsAutoPlayEnabled: boolean;
+
+
   ngAfterViewInit(): void {
 
     this.SetPlayingField();
 
     swal({
-      title: "Welcome to " + this.Game.Ballpark,
+      title: "Welcome to " + this.Game.Ballpark + " in " + this.Game.HomeTeam.TeamCity,
       text: "Today's matchup between the " + this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " and the " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + ". Play Ball!",
       icon: "success",
       dangerMode: true,
@@ -161,7 +164,20 @@ export class GameplayComponent implements OnInit {
 
   }
 
+  SetAutoExecuteNextPlay() {
+    setInterval(() => {
+      if (this.IsAutoPlayEnabled) {
+        this.ExecuteNextPlay();
+      }
+    }, 3500);
+  }
+
+  setAutoPlay() {
+    this.IsAutoPlayEnabled = !this.IsAutoPlayEnabled;
+  }
+
   ExecuteNextPlay() {
+
     this.IsPlayInProgress = true;
     this.Game.RunnersWhoScoredOnPlay = [];
     this.ClearCanvas();
@@ -800,6 +816,7 @@ export class GameplayComponent implements OnInit {
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts++;
       if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts == 3) {
+        this.IsAutoPlayEnabled = false;
         swal({
           title: "Game Over!",
           text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
@@ -831,6 +848,7 @@ export class GameplayComponent implements OnInit {
       if (this.Game.CurrentInning.AwayOuts == 3) {
 
         if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
+          this.IsAutoPlayEnabled = false;
           swal({
             title: "Game Over!",
             text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
@@ -2242,7 +2260,7 @@ export class GameplayComponent implements OnInit {
         this.Game.HomeTeam.Pitcher.BattingOrderNumber = 0;
         this.Game.HomeTeam.Pitcher.IsEligible = false;
         this.Game.HomeTeam.BenchPitchers.push(this.Game.HomeTeam.Pitcher);
-        this.Game.HomeTeam.SetPitcher(player);
+        this.Game.HomeTeam.SetPitcher(player, this.Game.IsDesignatedHitterEnabled);
 
         if (!this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentAtBat.Pitcher = player;
@@ -2321,7 +2339,7 @@ export class GameplayComponent implements OnInit {
         this.Game.AwayTeam.Pitcher.BattingOrderNumber = 0;
         this.Game.AwayTeam.Pitcher.IsEligible = false;
         this.Game.AwayTeam.BenchPitchers.push(this.Game.AwayTeam.Pitcher);
-        this.Game.AwayTeam.SetPitcher(player);
+        this.Game.AwayTeam.SetPitcher(player, this.Game.IsDesignatedHitterEnabled);
 
         if (this.Game.CurrentInning.IsBottomOfInning) {
           this.Game.CurrentAtBat.Pitcher = player;

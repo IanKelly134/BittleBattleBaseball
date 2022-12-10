@@ -63,7 +63,7 @@ export class SearchMilbAaTeamsComponent implements OnInit {
   }
 
   SetHomeTeamSelection(selection: TeamSearchResultViewModel) {
-    this.GameSetup.HomeTeamSelection = selection;
+    this.GameSetup.SetHomeTeamSelection(selection);
 
     if (this.GameSetup.AwayTeamSelection) {
       this.scrollToTop();

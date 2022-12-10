@@ -32,7 +32,7 @@ export class SetStartingLineupsComponent implements OnInit {
     this.NewGameSetup = JSON.parse(localStorage.getItem('game_setup_' + this.GameId)) as NewGameSetupViewModel;
     this.League = this.NewGameSetup.League;
     this.Game = game;
-    this.Game.SetValues(this.GameId, this.NewGameSetup.HomeTeamSelection, this.NewGameSetup.AwayTeamSelection);
+    this.Game.SetValues(this.GameId, this.NewGameSetup.HomeTeamSelection, this.NewGameSetup.AwayTeamSelection, this.NewGameSetup.IsDesignatedHitterEnabled);
 
     // if (this.NewGameSetup.HomeTeamSelection.ballpark.toLowerCase().indexOf("fenway", 0) > -1) {
     //   document.body.style.backgroundImage = "url('../assets/images/fenway1.jpg')";
@@ -97,14 +97,14 @@ export class SetStartingLineupsComponent implements OnInit {
 
     this.HomeTeamDataLoading = true;
     this.searchTeamsService.GetRosterBySeason(this.NewGameSetup.HomeTeamSelection.season,
-      this.NewGameSetup.HomeTeamSelection.id, this.NewGameSetup.League).subscribe(result => {
+      this.NewGameSetup.HomeTeamSelection.id, this.NewGameSetup.League, this.NewGameSetup.IsDesignatedHitterEnabled).subscribe(result => {
         this.HomeTeamRoster = result;
         this.HomeTeamDataLoading = false;
       });
 
     this.AwayTeamDataLoading = true;
     this.searchTeamsService.GetRosterBySeason(this.NewGameSetup.AwayTeamSelection.season,
-      this.NewGameSetup.AwayTeamSelection.id, this.NewGameSetup.League).subscribe(result => {
+      this.NewGameSetup.AwayTeamSelection.id, this.NewGameSetup.League, this.NewGameSetup.IsDesignatedHitterEnabled).subscribe(result => {
         this.AwayTeamRoster = result;
         this.AwayTeamDataLoading = false;
       });
@@ -114,7 +114,7 @@ export class SetStartingLineupsComponent implements OnInit {
 
     if (isHome) {
       if (pos == "SP") {
-        this.Game.HomeTeam.SetPitcher(new GamePlayerViewModel(pos, hitter, pitcher));
+        this.Game.HomeTeam.SetPitcher(new GamePlayerViewModel(pos, hitter, pitcher), this.Game.IsDesignatedHitterEnabled);
       }
       else if (pos == "C") {
         this.Game.HomeTeam.SetCatcher(new GamePlayerViewModel(pos, hitter, pitcher));
@@ -140,10 +140,13 @@ export class SetStartingLineupsComponent implements OnInit {
       else if (pos == "RF") {
         this.Game.HomeTeam.SetRightField(new GamePlayerViewModel(pos, hitter, pitcher));
       }
+      else if (this.Game.IsDesignatedHitterEnabled && pos == "DH") {
+        this.Game.HomeTeam.SetDesignatedHitter(new GamePlayerViewModel(pos, hitter, pitcher));
+      }
     }
     else {
       if (pos == "SP") {
-        this.Game.AwayTeam.SetPitcher(new GamePlayerViewModel(pos, hitter, pitcher));
+        this.Game.AwayTeam.SetPitcher(new GamePlayerViewModel(pos, hitter, pitcher), this.Game.IsDesignatedHitterEnabled);
       }
       else if (pos == "C") {
         this.Game.AwayTeam.SetCatcher(new GamePlayerViewModel(pos, hitter, pitcher));
@@ -169,6 +172,9 @@ export class SetStartingLineupsComponent implements OnInit {
       else if (pos == "RF") {
         this.Game.AwayTeam.SetRightField(new GamePlayerViewModel(pos, hitter, pitcher));
       }
+      else if (this.Game.IsDesignatedHitterEnabled && pos == "DH") {
+        this.Game.AwayTeam.SetDesignatedHitter(new GamePlayerViewModel(pos, hitter, pitcher));
+      }
     }
 
     if (this.HomeTeamRoster.suggestedLineup && this.AwayTeamRoster.suggestedLineup
@@ -179,7 +185,7 @@ export class SetStartingLineupsComponent implements OnInit {
 
   playerIsInStartingLineup(isHome: boolean, playerId): boolean {
     if (isHome) {
-      if (this.Game.HomeTeam.Pitcher && this.Game.HomeTeam.Pitcher.Id == playerId) {
+      if (!this.Game.IsDesignatedHitterEnabled && this.Game.HomeTeam.Pitcher && this.Game.HomeTeam.Pitcher.Id == playerId) {
         return true;
       }
       else if (this.Game.HomeTeam.Catcher && this.Game.HomeTeam.Catcher.Id == playerId) {
@@ -206,10 +212,13 @@ export class SetStartingLineupsComponent implements OnInit {
       else if (this.Game.HomeTeam.RightFielder && this.Game.HomeTeam.RightFielder.Id == playerId) {
         return true;
       }
+      else if (this.Game.IsDesignatedHitterEnabled && this.Game.HomeTeam.DesignatedHitter && this.Game.HomeTeam.DesignatedHitter.Id == playerId) {
+        return true;
+      }
 
       return false;
     } else {
-      if (this.Game.AwayTeam.Pitcher && this.Game.AwayTeam.Pitcher.Id == playerId) {
+      if (!this.Game.IsDesignatedHitterEnabled && this.Game.AwayTeam.Pitcher && this.Game.AwayTeam.Pitcher.Id == playerId) {
         return true;
       }
       else if (this.Game.AwayTeam.Catcher && this.Game.AwayTeam.Catcher.Id == playerId) {
@@ -234,6 +243,9 @@ export class SetStartingLineupsComponent implements OnInit {
         return true;
       }
       else if (this.Game.AwayTeam.RightFielder && this.Game.AwayTeam.RightFielder.Id == playerId) {
+        return true;
+      }
+      else if (this.Game.IsDesignatedHitterEnabled && this.Game.AwayTeam.DesignatedHitter && this.Game.AwayTeam.DesignatedHitter.Id == playerId) {
         return true;
       }
 
