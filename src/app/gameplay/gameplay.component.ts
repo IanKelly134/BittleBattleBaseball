@@ -102,7 +102,7 @@ export class GameplayComponent implements OnInit {
     this.SetPlayingField();
 
     swal({
-      title: "Welcome to " + this.Game.Ballpark,
+      title: "Welcome to " + this.Game.Ballpark + " in " + this.Game.HomeTeam.TeamCity,
       text: "Today's matchup between the " + this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " and the " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + ". Play Ball!",
       icon: "success",
       dangerMode: true,
