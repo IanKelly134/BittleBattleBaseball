@@ -18,10 +18,14 @@ export class NewGameSetupViewModel {
         this.HomeTeamYear = selection.season;
 
         if (this.HomeTeamLeague) {
-            if ((this.HomeTeamLeague.toLowerCase() == 'al' && this.HomeTeamYear >= 1973) || (this.HomeTeamLeague.toLowerCase() == 'nl' && this.HomeTeamYear >= 2022))
+            if ((this.HomeTeamLeague.toLowerCase() == 'al' && this.HomeTeamYear >= 1973) || (this.HomeTeamLeague.toLowerCase() == 'nl' && this.HomeTeamYear >= 2022)) {
                 this.IsDesignatedHitterEnabled = true;
-            else
+
+                alert("Designated Hitter Automatically Set. Since the home team was either an American League team after 1972 or a National League Team after 2022 the DH was automatically enabled. You can override this by changing the checkbox value before you continue...");
+            }
+            else {
                 this.IsDesignatedHitterEnabled = false;
+            }
         }
     }
 }
