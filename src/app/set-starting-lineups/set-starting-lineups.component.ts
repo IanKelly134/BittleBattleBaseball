@@ -344,11 +344,17 @@ export class SetStartingLineupsComponent implements OnInit {
   }
 
   RemoveHomePlayerAtLineupNumber(lineupNumber: number) {
-    this.Game.HomeTeam.RemovePlayerAtLineupNumber(lineupNumber);
+    if (lineupNumber == -1 && this.Game.HomeTeam.Pitcher)
+      this.Game.HomeTeam.Pitcher = null;
+    else
+      this.Game.HomeTeam.RemovePlayerAtLineupNumber(lineupNumber);
   }
 
   RemoveAwayPlayerAtLineupNumber(lineupNumber: number) {
-    this.Game.AwayTeam.RemovePlayerAtLineupNumber(lineupNumber);
+    if (lineupNumber == -1 && this.Game.HomeTeam.Pitcher)
+      this.Game.AwayTeam.Pitcher = null;
+    else
+      this.Game.AwayTeam.RemovePlayerAtLineupNumber(lineupNumber);
   }
 
   StartGame() {

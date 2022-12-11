@@ -71,6 +71,22 @@
                                     </td>
                                 </tr>
                             </ng-container>
+                            <tr *ngIf="Game.HomeTeam.Pitcher">
+                                <td class="text-center"></td>
+                                <td><img [src]="Game.HomeTeam.Pitcher.PlayerImageURL" alt="!"
+                                        onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="70px">
+                                </td>
+                                <td>{{Game.HomeTeam.Pitcher.Name}}
+
+                                </td>
+                                <td class="text-center">
+                                    {{Game.HomeTeam.Pitcher.Position}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-danger" (click)="RemoveHomePlayerAtLineupNumber(-1)"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -160,6 +176,22 @@
                                     </td>
                                 </tr>
                             </ng-container>
+                            <tr *ngIf="Game.AwayTeam.Pitcher">
+                                <td class="text-center"></td>
+                                <td><img [src]="Game.AwayTeam.Pitcher.PlayerImageURL" alt="!"
+                                        onerror="this.src='../assets/images/emptyHeadshot.jpeg'" height="70px">
+                                </td>
+                                <td>{{Game.AwayTeam.Pitcher.Name}}
+
+                                </td>
+                                <td class="text-center">
+                                    {{Game.AwayTeam.Pitcher.Position}}
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-primary" (click)="RemoveAwayPlayerAtLineupNumber(-1)"><i
+                                            class="fa fa-times"></i></button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -403,7 +435,7 @@
                                     class="btn btn-primary btn-pos"
                                     (click)="setLineupPosition('RF', false, hitter, null)">RF</button>
                                 <ng-container *ngIf="Game.IsDesignatedHitterEnabled">
-                                    <button *ngIf="!Game.AwayTeam.DesignatedHitter" class="btn btn-danger btn-pos"
+                                    <button *ngIf="!Game.AwayTeam.DesignatedHitter" class="btn btn-primary btn-pos"
                                         (click)="setLineupPosition('DH', false, hitter, null)">DH</button>
                                 </ng-container>
                             </td>
