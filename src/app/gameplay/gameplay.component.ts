@@ -4,12 +4,7 @@ import { MLBYearByYearBattingStatsViewModel } from '../mlbyear-by-year-batting-s
 import { MLBYearByYearPitchingStatsViewModel } from '../mlbyear-by-year-pitching-stats-view-model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MLBYearByYearLeagueStatsServiceService } from '../mlbyear-by-year-league-stats-service.service';
-import { GameTeamViewModel } from '../game-team-view-model';
-import { TeamSearchResultViewModel } from '../team-search-result-view-model';
 import { GamePlayerViewModel } from '../game-player-view-model';
-import { HitterPlayerSeasonViewModel } from '../hitter-player-season-view-model';
-import { PitcherPlayerSeasonViewModel } from '../pitcher-player-season-view-model';
-import { PlayerViewModel } from '../player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
 import { ToastrService } from 'ngx-toastr';
 import swal from 'sweetalert';
@@ -96,7 +91,7 @@ export class GameplayComponent implements OnInit {
   _leagueAwayBattingStats: MLBYearByYearBattingStatsViewModel;
   _leagueHomePitchingStats: MLBYearByYearPitchingStatsViewModel;
   _leagueAwayPitchingStats: MLBYearByYearPitchingStatsViewModel;
-
+  newOuts: number = 1;
   IsAutoPlayEnabled: boolean;
 
 
@@ -177,7 +172,7 @@ export class GameplayComponent implements OnInit {
   }
 
   ExecuteNextPlay() {
-
+    this.newOuts = 1;//Reset each time
     this.IsPlayInProgress = true;
     this.Game.RunnersWhoScoredOnPlay = [];
     this.ClearCanvas();
@@ -736,7 +731,6 @@ export class GameplayComponent implements OnInit {
     }
     else if (diceRoll == 12) {
       this.GroundBallOutToThird();
-      this.showError(this.Game.CurrentAtBat.Batter.Name + " grounds out to third.");
     }
     else if (diceRoll == 13) {
       this.GroundBallOutToShort();
@@ -813,10 +807,14 @@ export class GameplayComponent implements OnInit {
       this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
 
+    this.ProcessEndOfOutPlay();
+
+  }
+
+  ProcessEndOfOutPlay() {
     if (this.Game.CurrentInning.IsBottomOfInning) {
-      this.Game.CurrentInning.HomeOuts++;
+      this.Game.CurrentInning.HomeOuts += this.newOuts;
       if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts == 3) {
-        this.IsAutoPlayEnabled = false;
         swal({
           title: "Game Over!",
           text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
@@ -843,12 +841,11 @@ export class GameplayComponent implements OnInit {
       }
     }
     else {
-      this.Game.CurrentInning.AwayOuts++;
+      this.Game.CurrentInning.AwayOuts += this.newOuts;
 
       if (this.Game.CurrentInning.AwayOuts == 3) {
 
         if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
-          this.IsAutoPlayEnabled = false;
           swal({
             title: "Game Over!",
             text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
@@ -873,7 +870,6 @@ export class GameplayComponent implements OnInit {
         this.Game.NewAtBat();
       }
     }
-
   }
 
   DrawThrowFromLeftFieldToHome() {
@@ -1744,11 +1740,50 @@ export class GameplayComponent implements OnInit {
       this.rightFielderX + 140, this.rightFielderY + 20);
   }
 
+  GetCurrentNumberOfOuts() {
+    if (this.Game.CurrentInning.IsBottomOfInning) {
+      return this.Game.CurrentInning.HomeOuts;
+    }
+    else {
+      return this.Game.CurrentInning.AwayOuts;
+    }
+  }
+
   //Outs
   GroundBallOutToThird() {
-    // this.SetPlayingField();
     this.PlayBatHittingBallSound();
 
+    var numberOfOuts = this.GetCurrentNumberOfOuts();
+    if (numberOfOuts == 2) {
+      this.ThirdToFirstSingleGroundOut();//Just get the regular out
+    }
+    else {
+      if (numberOfOuts == 0) {
+        if (this.Game.RunnerOnThird) {
+
+        }
+
+        if (this.Game.RunnerOnSecond) {
+
+        }
+
+        if (this.Game.RunnerOnFirst) {
+
+        }
+      }
+      else if (numberOfOuts == 1) {
+        if (this.Game.RunnerOnFirst) {
+          this.AttemptFiveFourThreeDoublePlay();
+        }
+        else {
+          this.ThirdToFirstSingleGroundOut();
+        }
+
+      }
+    }
+  }
+
+  ThirdToSecondToFirstDoublePlayGroundOut() {
     this.ctx.beginPath();
     this.ctx.moveTo(this.homePlateX, this.homePlateY);
 
@@ -1758,50 +1793,109 @@ export class GameplayComponent implements OnInit {
     this.ctx.strokeStyle = 'white';
     this.ctx.stroke();
 
-    let _543doublePlayExecuted: boolean = false;
-    let _54doublePlayExecuted: boolean = false;
-    let _53doublePlayExecuted: boolean = false;
-    //Force-Out Multiple Outs Logic
-    if (this.IsDoublePlayPossible()) {
-      let diceRoll = this.GenerateRandomNumber(1, 1000);
-      if (diceRoll < 346) { //Baseball prospectus says about 34.5% of double plays are successful     
-        if (this.Game.RunnerOnFirst) {
-          if (this.Game.RunnerOnSecond) {
-            if (this.Game.RunnerOnThird) {
+    setTimeout(() => {
 
-            }
+      this.ctx.moveTo(this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2) + 15, this.thirdBasemanY + (this.playerFieldImgAvatarHeight / 2) + 15);
 
-          }
-        }
-      } else {
-        if (this.Game.RunnerOnFirst) {
-          if (this.Game.RunnerOnSecond) {
-            if (this.Game.RunnerOnThird) {
+      this.ctx.lineTo(this.secondBaseX + (this.playerFieldImgAvatarWidth / 2), this.secondBaseY + (this.playerFieldImgAvatarHeight / 2));
 
-            }
+      this.ctx.moveTo(this.secondBaseX + (this.playerFieldImgAvatarWidth / 2) + 15, this.secondBaseY + (this.playerFieldImgAvatarHeight / 2) + 15);
 
-          }
-        }
-      }
-    }
-    else {
-      setTimeout(() => {
-        this.ctx.beginPath();
-        this.ctx.moveTo(this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2) + 15, this.thirdBasemanY + (this.playerFieldImgAvatarHeight / 2) + 15);
+      this.ctx.lineWidth = 2;
+      this.ctx.lineTo(this.firstBaseX + (this.playerFieldImgAvatarWidth / 2), this.firstBaseY + (this.playerFieldImgAvatarHeight / 2));
+      // line color
+      this.ctx.strokeStyle = 'white';
+      this.ctx.stroke();
+    }, 200);
+  }
 
-        this.ctx.lineWidth = 2;
-        this.ctx.lineTo(this.firstBaseX + (this.playerFieldImgAvatarWidth / 2), this.firstBaseY + (this.playerFieldImgAvatarHeight / 2));
-        // line color
-        this.ctx.strokeStyle = 'white';
-        this.ctx.stroke();
-      }, 200);
-    }
+  ThirdToFirstSingleGroundOut() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+
+    this.ctx.lineWidth = 2;
+    this.ctx.lineTo(this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2) + 15, this.thirdBasemanY + (this.playerFieldImgAvatarHeight / 2) + 15);
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+
+    setTimeout(() => {
+      this.ctx.beginPath();
+      this.ctx.moveTo(this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2) + 15, this.thirdBasemanY + (this.playerFieldImgAvatarHeight / 2) + 15);
+
+      this.ctx.lineWidth = 2;
+      this.ctx.lineTo(this.firstBaseX + (this.playerFieldImgAvatarWidth / 2), this.firstBaseY + (this.playerFieldImgAvatarHeight / 2));
+      // line color
+      this.ctx.strokeStyle = 'white';
+      this.ctx.stroke();
+    }, 200);
+  }
+
+  AttemptFiveFourThreeTriplePlay() {
 
   }
 
-  IsDoublePlayPossible(): boolean {
-    return (this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.HomeOuts < 2) ||
-      (!this.Game.CurrentInning.IsBottomOfInning && this.Game.CurrentInning.AwayOuts < 2);
+  AttemptFiveFourThreeDoublePlay() {
+    //Drawing part
+    this.ThirdToSecondToFirstDoublePlayGroundOut();
+
+    //Actual Outcome
+    let diceRoll = this.GenerateRandomNumber(1, 100);
+    if (diceRoll > 90) {
+      //Both Safe
+      if (this.Game.RunnerOnThird) {
+        //Player from third scores
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
+      }
+
+      if (this.Game.RunnerOnSecond) {
+        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+      }
+
+      this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+      this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
+      this.newOuts = 0;
+
+      this.showInfo("All baserunners safe after double-play attempt.");
+    }
+    else if (diceRoll > 76) {
+      //Out at second only
+      if (this.Game.RunnerOnThird) {
+        //Player from third scores
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
+      }
+
+      if (this.Game.RunnerOnSecond) {
+        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+      }
+
+      this.Game.RunnerOnSecond = null;
+      this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
+      this.newOuts = 1;
+
+      this.showInfo("Baserunner at second is out and baserunner at first is safe after double-play attempt.");
+    }
+    else {
+      //Both out
+      this.Game.RunnerOnSecond = null;
+      this.Game.RunnerOnFirst = null;
+      this.newOuts = 2;
+      this.showError("Twin-killing! 5-4-3 Double-play. Both baserunners are out!");
+    }
+  }
+
+  AttemptSixFourThreeDoublePlay() {
+
+  }
+
+  AttemptFourSixThreeDoublePlay() {
+
+  }
+
+  AttemptOneTwoThreeDoublePlay() {
+
   }
 
   GroundBallOutToShort() {
