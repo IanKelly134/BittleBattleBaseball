@@ -7,8 +7,11 @@ import { MLBYearByYearLeagueStatsServiceService } from '../mlbyear-by-year-leagu
 import { GamePlayerViewModel } from '../game-player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
 import { ToastrService } from 'ngx-toastr';
-import swal from 'sweetalert';
+
 import { GameInningViewModel } from '../game-inning-view-model';
+//import swal from 'sweetalert';
+
+
 
 @Component({
   selector: 'app-gameplay',
@@ -99,15 +102,15 @@ export class GameplayComponent implements OnInit {
 
     this.SetPlayingField();
 
-    swal({
-      title: "Welcome to " + this.Game.Ballpark + " in " + this.Game.HomeTeam.TeamCity,
-      text: "Today's matchup between the " + this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " and the " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + ". Play Ball!",
-      icon: "success",
-      dangerMode: true,
-    })
-      .then(willDelete => {
+    // swal({
+    //   title: "Welcome to " + this.Game.Ballpark + " in " + this.Game.HomeTeam.TeamCity,
+    //   text: "Today's matchup between the " + this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " and the " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + ". Play Ball!",
+    //   icon: "success",
+    //   dangerMode: true,
+    // })
+    //   .then(willDelete => {
 
-      });
+    //   });
   }
 
   ngOnInit() {
@@ -212,7 +215,7 @@ export class GameplayComponent implements OnInit {
   ExecuteCurrentBatterReachedBase() {
     this.Game.RunnersWhoScoredOnPlay = [];
     let typeOfReachedBase = this.GenerateRandomNumber(1, 1000);
-    let diceRoll: Number;
+    let diceRoll: number;
     if (this.Game.CurrentInning.IsBottomOfInning) {
       let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueHomeBattingStats.slg;
       diceRoll = addedPower * typeOfReachedBase;
@@ -598,7 +601,7 @@ export class GameplayComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -614,7 +617,7 @@ export class GameplayComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -641,7 +644,7 @@ export class GameplayComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -657,7 +660,7 @@ export class GameplayComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -684,7 +687,7 @@ export class GameplayComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -700,7 +703,7 @@ export class GameplayComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -815,15 +818,15 @@ export class GameplayComponent implements OnInit {
     if (this.Game.CurrentInning.IsBottomOfInning) {
       this.Game.CurrentInning.HomeOuts += this.newOuts;
       if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts == 3) {
-        swal({
-          title: "Game Over!",
-          text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
-          icon: "success",
-          dangerMode: true,
-        })
-          .then(() => {
+        // swal({
+        //   title: "Game Over!",
+        //   text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
+        //   icon: "success",
+        //   dangerMode: true,
+        // })
+        //   .then(() => {
             this.Game.IsGameInProgress = false;
-          });
+         // });
       }
       else {
         if (this.Game.CurrentInning.HomeOuts == 3) {
@@ -846,15 +849,15 @@ export class GameplayComponent implements OnInit {
       if (this.Game.CurrentInning.AwayOuts == 3) {
 
         if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
-          swal({
-            title: "Game Over!",
-            text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
-            icon: "success",
-            dangerMode: true,
-          })
-            .then(() => {
+          // swal({
+          //   title: "Game Over!",
+          //   text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
+          //   icon: "success",
+          //   dangerMode: true,
+          // })
+          //   .then(() => {
               this.Game.IsGameInProgress = false;
-            });
+         //   });
         } else {
 
           this.Game.CurrentInning.IsBottomOfInning = true;
@@ -1300,7 +1303,7 @@ export class GameplayComponent implements OnInit {
         this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.whip + "WHIP"
         , 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 715);
 
-      //Draw pitcher tired percentage      
+      //Draw pitcher tired percentage
       let pctLeft = this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.StartingPX / this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.PX;
       this.ctx.beginPath();
       this.ctx.rect(80, 725, 325, 15);
