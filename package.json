@@ -2,8 +2,7 @@
   "name": "bittle-battle-baseball",
   "version": "0.0.0",
   "engines": {
-    "node": "10.9.0",
-    "@angular/cli" : "8.3.22"
+    "node": "10.9.0"
   },
   "scripts": {
     "ng": "ng",
@@ -15,6 +14,11 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-devkit/build-angular": "~0.803.22",
+    "@angular/cli": "~8.3.22",
+    "@angular/compiler-cli": "~8.2.14",
+    "@angular/language-service": "~8.2.14",
+
     "@angular/animations": "^8.2.14",
     "@angular/common": "~8.2.14",
     "@angular/compiler": "~8.2.14",
