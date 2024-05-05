@@ -10,10 +10,11 @@ import { HitterPlayerSeasonViewModel } from '../hitter-player-season-view-model'
 import { PitcherPlayerSeasonViewModel } from '../pitcher-player-season-view-model';
 import { PlayerViewModel } from '../player-view-model';
 import { EnumAtBatResult } from '../enum-at-bat-result.enum';
-import swal from 'sweetalert';
+
 import { Router } from '@angular/router'
 import { GameInningViewModel } from '../game-inning-view-model';
 import { ToastrService } from 'ngx-toastr';
+//import swal from 'sweetalert';
 
 @Component({
   selector: 'app-game-configure',
@@ -97,6 +98,8 @@ export class GameConfigureComponent implements OnInit {
   _leagueAwayBattingStats: MLBYearByYearBattingStatsViewModel;
   _leagueHomePitchingStats: MLBYearByYearPitchingStatsViewModel;
   _leagueAwayPitchingStats: MLBYearByYearPitchingStatsViewModel;
+
+  newOuts: number = 1;
 
   ngAfterViewInit(): void {
 
@@ -433,7 +436,7 @@ export class GameConfigureComponent implements OnInit {
 
     //---------------
 
-    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field", "https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/br/COL-1998.png", false, "Coloreado Rockies");
+    let awayTeam = new GameTeamViewModel("Rockies", 5678, "Colorado", 1998, "Coors Field", "https://d2p3bygnnzw9w3.cloudfront.net/req/202001161/tlogo/br/COL-1998.png", false, "Colorado Rockies");
 
     var pitcherHitterPlayerSeasonViewModel = new HitterPlayerSeasonViewModel();
     pitcherHitterPlayerSeasonViewModel.obp = 0.417;
@@ -678,6 +681,7 @@ export class GameConfigureComponent implements OnInit {
   //***
 
   ExecuteNextPlay() {
+    this.newOuts = 1;
     this.IsPlayInProgress = true;
     this.Game.RunnersWhoScoredOnPlay = [];
     this.ClearCanvas();
@@ -721,7 +725,7 @@ export class GameConfigureComponent implements OnInit {
   ExecuteCurrentBatterReachedBase() {
     this.Game.RunnersWhoScoredOnPlay = [];
     let typeOfReachedBase = this.GenerateRandomNumber(1, 1000);
-    let diceRoll: Number;
+    let diceRoll: number;
     if (this.Game.CurrentInning.IsBottomOfInning) {
       let addedPower = this.Game.CurrentAtBat.Batter.HittingSeasonStats.slg / this._leagueHomeBattingStats.slg;
       diceRoll = addedPower * typeOfReachedBase;
@@ -1107,7 +1111,7 @@ export class GameConfigureComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -1123,7 +1127,7 @@ export class GameConfigureComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -1150,7 +1154,7 @@ export class GameConfigureComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -1166,7 +1170,7 @@ export class GameConfigureComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -1193,7 +1197,7 @@ export class GameConfigureComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -1209,7 +1213,7 @@ export class GameConfigureComponent implements OnInit {
               this.showSuccess(this.Game.RunnerOnThird.Name + " scores on sac fly.");
               this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
               this.Game.RunnerOnThird = null;
-            } else { //runner out on sac fly       
+            } else { //runner out on sac fly
               this.showError(this.Game.RunnerOnThird.Name + " thrown out at home.");
               this.Game.RunnerOnThird = null;
               if (this.Game.CurrentInning.IsBottomOfInning) {
@@ -1240,7 +1244,6 @@ export class GameConfigureComponent implements OnInit {
     }
     else if (diceRoll == 12) {
       this.GroundBallOutToThird();
-      this.showError(this.Game.CurrentAtBat.Batter.Name + " grounds out to third.");
     }
     else if (diceRoll == 13) {
       this.GroundBallOutToShort();
@@ -1315,18 +1318,23 @@ export class GameConfigureComponent implements OnInit {
       this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX = this.Game.HomeTeam.Pitcher.PitchingSeasonStats.PX * pitcherTiredFactor;
     }
 
+    this.ProcessEndOfOutPlay();
+
+  }
+
+  ProcessEndOfOutPlay() {
     if (this.Game.CurrentInning.IsBottomOfInning) {
-      this.Game.CurrentInning.HomeOuts++;
+      this.Game.CurrentInning.HomeOuts += this.newOuts;
       if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns != this.Game.HomeTeamRuns && this.Game.CurrentInning.HomeOuts == 3) {
-        swal({
-          title: "Game Over!",
-          text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
-          icon: "success",
-          dangerMode: true,
-        })
-          .then(() => {
+        // swal({
+        //   title: "Game Over!",
+        //   text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
+        //   icon: "success",
+        //   dangerMode: true,
+        // })
+        //   .then(() => {
             this.Game.IsGameInProgress = false;
-          });
+          //});
       }
       else {
         if (this.Game.CurrentInning.HomeOuts == 3) {
@@ -1344,20 +1352,20 @@ export class GameConfigureComponent implements OnInit {
       }
     }
     else {
-      this.Game.CurrentInning.AwayOuts++;
+      this.Game.CurrentInning.AwayOuts += this.newOuts;
 
       if (this.Game.CurrentInning.AwayOuts == 3) {
 
         if (this.Game.CurrentInning.InningNumber >= 9 && this.Game.AwayTeamRuns < this.Game.HomeTeamRuns) {
-          swal({
-            title: "Game Over!",
-            text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
-            icon: "success",
-            dangerMode: true,
-          })
-            .then(() => {
+          // swal({
+          //   title: "Game Over!",
+          //   text: this.Game.HomeTeam.TeamSeason + " " + this.Game.HomeTeam.TeamName + " " + this.Game.HomeTeamRuns + " to " + this.Game.AwayTeam.TeamSeason + " " + this.Game.AwayTeam.TeamName + " " + this.Game.AwayTeamRuns,
+          //   icon: "success",
+          //   dangerMode: true,
+          // })
+          //   .then(() => {
               this.Game.IsGameInProgress = false;
-            });
+          //  });
         } else {
 
           this.Game.CurrentInning.IsBottomOfInning = true;
@@ -1373,7 +1381,6 @@ export class GameConfigureComponent implements OnInit {
         this.Game.NewAtBat();
       }
     }
-
   }
 
   DrawThrowFromLeftFieldToHome() {
@@ -1809,7 +1816,7 @@ export class GameConfigureComponent implements OnInit {
         , 110 + ((this.playerFieldImgAvatarWidth * 3) / 2), 715);
 
 
-      //Draw pitcher tired percentage      
+      //Draw pitcher tired percentage
       let pctLeft = this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.StartingPX / this.Game.CurrentAtBat.Pitcher.PitchingSeasonStats.PX;
       this.ctx.beginPath();
       this.ctx.rect(80, 725, 325, 15);
@@ -2250,11 +2257,79 @@ export class GameConfigureComponent implements OnInit {
       this.rightFielderX + 140, this.rightFielderY + 20);
   }
 
+  GetCurrentNumberOfOuts() {
+    if (this.Game.CurrentInning.IsBottomOfInning) {
+      return this.Game.CurrentInning.HomeOuts;
+    }
+    else {
+      return this.Game.CurrentInning.AwayOuts;
+    }
+  }
+
   //Outs
   GroundBallOutToThird() {
-    // this.SetPlayingField();
     this.PlayBatHittingBallSound();
 
+    var numberOfOuts = this.GetCurrentNumberOfOuts();
+    if (numberOfOuts == 2) {
+      this.ThirdToFirstSingleGroundOut();
+    }
+    else {
+      if (numberOfOuts == 0) {
+        if (this.IsForcePlayAtHome()) {
+          this.AttemptFiveOneThreeDoublePlay();
+          return;
+        }
+
+        if (this.IsForcePlayAtThird()) {
+          this.AttemptFiveThreeDoublePlay();
+          return;
+        }
+
+        if (this.IsForcePlayAtSecond()) {
+          this.AttemptFiveFourThreeDoublePlay();
+          return;
+        }
+      }
+      else if (numberOfOuts == 1) {
+        if (this.Game.RunnerOnFirst) {
+          this.AttemptFiveFourThreeDoublePlay();
+        }
+        else {
+          this.ThirdToFirstSingleGroundOut();
+        }
+
+      }
+    }
+  }
+
+  ThirdToSecondToFirstDoublePlayGroundOut() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.homePlateX, this.homePlateY);
+
+    this.ctx.lineWidth = 2;
+    this.ctx.lineTo(this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2) + 15, this.thirdBasemanY + (this.playerFieldImgAvatarHeight / 2) + 15);
+    // line color
+    this.ctx.strokeStyle = 'white';
+    this.ctx.stroke();
+
+    setTimeout(() => {
+
+      this.ctx.moveTo(this.thirdBasemanX + (this.playerFieldImgAvatarWidth / 2) + 15, this.thirdBasemanY + (this.playerFieldImgAvatarHeight / 2) + 15);
+
+      this.ctx.lineTo(this.secondBaseX + (this.playerFieldImgAvatarWidth / 2), this.secondBaseY + (this.playerFieldImgAvatarHeight / 2));
+
+      this.ctx.moveTo(this.secondBaseX + (this.playerFieldImgAvatarWidth / 2) + 15, this.secondBaseY + (this.playerFieldImgAvatarHeight / 2) + 15);
+
+      this.ctx.lineWidth = 2;
+      this.ctx.lineTo(this.firstBaseX + (this.playerFieldImgAvatarWidth / 2), this.firstBaseY + (this.playerFieldImgAvatarHeight / 2));
+      // line color
+      this.ctx.strokeStyle = 'white';
+      this.ctx.stroke();
+    }, 200);
+  }
+
+  ThirdToFirstSingleGroundOut() {
     this.ctx.beginPath();
     this.ctx.moveTo(this.homePlateX, this.homePlateY);
 
@@ -2274,6 +2349,140 @@ export class GameConfigureComponent implements OnInit {
       this.ctx.strokeStyle = 'white';
       this.ctx.stroke();
     }, 200);
+  }
+
+  AttemptFiveThreeDoublePlay() {
+    //Drawing part
+    this.ThirdToFirstSingleGroundOut();
+
+    //Actual Outcome
+    let diceRoll = this.GenerateRandomNumber(1, 100);
+    if (diceRoll > 90) {
+      //Both Safe
+      if (this.Game.RunnerOnThird) {
+        //Player from third scores
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
+      }
+
+      if (this.Game.RunnerOnSecond) {
+        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+      }
+
+      this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+      this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
+      this.newOuts = 0;
+
+      this.showInfo("All baserunners safe after double-play attempt.");
+    }
+    else if (diceRoll > 76) {
+      //Out at second only
+      if (this.Game.RunnerOnThird) {
+        //Player from third scores
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
+      }
+
+      if (this.Game.RunnerOnFirst) {
+        this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+      }
+
+      this.Game.RunnerOnThird = null;
+      this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
+      this.newOuts = 1;
+
+      this.showInfo("Baserunner at third is out and baserunner at first is safe after double-play attempt.");
+    }
+    else {
+      //Both out
+      this.Game.RunnerOnThird = null;
+      this.Game.RunnerOnFirst = null;
+      this.newOuts = 2;
+      this.showError("Twin-killing! Unassisted 5-3 Double-play. Both baserunners are out!");
+    }
+  }
+
+  AttemptFiveOneThreeDoublePlay() {
+
+  }
+
+  AttemptFiveFourThreeTriplePlay() {
+
+  }
+
+  AttemptFiveFourThreeDoublePlay() {
+    //Drawing part
+    this.ThirdToSecondToFirstDoublePlayGroundOut();
+
+    //Actual Outcome
+    let diceRoll = this.GenerateRandomNumber(1, 100);
+    if (diceRoll > 90) {
+      //Both Safe
+      if (this.Game.RunnerOnThird) {
+        //Player from third scores
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
+      }
+
+      if (this.Game.RunnerOnSecond) {
+        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+      }
+
+      this.Game.RunnerOnSecond = this.Game.RunnerOnFirst;
+      this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
+      this.newOuts = 0;
+
+      this.showInfo("All baserunners safe after double-play attempt.");
+    }
+    else if (diceRoll > 76) {
+      //Out at second only
+      if (this.Game.RunnerOnThird) {
+        //Player from third scores
+        this.Game.RunnersWhoScoredOnPlay.push(this.Game.RunnerOnThird);
+        this.Game.RunnerOnThird = null;
+      }
+
+      if (this.Game.RunnerOnSecond) {
+        this.Game.RunnerOnThird = this.Game.RunnerOnSecond;
+      }
+
+      this.Game.RunnerOnSecond = null;
+      this.Game.RunnerOnFirst = this.Game.CurrentAtBat.Batter;
+      this.newOuts = 1;
+
+      this.showInfo("Baserunner at second is out and baserunner at first is safe after double-play attempt.");
+    }
+    else {
+      //Both out
+      this.Game.RunnerOnSecond = null;
+      this.Game.RunnerOnFirst = null;
+      this.newOuts = 2;
+      this.showError("Twin-killing! 5-4-3 Double-play. Both baserunners are out!");
+    }
+  }
+
+  AttemptSixFourThreeDoublePlay() {
+
+  }
+
+  AttemptFourSixThreeDoublePlay() {
+
+  }
+
+  AttemptOneTwoThreeDoublePlay() {
+
+  }
+
+  IsForcePlayAtHome() {
+    return this.Game.RunnerOnThird && this.Game.RunnerOnSecond && this.Game.RunnerOnFirst;
+  }
+
+  IsForcePlayAtThird() {
+    return this.Game.RunnerOnSecond && this.Game.RunnerOnFirst;
+  }
+
+  IsForcePlayAtSecond() {
+    return this.Game.RunnerOnFirst;
   }
 
   GroundBallOutToShort() {
@@ -2535,18 +2744,6 @@ export class GameConfigureComponent implements OnInit {
   }
 
   Pitch() {
-
-    // this.ctx.beginPath();
-    // this.ctx.moveTo(this.pitcherX + 20, this.pitcherY + this.playerFieldImgAvatarHeight);
-    // this.ctx.lineTo(this.homePlateX, this.homePlateY);
-    // this.ctx.lineWidth = 3;
-    // this.ctx.lineCap = 'round';
-    // // line color
-    // this.ctx.strokeStyle = 'lightgray';
-    // this.ctx.stroke();
-
-    // // this.PlayPitchSound();
-
     this.ThrowPitch();
   }
 

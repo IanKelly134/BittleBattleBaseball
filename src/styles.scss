@@ -3,12 +3,12 @@
 body {
     /* Margin bottom by footer height */
     // margin-bottom: 60px;
- 
+
     // background-repeat: repeat;
     // background-size: 100%; /*if you wanted to 'fill' the page to max size without cropping*/
     // color: white;
 
-    background: url(../../BittleBattleBaseball/src/assets/images/BaseballFieldBackground.jpg);
+    background: url(src\assets\images\BaseballFieldBackground.jpg);
 
     min-height: 100%;
 background-repeat: no-repeat;
@@ -131,11 +131,11 @@ td {
     height: 90px;
     animation: spin 2s linear infinite;
     margin-right: auto;
-    margin-left: auto;      
-    margin-top: 10%;  
-    margin-bottom: 10%;  
+    margin-left: auto;
+    margin-top: 10%;
+    margin-bottom: 10%;
   }
-  
+
   @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
