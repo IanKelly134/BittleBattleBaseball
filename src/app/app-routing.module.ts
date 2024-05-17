@@ -13,7 +13,7 @@ import { SearchMilbATeamsComponent } from './search-milb-ateams/search-milb-atea
 
 
 const routes: Routes = [
-  { path: "", component: HomeComponent },
+  { path: "", redirectTo:"/home", pathMatch:"full" },
   { path: "home", component: HomeComponent },
   { path: "searchteams", component: SearchTeamsComponent },
   { path: "searchnlteams", component: SearchNlTeamsComponent },
