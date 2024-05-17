@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: "setlineups/:newGameId", component: SetStartingLineupsComponent },
   { path: "game/:gameId", component: GameplayComponent },
   { path: "ballparkconfigure", component: BallParkCoordinatesConfiguratorComponent },
-  { path: "gameconfigure", component: GameConfigureComponent }
+  { path: "gameconfigure", component: GameConfigureComponent },
   { path: "**", component: ErrorPageComponent }
 ];
 
