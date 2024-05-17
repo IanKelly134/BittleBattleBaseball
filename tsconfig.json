@@ -1,8 +1,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-   // "baseUrl": "./",
-    "baseUrl": "bittlebattlebaseball.onrender.com/",
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
